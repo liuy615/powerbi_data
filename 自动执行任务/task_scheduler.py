@@ -82,7 +82,8 @@ class ScheduledTaskRunner:
                         [sys.executable, script_path],
                         capture_output=True,
                         text=True,
-                        encoding='utf-8',
+                        encoding='gbk',  # 改为gbk编码（中文Windows常用编码）
+                        errors='replace',  # 替换无法解码的字符
                         shell=True,
                         timeout=3600  # 1小时超时
                     )
