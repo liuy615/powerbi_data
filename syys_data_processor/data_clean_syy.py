@@ -503,8 +503,8 @@ class InsuranceWarrantyIntegrator(DataProcessorBase):
 
         # 路径配置
         self.output_dir = os.path.join(base_data_dir, "dashboard")
-        self.supplement_car_path = r"C:\Users\刘洋\Documents\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\看板部分数据源\各公司银行额度.xlsx"
-        self.insurance_csv_path = r"C:\Users\刘洋\Documents\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\新车保险台账-2025.csv"
+        self.supplement_car_path = r"E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\看板部分数据源\各公司银行额度.xlsx"
+        self.insurance_csv_path = r"E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\新车保险台账-2025.csv"
         self.chanpin_xls_path = r"E:\powerbi_data\看板数据\私有云文件本地\全保无忧产品明细\产品费用明细.xlsx"
 
         self.input_paths = {

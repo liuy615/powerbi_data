@@ -29,7 +29,7 @@ class DataProcessor:
     def clean_insurance(self, df_insurance):
         df_insurance['保费总额'] = pd.to_numeric(df_insurance['保费总额'], errors='coerce').fillna(0)
         df_insurance['总费用_次数'] = df_insurance['保费总额'].apply(lambda x: 1 if x > 0 else (-1 if x < 0 else 0))
-        df_insurance.to_csv(fr"C:\Users\刘洋\Documents\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\新车保险台账-2025.csv")
+        df_insurance.to_csv(fr"E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\新车保险台账-2025.csv")
         return df_insurance
 
     """清洗二手车数据"""
@@ -1123,7 +1123,7 @@ class DataProcessor:
 
         df_salesAgg2_ = df_salesAgg2.copy().drop_duplicates()
         df_salesAgg2_.rename(columns={'公司名称': '匹配定单归属门店'}, inplace=True)
-        df_salesAgg2_.to_csv(r'C:\Users\刘洋\Documents\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\车易云新车销售台账.csv',index=False)
+        df_salesAgg2_.to_csv(r'E:/WXWork/1688858189749305/WeDrive/成都永乐盛世/维护文件/车易云新车销售台账.csv',index=False)
         print(f"车易云新车销售台账备份完成！")
 
         # 处理调拨数据

@@ -224,7 +224,7 @@ class CyysDataProcessorApp:
 
             # 11. 写入MySQL
             self.data_writer.write_to_mysql(mysql_data)
-            self.backup_to_excel_simple(mysql_data, r"C:\Users\刘洋\Documents\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\cyy.xlsx")
+            self.backup_to_excel_simple(mysql_data, r"E:/WXWork/1688858189749305/WeDrive/成都永乐盛世/维护文件/cyy.xlsx")
 
             # 12. 准备MongoDB数据并导出
             self.logger.info("准备MongoDB数据...")
@@ -247,7 +247,7 @@ class CyysDataProcessorApp:
             df_rebate = df_salesAgg_mongo[df_salesAgg_mongo["车架号"] == "二手车返利"]
             # 3. 合并两部分数据
             df_salesAgg_mongo = pd.concat([df_not_rebate, df_rebate], ignore_index=True)
-            df_salesAgg_mongo.to_csv(r"C:\Users\刘洋\Documents\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\车易云毛利润表.csv")
+            df_salesAgg_mongo.to_csv(r"E:/WXWork/1688858189749305/WeDrive/成都永乐盛世/维护文件/车易云毛利润表.csv")
             print(f"车易云毛利润表备份完成！")
             # 13. 导出到MongoDB
             self.data_writer.export_to_mongodb(
