@@ -11,7 +11,7 @@ def syy_auto_runner():
         r"E:\powerbi_data\代码执行\syys_data_processor\tmsj.py"
     ]
 
-    config = generate_time_range_schedule("08:00", "22:00", 3, "hours")
+    config = generate_time_range_schedule("08:00", "22:00", 2, "hours")
     runner = ScheduledTaskRunner("私有云数据清洗")
     runner.start_schedule(scripts, config)
 
