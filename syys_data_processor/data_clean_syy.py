@@ -25,7 +25,7 @@ class DataProcessorBase:
 
     def _setup_logger(self) -> logging.Logger:
         """设置日志配置"""
-        log_dir = os.path.join(self.base_data_dir, "代码执行", "data", "私有云日志", "logs")
+        log_dir = os.path.join(self.base_data_dir, "powerbi_data", "data", "私有云日志", "logs")
         os.makedirs(log_dir, exist_ok=True)
 
         log_filename = f"{self.processor_name}_{datetime.datetime.now().strftime('%Y%m%d')}.log"
@@ -676,7 +676,7 @@ class InsuranceWarrantyIntegrator(DataProcessorBase):
                 df_qbwy1 = df_qbwy1[df_qbwy1["业务部门"] == "售前"]
                 df_qbwy1 = df_qbwy1[df_qbwy1["产品状态"] == "生效"]
                 df_qbwy1["全保无忧版本"] = df_qbwy1["全保无忧版本"].replace("畅行+终身版(送)", "畅行版")
-                df_qbwy1.to_csv("df_qbwy1.csv")
+                # df_qbwy1.to_csv("df_qbwy1.csv")
 
                 # 查询指定字段
                 # 定义需要的字段
@@ -695,7 +695,7 @@ class InsuranceWarrantyIntegrator(DataProcessorBase):
                 df_qbwy2 = df_qbwy2[df_qbwy2["数据有效性"] == "有效"]
                 df_qbwy2 = df_qbwy2[df_qbwy2["业务部门"] == "售前"]
                 df_qbwy2 = df_qbwy2[df_qbwy2["产品状态"] == "生效"]
-                df_qbwy2.to_csv("df_qbwy2.csv")
+                # df_qbwy2.to_csv("df_qbwy2.csv")
                 # 查询全保无忧费用明细
                 chanpin = mongo_client.query_all_data(collection_name_qbwy_info)
                 chanpin["关联键"] = chanpin["区域"] + "_" + chanpin["网络"] + "_" + chanpin["车辆阶段"] + "_" + chanpin["车价/车损投保价"] + "_" + chanpin["产品规格"] + "_" + chanpin["车辆类型"]
@@ -1451,7 +1451,7 @@ class MainDataProcessor:
 
     def _setup_main_logger(self) -> logging.Logger:
         """设置主程序日志配置"""
-        log_dir = os.path.join(self.base_data_dir, "代码执行", "data", "私有云日志", "logs")
+        log_dir = os.path.join(self.base_data_dir, "powerbi_data", "data", "私有云日志", "logs")
         os.makedirs(log_dir, exist_ok=True)
 
         log_filename = f"main_processor_{datetime.datetime.now().strftime('%Y%m%d')}.log"

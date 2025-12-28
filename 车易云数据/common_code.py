@@ -30,7 +30,7 @@ class WriteLog:
             self.logger.setLevel(logging.DEBUG)
 
             # 创建日志目录
-            log_dir = r'E:\powerbi_data\代码执行\data\logs'
+            log_dir = r'/powerbi_data\data\logs'
             os.makedirs(log_dir, exist_ok=True)
 
             # 文件处理器（记录所有级别）

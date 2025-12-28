@@ -13,7 +13,7 @@ import shutil
 class Logger:
     """日志类，用于记录下载操作"""
 
-    def __init__(self, log_file: str = "E:\powerbi_data\代码执行\data\syys_download.log"):
+    def __init__(self, log_file: str = "E:/powerbi_data/powerbi_data/data/syys_download.log"):
         """初始化日志器"""
         self.log_file = log_file
         self.setup_logging()
@@ -422,18 +422,18 @@ def test_connection(base_url: str, username: str, password: str) -> bool:
         response = session.request('PROPFIND', base_url, headers={'Depth': '0'}, timeout=10)
 
         if response.status_code in [200, 207]:
-            print("✓ 连接测试成功")
+            print("连接测试成功")
             return True
         elif response.status_code == 401:
-            print("✗ 认证失败: 401 Unauthorized")
+            print("[失败] 认证失败: 401 Unauthorized")
             print("请检查用户名和密码是否正确")
             return False
         else:
-            print(f"✗ 连接测试失败，状态码: {response.status_code}")
+            print(f"[失败] 连接测试失败，状态码: {response.status_code}")
             return False
 
     except Exception as e:
-        print(f"✗ 连接测试异常: {e}")
+        print(f"[失败] 连接测试异常: {e}")
         return False
 
 
@@ -460,9 +460,9 @@ def main():
             CONFIG['WEBDAV_PASSWORD'],
             CONFIG['MAX_WORKERS']
         )
-        print("✓ 下载管理器初始化成功")
+        print("[OK] 下载管理器初始化成功")
     except Exception as e:
-        print(f"✗ 下载管理器初始化失败: {e}")
+        print(f"[失败] 下载管理器初始化失败: {e}")
         return
 
     # 定义多个下载任务

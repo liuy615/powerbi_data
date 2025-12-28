@@ -47,7 +47,7 @@ class CyysDataProcessor:
     # 1. 日志与文件路径配置
     LOG_DIR = r"E:/pycharm_project/powerbi/data/log"
     SERVICE_NET_PATH = r'C:/Users/刘洋/Documents/WXWork/1688858189749305/WeDrive/成都永乐盛世/维护文件/看板部分数据源/各公司银行额度.xlsx'
-    MAPPING_EXCEL_PATH = r"E:/powerbi_data/代码执行/data/字段对应 - csv.xlsx"
+    MAPPING_EXCEL_PATH = r"/powerbi_data/data/字段对应 - csv.xlsx"
     USED_CAR_REBATE_PATH = r"E:/powerbi_data/看板数据/cyy_old_data/二手车返利存档.csv"
 
     # 2. 数据库配置

@@ -25,7 +25,7 @@ class DataProcessorBase:
 
     def _setup_logger(self) -> logging.Logger:
         """设置日志配置"""
-        log_dir = os.path.join(self.base_data_dir, "代码执行", "data", "私有云日志", "logs")
+        log_dir = os.path.join(self.base_data_dir, "powerbi_data", "data", "私有云日志", "logs")
         os.makedirs(log_dir, exist_ok=True)
 
         log_filename = f"{self.processor_name}_{datetime.datetime.now().strftime('%Y%m%d')}.log"
@@ -1447,7 +1447,7 @@ class MainDataProcessor:
 
     def _setup_main_logger(self) -> logging.Logger:
         """设置主程序日志配置"""
-        log_dir = os.path.join(self.base_data_dir, "代码执行", "data", "私有云日志", "logs")
+        log_dir = os.path.join(self.base_data_dir, "powerbi_data", "data", "私有云日志", "logs")
         os.makedirs(log_dir, exist_ok=True)
 
         log_filename = f"main_processor_{datetime.datetime.now().strftime('%Y%m%d')}.log"

@@ -16,7 +16,7 @@ class WebDAVDownloader:
 
     def __init__(self,
                  base_dir: str = r"E:/powerbi_data/看板数据/辅助文件",
-                 log_dir: str = r"E:/powerbi_data/代码执行/data/私有云日志/log",
+                 log_dir: str = r"E:/powerbi_data/powerbi_data/data/私有云日志/log",
                  webdav_hostname: str = 'http://222.212.88.126:5005',
                  webdav_login: str = 'wangdie',
                  webdav_password: str = 'wd#123456',

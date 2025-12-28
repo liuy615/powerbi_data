@@ -6,9 +6,9 @@ import time
 def syy_auto_runner():
     """私有云任务执行器"""
     scripts = [
-        r"E:\powerbi_data\代码执行\syys_data_processor\down_syy_all.py",
-        r"E:\powerbi_data\代码执行\syys_data_processor\data_clean_syy.py",
-        r"E:\powerbi_data\代码执行\syys_data_processor\tmsj.py"
+        r"E:\powerbi_data\powerbi_data\syys_data_processor\down_syy_all.py",
+        r"E:\powerbi_data\powerbi_data\syys_data_processor\data_clean_syy.py",
+        r"E:\powerbi_data\powerbi_data\syys_data_processor\tmsj.py"
     ]
 
     config = generate_time_range_schedule("08:00", "22:00", 2, "hours")
@@ -19,10 +19,10 @@ def syy_auto_runner():
 def cyy_auto_runner():
     """车易云任务执行器"""
     scripts = [
-        r"E:\powerbi_data\代码执行\车易云数据\cyy_to_mysql_99.py",
-        r"E:\powerbi_data\代码执行\车易云数据\cyy_delete_data.py",
-        r"E:\powerbi_data\代码执行\cyys_data_processor\main.py",
-        r"E:\powerbi_data\代码执行\私有云数据\concat_dashboad.py",
+        r"E:\powerbi_data\powerbi_data\车易云数据\cyy_to_mysql_99.py",
+        r"E:\powerbi_data\powerbi_data\车易云数据\cyy_delete_data.py",
+        r"E:\powerbi_data\powerbi_data\cyys_data_processor\main.py",
+        r"E:\powerbi_data\powerbi_data\私有云数据\concat_dashboad.py",
     ]
 
     config = generate_time_range_schedule("08:48", "22:48", 30, "minutes")

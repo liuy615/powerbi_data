@@ -14,7 +14,7 @@ warnings.filterwarnings('ignore', category=FutureWarning, message='.*Downcasting
 pd.set_option('display.max_columns', 100)
 
 # -------------------------- 1. 修复路径转义：所有Windows路径加r前缀 --------------------------
-log_dir = r"E:\powerbi_data\代码执行\私有云数据\data\log"  # 加r
+log_dir = r"/powerbi_data\私有云数据\data\log"  # 加r
 os.makedirs(log_dir, exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,

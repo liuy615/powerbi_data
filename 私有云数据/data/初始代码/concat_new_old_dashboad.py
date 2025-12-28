@@ -10,7 +10,7 @@ import pandas as pd
 from datetime import datetime
 
 
-log_dir = "/代码执行/私有云数据/data/log"
+log_dir = "/powerbi_data/私有云数据/data/log"
 os.makedirs(log_dir, exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,

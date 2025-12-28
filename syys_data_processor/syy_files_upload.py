@@ -11,7 +11,7 @@ from urllib.parse import unquote
 import tempfile
 
 # 日志配置 (保持不变)
-log_dir = r"E:/powerbi_data/代码执行/data/私有云日志/上传私有云"
+log_dir = r"/powerbi_data/data/私有云日志/上传私有云"
 os.makedirs(log_dir, exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,

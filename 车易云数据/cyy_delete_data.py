@@ -23,7 +23,7 @@ class Config:
     }
 
     # 删除日志对应关系文件路径
-    DELETE_LOG_MAPPING_PATH = r"E:\powerbi_data\代码执行\data\删除日志对应.xlsx"
+    DELETE_LOG_MAPPING_PATH = r"/powerbi_data\data\删除日志对应.xlsx"
 
     # API名称到数据库表名的映射
     API_TABLE_MAPPING = {
@@ -74,7 +74,7 @@ class Config:
     }
 
     # 日志配置
-    LOG_PATH = r"E:\powerbi_data\代码执行\车易云数据\data\delete_log"
+    LOG_PATH = r"/powerbi_data\车易云数据\data\delete_log"
     LOG_LEVEL = logging.INFO
 
 

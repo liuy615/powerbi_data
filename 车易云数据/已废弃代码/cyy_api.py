@@ -128,7 +128,7 @@ class cyys:
         # 保险业务
         df_insurance = self.merge_csv_files(r'/看板数据/cyy原始数据/保险业务')
         # 1. 读取字段对照表
-        mapping_df = pd.read_excel(r"E:/powerbi_data/代码执行/data/字段对应.xlsx", sheet_name="Sheet1")
+        mapping_df = pd.read_excel(r"E:/powerbi_data/powerbi_data/data/字段对应.xlsx", sheet_name="Sheet1")
 
         # 2. 构建映射字典：{df_name: {英文字段: 中文字段}}
         mapping_dict = {}
@@ -567,7 +567,7 @@ class cyys:
         df_diao1 = pd.merge(df_diao, df_salesAgg1[['车架号', '销售日期', '车系', '车型', '车辆配置', '调拨费']],on=['车架号'], how='left')
         df_diao = df_diao.sort_values(by=['结算日期'],ascending=False)
         df_diao = df_diao.drop_duplicates(subset=['车架号'],keep='first')
-        df_diao.to_csv("E:/powerbi_data/代码执行/data/调拨表.csv",index=False)
+        df_diao.to_csv("E:/powerbi_data/powerbi_data/data/调拨表.csv",index=False)
         df_diao1 = pd.merge(df_diao, df_salesAgg1[['车架号','销售日期','车系','车型','车辆配置']], on=['车架号'], how='left')
         df_diao1['调拨费'] = df_diao1['调拨费'].astype('float')
         df_diao1 = df_diao1[['调出门店','支付门店','调拨费','车架号','销售日期','车系','车型','车辆配置','车辆信息']]
