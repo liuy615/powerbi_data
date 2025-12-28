@@ -1,0 +1,43 @@
+[
+  {
+    "task_name": "我的定时任务",
+    "run_time": "2025-12-26 14:41:11",
+    "results": {
+      "total": 3,
+      "success": 3,
+      "failed": 0,
+      "details": [
+        {
+          "script": "down_syy_all.py",
+          "path": "E:\\powerbi_data\\代码执行\\syys_data_processor\\down_syy_all.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "14:40:23",
+          "end_time": "14:40:40",
+          "duration": "0:00:16.241900",
+          "error": null
+        },
+        {
+          "script": "data_clean_syy.py",
+          "path": "E:\\powerbi_data\\代码执行\\syys_data_processor\\data_clean_syy.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "14:40:40",
+          "end_time": "14:41:05",
+          "duration": "0:00:25.500923",
+          "error": null
+        },
+        {
+          "script": "tmsj.py",
+          "path": "E:\\powerbi_data\\代码执行\\syys_data_processor\\tmsj.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "14:41:05",
+          "end_time": "14:41:11",
+          "duration": "0:00:05.912332",
+          "error": null
+        }
+      ]
+    }
+  }
+]

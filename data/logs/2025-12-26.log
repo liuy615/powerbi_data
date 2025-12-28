@@ -1,0 +1,1072 @@
+2025-12-26 08:50:04,829 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 08:50:04,830 - cyy_to_mysql_99.py[line:940] - INFO: 车辆销售明细表_开票日期 第1页 - 重试第1次
+2025-12-26 08:50:04,831 - cyy_to_mysql_99.py[line:940] - INFO: 车辆成本管理 第1页 - 重试第1次
+2025-12-26 08:50:04,832 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 08:50:06,246 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 08:50:06,246 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 08:50:06,521 - cyy_to_mysql_99.py[line:940] - INFO: 套餐销售列表 第1页 - 重试第1次
+2025-12-26 08:50:06,522 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆成本管理 完成, 获取39条数据
+2025-12-26 08:50:06,549 - cyy_to_mysql_99.py[line:857] - INFO: 车辆成本管理 数据保存完成，影响 39 行
+2025-12-26 08:50:11,256 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 08:50:12,390 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 08:50:12,391 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 08:50:14,853 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_成交订单 第1页 - 重试第1次
+2025-12-26 08:50:14,853 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆销售明细表_开票日期 完成, 获取5条数据
+2025-12-26 08:50:14,874 - cyy_to_mysql_99.py[line:857] - INFO: 车辆销售明细表_开票日期 数据保存完成，影响 10 行
+2025-12-26 08:50:17,391 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 08:50:17,989 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_作废订单 第1页 - 重试第1次
+2025-12-26 08:50:17,989 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_成交订单 完成, 获取0条数据
+2025-12-26 08:50:17,990 - cyy_to_mysql_99.py[line:816] - INFO: 销售_车辆销售_成交订单 无数据可保存
+2025-12-26 08:50:17,990 - cyy_to_mysql_99.py[line:1064] - ERROR: 任务 销售_车辆销售_成交订单 数据保存失败: 销售_车辆销售_成交订单 无数据可保存
+2025-12-26 08:50:18,466 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 08:50:18,466 - cyy_to_mysql_99.py[line:1123] - WARNING: 装饰_订单管理_装饰订单 额外重试第1次: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"，10秒后重试
+2025-12-26 08:50:19,319 - cyy_to_mysql_99.py[line:940] - INFO: 开票维护 第1页 - 重试第1次
+2025-12-26 08:50:19,319 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 套餐销售列表 完成, 获取2条数据
+2025-12-26 08:50:19,331 - cyy_to_mysql_99.py[line:857] - INFO: 套餐销售列表 数据保存完成，影响 0 行
+2025-12-26 08:50:24,416 - cyy_to_mysql_99.py[line:940] - INFO: 保险业务 第1页 - 重试第1次
+2025-12-26 08:50:24,416 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_作废订单 完成, 获取1条数据
+2025-12-26 08:50:24,437 - cyy_to_mysql_99.py[line:857] - INFO: 销售_车辆销售_作废订单 数据保存完成，影响 1 行
+2025-12-26 08:50:28,466 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 08:50:28,917 - cyy_to_mysql_99.py[line:940] - INFO: 按揭业务 第1页 - 重试第1次
+2025-12-26 08:50:28,918 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 保险业务 完成, 获取0条数据
+2025-12-26 08:50:28,918 - cyy_to_mysql_99.py[line:816] - INFO: 保险业务 无数据可保存
+2025-12-26 08:50:28,918 - cyy_to_mysql_99.py[line:1064] - ERROR: 任务 保险业务 数据保存失败: 保险业务 无数据可保存
+2025-12-26 08:50:29,034 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 08:50:29,035 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 08:50:30,506 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_成交 第1页 - 重试第1次
+2025-12-26 08:50:30,506 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 按揭业务 完成, 获取5条数据
+2025-12-26 08:50:30,517 - cyy_to_mysql_99.py[line:857] - INFO: 按揭业务 数据保存完成，影响 10 行
+2025-12-26 08:50:32,876 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_已入库 第1页 - 重试第1次
+2025-12-26 08:50:32,877 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 开票维护 完成, 获取0条数据
+2025-12-26 08:50:32,877 - cyy_to_mysql_99.py[line:816] - INFO: 开票维护 无数据可保存
+2025-12-26 08:50:32,878 - cyy_to_mysql_99.py[line:1064] - ERROR: 任务 开票维护 数据保存失败: 开票维护 无数据可保存
+2025-12-26 08:50:33,128 - cyy_to_mysql_99.py[line:940] - INFO: 调车结算查询 第1页 - 重试第1次
+2025-12-26 08:50:33,128 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_成交 完成, 获取0条数据
+2025-12-26 08:50:33,128 - cyy_to_mysql_99.py[line:816] - INFO: 评估管理_成交 无数据可保存
+2025-12-26 08:50:33,129 - cyy_to_mysql_99.py[line:1064] - ERROR: 任务 评估管理_成交 数据保存失败: 评估管理_成交 无数据可保存
+2025-12-26 08:50:34,035 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 08:50:34,187 - cyy_to_mysql_99.py[line:940] - INFO: 销售_衍生_订单查询 第1页 - 重试第1次
+2025-12-26 08:50:34,188 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 调车结算查询 完成, 获取0条数据
+2025-12-26 08:50:34,189 - cyy_to_mysql_99.py[line:816] - INFO: 调车结算查询 无数据可保存
+2025-12-26 08:50:34,189 - cyy_to_mysql_99.py[line:1064] - ERROR: 任务 调车结算查询 数据保存失败: 调车结算查询 无数据可保存
+2025-12-26 08:50:34,654 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 08:50:34,655 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 08:50:34,698 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆已售 第1页 - 重试第1次
+2025-12-26 08:50:34,698 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_已入库 完成, 获取4条数据
+2025-12-26 08:50:35,529 - cyy_to_mysql_99.py[line:940] - INFO: 汇票管理 第1页 - 重试第1次
+2025-12-26 08:50:35,912 - cyy_to_mysql_99.py[line:857] - INFO: 评估管理_已入库 数据保存完成，影响 4 行
+2025-12-26 08:50:35,912 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_衍生_订单查询 完成, 获取5条数据
+2025-12-26 08:50:35,934 - cyy_to_mysql_99.py[line:857] - INFO: 销售_衍生_订单查询 数据保存完成，影响 10 行
+2025-12-26 08:50:38,194 - cyy_to_mysql_99.py[line:940] - INFO: 销售回访 第1页 - 重试第1次
+2025-12-26 08:50:38,195 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 汇票管理 完成, 获取40条数据
+2025-12-26 08:50:38,222 - cyy_to_mysql_99.py[line:857] - INFO: 汇票管理 数据保存完成，影响 39 行
+2025-12-26 08:50:39,517 - cyy_to_mysql_99.py[line:940] - INFO: 未售订单 第1页 - 重试第1次
+2025-12-26 08:50:39,518 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售回访 完成, 获取4条数据
+2025-12-26 08:50:39,535 - cyy_to_mysql_99.py[line:857] - INFO: 销售回访 数据保存完成，影响 4 行
+2025-12-26 08:50:39,655 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 08:50:41,031 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 08:50:41,032 - cyy_to_mysql_99.py[line:1123] - WARNING: 装饰_订单管理_装饰订单 额外重试第2次: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"，10秒后重试
+2025-12-26 08:50:46,092 - cyy_to_mysql_99.py[line:940] - INFO: 计划车辆 第1页 - 重试第1次
+2025-12-26 08:50:46,092 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 未售订单 完成, 获取802条数据
+2025-12-26 08:50:46,158 - cyy_to_mysql_99.py[line:583] - INFO: 未售订单 已清空表数据
+2025-12-26 08:50:46,211 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第1页 - 重试第1次
+2025-12-26 08:50:46,259 - cyy_to_mysql_99.py[line:593] - INFO: 未售订单 全量更新完成，插入 802 行数据
+2025-12-26 08:50:46,260 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆已售 完成, 获取2条数据
+2025-12-26 08:50:46,265 - cyy_to_mysql_99.py[line:857] - INFO: 库存车辆已售 数据保存完成，影响 0 行
+2025-12-26 08:50:50,965 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第1页 - 重试第1次
+2025-12-26 08:50:50,965 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 计划车辆 完成, 获取1436条数据
+2025-12-26 08:50:51,033 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 08:50:51,044 - cyy_to_mysql_99.py[line:583] - INFO: 计划车辆 已清空表数据
+2025-12-26 08:50:51,164 - cyy_to_mysql_99.py[line:593] - INFO: 计划车辆 全量更新完成，插入 1436 行数据
+2025-12-26 08:50:51,796 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 08:50:51,797 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 08:50:56,798 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 08:50:57,741 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 08:50:57,741 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 08:51:02,110 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第2页 - 重试第1次
+2025-12-26 08:51:02,741 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 08:51:03,243 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 08:51:03,243 - cyy_to_mysql_99.py[line:1127] - ERROR: 装饰_订单管理_装饰订单 额外重试2次后仍然失败: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"
+2025-12-26 08:51:03,244 - cyy_to_mysql_99.py[line:1076] - ERROR: 任务 装饰_订单管理_装饰订单 处理失败: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"
+2025-12-26 08:51:05,596 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 删除日志 完成, 获取4433条数据
+2025-12-26 08:51:16,215 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/StoreCar - [Timeout] Failed to perform, curl: (28) Operation timed out after 30001 milliseconds with 4210425 out of 4311938 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details. [状态码: 28]
+2025-12-26 08:51:16,216 - cyy_to_mysql_99.py[line:975] - WARNING: 库存车辆查询 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 08:51:21,216 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第1页 - 重试第2次
+2025-12-26 08:51:45,875 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第2页 - 重试第1次
+2025-12-26 08:52:05,272 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆查询 完成, 获取3378条数据
+2025-12-26 08:52:05,623 - cyy_to_mysql_99.py[line:583] - INFO: 库存车辆查询 已清空表数据
+2025-12-26 08:52:06,231 - cyy_to_mysql_99.py[line:593] - INFO: 库存车辆查询 全量更新完成，插入 3378 行数据
+2025-12-26 08:52:06,570 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 09:00:11,894 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:00:11,896 - cyy_to_mysql.py[line:734] - ERROR: 任务 装饰_订单管理_装饰订单 处理失败: API请求过程出错: 'data'
+2025-12-26 09:00:18,135 - cyy_to_mysql.py[line:714] - INFO: 任务 套餐销售列表 完成, 获取1210条数据
+2025-12-26 09:00:28,528 - cyy_to_mysql.py[line:714] - INFO: 任务 车辆成本管理 完成, 获取4379条数据
+2025-12-26 09:00:34,811 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/CarSalDetailSummary - [Timeout] Failed to perform, curl: (28) Operation timed out after 30002 milliseconds with 5439225 out of 9085783 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details. [状态码: 28]
+2025-12-26 09:00:34,830 - cyy_to_mysql.py[line:734] - ERROR: 任务 车辆销售明细表_开票日期 处理失败: API请求过程出错: 'data'
+2025-12-26 09:00:35,578 - cyy_to_mysql.py[line:714] - INFO: 任务 销售_车辆销售_成交订单 完成, 获取2773条数据
+2025-12-26 09:00:38,476 - cyy_to_mysql.py[line:714] - INFO: 任务 销售_车辆销售_作废订单 完成, 获取472条数据
+2025-12-26 09:00:39,004 - cyy_to_mysql.py[line:714] - INFO: 任务 评估管理_成交 完成, 获取0条数据
+2025-12-26 09:00:39,005 - cyy_to_mysql.py[line:722] - ERROR: 任务 评估管理_成交 数据保存失败: 评估管理_成交 无数据可保存
+2025-12-26 09:00:40,121 - cyy_to_mysql.py[line:714] - INFO: 任务 保险业务 完成, 获取2101条数据
+2025-12-26 09:00:40,575 - cyy_to_mysql.py[line:714] - INFO: 任务 评估管理_已入库 完成, 获取491条数据
+2025-12-26 09:00:41,858 - cyy_to_mysql.py[line:714] - INFO: 任务 按揭业务 完成, 获取1365条数据
+2025-12-26 09:00:52,729 - cyy_to_mysql.py[line:714] - INFO: 任务 销售_衍生_订单查询 完成, 获取2449条数据
+2025-12-26 09:00:54,221 - cyy_to_mysql.py[line:714] - INFO: 任务 汇票管理 完成, 获取1311条数据
+2025-12-26 09:00:55,956 - cyy_to_mysql.py[line:714] - INFO: 任务 库存车辆已售 完成, 获取811条数据
+2025-12-26 09:00:56,750 - cyy_to_mysql.py[line:714] - INFO: 任务 销售回访 完成, 获取2449条数据
+2025-12-26 09:01:04,510 - cyy_to_mysql.py[line:714] - INFO: 任务 调车结算查询 完成, 获取6141条数据
+2025-12-26 09:01:48,211 - cyy_to_mysql.py[line:714] - INFO: 任务 开票维护 完成, 获取10463条数据
+2025-12-26 09:22:03,167 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 09:22:03,168 - cyy_to_mysql_99.py[line:940] - INFO: 车辆销售明细表_开票日期 第1页 - 重试第1次
+2025-12-26 09:22:03,169 - cyy_to_mysql_99.py[line:940] - INFO: 车辆成本管理 第1页 - 重试第1次
+2025-12-26 09:22:03,169 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 09:22:04,359 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:22:04,359 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:22:04,688 - cyy_to_mysql_99.py[line:940] - INFO: 套餐销售列表 第1页 - 重试第1次
+2025-12-26 09:22:04,689 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆成本管理 完成, 获取44条数据
+2025-12-26 09:22:04,729 - cyy_to_mysql_99.py[line:857] - INFO: 车辆成本管理 数据保存完成，影响 10 行
+2025-12-26 09:22:09,359 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 09:22:10,548 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:22:10,548 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:22:13,854 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_成交订单 第1页 - 重试第1次
+2025-12-26 09:22:13,855 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆销售明细表_开票日期 完成, 获取22条数据
+2025-12-26 09:22:13,894 - cyy_to_mysql_99.py[line:857] - INFO: 车辆销售明细表_开票日期 数据保存完成，影响 43 行
+2025-12-26 09:22:15,548 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 09:22:15,926 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_作废订单 第1页 - 重试第1次
+2025-12-26 09:22:15,927 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_成交订单 完成, 获取0条数据
+2025-12-26 09:22:15,927 - cyy_to_mysql_99.py[line:816] - INFO: 销售_车辆销售_成交订单 无数据可保存
+2025-12-26 09:22:15,927 - cyy_to_mysql_99.py[line:1064] - ERROR: 任务 销售_车辆销售_成交订单 数据保存失败: 销售_车辆销售_成交订单 无数据可保存
+2025-12-26 09:22:17,759 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:22:17,759 - cyy_to_mysql_99.py[line:1123] - WARNING: 装饰_订单管理_装饰订单 额外重试第1次: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"，10秒后重试
+2025-12-26 09:22:22,199 - cyy_to_mysql_99.py[line:940] - INFO: 开票维护 第1页 - 重试第1次
+2025-12-26 09:22:22,199 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 套餐销售列表 完成, 获取9条数据
+2025-12-26 09:22:22,221 - cyy_to_mysql_99.py[line:857] - INFO: 套餐销售列表 数据保存完成，影响 2 行
+2025-12-26 09:22:24,246 - cyy_to_mysql_99.py[line:940] - INFO: 保险业务 第1页 - 重试第1次
+2025-12-26 09:22:24,247 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_作废订单 完成, 获取2条数据
+2025-12-26 09:22:24,252 - cyy_to_mysql_99.py[line:857] - INFO: 销售_车辆销售_作废订单 数据保存完成，影响 0 行
+2025-12-26 09:22:25,907 - cyy_to_mysql_99.py[line:940] - INFO: 按揭业务 第1页 - 重试第1次
+2025-12-26 09:22:25,908 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 保险业务 完成, 获取3条数据
+2025-12-26 09:22:25,928 - cyy_to_mysql_99.py[line:857] - INFO: 保险业务 数据保存完成，影响 3 行
+2025-12-26 09:22:27,760 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 09:22:27,886 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_成交 第1页 - 重试第1次
+2025-12-26 09:22:27,886 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 按揭业务 完成, 获取12条数据
+2025-12-26 09:22:27,909 - cyy_to_mysql_99.py[line:857] - INFO: 按揭业务 数据保存完成，影响 24 行
+2025-12-26 09:22:29,763 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:22:29,763 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:22:29,814 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_已入库 第1页 - 重试第1次
+2025-12-26 09:22:29,814 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 开票维护 完成, 获取6条数据
+2025-12-26 09:22:29,834 - cyy_to_mysql_99.py[line:857] - INFO: 开票维护 数据保存完成，影响 5 行
+2025-12-26 09:22:30,958 - cyy_to_mysql_99.py[line:940] - INFO: 调车结算查询 第1页 - 重试第1次
+2025-12-26 09:22:30,958 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_已入库 完成, 获取5条数据
+2025-12-26 09:22:30,970 - cyy_to_mysql_99.py[line:857] - INFO: 评估管理_已入库 数据保存完成，影响 2 行
+2025-12-26 09:22:31,021 - cyy_to_mysql_99.py[line:940] - INFO: 销售_衍生_订单查询 第1页 - 重试第1次
+2025-12-26 09:22:31,021 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_成交 完成, 获取0条数据
+2025-12-26 09:22:31,022 - cyy_to_mysql_99.py[line:816] - INFO: 评估管理_成交 无数据可保存
+2025-12-26 09:22:31,023 - cyy_to_mysql_99.py[line:1064] - ERROR: 任务 评估管理_成交 数据保存失败: 评估管理_成交 无数据可保存
+2025-12-26 09:22:32,128 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆已售 第1页 - 重试第1次
+2025-12-26 09:22:32,129 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 调车结算查询 完成, 获取0条数据
+2025-12-26 09:22:32,129 - cyy_to_mysql_99.py[line:816] - INFO: 调车结算查询 无数据可保存
+2025-12-26 09:22:32,129 - cyy_to_mysql_99.py[line:1064] - ERROR: 任务 调车结算查询 数据保存失败: 调车结算查询 无数据可保存
+2025-12-26 09:22:32,143 - cyy_to_mysql_99.py[line:940] - INFO: 汇票管理 第1页 - 重试第1次
+2025-12-26 09:22:32,144 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_衍生_订单查询 完成, 获取17条数据
+2025-12-26 09:22:32,158 - cyy_to_mysql_99.py[line:857] - INFO: 销售_衍生_订单查询 数据保存完成，影响 15 行
+2025-12-26 09:22:34,765 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 09:22:35,450 - cyy_to_mysql_99.py[line:940] - INFO: 销售回访 第1页 - 重试第1次
+2025-12-26 09:22:35,450 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 汇票管理 完成, 获取53条数据
+2025-12-26 09:22:35,476 - cyy_to_mysql_99.py[line:857] - INFO: 汇票管理 数据保存完成，影响 12 行
+2025-12-26 09:22:36,056 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:22:36,056 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:22:36,503 - cyy_to_mysql_99.py[line:940] - INFO: 未售订单 第1页 - 重试第1次
+2025-12-26 09:22:36,504 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售回访 完成, 获取12条数据
+2025-12-26 09:22:36,524 - cyy_to_mysql_99.py[line:857] - INFO: 销售回访 数据保存完成，影响 11 行
+2025-12-26 09:22:37,421 - cyy_to_mysql_99.py[line:940] - INFO: 计划车辆 第1页 - 重试第1次
+2025-12-26 09:22:37,421 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆已售 完成, 获取12条数据
+2025-12-26 09:22:37,437 - cyy_to_mysql_99.py[line:857] - INFO: 库存车辆已售 数据保存完成，影响 13 行
+2025-12-26 09:22:39,098 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第1页 - 重试第1次
+2025-12-26 09:22:39,098 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 计划车辆 完成, 获取1436条数据
+2025-12-26 09:22:39,176 - cyy_to_mysql_99.py[line:583] - INFO: 计划车辆 已清空表数据
+2025-12-26 09:22:39,326 - cyy_to_mysql_99.py[line:593] - INFO: 计划车辆 全量更新完成，插入 1436 行数据
+2025-12-26 09:22:39,947 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第1页 - 重试第1次
+2025-12-26 09:22:39,947 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 未售订单 完成, 获取797条数据
+2025-12-26 09:22:40,032 - cyy_to_mysql_99.py[line:583] - INFO: 未售订单 已清空表数据
+2025-12-26 09:22:40,169 - cyy_to_mysql_99.py[line:593] - INFO: 未售订单 全量更新完成，插入 797 行数据
+2025-12-26 09:22:41,057 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 09:22:42,746 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:22:42,746 - cyy_to_mysql_99.py[line:1123] - WARNING: 装饰_订单管理_装饰订单 额外重试第2次: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"，10秒后重试
+2025-12-26 09:22:50,884 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第2页 - 重试第1次
+2025-12-26 09:22:52,058 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 删除日志 完成, 获取4436条数据
+2025-12-26 09:22:52,747 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 09:22:53,376 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:22:53,376 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:22:58,377 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 09:22:59,154 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:22:59,154 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:23:04,155 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 09:23:04,836 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:23:04,836 - cyy_to_mysql_99.py[line:1127] - ERROR: 装饰_订单管理_装饰订单 额外重试2次后仍然失败: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"
+2025-12-26 09:23:04,837 - cyy_to_mysql_99.py[line:1076] - ERROR: 任务 装饰_订单管理_装饰订单 处理失败: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"
+2025-12-26 09:23:06,703 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第2页 - 重试第1次
+2025-12-26 09:23:27,416 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆查询 完成, 获取3374条数据
+2025-12-26 09:23:27,717 - cyy_to_mysql_99.py[line:583] - INFO: 库存车辆查询 已清空表数据
+2025-12-26 09:23:28,160 - cyy_to_mysql_99.py[line:593] - INFO: 库存车辆查询 全量更新完成，插入 3374 行数据
+2025-12-26 09:23:28,472 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 09:47:17,360 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 09:47:17,361 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 09:47:18,488 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:47:18,488 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:47:23,489 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 09:47:24,131 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:47:24,131 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:47:29,132 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 09:47:29,645 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:47:29,645 - cyy_to_mysql_99.py[line:1123] - WARNING: 装饰_订单管理_装饰订单 额外重试第1次: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"，10秒后重试
+2025-12-26 09:47:39,645 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 09:47:40,663 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:47:40,663 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:47:45,664 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 09:47:47,223 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:47:47,223 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:47:52,224 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 09:47:53,000 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:47:53,000 - cyy_to_mysql_99.py[line:1123] - WARNING: 装饰_订单管理_装饰订单 额外重试第2次: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"，10秒后重试
+2025-12-26 09:48:03,001 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 09:48:04,401 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:48:04,401 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:48:09,401 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 09:48:10,534 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:48:10,535 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:48:15,535 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 09:48:16,613 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:48:16,613 - cyy_to_mysql_99.py[line:1127] - ERROR: 装饰_订单管理_装饰订单 额外重试2次后仍然失败: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"
+2025-12-26 09:48:16,614 - cyy_to_mysql_99.py[line:1076] - ERROR: 任务 装饰_订单管理_装饰订单 处理失败: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"
+2025-12-26 09:48:16,969 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 09:48:51,859 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:48:51,859 - cyy_to_mysql.py[line:734] - ERROR: 任务 装饰_订单管理_装饰订单 处理失败: API请求过程出错: 'data'
+2025-12-26 09:52:02,758 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 09:52:02,759 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 09:52:03,832 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:52:03,832 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:52:08,833 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 09:52:09,825 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:52:09,825 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:52:14,825 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 09:52:15,325 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:52:15,325 - cyy_to_mysql_99.py[line:1123] - WARNING: 装饰_订单管理_装饰订单 额外重试第1次: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"，10秒后重试
+2025-12-26 09:52:25,326 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 09:52:26,168 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:52:26,169 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:52:31,170 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 09:52:31,857 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:52:31,857 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:52:36,858 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 09:52:37,984 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:52:37,985 - cyy_to_mysql_99.py[line:1123] - WARNING: 装饰_订单管理_装饰订单 额外重试第2次: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"，10秒后重试
+2025-12-26 09:52:47,985 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 09:52:49,627 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:52:49,627 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:52:54,627 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 09:52:55,118 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:52:55,118 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 09:53:00,118 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 09:53:00,778 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 09:53:00,779 - cyy_to_mysql_99.py[line:1127] - ERROR: 装饰_订单管理_装饰订单 额外重试2次后仍然失败: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"
+2025-12-26 09:53:00,779 - cyy_to_mysql_99.py[line:1076] - ERROR: 任务 装饰_订单管理_装饰订单 处理失败: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"
+2025-12-26 09:53:01,094 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 10:22:03,842 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 10:22:03,844 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 10:22:04,870 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 10:22:04,870 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 10:22:09,871 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 10:22:11,046 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 10:22:11,046 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 10:22:16,047 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 10:22:16,580 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 10:22:16,581 - cyy_to_mysql_99.py[line:1123] - WARNING: 装饰_订单管理_装饰订单 额外重试第1次: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"，10秒后重试
+2025-12-26 10:22:26,581 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 10:22:27,368 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 10:22:27,368 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 10:22:32,368 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 10:22:33,765 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 10:22:33,765 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 10:22:38,765 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 10:22:40,373 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 10:22:40,373 - cyy_to_mysql_99.py[line:1123] - WARNING: 装饰_订单管理_装饰订单 额外重试第2次: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"，10秒后重试
+2025-12-26 10:22:50,374 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 10:22:51,649 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 10:22:51,649 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 10:22:56,650 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 10:22:57,699 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 10:22:57,699 - cyy_to_mysql_99.py[line:975] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 10:23:02,700 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 10:23:04,695 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [HTTPError] HTTP Error 500: Internal Server Error [状态码: 0]
+2025-12-26 10:23:04,695 - cyy_to_mysql_99.py[line:1127] - ERROR: 装饰_订单管理_装饰订单 额外重试2次后仍然失败: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"
+2025-12-26 10:23:04,696 - cyy_to_mysql_99.py[line:1076] - ERROR: 任务 装饰_订单管理_装饰订单 处理失败: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"
+2025-12-26 10:23:05,035 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 10:46:44,028 - cyy_to_mysql.py[line:714] - INFO: 任务 装饰_订单管理_装饰订单 完成, 获取13165条数据
+2025-12-26 10:52:02,834 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 10:52:02,835 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 10:52:03,779 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 装饰_订单管理_装饰订单 完成, 获取445条数据
+2025-12-26 10:52:03,886 - cyy_to_mysql_99.py[line:857] - INFO: 装饰_订单管理_装饰订单 数据保存完成，影响 316 行
+2025-12-26 10:52:04,178 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 11:22:02,744 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 11:22:02,746 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 11:22:03,658 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 装饰_订单管理_装饰订单 完成, 获取582条数据
+2025-12-26 11:22:03,751 - cyy_to_mysql_99.py[line:857] - INFO: 装饰_订单管理_装饰订单 数据保存完成，影响 234 行
+2025-12-26 11:22:04,047 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 11:52:02,643 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 11:52:02,645 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 11:52:04,183 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 装饰_订单管理_装饰订单 完成, 获取666条数据
+2025-12-26 11:52:04,302 - cyy_to_mysql_99.py[line:857] - INFO: 装饰_订单管理_装饰订单 数据保存完成，影响 148 行
+2025-12-26 11:52:04,601 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 12:22:02,682 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 12:22:02,683 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 12:22:03,716 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 装饰_订单管理_装饰订单 完成, 获取691条数据
+2025-12-26 12:22:03,834 - cyy_to_mysql_99.py[line:857] - INFO: 装饰_订单管理_装饰订单 数据保存完成，影响 96 行
+2025-12-26 12:22:04,148 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 13:45:36,889 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/CarCost - [Timeout] Failed to perform, curl: (28) Operation timed out after 30001 milliseconds with 1539833 out of 3916156 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details. [状态码: 28]
+2025-12-26 13:45:36,890 - cyy_to_mysql.py[line:734] - ERROR: 任务 车辆成本管理 处理失败: API请求过程出错: 'data'
+2025-12-26 13:45:36,893 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/CarSalDetailSummary - [Timeout] Failed to perform, curl: (28) Operation timed out after 30005 milliseconds with 1163001 out of 9174708 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details. [状态码: 28]
+2025-12-26 13:45:36,893 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AccessoryOrder - [Timeout] Failed to perform, curl: (28) Operation timed out after 30004 milliseconds with 458489 out of 3114531 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details. [状态码: 28]
+2025-12-26 13:45:36,894 - cyy_to_mysql.py[line:734] - ERROR: 任务 车辆销售明细表_开票日期 处理失败: API请求过程出错: 'data'
+2025-12-26 13:45:36,895 - cyy_to_mysql.py[line:734] - ERROR: 任务 装饰_订单管理_装饰订单 处理失败: API请求过程出错: 'data'
+2025-12-26 13:45:49,642 - cyy_to_mysql.py[line:714] - INFO: 任务 销售_车辆销售_作废订单 完成, 获取479条数据
+2025-12-26 13:45:56,027 - cyy_to_mysql.py[line:714] - INFO: 任务 套餐销售列表 完成, 获取1228条数据
+2025-12-26 13:45:57,935 - cyy_to_mysql.py[line:714] - INFO: 任务 保险业务 完成, 获取2118条数据
+2025-12-26 13:45:58,374 - cyy_to_mysql.py[line:714] - INFO: 任务 销售_车辆销售_成交订单 完成, 获取2802条数据
+2025-12-26 13:45:59,005 - cyy_to_mysql.py[line:714] - INFO: 任务 评估管理_成交 完成, 获取0条数据
+2025-12-26 13:45:59,006 - cyy_to_mysql.py[line:722] - ERROR: 任务 评估管理_成交 数据保存失败: 评估管理_成交 无数据可保存
+2025-12-26 13:45:59,162 - cyy_to_mysql.py[line:714] - INFO: 任务 评估管理_已入库 完成, 获取508条数据
+2025-12-26 13:46:00,240 - cyy_to_mysql.py[line:714] - INFO: 任务 按揭业务 完成, 获取1371条数据
+2025-12-26 13:46:08,944 - cyy_to_mysql.py[line:714] - INFO: 任务 库存车辆已售 完成, 获取822条数据
+2025-12-26 13:46:11,127 - cyy_to_mysql.py[line:714] - INFO: 任务 汇票管理 完成, 获取1570条数据
+2025-12-26 13:46:13,978 - cyy_to_mysql.py[line:714] - INFO: 任务 销售_衍生_订单查询 完成, 获取2462条数据
+2025-12-26 13:46:15,448 - cyy_to_mysql.py[line:714] - INFO: 任务 销售回访 完成, 获取2462条数据
+2025-12-26 13:46:22,555 - cyy_to_mysql.py[line:714] - INFO: 任务 调车结算查询 完成, 获取6143条数据
+2025-12-26 13:47:00,538 - cyy_to_mysql.py[line:714] - INFO: 任务 开票维护 完成, 获取10671条数据
+2025-12-26 14:52:02,053 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 14:52:02,054 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 14:52:03,905 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 装饰_订单管理_装饰订单 完成, 获取983条数据
+2025-12-26 14:52:04,112 - cyy_to_mysql_99.py[line:857] - INFO: 装饰_订单管理_装饰订单 数据保存完成，影响 362 行
+2025-12-26 14:52:04,391 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 15:00:52,408 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 15:00:52,408 - cyy_to_mysql_99.py[line:940] - INFO: 车辆销售明细表_订单日期 第1页 - 重试第1次
+2025-12-26 15:00:52,409 - cyy_to_mysql_99.py[line:940] - INFO: 车辆销售明细表_开票日期 第1页 - 重试第1次
+2025-12-26 15:00:52,409 - cyy_to_mysql_99.py[line:940] - INFO: 车辆成本管理 第1页 - 重试第1次
+2025-12-26 15:00:53,935 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 15:00:53,935 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆成本管理 完成, 获取95条数据
+2025-12-26 15:00:53,985 - cyy_to_mysql_99.py[line:857] - INFO: 车辆成本管理 数据保存完成，影响 100 行
+2025-12-26 15:00:57,941 - cyy_to_mysql_99.py[line:940] - INFO: 套餐销售列表 第1页 - 重试第1次
+2025-12-26 15:00:57,942 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 装饰_订单管理_装饰订单 完成, 获取1035条数据
+2025-12-26 15:00:58,031 - cyy_to_mysql_99.py[line:857] - INFO: 装饰_订单管理_装饰订单 数据保存完成，影响 100 行
+2025-12-26 15:01:08,447 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_成交订单 第1页 - 重试第1次
+2025-12-26 15:01:08,447 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆销售明细表_订单日期 完成, 获取268条数据
+2025-12-26 15:01:08,622 - cyy_to_mysql_99.py[line:857] - INFO: 车辆销售明细表_订单日期 数据保存完成，影响 393 行
+2025-12-26 15:01:09,562 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_作废订单 第1页 - 重试第1次
+2025-12-26 15:01:09,562 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆销售明细表_开票日期 完成, 获取269条数据
+2025-12-26 15:01:09,688 - cyy_to_mysql_99.py[line:857] - INFO: 车辆销售明细表_开票日期 数据保存完成，影响 520 行
+2025-12-26 15:01:10,128 - cyy_to_mysql_99.py[line:940] - INFO: 开票维护 第1页 - 重试第1次
+2025-12-26 15:01:10,129 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_成交订单 完成, 获取40条数据
+2025-12-26 15:01:10,157 - cyy_to_mysql_99.py[line:857] - INFO: 销售_车辆销售_成交订单 数据保存完成，影响 31 行
+2025-12-26 15:01:19,577 - cyy_to_mysql_99.py[line:940] - INFO: 保险业务 第1页 - 重试第1次
+2025-12-26 15:01:19,577 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 套餐销售列表 完成, 获取95条数据
+2025-12-26 15:01:19,608 - cyy_to_mysql_99.py[line:857] - INFO: 套餐销售列表 数据保存完成，影响 38 行
+2025-12-26 15:01:22,376 - cyy_to_mysql_99.py[line:940] - INFO: 按揭业务 第1页 - 重试第1次
+2025-12-26 15:01:22,377 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 保险业务 完成, 获取34条数据
+2025-12-26 15:01:22,379 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_成交 第1页 - 重试第1次
+2025-12-26 15:01:22,391 - cyy_to_mysql_99.py[line:857] - INFO: 保险业务 数据保存完成，影响 15 行
+2025-12-26 15:01:22,391 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_作废订单 完成, 获取11条数据
+2025-12-26 15:01:22,397 - cyy_to_mysql_99.py[line:857] - INFO: 销售_车辆销售_作废订单 数据保存完成，影响 2 行
+2025-12-26 15:01:22,827 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_已入库 第1页 - 重试第1次
+2025-12-26 15:01:22,827 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 开票维护 完成, 获取276条数据
+2025-12-26 15:01:22,860 - cyy_to_mysql_99.py[line:857] - INFO: 开票维护 数据保存完成，影响 67 行
+2025-12-26 15:01:24,126 - cyy_to_mysql_99.py[line:940] - INFO: 调车结算查询 第1页 - 重试第1次
+2025-12-26 15:01:24,127 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_成交 完成, 获取0条数据
+2025-12-26 15:01:24,127 - cyy_to_mysql_99.py[line:816] - INFO: 评估管理_成交 无数据可保存
+2025-12-26 15:01:24,127 - cyy_to_mysql_99.py[line:1064] - ERROR: 任务 评估管理_成交 数据保存失败: 评估管理_成交 无数据可保存
+2025-12-26 15:01:24,148 - cyy_to_mysql_99.py[line:940] - INFO: 销售_衍生_订单查询 第1页 - 重试第1次
+2025-12-26 15:01:24,149 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_已入库 完成, 获取45条数据
+2025-12-26 15:01:24,168 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆已售 第1页 - 重试第1次
+2025-12-26 15:01:24,172 - cyy_to_mysql_99.py[line:857] - INFO: 评估管理_已入库 数据保存完成，影响 8 行
+2025-12-26 15:01:24,172 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 按揭业务 完成, 获取93条数据
+2025-12-26 15:01:24,200 - cyy_to_mysql_99.py[line:857] - INFO: 按揭业务 数据保存完成，影响 185 行
+2025-12-26 15:01:24,947 - cyy_to_mysql_99.py[line:940] - INFO: 汇票管理 第1页 - 重试第1次
+2025-12-26 15:01:24,948 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 调车结算查询 完成, 获取3条数据
+2025-12-26 15:01:24,956 - cyy_to_mysql_99.py[line:857] - INFO: 调车结算查询 数据保存完成，影响 0 行
+2025-12-26 15:01:26,527 - cyy_to_mysql_99.py[line:940] - INFO: 销售回访 第1页 - 重试第1次
+2025-12-26 15:01:26,528 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_衍生_订单查询 完成, 获取255条数据
+2025-12-26 15:01:26,578 - cyy_to_mysql_99.py[line:857] - INFO: 销售_衍生_订单查询 数据保存完成，影响 190 行
+2025-12-26 15:01:28,359 - cyy_to_mysql_99.py[line:940] - INFO: 未售订单 第1页 - 重试第1次
+2025-12-26 15:01:28,359 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售回访 完成, 获取113条数据
+2025-12-26 15:01:28,409 - cyy_to_mysql_99.py[line:857] - INFO: 销售回访 数据保存完成，影响 98 行
+2025-12-26 15:01:28,622 - cyy_to_mysql_99.py[line:940] - INFO: 计划车辆 第1页 - 重试第1次
+2025-12-26 15:01:28,622 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 汇票管理 完成, 获取397条数据
+2025-12-26 15:01:28,676 - cyy_to_mysql_99.py[line:857] - INFO: 汇票管理 数据保存完成，影响 102 行
+2025-12-26 15:01:30,202 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第1页 - 重试第1次
+2025-12-26 15:01:30,202 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆已售 完成, 获取82条数据
+2025-12-26 15:01:30,255 - cyy_to_mysql_99.py[line:857] - INFO: 库存车辆已售 数据保存完成，影响 74 行
+2025-12-26 15:01:30,523 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第1页 - 重试第1次
+2025-12-26 15:01:30,523 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 计划车辆 完成, 获取1691条数据
+2025-12-26 15:01:30,562 - cyy_to_mysql_99.py[line:583] - INFO: 计划车辆 已清空表数据
+2025-12-26 15:01:30,633 - cyy_to_mysql_99.py[line:593] - INFO: 计划车辆 全量更新完成，插入 1691 行数据
+2025-12-26 15:01:34,125 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 未售订单 完成, 获取761条数据
+2025-12-26 15:01:34,182 - cyy_to_mysql_99.py[line:583] - INFO: 未售订单 已清空表数据
+2025-12-26 15:01:34,258 - cyy_to_mysql_99.py[line:593] - INFO: 未售订单 全量更新完成，插入 761 行数据
+2025-12-26 15:01:39,695 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第2页 - 重试第1次
+2025-12-26 15:01:40,779 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 删除日志 完成, 获取4465条数据
+2025-12-26 15:02:00,527 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第2页 - 重试第1次
+2025-12-26 15:02:21,246 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆查询 完成, 获取3339条数据
+2025-12-26 15:02:21,425 - cyy_to_mysql_99.py[line:583] - INFO: 库存车辆查询 已清空表数据
+2025-12-26 15:02:21,748 - cyy_to_mysql_99.py[line:593] - INFO: 库存车辆查询 全量更新完成，插入 3339 行数据
+2025-12-26 15:02:22,066 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 16:06:00,009 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 16:06:00,012 - cyy_to_mysql_99.py[line:940] - INFO: 车辆销售明细表_订单日期 第1页 - 重试第1次
+2025-12-26 16:06:00,013 - cyy_to_mysql_99.py[line:940] - INFO: 车辆销售明细表_开票日期 第1页 - 重试第1次
+2025-12-26 16:06:00,014 - cyy_to_mysql_99.py[line:940] - INFO: 车辆成本管理 第1页 - 重试第1次
+2025-12-26 16:06:01,722 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 16:06:01,722 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆成本管理 完成, 获取115条数据
+2025-12-26 16:06:01,769 - cyy_to_mysql_99.py[line:857] - INFO: 车辆成本管理 数据保存完成，影响 51 行
+2025-12-26 16:06:05,465 - cyy_to_mysql_99.py[line:940] - INFO: 套餐销售列表 第1页 - 重试第1次
+2025-12-26 16:06:05,465 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 装饰_订单管理_装饰订单 完成, 获取1116条数据
+2025-12-26 16:06:05,559 - cyy_to_mysql_99.py[line:857] - INFO: 装饰_订单管理_装饰订单 数据保存完成，影响 230 行
+2025-12-26 16:06:17,602 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_成交订单 第1页 - 重试第1次
+2025-12-26 16:06:17,603 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆销售明细表_订单日期 完成, 获取294条数据
+2025-12-26 16:06:17,758 - cyy_to_mysql_99.py[line:857] - INFO: 车辆销售明细表_订单日期 数据保存完成，影响 580 行
+2025-12-26 16:06:18,732 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_作废订单 第1页 - 重试第1次
+2025-12-26 16:06:18,732 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆销售明细表_开票日期 完成, 获取294条数据
+2025-12-26 16:06:18,858 - cyy_to_mysql_99.py[line:857] - INFO: 车辆销售明细表_开票日期 数据保存完成，影响 586 行
+2025-12-26 16:06:20,577 - cyy_to_mysql_99.py[line:940] - INFO: 开票维护 第1页 - 重试第1次
+2025-12-26 16:06:20,577 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_成交订单 完成, 获取52条数据
+2025-12-26 16:06:20,593 - cyy_to_mysql_99.py[line:857] - INFO: 销售_车辆销售_成交订单 数据保存完成，影响 18 行
+2025-12-26 16:06:26,724 - cyy_to_mysql_99.py[line:940] - INFO: 保险业务 第1页 - 重试第1次
+2025-12-26 16:06:26,724 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 套餐销售列表 完成, 获取101条数据
+2025-12-26 16:06:26,754 - cyy_to_mysql_99.py[line:857] - INFO: 套餐销售列表 数据保存完成，影响 26 行
+2025-12-26 16:06:29,394 - cyy_to_mysql_99.py[line:940] - INFO: 按揭业务 第1页 - 重试第1次
+2025-12-26 16:06:29,394 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_作废订单 完成, 获取12条数据
+2025-12-26 16:06:29,404 - cyy_to_mysql_99.py[line:857] - INFO: 销售_车辆销售_作废订单 数据保存完成，影响 1 行
+2025-12-26 16:06:30,579 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_成交 第1页 - 重试第1次
+2025-12-26 16:06:30,580 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 保险业务 完成, 获取37条数据
+2025-12-26 16:06:30,608 - cyy_to_mysql_99.py[line:857] - INFO: 保险业务 数据保存完成，影响 3 行
+2025-12-26 16:06:31,157 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_已入库 第1页 - 重试第1次
+2025-12-26 16:06:31,158 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 按揭业务 完成, 获取97条数据
+2025-12-26 16:06:31,191 - cyy_to_mysql_99.py[line:857] - INFO: 按揭业务 数据保存完成，影响 166 行
+2025-12-26 16:06:34,465 - cyy_to_mysql_99.py[line:940] - INFO: 调车结算查询 第1页 - 重试第1次
+2025-12-26 16:06:34,467 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_已入库 完成, 获取46条数据
+2025-12-26 16:06:34,492 - cyy_to_mysql_99.py[line:857] - INFO: 评估管理_已入库 数据保存完成，影响 15 行
+2025-12-26 16:06:34,611 - cyy_to_mysql_99.py[line:940] - INFO: 销售_衍生_订单查询 第1页 - 重试第1次
+2025-12-26 16:06:34,612 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_成交 完成, 获取0条数据
+2025-12-26 16:06:34,612 - cyy_to_mysql_99.py[line:816] - INFO: 评估管理_成交 无数据可保存
+2025-12-26 16:06:34,613 - cyy_to_mysql_99.py[line:1064] - ERROR: 任务 评估管理_成交 数据保存失败: 评估管理_成交 无数据可保存
+2025-12-26 16:06:35,559 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆已售 第1页 - 重试第1次
+2025-12-26 16:06:35,559 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 调车结算查询 完成, 获取3条数据
+2025-12-26 16:06:35,567 - cyy_to_mysql_99.py[line:857] - INFO: 调车结算查询 数据保存完成，影响 0 行
+2025-12-26 16:06:37,692 - cyy_to_mysql_99.py[line:940] - INFO: 汇票管理 第1页 - 重试第1次
+2025-12-26 16:06:37,693 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_衍生_订单查询 完成, 获取268条数据
+2025-12-26 16:06:37,752 - cyy_to_mysql_99.py[line:857] - INFO: 销售_衍生_订单查询 数据保存完成，影响 76 行
+2025-12-26 16:06:40,533 - cyy_to_mysql_99.py[line:940] - INFO: 销售回访 第1页 - 重试第1次
+2025-12-26 16:06:40,533 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 汇票管理 完成, 获取424条数据
+2025-12-26 16:06:40,593 - cyy_to_mysql_99.py[line:857] - INFO: 汇票管理 数据保存完成，影响 24 行
+2025-12-26 16:06:42,967 - cyy_to_mysql_99.py[line:940] - INFO: 未售订单 第1页 - 重试第1次
+2025-12-26 16:06:42,968 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售回访 完成, 获取122条数据
+2025-12-26 16:06:42,994 - cyy_to_mysql_99.py[line:857] - INFO: 销售回访 数据保存完成，影响 70 行
+2025-12-26 16:06:44,025 - cyy_to_mysql_99.py[line:940] - INFO: 计划车辆 第1页 - 重试第1次
+2025-12-26 16:06:44,026 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 开票维护 完成, 获取319条数据
+2025-12-26 16:06:44,049 - cyy_to_mysql_99.py[line:857] - INFO: 开票维护 数据保存完成，影响 43 行
+2025-12-26 16:06:45,712 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第1页 - 重试第1次
+2025-12-26 16:06:45,712 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 计划车辆 完成, 获取1691条数据
+2025-12-26 16:06:45,764 - cyy_to_mysql_99.py[line:583] - INFO: 计划车辆 已清空表数据
+2025-12-26 16:06:45,835 - cyy_to_mysql_99.py[line:593] - INFO: 计划车辆 全量更新完成，插入 1691 行数据
+2025-12-26 16:06:49,424 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第1页 - 重试第1次
+2025-12-26 16:06:49,425 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 未售订单 完成, 获取759条数据
+2025-12-26 16:06:49,469 - cyy_to_mysql_99.py[line:583] - INFO: 未售订单 已清空表数据
+2025-12-26 16:06:49,528 - cyy_to_mysql_99.py[line:593] - INFO: 未售订单 全量更新完成，插入 759 行数据
+2025-12-26 16:06:53,062 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆已售 完成, 获取108条数据
+2025-12-26 16:06:53,103 - cyy_to_mysql_99.py[line:857] - INFO: 库存车辆已售 数据保存完成，影响 50 行
+2025-12-26 16:06:59,719 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第2页 - 重试第1次
+2025-12-26 16:07:00,549 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 删除日志 完成, 获取4471条数据
+2025-12-26 16:07:18,822 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第2页 - 重试第1次
+2025-12-26 16:07:39,165 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆查询 完成, 获取3331条数据
+2025-12-26 16:07:39,306 - cyy_to_mysql_99.py[line:583] - INFO: 库存车辆查询 已清空表数据
+2025-12-26 16:07:39,656 - cyy_to_mysql_99.py[line:593] - INFO: 库存车辆查询 全量更新完成，插入 3331 行数据
+2025-12-26 16:07:39,969 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 16:22:02,937 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 16:22:02,938 - cyy_to_mysql_99.py[line:940] - INFO: 车辆销售明细表_订单日期 第1页 - 重试第1次
+2025-12-26 16:22:02,939 - cyy_to_mysql_99.py[line:940] - INFO: 车辆销售明细表_开票日期 第1页 - 重试第1次
+2025-12-26 16:22:02,940 - cyy_to_mysql_99.py[line:940] - INFO: 车辆成本管理 第1页 - 重试第1次
+2025-12-26 16:22:04,905 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 16:22:04,905 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆成本管理 完成, 获取133条数据
+2025-12-26 16:22:04,981 - cyy_to_mysql_99.py[line:857] - INFO: 车辆成本管理 数据保存完成，影响 40 行
+2025-12-26 16:22:10,231 - cyy_to_mysql_99.py[line:940] - INFO: 套餐销售列表 第1页 - 重试第1次
+2025-12-26 16:22:10,231 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 装饰_订单管理_装饰订单 完成, 获取1133条数据
+2025-12-26 16:22:10,428 - cyy_to_mysql_99.py[line:857] - INFO: 装饰_订单管理_装饰订单 数据保存完成，影响 109 行
+2025-12-26 16:22:19,629 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_成交订单 第1页 - 重试第1次
+2025-12-26 16:22:19,629 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆销售明细表_开票日期 完成, 获取313条数据
+2025-12-26 16:22:19,835 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_作废订单 第1页 - 重试第1次
+2025-12-26 16:22:19,867 - cyy_to_mysql_99.py[line:857] - INFO: 车辆销售明细表_开票日期 数据保存完成，影响 574 行
+2025-12-26 16:22:19,868 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆销售明细表_订单日期 完成, 获取313条数据
+2025-12-26 16:22:20,076 - cyy_to_mysql_99.py[line:857] - INFO: 车辆销售明细表_订单日期 数据保存完成，影响 569 行
+2025-12-26 16:22:22,217 - cyy_to_mysql_99.py[line:940] - INFO: 开票维护 第1页 - 重试第1次
+2025-12-26 16:22:22,218 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_成交订单 完成, 获取53条数据
+2025-12-26 16:22:22,257 - cyy_to_mysql_99.py[line:857] - INFO: 销售_车辆销售_成交订单 数据保存完成，影响 9 行
+2025-12-26 16:22:24,566 - cyy_to_mysql_99.py[line:940] - INFO: 保险业务 第1页 - 重试第1次
+2025-12-26 16:22:24,567 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_作废订单 完成, 获取12条数据
+2025-12-26 16:22:24,584 - cyy_to_mysql_99.py[line:857] - INFO: 销售_车辆销售_作废订单 数据保存完成，影响 0 行
+2025-12-26 16:22:28,277 - cyy_to_mysql_99.py[line:940] - INFO: 按揭业务 第1页 - 重试第1次
+2025-12-26 16:22:28,277 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 套餐销售列表 完成, 获取101条数据
+2025-12-26 16:22:28,319 - cyy_to_mysql_99.py[line:857] - INFO: 套餐销售列表 数据保存完成，影响 6 行
+2025-12-26 16:22:28,601 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_成交 第1页 - 重试第1次
+2025-12-26 16:22:28,601 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 保险业务 完成, 获取41条数据
+2025-12-26 16:22:28,618 - cyy_to_mysql_99.py[line:857] - INFO: 保险业务 数据保存完成，影响 4 行
+2025-12-26 16:22:29,960 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_已入库 第1页 - 重试第1次
+2025-12-26 16:22:29,960 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_成交 完成, 获取0条数据
+2025-12-26 16:22:29,960 - cyy_to_mysql_99.py[line:816] - INFO: 评估管理_成交 无数据可保存
+2025-12-26 16:22:29,960 - cyy_to_mysql_99.py[line:1064] - ERROR: 任务 评估管理_成交 数据保存失败: 评估管理_成交 无数据可保存
+2025-12-26 16:22:30,795 - cyy_to_mysql_99.py[line:940] - INFO: 调车结算查询 第1页 - 重试第1次
+2025-12-26 16:22:30,795 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 按揭业务 完成, 获取97条数据
+2025-12-26 16:22:30,834 - cyy_to_mysql_99.py[line:857] - INFO: 按揭业务 数据保存完成，影响 12 行
+2025-12-26 16:22:31,740 - cyy_to_mysql_99.py[line:940] - INFO: 销售_衍生_订单查询 第1页 - 重试第1次
+2025-12-26 16:22:31,741 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 调车结算查询 完成, 获取3条数据
+2025-12-26 16:22:31,756 - cyy_to_mysql_99.py[line:857] - INFO: 调车结算查询 数据保存完成，影响 0 行
+2025-12-26 16:22:31,773 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆已售 第1页 - 重试第1次
+2025-12-26 16:22:31,774 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_已入库 完成, 获取46条数据
+2025-12-26 16:22:31,788 - cyy_to_mysql_99.py[line:857] - INFO: 评估管理_已入库 数据保存完成，影响 0 行
+2025-12-26 16:22:32,051 - cyy_to_mysql_99.py[line:940] - INFO: 汇票管理 第1页 - 重试第1次
+2025-12-26 16:22:32,052 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 开票维护 完成, 获取338条数据
+2025-12-26 16:22:32,089 - cyy_to_mysql_99.py[line:857] - INFO: 开票维护 数据保存完成，影响 19 行
+2025-12-26 16:22:33,418 - cyy_to_mysql_99.py[line:940] - INFO: 销售回访 第1页 - 重试第1次
+2025-12-26 16:22:33,418 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_衍生_订单查询 完成, 获取275条数据
+2025-12-26 16:22:33,505 - cyy_to_mysql_99.py[line:857] - INFO: 销售_衍生_订单查询 数据保存完成，影响 26 行
+2025-12-26 16:22:33,939 - cyy_to_mysql_99.py[line:940] - INFO: 未售订单 第1页 - 重试第1次
+2025-12-26 16:22:33,939 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 汇票管理 完成, 获取438条数据
+2025-12-26 16:22:34,000 - cyy_to_mysql_99.py[line:857] - INFO: 汇票管理 数据保存完成，影响 8 行
+2025-12-26 16:22:34,894 - cyy_to_mysql_99.py[line:940] - INFO: 计划车辆 第1页 - 重试第1次
+2025-12-26 16:22:34,895 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆已售 完成, 获取123条数据
+2025-12-26 16:22:34,948 - cyy_to_mysql_99.py[line:857] - INFO: 库存车辆已售 数据保存完成，影响 36 行
+2025-12-26 16:22:35,132 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第1页 - 重试第1次
+2025-12-26 16:22:35,132 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售回访 完成, 获取123条数据
+2025-12-26 16:22:35,152 - cyy_to_mysql_99.py[line:857] - INFO: 销售回访 数据保存完成，影响 16 行
+2025-12-26 16:22:36,115 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第1页 - 重试第1次
+2025-12-26 16:22:36,115 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 计划车辆 完成, 获取1691条数据
+2025-12-26 16:22:36,185 - cyy_to_mysql_99.py[line:583] - INFO: 计划车辆 已清空表数据
+2025-12-26 16:22:36,307 - cyy_to_mysql_99.py[line:593] - INFO: 计划车辆 全量更新完成，插入 1691 行数据
+2025-12-26 16:22:41,951 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 未售订单 完成, 获取755条数据
+2025-12-26 16:22:42,033 - cyy_to_mysql_99.py[line:583] - INFO: 未售订单 已清空表数据
+2025-12-26 16:22:42,132 - cyy_to_mysql_99.py[line:593] - INFO: 未售订单 全量更新完成，插入 755 行数据
+2025-12-26 16:22:46,548 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第2页 - 重试第1次
+2025-12-26 16:22:47,541 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 删除日志 完成, 获取4472条数据
+2025-12-26 16:23:02,943 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第2页 - 重试第1次
+2025-12-26 16:23:23,758 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆查询 完成, 获取3329条数据
+2025-12-26 16:23:24,083 - cyy_to_mysql_99.py[line:583] - INFO: 库存车辆查询 已清空表数据
+2025-12-26 16:23:24,515 - cyy_to_mysql_99.py[line:593] - INFO: 库存车辆查询 全量更新完成，插入 3329 行数据
+2025-12-26 16:23:24,864 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 16:45:17,629 - cyy_to_mysql.py[line:714] - INFO: 任务 车辆成本管理 完成, 获取4419条数据
+2025-12-26 16:45:18,798 - cyy_to_mysql.py[line:714] - INFO: 任务 车辆销售明细表_开票日期 完成, 获取2816条数据
+2025-12-26 16:45:23,913 - cyy_to_mysql.py[line:714] - INFO: 任务 套餐销售列表 完成, 获取1238条数据
+2025-12-26 16:45:35,101 - cyy_to_mysql.py[line:714] - INFO: 任务 销售_车辆销售_成交订单 完成, 获取2825条数据
+2025-12-26 16:45:36,591 - cyy_to_mysql.py[line:714] - INFO: 任务 销售_车辆销售_作废订单 完成, 获取482条数据
+2025-12-26 16:45:39,169 - cyy_to_mysql.py[line:714] - INFO: 任务 按揭业务 完成, 获取1369条数据
+2025-12-26 16:45:39,935 - cyy_to_mysql.py[line:714] - INFO: 任务 评估管理_成交 完成, 获取0条数据
+2025-12-26 16:45:39,935 - cyy_to_mysql.py[line:722] - ERROR: 任务 评估管理_成交 数据保存失败: 评估管理_成交 无数据可保存
+2025-12-26 16:45:41,050 - cyy_to_mysql.py[line:714] - INFO: 任务 评估管理_已入库 完成, 获取513条数据
+2025-12-26 16:45:41,175 - cyy_to_mysql.py[line:714] - INFO: 任务 保险业务 完成, 获取2142条数据
+2025-12-26 16:45:48,558 - cyy_to_mysql.py[line:714] - INFO: 任务 销售_衍生_订单查询 完成, 获取2470条数据
+2025-12-26 16:45:57,768 - cyy_to_mysql.py[line:714] - INFO: 任务 调车结算查询 完成, 获取6157条数据
+2025-12-26 16:45:58,439 - cyy_to_mysql.py[line:714] - INFO: 任务 库存车辆已售 完成, 获取838条数据
+2025-12-26 16:45:59,507 - cyy_to_mysql.py[line:714] - INFO: 任务 汇票管理 完成, 获取1569条数据
+2025-12-26 16:46:01,859 - cyy_to_mysql.py[line:714] - INFO: 任务 销售回访 完成, 获取2470条数据
+2025-12-26 16:46:25,234 - cyy_to_mysql.py[line:714] - INFO: 任务 装饰_订单管理_装饰订单 完成, 获取13372条数据
+2025-12-26 16:46:50,063 - cyy_to_mysql.py[line:714] - INFO: 任务 开票维护 完成, 获取10806条数据
+2025-12-26 17:52:02,953 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 17:52:02,955 - cyy_to_mysql_99.py[line:940] - INFO: 车辆销售明细表_订单日期 第1页 - 重试第1次
+2025-12-26 17:52:02,955 - cyy_to_mysql_99.py[line:940] - INFO: 车辆销售明细表_开票日期 第1页 - 重试第1次
+2025-12-26 17:52:02,956 - cyy_to_mysql_99.py[line:940] - INFO: 车辆成本管理 第1页 - 重试第1次
+2025-12-26 17:52:06,522 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 17:52:06,522 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆成本管理 完成, 获取163条数据
+2025-12-26 17:52:06,598 - cyy_to_mysql_99.py[line:857] - INFO: 车辆成本管理 数据保存完成，影响 53 行
+2025-12-26 17:52:10,048 - cyy_to_mysql_99.py[line:940] - INFO: 套餐销售列表 第1页 - 重试第1次
+2025-12-26 17:52:10,048 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 装饰_订单管理_装饰订单 完成, 获取1338条数据
+2025-12-26 17:52:10,374 - cyy_to_mysql_99.py[line:857] - INFO: 装饰_订单管理_装饰订单 数据保存完成，影响 300 行
+2025-12-26 17:52:25,954 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_成交订单 第1页 - 重试第1次
+2025-12-26 17:52:25,954 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆销售明细表_订单日期 完成, 获取413条数据
+2025-12-26 17:52:26,214 - cyy_to_mysql_99.py[line:857] - INFO: 车辆销售明细表_订单日期 数据保存完成，影响 791 行
+2025-12-26 17:52:26,391 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_作废订单 第1页 - 重试第1次
+2025-12-26 17:52:26,391 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆销售明细表_开票日期 完成, 获取413条数据
+2025-12-26 17:52:26,584 - cyy_to_mysql_99.py[line:857] - INFO: 车辆销售明细表_开票日期 数据保存完成，影响 808 行
+2025-12-26 17:52:28,778 - cyy_to_mysql_99.py[line:940] - INFO: 开票维护 第1页 - 重试第1次
+2025-12-26 17:52:28,778 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_成交订单 完成, 获取64条数据
+2025-12-26 17:52:28,806 - cyy_to_mysql_99.py[line:857] - INFO: 销售_车辆销售_成交订单 数据保存完成，影响 24 行
+2025-12-26 17:52:29,255 - cyy_to_mysql_99.py[line:940] - INFO: 保险业务 第1页 - 重试第1次
+2025-12-26 17:52:29,255 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 套餐销售列表 完成, 获取123条数据
+2025-12-26 17:52:29,312 - cyy_to_mysql_99.py[line:857] - INFO: 套餐销售列表 数据保存完成，影响 24 行
+2025-12-26 17:52:33,661 - cyy_to_mysql_99.py[line:940] - INFO: 按揭业务 第1页 - 重试第1次
+2025-12-26 17:52:33,661 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 保险业务 完成, 获取61条数据
+2025-12-26 17:52:33,689 - cyy_to_mysql_99.py[line:857] - INFO: 保险业务 数据保存完成，影响 13 行
+2025-12-26 17:52:34,617 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_成交 第1页 - 重试第1次
+2025-12-26 17:52:34,618 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_作废订单 完成, 获取13条数据
+2025-12-26 17:52:34,647 - cyy_to_mysql_99.py[line:857] - INFO: 销售_车辆销售_作废订单 数据保存完成，影响 1 行
+2025-12-26 17:52:35,135 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_已入库 第1页 - 重试第1次
+2025-12-26 17:52:35,135 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 按揭业务 完成, 获取108条数据
+2025-12-26 17:52:35,186 - cyy_to_mysql_99.py[line:857] - INFO: 按揭业务 数据保存完成，影响 188 行
+2025-12-26 17:52:36,635 - cyy_to_mysql_99.py[line:940] - INFO: 调车结算查询 第1页 - 重试第1次
+2025-12-26 17:52:36,637 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_已入库 完成, 获取47条数据
+2025-12-26 17:52:36,655 - cyy_to_mysql_99.py[line:857] - INFO: 评估管理_已入库 数据保存完成，影响 16 行
+2025-12-26 17:52:37,081 - cyy_to_mysql_99.py[line:940] - INFO: 销售_衍生_订单查询 第1页 - 重试第1次
+2025-12-26 17:52:37,082 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_成交 完成, 获取0条数据
+2025-12-26 17:52:37,082 - cyy_to_mysql_99.py[line:816] - INFO: 评估管理_成交 无数据可保存
+2025-12-26 17:52:37,083 - cyy_to_mysql_99.py[line:1064] - ERROR: 任务 评估管理_成交 数据保存失败: 评估管理_成交 无数据可保存
+2025-12-26 17:52:38,037 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆已售 第1页 - 重试第1次
+2025-12-26 17:52:38,040 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 调车结算查询 完成, 获取3条数据
+2025-12-26 17:52:38,047 - cyy_to_mysql_99.py[line:857] - INFO: 调车结算查询 数据保存完成，影响 0 行
+2025-12-26 17:52:39,365 - cyy_to_mysql_99.py[line:940] - INFO: 汇票管理 第1页 - 重试第1次
+2025-12-26 17:52:39,366 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_衍生_订单查询 完成, 获取348条数据
+2025-12-26 17:52:39,475 - cyy_to_mysql_99.py[line:857] - INFO: 销售_衍生_订单查询 数据保存完成，影响 139 行
+2025-12-26 17:52:41,863 - cyy_to_mysql_99.py[line:940] - INFO: 销售回访 第1页 - 重试第1次
+2025-12-26 17:52:41,863 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 汇票管理 完成, 获取484条数据
+2025-12-26 17:52:41,943 - cyy_to_mysql_99.py[line:857] - INFO: 汇票管理 数据保存完成，影响 56 行
+2025-12-26 17:52:43,366 - cyy_to_mysql_99.py[line:940] - INFO: 未售订单 第1页 - 重试第1次
+2025-12-26 17:52:43,366 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆已售 完成, 获取177条数据
+2025-12-26 17:52:43,445 - cyy_to_mysql_99.py[line:857] - INFO: 库存车辆已售 数据保存完成，影响 119 行
+2025-12-26 17:52:44,068 - cyy_to_mysql_99.py[line:940] - INFO: 计划车辆 第1页 - 重试第1次
+2025-12-26 17:52:44,068 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售回访 完成, 获取150条数据
+2025-12-26 17:52:44,112 - cyy_to_mysql_99.py[line:857] - INFO: 销售回访 数据保存完成，影响 97 行
+2025-12-26 17:52:44,943 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第1页 - 重试第1次
+2025-12-26 17:52:44,943 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 开票维护 完成, 获取390条数据
+2025-12-26 17:52:44,995 - cyy_to_mysql_99.py[line:857] - INFO: 开票维护 数据保存完成，影响 43 行
+2025-12-26 17:52:45,799 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第1页 - 重试第1次
+2025-12-26 17:52:45,800 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 计划车辆 完成, 获取1691条数据
+2025-12-26 17:52:45,873 - cyy_to_mysql_99.py[line:583] - INFO: 计划车辆 已清空表数据
+2025-12-26 17:52:45,991 - cyy_to_mysql_99.py[line:593] - INFO: 计划车辆 全量更新完成，插入 1691 行数据
+2025-12-26 17:52:48,693 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 未售订单 完成, 获取748条数据
+2025-12-26 17:52:48,743 - cyy_to_mysql_99.py[line:583] - INFO: 未售订单 已清空表数据
+2025-12-26 17:52:48,855 - cyy_to_mysql_99.py[line:593] - INFO: 未售订单 全量更新完成，插入 748 行数据
+2025-12-26 17:52:53,344 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第2页 - 重试第1次
+2025-12-26 17:52:54,464 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 删除日志 完成, 获取4482条数据
+2025-12-26 17:53:11,187 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第2页 - 重试第1次
+2025-12-26 17:53:31,514 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆查询 完成, 获取3314条数据
+2025-12-26 17:53:31,800 - cyy_to_mysql_99.py[line:583] - INFO: 库存车辆查询 已清空表数据
+2025-12-26 17:53:32,253 - cyy_to_mysql_99.py[line:593] - INFO: 库存车辆查询 全量更新完成，插入 3314 行数据
+2025-12-26 17:53:32,589 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 17:55:02,398 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 17:55:02,399 - cyy_to_mysql_99.py[line:940] - INFO: 车辆销售明细表_订单日期 第1页 - 重试第1次
+2025-12-26 17:55:02,399 - cyy_to_mysql_99.py[line:940] - INFO: 车辆销售明细表_开票日期 第1页 - 重试第1次
+2025-12-26 17:55:02,400 - cyy_to_mysql_99.py[line:940] - INFO: 车辆成本管理 第1页 - 重试第1次
+2025-12-26 17:55:04,143 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 17:55:04,143 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆成本管理 完成, 获取164条数据
+2025-12-26 17:55:04,205 - cyy_to_mysql_99.py[line:857] - INFO: 车辆成本管理 数据保存完成，影响 6 行
+2025-12-26 17:55:14,180 - cyy_to_mysql_99.py[line:940] - INFO: 套餐销售列表 第1页 - 重试第1次
+2025-12-26 17:55:14,181 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 装饰_订单管理_装饰订单 完成, 获取1338条数据
+2025-12-26 17:55:14,325 - cyy_to_mysql_99.py[line:857] - INFO: 装饰_订单管理_装饰订单 数据保存完成，影响 18 行
+2025-12-26 17:55:18,081 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_成交订单 第1页 - 重试第1次
+2025-12-26 17:55:18,081 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆销售明细表_订单日期 完成, 获取416条数据
+2025-12-26 17:55:18,313 - cyy_to_mysql_99.py[line:857] - INFO: 车辆销售明细表_订单日期 数据保存完成，影响 292 行
+2025-12-26 17:55:18,858 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_作废订单 第1页 - 重试第1次
+2025-12-26 17:55:18,858 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆销售明细表_开票日期 完成, 获取416条数据
+2025-12-26 17:55:19,065 - cyy_to_mysql_99.py[line:857] - INFO: 车辆销售明细表_开票日期 数据保存完成，影响 292 行
+2025-12-26 17:55:22,767 - cyy_to_mysql_99.py[line:940] - INFO: 开票维护 第1页 - 重试第1次
+2025-12-26 17:55:22,767 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_成交订单 完成, 获取66条数据
+2025-12-26 17:55:22,795 - cyy_to_mysql_99.py[line:857] - INFO: 销售_车辆销售_成交订单 数据保存完成，影响 4 行
+2025-12-26 17:55:23,073 - cyy_to_mysql_99.py[line:940] - INFO: 保险业务 第1页 - 重试第1次
+2025-12-26 17:55:23,073 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_作废订单 完成, 获取13条数据
+2025-12-26 17:55:23,087 - cyy_to_mysql_99.py[line:857] - INFO: 销售_车辆销售_作废订单 数据保存完成，影响 0 行
+2025-12-26 17:55:26,533 - cyy_to_mysql_99.py[line:940] - INFO: 按揭业务 第1页 - 重试第1次
+2025-12-26 17:55:26,533 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 保险业务 完成, 获取61条数据
+2025-12-26 17:55:26,548 - cyy_to_mysql_99.py[line:857] - INFO: 保险业务 数据保存完成，影响 0 行
+2025-12-26 17:55:27,220 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_成交 第1页 - 重试第1次
+2025-12-26 17:55:27,220 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 套餐销售列表 完成, 获取124条数据
+2025-12-26 17:55:27,261 - cyy_to_mysql_99.py[line:857] - INFO: 套餐销售列表 数据保存完成，影响 5 行
+2025-12-26 17:55:29,264 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_已入库 第1页 - 重试第1次
+2025-12-26 17:55:29,264 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 按揭业务 完成, 获取114条数据
+2025-12-26 17:55:29,314 - cyy_to_mysql_99.py[line:857] - INFO: 按揭业务 数据保存完成，影响 173 行
+2025-12-26 17:55:30,509 - cyy_to_mysql_99.py[line:940] - INFO: 调车结算查询 第1页 - 重试第1次
+2025-12-26 17:55:30,509 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_成交 完成, 获取0条数据
+2025-12-26 17:55:30,511 - cyy_to_mysql_99.py[line:816] - INFO: 评估管理_成交 无数据可保存
+2025-12-26 17:55:30,511 - cyy_to_mysql_99.py[line:1064] - ERROR: 任务 评估管理_成交 数据保存失败: 评估管理_成交 无数据可保存
+2025-12-26 17:55:32,509 - cyy_to_mysql_99.py[line:940] - INFO: 销售_衍生_订单查询 第1页 - 重试第1次
+2025-12-26 17:55:32,510 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 调车结算查询 完成, 获取3条数据
+2025-12-26 17:55:32,517 - cyy_to_mysql_99.py[line:857] - INFO: 调车结算查询 数据保存完成，影响 0 行
+2025-12-26 17:55:32,693 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆已售 第1页 - 重试第1次
+2025-12-26 17:55:32,694 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_已入库 完成, 获取47条数据
+2025-12-26 17:55:32,713 - cyy_to_mysql_99.py[line:857] - INFO: 评估管理_已入库 数据保存完成，影响 0 行
+2025-12-26 17:55:35,870 - cyy_to_mysql_99.py[line:940] - INFO: 汇票管理 第1页 - 重试第1次
+2025-12-26 17:55:35,870 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆已售 完成, 获取179条数据
+2025-12-26 17:55:35,954 - cyy_to_mysql_99.py[line:857] - INFO: 库存车辆已售 数据保存完成，影响 4 行
+2025-12-26 17:55:36,002 - cyy_to_mysql_99.py[line:940] - INFO: 销售回访 第1页 - 重试第1次
+2025-12-26 17:55:36,002 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 开票维护 完成, 获取392条数据
+2025-12-26 17:55:36,042 - cyy_to_mysql_99.py[line:857] - INFO: 开票维护 数据保存完成，影响 2 行
+2025-12-26 17:55:36,370 - cyy_to_mysql_99.py[line:940] - INFO: 未售订单 第1页 - 重试第1次
+2025-12-26 17:55:36,370 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_衍生_订单查询 完成, 获取352条数据
+2025-12-26 17:55:36,468 - cyy_to_mysql_99.py[line:857] - INFO: 销售_衍生_订单查询 数据保存完成，影响 24 行
+2025-12-26 17:55:37,471 - cyy_to_mysql_99.py[line:940] - INFO: 计划车辆 第1页 - 重试第1次
+2025-12-26 17:55:37,471 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 汇票管理 完成, 获取484条数据
+2025-12-26 17:55:37,542 - cyy_to_mysql_99.py[line:857] - INFO: 汇票管理 数据保存完成，影响 4 行
+2025-12-26 17:55:38,218 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第1页 - 重试第1次
+2025-12-26 17:55:38,218 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售回访 完成, 获取150条数据
+2025-12-26 17:55:38,242 - cyy_to_mysql_99.py[line:857] - INFO: 销售回访 数据保存完成，影响 14 行
+2025-12-26 17:55:38,935 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第1页 - 重试第1次
+2025-12-26 17:55:38,935 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 计划车辆 完成, 获取1691条数据
+2025-12-26 17:55:38,993 - cyy_to_mysql_99.py[line:583] - INFO: 计划车辆 已清空表数据
+2025-12-26 17:55:39,093 - cyy_to_mysql_99.py[line:593] - INFO: 计划车辆 全量更新完成，插入 1691 行数据
+2025-12-26 17:55:40,416 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 未售订单 完成, 获取750条数据
+2025-12-26 17:55:40,463 - cyy_to_mysql_99.py[line:583] - INFO: 未售订单 已清空表数据
+2025-12-26 17:55:40,542 - cyy_to_mysql_99.py[line:593] - INFO: 未售订单 全量更新完成，插入 750 行数据
+2025-12-26 17:55:47,750 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第2页 - 重试第1次
+2025-12-26 17:55:48,477 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 删除日志 完成, 获取4482条数据
+2025-12-26 17:56:03,009 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第2页 - 重试第1次
+2025-12-26 17:56:25,168 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆查询 完成, 获取3311条数据
+2025-12-26 17:56:25,403 - cyy_to_mysql_99.py[line:583] - INFO: 库存车辆查询 已清空表数据
+2025-12-26 17:56:25,805 - cyy_to_mysql_99.py[line:593] - INFO: 库存车辆查询 全量更新完成，插入 3311 行数据
+2025-12-26 17:56:26,104 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 18:05:31,492 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 18:05:31,494 - cyy_to_mysql_99.py[line:940] - INFO: 车辆销售明细表_订单日期 第1页 - 重试第1次
+2025-12-26 18:05:31,495 - cyy_to_mysql_99.py[line:940] - INFO: 车辆销售明细表_开票日期 第1页 - 重试第1次
+2025-12-26 18:05:31,498 - cyy_to_mysql_99.py[line:940] - INFO: 车辆成本管理 第1页 - 重试第1次
+2025-12-26 18:05:33,398 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 18:05:33,398 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆成本管理 完成, 获取165条数据
+2025-12-26 18:05:33,473 - cyy_to_mysql_99.py[line:857] - INFO: 车辆成本管理 数据保存完成，影响 2 行
+2025-12-26 18:05:35,629 - cyy_to_mysql_99.py[line:940] - INFO: 套餐销售列表 第1页 - 重试第1次
+2025-12-26 18:05:35,629 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 装饰_订单管理_装饰订单 完成, 获取1346条数据
+2025-12-26 18:05:35,861 - cyy_to_mysql_99.py[line:857] - INFO: 装饰_订单管理_装饰订单 数据保存完成，影响 29 行
+2025-12-26 18:05:46,052 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_成交订单 第1页 - 重试第1次
+2025-12-26 18:05:46,052 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆销售明细表_订单日期 完成, 获取418条数据
+2025-12-26 18:05:46,304 - cyy_to_mysql_99.py[line:857] - INFO: 车辆销售明细表_订单日期 数据保存完成，影响 835 行
+2025-12-26 18:05:46,581 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_作废订单 第1页 - 重试第1次
+2025-12-26 18:05:46,582 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆销售明细表_开票日期 完成, 获取418条数据
+2025-12-26 18:05:46,818 - cyy_to_mysql_99.py[line:857] - INFO: 车辆销售明细表_开票日期 数据保存完成，影响 835 行
+2025-12-26 18:05:49,333 - cyy_to_mysql_99.py[line:940] - INFO: 开票维护 第1页 - 重试第1次
+2025-12-26 18:05:49,333 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_成交订单 完成, 获取66条数据
+2025-12-26 18:05:49,366 - cyy_to_mysql_99.py[line:857] - INFO: 销售_车辆销售_成交订单 数据保存完成，影响 4 行
+2025-12-26 18:05:49,889 - cyy_to_mysql_99.py[line:940] - INFO: 保险业务 第1页 - 重试第1次
+2025-12-26 18:05:49,891 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_作废订单 完成, 获取14条数据
+2025-12-26 18:05:49,905 - cyy_to_mysql_99.py[line:857] - INFO: 销售_车辆销售_作废订单 数据保存完成，影响 1 行
+2025-12-26 18:05:51,698 - cyy_to_mysql_99.py[line:940] - INFO: 按揭业务 第1页 - 重试第1次
+2025-12-26 18:05:51,698 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 套餐销售列表 完成, 获取124条数据
+2025-12-26 18:05:51,760 - cyy_to_mysql_99.py[line:857] - INFO: 套餐销售列表 数据保存完成，影响 2 行
+2025-12-26 18:05:53,036 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_成交 第1页 - 重试第1次
+2025-12-26 18:05:53,036 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 按揭业务 完成, 获取114条数据
+2025-12-26 18:05:53,078 - cyy_to_mysql_99.py[line:857] - INFO: 按揭业务 数据保存完成，影响 10 行
+2025-12-26 18:05:53,509 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_已入库 第1页 - 重试第1次
+2025-12-26 18:05:53,509 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 保险业务 完成, 获取61条数据
+2025-12-26 18:05:53,528 - cyy_to_mysql_99.py[line:857] - INFO: 保险业务 数据保存完成，影响 0 行
+2025-12-26 18:05:54,843 - cyy_to_mysql_99.py[line:940] - INFO: 调车结算查询 第1页 - 重试第1次
+2025-12-26 18:05:54,843 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_成交 完成, 获取0条数据
+2025-12-26 18:05:54,845 - cyy_to_mysql_99.py[line:816] - INFO: 评估管理_成交 无数据可保存
+2025-12-26 18:05:54,845 - cyy_to_mysql_99.py[line:1064] - ERROR: 任务 评估管理_成交 数据保存失败: 评估管理_成交 无数据可保存
+2025-12-26 18:05:55,785 - cyy_to_mysql_99.py[line:940] - INFO: 销售_衍生_订单查询 第1页 - 重试第1次
+2025-12-26 18:05:55,786 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_已入库 完成, 获取47条数据
+2025-12-26 18:05:55,798 - cyy_to_mysql_99.py[line:857] - INFO: 评估管理_已入库 数据保存完成，影响 0 行
+2025-12-26 18:05:55,811 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆已售 第1页 - 重试第1次
+2025-12-26 18:05:55,813 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 调车结算查询 完成, 获取3条数据
+2025-12-26 18:05:55,818 - cyy_to_mysql_99.py[line:857] - INFO: 调车结算查询 数据保存完成，影响 0 行
+2025-12-26 18:05:57,580 - cyy_to_mysql_99.py[line:940] - INFO: 汇票管理 第1页 - 重试第1次
+2025-12-26 18:05:57,588 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_衍生_订单查询 完成, 获取353条数据
+2025-12-26 18:05:57,588 - cyy_to_mysql_99.py[line:940] - INFO: 销售回访 第1页 - 重试第1次
+2025-12-26 18:05:57,735 - cyy_to_mysql_99.py[line:857] - INFO: 销售_衍生_订单查询 数据保存完成，影响 19 行
+2025-12-26 18:05:57,736 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 开票维护 完成, 获取394条数据
+2025-12-26 18:05:57,780 - cyy_to_mysql_99.py[line:857] - INFO: 开票维护 数据保存完成，影响 4 行
+2025-12-26 18:05:58,497 - cyy_to_mysql_99.py[line:940] - INFO: 未售订单 第1页 - 重试第1次
+2025-12-26 18:05:58,498 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆已售 完成, 获取180条数据
+2025-12-26 18:05:58,579 - cyy_to_mysql_99.py[line:857] - INFO: 库存车辆已售 数据保存完成，影响 9 行
+2025-12-26 18:05:59,280 - cyy_to_mysql_99.py[line:940] - INFO: 计划车辆 第1页 - 重试第1次
+2025-12-26 18:05:59,280 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售回访 完成, 获取151条数据
+2025-12-26 18:05:59,320 - cyy_to_mysql_99.py[line:857] - INFO: 销售回访 数据保存完成，影响 19 行
+2025-12-26 18:06:00,020 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第1页 - 重试第1次
+2025-12-26 18:06:00,021 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 汇票管理 完成, 获取488条数据
+2025-12-26 18:06:00,138 - cyy_to_mysql_99.py[line:857] - INFO: 汇票管理 数据保存完成，影响 10 行
+2025-12-26 18:06:00,792 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第1页 - 重试第1次
+2025-12-26 18:06:00,793 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 计划车辆 完成, 获取1691条数据
+2025-12-26 18:06:00,888 - cyy_to_mysql_99.py[line:583] - INFO: 计划车辆 已清空表数据
+2025-12-26 18:06:01,023 - cyy_to_mysql_99.py[line:593] - INFO: 计划车辆 全量更新完成，插入 1691 行数据
+2025-12-26 18:06:01,273 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 未售订单 完成, 获取752条数据
+2025-12-26 18:06:01,336 - cyy_to_mysql_99.py[line:583] - INFO: 未售订单 已清空表数据
+2025-12-26 18:06:01,449 - cyy_to_mysql_99.py[line:593] - INFO: 未售订单 全量更新完成，插入 752 行数据
+2025-12-26 18:06:09,955 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第2页 - 重试第1次
+2025-12-26 18:06:11,105 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 删除日志 完成, 获取4484条数据
+2025-12-26 18:06:24,571 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第2页 - 重试第1次
+2025-12-26 18:06:45,368 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆查询 完成, 获取3311条数据
+2025-12-26 18:06:45,627 - cyy_to_mysql_99.py[line:583] - INFO: 库存车辆查询 已清空表数据
+2025-12-26 18:06:46,097 - cyy_to_mysql_99.py[line:593] - INFO: 库存车辆查询 全量更新完成，插入 3311 行数据
+2025-12-26 18:06:46,423 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 18:22:02,663 - cyy_to_mysql_99.py[line:253] - INFO: 数据库连接成功
+2025-12-26 18:22:02,665 - cyy_to_mysql_99.py[line:940] - INFO: 车辆销售明细表_订单日期 第1页 - 重试第1次
+2025-12-26 18:22:02,666 - cyy_to_mysql_99.py[line:940] - INFO: 车辆销售明细表_开票日期 第1页 - 重试第1次
+2025-12-26 18:22:02,668 - cyy_to_mysql_99.py[line:940] - INFO: 车辆成本管理 第1页 - 重试第1次
+2025-12-26 18:22:05,349 - cyy_to_mysql_99.py[line:940] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 18:22:05,350 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆成本管理 完成, 获取168条数据
+2025-12-26 18:22:05,423 - cyy_to_mysql_99.py[line:857] - INFO: 车辆成本管理 数据保存完成，影响 6 行
+2025-12-26 18:22:07,701 - cyy_to_mysql_99.py[line:940] - INFO: 套餐销售列表 第1页 - 重试第1次
+2025-12-26 18:22:07,701 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 装饰_订单管理_装饰订单 完成, 获取1356条数据
+2025-12-26 18:22:07,923 - cyy_to_mysql_99.py[line:857] - INFO: 装饰_订单管理_装饰订单 数据保存完成，影响 17 行
+2025-12-26 18:22:15,733 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_成交订单 第1页 - 重试第1次
+2025-12-26 18:22:15,733 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆销售明细表_订单日期 完成, 获取428条数据
+2025-12-26 18:22:15,992 - cyy_to_mysql_99.py[line:857] - INFO: 车辆销售明细表_订单日期 数据保存完成，影响 853 行
+2025-12-26 18:22:16,041 - cyy_to_mysql_99.py[line:940] - INFO: 销售_车辆销售_作废订单 第1页 - 重试第1次
+2025-12-26 18:22:16,041 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 车辆销售明细表_开票日期 完成, 获取428条数据
+2025-12-26 18:22:16,327 - cyy_to_mysql_99.py[line:857] - INFO: 车辆销售明细表_开票日期 数据保存完成，影响 854 行
+2025-12-26 18:22:17,801 - cyy_to_mysql_99.py[line:940] - INFO: 开票维护 第1页 - 重试第1次
+2025-12-26 18:22:17,801 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_成交订单 完成, 获取69条数据
+2025-12-26 18:22:17,826 - cyy_to_mysql_99.py[line:857] - INFO: 销售_车辆销售_成交订单 数据保存完成，影响 9 行
+2025-12-26 18:22:19,045 - cyy_to_mysql_99.py[line:940] - INFO: 保险业务 第1页 - 重试第1次
+2025-12-26 18:22:19,046 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_车辆销售_作废订单 完成, 获取14条数据
+2025-12-26 18:22:19,062 - cyy_to_mysql_99.py[line:857] - INFO: 销售_车辆销售_作废订单 数据保存完成，影响 0 行
+2025-12-26 18:22:22,698 - cyy_to_mysql_99.py[line:940] - INFO: 按揭业务 第1页 - 重试第1次
+2025-12-26 18:22:22,698 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 保险业务 完成, 获取62条数据
+2025-12-26 18:22:22,723 - cyy_to_mysql_99.py[line:857] - INFO: 保险业务 数据保存完成，影响 1 行
+2025-12-26 18:22:25,572 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_成交 第1页 - 重试第1次
+2025-12-26 18:22:25,573 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 按揭业务 完成, 获取120条数据
+2025-12-26 18:22:25,630 - cyy_to_mysql_99.py[line:857] - INFO: 按揭业务 数据保存完成，影响 235 行
+2025-12-26 18:22:26,859 - cyy_to_mysql_99.py[line:940] - INFO: 评估管理_已入库 第1页 - 重试第1次
+2025-12-26 18:22:26,859 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_成交 完成, 获取0条数据
+2025-12-26 18:22:26,861 - cyy_to_mysql_99.py[line:816] - INFO: 评估管理_成交 无数据可保存
+2025-12-26 18:22:26,861 - cyy_to_mysql_99.py[line:1064] - ERROR: 任务 评估管理_成交 数据保存失败: 评估管理_成交 无数据可保存
+2025-12-26 18:22:28,547 - cyy_to_mysql_99.py[line:940] - INFO: 调车结算查询 第1页 - 重试第1次
+2025-12-26 18:22:28,548 - cyy_to_mysql_99.py[line:940] - INFO: 销售_衍生_订单查询 第1页 - 重试第1次
+2025-12-26 18:22:28,548 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 开票维护 完成, 获取399条数据
+2025-12-26 18:22:28,598 - cyy_to_mysql_99.py[line:857] - INFO: 开票维护 数据保存完成，影响 5 行
+2025-12-26 18:22:28,598 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 评估管理_已入库 完成, 获取48条数据
+2025-12-26 18:22:28,613 - cyy_to_mysql_99.py[line:857] - INFO: 评估管理_已入库 数据保存完成，影响 2 行
+2025-12-26 18:22:29,426 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆已售 第1页 - 重试第1次
+2025-12-26 18:22:29,426 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 调车结算查询 完成, 获取3条数据
+2025-12-26 18:22:29,435 - cyy_to_mysql_99.py[line:857] - INFO: 调车结算查询 数据保存完成，影响 0 行
+2025-12-26 18:22:32,090 - cyy_to_mysql_99.py[line:940] - INFO: 汇票管理 第1页 - 重试第1次
+2025-12-26 18:22:32,090 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆已售 完成, 获取187条数据
+2025-12-26 18:22:32,097 - cyy_to_mysql_99.py[line:940] - INFO: 销售回访 第1页 - 重试第1次
+2025-12-26 18:22:32,196 - cyy_to_mysql_99.py[line:857] - INFO: 库存车辆已售 数据保存完成，影响 7 行
+2025-12-26 18:22:32,197 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 套餐销售列表 完成, 获取124条数据
+2025-12-26 18:22:32,238 - cyy_to_mysql_99.py[line:857] - INFO: 套餐销售列表 数据保存完成，影响 4 行
+2025-12-26 18:22:32,338 - cyy_to_mysql_99.py[line:940] - INFO: 未售订单 第1页 - 重试第1次
+2025-12-26 18:22:32,339 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售_衍生_订单查询 完成, 获取364条数据
+2025-12-26 18:22:32,439 - cyy_to_mysql_99.py[line:857] - INFO: 销售_衍生_订单查询 数据保存完成，影响 32 行
+2025-12-26 18:22:34,447 - cyy_to_mysql_99.py[line:940] - INFO: 计划车辆 第1页 - 重试第1次
+2025-12-26 18:22:34,447 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 销售回访 完成, 获取162条数据
+2025-12-26 18:22:34,486 - cyy_to_mysql_99.py[line:857] - INFO: 销售回访 数据保存完成，影响 26 行
+2025-12-26 18:22:34,515 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第1页 - 重试第1次
+2025-12-26 18:22:34,515 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 汇票管理 完成, 获取492条数据
+2025-12-26 18:22:34,585 - cyy_to_mysql_99.py[line:857] - INFO: 汇票管理 数据保存完成，影响 6 行
+2025-12-26 18:22:35,806 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第1页 - 重试第1次
+2025-12-26 18:22:35,807 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 计划车辆 完成, 获取1691条数据
+2025-12-26 18:22:35,877 - cyy_to_mysql_99.py[line:583] - INFO: 计划车辆 已清空表数据
+2025-12-26 18:22:35,981 - cyy_to_mysql_99.py[line:593] - INFO: 计划车辆 全量更新完成，插入 1691 行数据
+2025-12-26 18:22:36,340 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 未售订单 完成, 获取753条数据
+2025-12-26 18:22:36,410 - cyy_to_mysql_99.py[line:583] - INFO: 未售订单 已清空表数据
+2025-12-26 18:22:36,551 - cyy_to_mysql_99.py[line:593] - INFO: 未售订单 全量更新完成，插入 753 行数据
+2025-12-26 18:22:44,040 - cyy_to_mysql_99.py[line:940] - INFO: 删除日志 第2页 - 重试第1次
+2025-12-26 18:22:44,810 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 删除日志 完成, 获取4484条数据
+2025-12-26 18:23:03,371 - cyy_to_mysql_99.py[line:940] - INFO: 库存车辆查询 第2页 - 重试第1次
+2025-12-26 18:23:22,871 - cyy_to_mysql_99.py[line:1056] - INFO: 任务 库存车辆查询 完成, 获取3307条数据
+2025-12-26 18:23:23,133 - cyy_to_mysql_99.py[line:583] - INFO: 库存车辆查询 已清空表数据
+2025-12-26 18:23:23,622 - cyy_to_mysql_99.py[line:593] - INFO: 库存车辆查询 全量更新完成，插入 3307 行数据
+2025-12-26 18:23:23,978 - cyy_to_mysql_99.py[line:347] - INFO: 数据库连接已关闭
+2025-12-26 19:45:04,201 - cyy_to_mysql.py[line:734] - ERROR: 任务 装饰_订单管理_装饰订单 处理失败: API请求过程出错: string indices must be integers, not 'str'
+2025-12-26 19:45:04,203 - cyy_to_mysql.py[line:734] - ERROR: 任务 车辆成本管理 处理失败: API请求过程出错: string indices must be integers, not 'str'
+2025-12-26 19:45:04,205 - cyy_to_mysql.py[line:734] - ERROR: 任务 车辆销售明细表_开票日期 处理失败: API请求过程出错: string indices must be integers, not 'str'
+2025-12-26 19:45:04,415 - cyy_to_mysql.py[line:734] - ERROR: 任务 销售_车辆销售_作废订单 处理失败: API请求过程出错: string indices must be integers, not 'str'
+2025-12-26 19:45:04,427 - cyy_to_mysql.py[line:734] - ERROR: 任务 销售_车辆销售_成交订单 处理失败: API请求过程出错: string indices must be integers, not 'str'
+2025-12-26 19:45:04,428 - cyy_to_mysql.py[line:734] - ERROR: 任务 套餐销售列表 处理失败: API请求过程出错: string indices must be integers, not 'str'
+2025-12-26 19:45:04,626 - cyy_to_mysql.py[line:734] - ERROR: 任务 按揭业务 处理失败: API请求过程出错: string indices must be integers, not 'str'
+2025-12-26 19:45:04,633 - cyy_to_mysql.py[line:734] - ERROR: 任务 保险业务 处理失败: API请求过程出错: string indices must be integers, not 'str'
+2025-12-26 19:45:04,637 - cyy_to_mysql.py[line:734] - ERROR: 任务 评估管理_成交 处理失败: API请求过程出错: string indices must be integers, not 'str'
+2025-12-26 19:45:04,834 - cyy_to_mysql.py[line:734] - ERROR: 任务 销售_衍生_订单查询 处理失败: API请求过程出错: string indices must be integers, not 'str'
+2025-12-26 19:45:04,848 - cyy_to_mysql.py[line:734] - ERROR: 任务 评估管理_已入库 处理失败: API请求过程出错: string indices must be integers, not 'str'
+2025-12-26 19:45:04,850 - cyy_to_mysql.py[line:734] - ERROR: 任务 调车结算查询 处理失败: API请求过程出错: string indices must be integers, not 'str'
+2025-12-26 19:45:05,032 - cyy_to_mysql.py[line:734] - ERROR: 任务 库存车辆已售 处理失败: API请求过程出错: string indices must be integers, not 'str'
+2025-12-26 19:45:05,056 - cyy_to_mysql.py[line:734] - ERROR: 任务 汇票管理 处理失败: API请求过程出错: string indices must be integers, not 'str'
+2025-12-26 19:45:05,056 - cyy_to_mysql.py[line:734] - ERROR: 任务 销售回访 处理失败: API请求过程出错: string indices must be integers, not 'str'
+2025-12-26 19:45:05,242 - cyy_to_mysql.py[line:734] - ERROR: 任务 开票维护 处理失败: API请求过程出错: string indices must be integers, not 'str'
+2025-12-26 23:00:02,975 - cyy_to_mysql_all.py[line:194] - INFO: 数据库连接成功
+2025-12-26 23:00:02,976 - cyy_to_mysql_all.py[line:718] - INFO: 车辆销售明细表_开票日期 第1页 - 重试第1次
+2025-12-26 23:00:02,977 - cyy_to_mysql_all.py[line:718] - INFO: 车辆成本管理 第1页 - 重试第1次
+2025-12-26 23:00:02,978 - cyy_to_mysql_all.py[line:718] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 23:00:03,241 - cyy_to_mysql_all.py[line:753] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "data.Msg 中缺少 'Model' 字段"，5秒后重试
+2025-12-26 23:00:08,242 - cyy_to_mysql_all.py[line:718] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 23:00:08,488 - cyy_to_mysql_all.py[line:753] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "data.Msg 中缺少 'Model' 字段"，5秒后重试
+2025-12-26 23:00:10,992 - cyy_to_mysql_all.py[line:718] - INFO: 车辆成本管理 第2页 - 重试第1次
+2025-12-26 23:00:13,489 - cyy_to_mysql_all.py[line:718] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 23:00:13,894 - cyy_to_mysql_all.py[line:895] - WARNING: 装饰_订单管理_装饰订单 额外重试第1次: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "data.Msg 中缺少 'Model' 字段"，10秒后重试
+2025-12-26 23:00:23,254 - cyy_to_mysql_all.py[line:718] - INFO: 车辆成本管理 第3页 - 重试第1次
+2025-12-26 23:00:23,895 - cyy_to_mysql_all.py[line:718] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 23:00:24,178 - cyy_to_mysql_all.py[line:753] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "data.Msg 中缺少 'Model' 字段"，5秒后重试
+2025-12-26 23:00:25,870 - cyy_to_mysql_all.py[line:718] - INFO: 车辆销售明细表_开票日期 第2页 - 重试第1次
+2025-12-26 23:00:29,179 - cyy_to_mysql_all.py[line:718] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 23:00:29,472 - cyy_to_mysql_all.py[line:753] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "data.Msg 中缺少 'Model' 字段"，5秒后重试
+2025-12-26 23:00:34,472 - cyy_to_mysql_all.py[line:718] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 23:00:34,739 - cyy_to_mysql_all.py[line:895] - WARNING: 装饰_订单管理_装饰订单 额外重试第2次: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "data.Msg 中缺少 'Model' 字段"，10秒后重试
+2025-12-26 23:00:35,635 - cyy_to_mysql_all.py[line:718] - INFO: 车辆成本管理 第4页 - 重试第1次
+2025-12-26 23:00:44,740 - cyy_to_mysql_all.py[line:718] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第1次
+2025-12-26 23:00:44,984 - cyy_to_mysql_all.py[line:753] - WARNING: 装饰_订单管理_装饰订单 第1页第1次请求数据结构错误: "data.Msg 中缺少 'Model' 字段"，5秒后重试
+2025-12-26 23:00:45,533 - cyy_to_mysql_all.py[line:718] - INFO: 车辆成本管理 第5页 - 重试第1次
+2025-12-26 23:00:46,116 - cyy_to_mysql_all.py[line:718] - INFO: 车辆销售明细表_开票日期 第3页 - 重试第1次
+2025-12-26 23:00:49,985 - cyy_to_mysql_all.py[line:718] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第2次
+2025-12-26 23:00:50,215 - cyy_to_mysql_all.py[line:753] - WARNING: 装饰_订单管理_装饰订单 第1页第2次请求数据结构错误: "data.Msg 中缺少 'Model' 字段"，5秒后重试
+2025-12-26 23:00:55,216 - cyy_to_mysql_all.py[line:718] - INFO: 装饰_订单管理_装饰订单 第1页 - 重试第3次
+2025-12-26 23:00:55,581 - cyy_to_mysql_all.py[line:899] - ERROR: 装饰_订单管理_装饰订单 额外重试2次后仍然失败: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "data.Msg 中缺少 'Model' 字段"
+2025-12-26 23:00:55,581 - cyy_to_mysql_all.py[line:718] - INFO: 套餐销售列表 第1页 - 重试第1次
+2025-12-26 23:00:55,581 - cyy_to_mysql_all.py[line:854] - ERROR: 任务 装饰_订单管理_装饰订单 处理失败: API请求过程出错: 装饰_订单管理_装饰订单 第1页请求数据结构错误，已重试3次: "data.Msg 中缺少 'Model' 字段"
+2025-12-26 23:00:55,990 - cyy_to_mysql_all.py[line:718] - INFO: 车辆成本管理 第6页 - 重试第1次
+2025-12-26 23:01:06,090 - cyy_to_mysql_all.py[line:718] - INFO: 车辆销售明细表_开票日期 第4页 - 重试第1次
+2025-12-26 23:01:08,630 - cyy_to_mysql_all.py[line:718] - INFO: 车辆成本管理 第7页 - 重试第1次
+2025-12-26 23:01:08,747 - cyy_to_mysql_all.py[line:718] - INFO: 套餐销售列表 第2页 - 重试第1次
+2025-12-26 23:01:19,750 - cyy_to_mysql_all.py[line:718] - INFO: 车辆成本管理 第8页 - 重试第1次
+2025-12-26 23:01:21,305 - cyy_to_mysql_all.py[line:718] - INFO: 套餐销售列表 第3页 - 重试第1次
+2025-12-26 23:01:23,387 - cyy_to_mysql_all.py[line:718] - INFO: 车辆销售明细表_开票日期 第5页 - 重试第1次
+2025-12-26 23:01:29,529 - cyy_to_mysql_all.py[line:718] - INFO: 车辆成本管理 第9页 - 重试第1次
+2025-12-26 23:01:31,185 - cyy_to_mysql_all.py[line:718] - INFO: 套餐销售列表 第4页 - 重试第1次
+2025-12-26 23:01:43,665 - cyy_to_mysql_all.py[line:718] - INFO: 套餐销售列表 第5页 - 重试第1次
+2025-12-26 23:01:43,782 - cyy_to_mysql_all.py[line:718] - INFO: 车辆销售明细表_开票日期 第6页 - 重试第1次
+2025-12-26 23:01:45,801 - cyy_to_mysql_all.py[line:718] - INFO: 销售_车辆销售_成交订单 第1页 - 重试第1次
+2025-12-26 23:01:45,801 - cyy_to_mysql_all.py[line:834] - INFO: 任务 套餐销售列表 完成, 获取13250条全量数据
+2025-12-26 23:01:45,938 - cyy_to_mysql_all.py[line:718] - INFO: 车辆成本管理 第10页 - 重试第1次
+2025-12-26 23:01:46,928 - cyy_to_mysql_all.py[line:458] - INFO: 套餐销售列表 - 表 package_sales 已清空所有数据
+2025-12-26 23:01:48,604 - cyy_to_mysql_all.py[line:468] - INFO: 套餐销售列表 全量更新完成，插入 13250 行数据
+2025-12-26 23:01:49,621 - cyy_to_mysql_all.py[line:718] - INFO: 销售_车辆销售_作废订单 第1页 - 重试第1次
+2025-12-26 23:01:49,622 - cyy_to_mysql_all.py[line:834] - INFO: 任务 车辆成本管理 完成, 获取29198条全量数据
+2025-12-26 23:01:51,970 - cyy_to_mysql_all.py[line:458] - INFO: 车辆成本管理 - 表 car_cost_management 已清空所有数据
+2025-12-26 23:01:55,228 - cyy_to_mysql_all.py[line:468] - INFO: 车辆成本管理 全量更新完成，插入 29198 行数据
+2025-12-26 23:02:08,882 - cyy_to_mysql_all.py[line:718] - INFO: 车辆销售明细表_开票日期 第7页 - 重试第1次
+2025-12-26 23:02:14,669 - cyy_to_mysql_all.py[line:718] - INFO: 销售_车辆销售_成交订单 第2页 - 重试第1次
+2025-12-26 23:02:19,635 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AbnormalOrder - [Timeout] Failed to perform, curl: (28) Operation timed out after 30011 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details. [状态码: 28]
+2025-12-26 23:02:19,636 - cyy_to_mysql_all.py[line:753] - WARNING: 销售_车辆销售_作废订单 第1页第1次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 23:02:24,637 - cyy_to_mysql_all.py[line:718] - INFO: 销售_车辆销售_作废订单 第1页 - 重试第2次
+2025-12-26 23:02:35,262 - cyy_to_mysql_all.py[line:718] - INFO: 车辆销售明细表_开票日期 第8页 - 重试第1次
+2025-12-26 23:02:42,100 - cyy_to_mysql_all.py[line:718] - INFO: 销售_车辆销售_成交订单 第3页 - 重试第1次
+2025-12-26 23:02:54,651 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AbnormalOrder - [Timeout] Failed to perform, curl: (28) Operation timed out after 30010 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details. [状态码: 28]
+2025-12-26 23:02:54,651 - cyy_to_mysql_all.py[line:753] - WARNING: 销售_车辆销售_作废订单 第1页第2次请求数据结构错误: "响应中缺少 'data' 字段"，5秒后重试
+2025-12-26 23:02:59,652 - cyy_to_mysql_all.py[line:718] - INFO: 销售_车辆销售_作废订单 第1页 - 重试第3次
+2025-12-26 23:03:01,218 - cyy_to_mysql_all.py[line:718] - INFO: 车辆销售明细表_开票日期 第9页 - 重试第1次
+2025-12-26 23:03:11,200 - cyy_to_mysql_all.py[line:718] - INFO: 销售_车辆销售_成交订单 第4页 - 重试第1次
+2025-12-26 23:03:27,902 - cyy_to_mysql_all.py[line:718] - INFO: 保险业务 第1页 - 重试第1次
+2025-12-26 23:03:27,902 - cyy_to_mysql_all.py[line:834] - INFO: 任务 车辆销售明细表_开票日期 完成, 获取26607条全量数据
+2025-12-26 23:03:29,705 - common_code.py[line:256] - ERROR: 请求失败: https://openapi.cyys361.com:5085/api/Summary/AbnormalOrder - [Timeout] Failed to perform, curl: (28) Operation timed out after 30002 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details. [状态码: 28]
+2025-12-26 23:03:29,705 - cyy_to_mysql_all.py[line:718] - INFO: 按揭业务 第1页 - 重试第1次
+2025-12-26 23:03:32,927 - cyy_to_mysql_all.py[line:458] - INFO: 车辆销售明细表_开票日期 - 表 car_sales_invoice_date 已清空所有数据
+2025-12-26 23:03:40,299 - cyy_to_mysql_all.py[line:468] - INFO: 车辆销售明细表_开票日期 全量更新完成，插入 26607 行数据
+2025-12-26 23:03:40,458 - cyy_to_mysql_all.py[line:718] - INFO: 销售_车辆销售_成交订单 第5页 - 重试第1次
+2025-12-26 23:03:40,458 - cyy_to_mysql_all.py[line:854] - ERROR: 任务 销售_车辆销售_作废订单 处理失败: API请求过程出错: 销售_车辆销售_作废订单 第1页请求数据结构错误，已重试3次: "响应中缺少 'data' 字段"
+2025-12-26 23:03:43,293 - cyy_to_mysql_all.py[line:718] - INFO: 保险业务 第2页 - 重试第1次
+2025-12-26 23:03:43,964 - cyy_to_mysql_all.py[line:718] - INFO: 按揭业务 第2页 - 重试第1次
+2025-12-26 23:03:57,653 - cyy_to_mysql_all.py[line:718] - INFO: 按揭业务 第3页 - 重试第1次
+2025-12-26 23:03:58,333 - cyy_to_mysql_all.py[line:718] - INFO: 保险业务 第3页 - 重试第1次
+2025-12-26 23:04:04,598 - cyy_to_mysql_all.py[line:718] - INFO: 销售_车辆销售_成交订单 第6页 - 重试第1次
+2025-12-26 23:04:11,588 - cyy_to_mysql_all.py[line:718] - INFO: 按揭业务 第4页 - 重试第1次
+2025-12-26 23:04:12,251 - cyy_to_mysql_all.py[line:718] - INFO: 保险业务 第4页 - 重试第1次
+2025-12-26 23:04:24,443 - cyy_to_mysql_all.py[line:718] - INFO: 按揭业务 第5页 - 重试第1次
+2025-12-26 23:04:29,075 - cyy_to_mysql_all.py[line:718] - INFO: 销售_车辆销售_成交订单 第7页 - 重试第1次
+2025-12-26 23:04:30,410 - cyy_to_mysql_all.py[line:718] - INFO: 评估管理_成交 第1页 - 重试第1次
+2025-12-26 23:04:30,410 - cyy_to_mysql_all.py[line:834] - INFO: 任务 按揭业务 完成, 获取14933条全量数据
+2025-12-26 23:04:30,721 - cyy_to_mysql_all.py[line:718] - INFO: 保险业务 第5页 - 重试第1次
+2025-12-26 23:04:31,427 - cyy_to_mysql_all.py[line:718] - INFO: 评估管理_已入库 第1页 - 重试第1次
+2025-12-26 23:04:31,798 - cyy_to_mysql_all.py[line:458] - INFO: 按揭业务 - 表 mortgage_business 已清空所有数据
+2025-12-26 23:04:33,973 - cyy_to_mysql_all.py[line:468] - INFO: 按揭业务 全量更新完成，插入 14933 行数据
+2025-12-26 23:04:34,000 - cyy_to_mysql_all.py[line:834] - INFO: 任务 评估管理_成交 完成, 获取11条全量数据
+2025-12-26 23:04:34,006 - cyy_to_mysql_all.py[line:458] - INFO: 评估管理_成交 - 表 evaluation_deal 已清空所有数据
+2025-12-26 23:04:34,009 - cyy_to_mysql_all.py[line:468] - INFO: 评估管理_成交 全量更新完成，插入 11 行数据
+2025-12-26 23:04:42,803 - cyy_to_mysql_all.py[line:718] - INFO: 评估管理_已入库 第2页 - 重试第1次
+2025-12-26 23:04:46,516 - cyy_to_mysql_all.py[line:718] - INFO: 调车结算查询 第1页 - 重试第1次
+2025-12-26 23:04:46,517 - cyy_to_mysql_all.py[line:834] - INFO: 任务 评估管理_已入库 完成, 获取4786条全量数据
+2025-12-26 23:04:46,790 - cyy_to_mysql_all.py[line:458] - INFO: 评估管理_已入库 - 表 evaluation_stored 已清空所有数据
+2025-12-26 23:04:47,262 - cyy_to_mysql_all.py[line:468] - INFO: 评估管理_已入库 全量更新完成，插入 4786 行数据
+2025-12-26 23:04:48,629 - cyy_to_mysql_all.py[line:718] - INFO: 保险业务 第6页 - 重试第1次
+2025-12-26 23:04:53,546 - cyy_to_mysql_all.py[line:718] - INFO: 销售_车辆销售_成交订单 第8页 - 重试第1次
+2025-12-26 23:04:56,783 - cyy_to_mysql_all.py[line:718] - INFO: 调车结算查询 第2页 - 重试第1次
+2025-12-26 23:05:02,387 - cyy_to_mysql_all.py[line:718] - INFO: 保险业务 第7页 - 重试第1次
+2025-12-26 23:05:06,374 - cyy_to_mysql_all.py[line:718] - INFO: 调车结算查询 第3页 - 重试第1次
+2025-12-26 23:05:07,090 - cyy_to_mysql_all.py[line:718] - INFO: 销售_衍生_订单查询 第1页 - 重试第1次
+2025-12-26 23:05:07,090 - cyy_to_mysql_all.py[line:834] - INFO: 任务 调车结算查询 完成, 获取6161条全量数据
+2025-12-26 23:05:07,137 - cyy_to_mysql_all.py[line:561] - INFO: 调车结算查询去重后: 从 6161 条数据保留 6024 条
+2025-12-26 23:05:07,352 - cyy_to_mysql_all.py[line:753] - WARNING: 销售_衍生_订单查询 第1页第1次请求数据结构错误: "data.Msg 中缺少 'Model' 字段"，5秒后重试
+2025-12-26 23:05:07,503 - cyy_to_mysql_all.py[line:718] - INFO: 库存车辆已售 第1页 - 重试第1次
+2025-12-26 23:05:07,651 - cyy_to_mysql_all.py[line:585] - INFO: 调车结算查询保存完成，影响 218 行数据
+2025-12-26 23:05:07,654 - cyy_to_mysql_all.py[line:834] - INFO: 任务 保险业务 完成, 获取20590条全量数据
+2025-12-26 23:05:09,318 - cyy_to_mysql_all.py[line:458] - INFO: 保险业务 - 表 insurance_business 已清空所有数据
+2025-12-26 23:05:11,695 - cyy_to_mysql_all.py[line:468] - INFO: 保险业务 全量更新完成，插入 20590 行数据
+2025-12-26 23:05:12,353 - cyy_to_mysql_all.py[line:718] - INFO: 销售_衍生_订单查询 第1页 - 重试第2次
+2025-12-26 23:05:12,617 - cyy_to_mysql_all.py[line:753] - WARNING: 销售_衍生_订单查询 第1页第2次请求数据结构错误: "data.Msg 中缺少 'Model' 字段"，5秒后重试
+2025-12-26 23:05:16,969 - cyy_to_mysql_all.py[line:718] - INFO: 销售_车辆销售_成交订单 第9页 - 重试第1次
+2025-12-26 23:05:17,618 - cyy_to_mysql_all.py[line:718] - INFO: 销售_衍生_订单查询 第1页 - 重试第3次
+2025-12-26 23:05:17,849 - cyy_to_mysql_all.py[line:895] - WARNING: 销售_衍生_订单查询 额外重试第1次: API请求过程出错: 销售_衍生_订单查询 第1页请求数据结构错误，已重试3次: "data.Msg 中缺少 'Model' 字段"，10秒后重试
+2025-12-26 23:05:27,850 - cyy_to_mysql_all.py[line:718] - INFO: 销售_衍生_订单查询 第1页 - 重试第1次
+2025-12-26 23:05:28,111 - cyy_to_mysql_all.py[line:753] - WARNING: 销售_衍生_订单查询 第1页第1次请求数据结构错误: "data.Msg 中缺少 'Model' 字段"，5秒后重试
+2025-12-26 23:05:29,121 - cyy_to_mysql_all.py[line:718] - INFO: 库存车辆已售 第2页 - 重试第1次
+2025-12-26 23:05:32,669 - cyy_to_mysql_all.py[line:718] - INFO: 汇票管理 第1页 - 重试第1次
+2025-12-26 23:05:32,669 - cyy_to_mysql_all.py[line:834] - INFO: 任务 销售_车辆销售_成交订单 完成, 获取26319条全量数据
+2025-12-26 23:05:33,126 - cyy_to_mysql_all.py[line:718] - INFO: 销售_衍生_订单查询 第1页 - 重试第2次
+2025-12-26 23:05:33,466 - cyy_to_mysql_all.py[line:753] - WARNING: 销售_衍生_订单查询 第1页第2次请求数据结构错误: "data.Msg 中缺少 'Model' 字段"，5秒后重试
+2025-12-26 23:05:35,365 - cyy_to_mysql_all.py[line:458] - INFO: 销售_车辆销售_成交订单 - 表 sales_deal_orders 已清空所有数据
+2025-12-26 23:05:38,505 - cyy_to_mysql_all.py[line:718] - INFO: 销售_衍生_订单查询 第1页 - 重试第3次
+2025-12-26 23:05:38,810 - cyy_to_mysql_all.py[line:895] - WARNING: 销售_衍生_订单查询 额外重试第2次: API请求过程出错: 销售_衍生_订单查询 第1页请求数据结构错误，已重试3次: "data.Msg 中缺少 'Model' 字段"，10秒后重试
+2025-12-26 23:05:39,017 - cyy_to_mysql_all.py[line:468] - INFO: 销售_车辆销售_成交订单 全量更新完成，插入 26319 行数据
+2025-12-26 23:05:39,201 - cyy_to_mysql_all.py[line:718] - INFO: 汇票管理 第2页 - 重试第1次
+2025-12-26 23:05:44,741 - cyy_to_mysql_all.py[line:718] - INFO: 库存车辆已售 第3页 - 重试第1次
+2025-12-26 23:05:47,914 - cyy_to_mysql_all.py[line:718] - INFO: 汇票管理 第3页 - 重试第1次
+2025-12-26 23:05:48,810 - cyy_to_mysql_all.py[line:718] - INFO: 销售_衍生_订单查询 第1页 - 重试第1次
+2025-12-26 23:05:49,078 - cyy_to_mysql_all.py[line:753] - WARNING: 销售_衍生_订单查询 第1页第1次请求数据结构错误: "data.Msg 中缺少 'Model' 字段"，5秒后重试
+2025-12-26 23:05:54,079 - cyy_to_mysql_all.py[line:718] - INFO: 销售_衍生_订单查询 第1页 - 重试第2次
+2025-12-26 23:05:54,311 - cyy_to_mysql_all.py[line:753] - WARNING: 销售_衍生_订单查询 第1页第2次请求数据结构错误: "data.Msg 中缺少 'Model' 字段"，5秒后重试
+2025-12-26 23:05:54,656 - cyy_to_mysql_all.py[line:718] - INFO: 汇票管理 第4页 - 重试第1次
+2025-12-26 23:05:59,312 - cyy_to_mysql_all.py[line:718] - INFO: 销售_衍生_订单查询 第1页 - 重试第3次
+2025-12-26 23:05:59,660 - cyy_to_mysql_all.py[line:899] - ERROR: 销售_衍生_订单查询 额外重试2次后仍然失败: API请求过程出错: 销售_衍生_订单查询 第1页请求数据结构错误，已重试3次: "data.Msg 中缺少 'Model' 字段"
+2025-12-26 23:05:59,660 - cyy_to_mysql_all.py[line:718] - INFO: 销售回访 第1页 - 重试第1次
+2025-12-26 23:05:59,662 - cyy_to_mysql_all.py[line:854] - ERROR: 任务 销售_衍生_订单查询 处理失败: API请求过程出错: 销售_衍生_订单查询 第1页请求数据结构错误，已重试3次: "data.Msg 中缺少 'Model' 字段"
+2025-12-26 23:06:00,298 - cyy_to_mysql_all.py[line:718] - INFO: 库存车辆已售 第4页 - 重试第1次
+2025-12-26 23:06:05,814 - cyy_to_mysql_all.py[line:718] - INFO: 汇票管理 第5页 - 重试第1次
+2025-12-26 23:06:12,978 - cyy_to_mysql_all.py[line:718] - INFO: 销售回访 第2页 - 重试第1次
+2025-12-26 23:06:14,556 - cyy_to_mysql_all.py[line:718] - INFO: 汇票管理 第6页 - 重试第1次
+2025-12-26 23:06:15,491 - cyy_to_mysql_all.py[line:718] - INFO: 库存车辆已售 第5页 - 重试第1次
+2025-12-26 23:06:24,454 - cyy_to_mysql_all.py[line:718] - INFO: 销售回访 第3页 - 重试第1次
+2025-12-26 23:06:24,791 - cyy_to_mysql_all.py[line:718] - INFO: 汇票管理 第7页 - 重试第1次
+2025-12-26 23:06:33,001 - cyy_to_mysql_all.py[line:718] - INFO: 库存车辆已售 第6页 - 重试第1次
+2025-12-26 23:06:33,979 - cyy_to_mysql_all.py[line:718] - INFO: 汇票管理 第8页 - 重试第1次
+2025-12-26 23:06:35,192 - cyy_to_mysql_all.py[line:718] - INFO: 销售回访 第4页 - 重试第1次
+2025-12-26 23:06:45,969 - cyy_to_mysql_all.py[line:718] - INFO: 汇票管理 第9页 - 重试第1次
+2025-12-26 23:06:47,976 - cyy_to_mysql_all.py[line:718] - INFO: 销售回访 第5页 - 重试第1次
+2025-12-26 23:06:52,159 - cyy_to_mysql_all.py[line:718] - INFO: 库存车辆已售 第7页 - 重试第1次
+2025-12-26 23:06:54,106 - cyy_to_mysql_all.py[line:718] - INFO: 汇票管理 第10页 - 重试第1次
+2025-12-26 23:06:55,195 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第1页 - 重试第1次
+2025-12-26 23:06:55,195 - cyy_to_mysql_all.py[line:834] - INFO: 任务 汇票管理 完成, 获取27859条全量数据
+2025-12-26 23:06:56,625 - cyy_to_mysql_all.py[line:458] - INFO: 汇票管理 - 表 bill_management 已清空所有数据
+2025-12-26 23:06:58,419 - cyy_to_mysql_all.py[line:468] - INFO: 汇票管理 全量更新完成，插入 27859 行数据
+2025-12-26 23:06:58,601 - cyy_to_mysql_all.py[line:718] - INFO: 销售回访 第6页 - 重试第1次
+2025-12-26 23:07:08,497 - cyy_to_mysql_all.py[line:718] - INFO: 库存车辆已售 第8页 - 重试第1次
+2025-12-26 23:07:09,054 - cyy_to_mysql_all.py[line:718] - INFO: 销售回访 第7页 - 重试第1次
+2025-12-26 23:07:14,899 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第2页 - 重试第1次
+2025-12-26 23:07:19,664 - cyy_to_mysql_all.py[line:718] - INFO: 销售回访 第8页 - 重试第1次
+2025-12-26 23:07:26,316 - cyy_to_mysql_all.py[line:718] - INFO: 库存车辆已售 第9页 - 重试第1次
+2025-12-26 23:07:30,170 - cyy_to_mysql_all.py[line:718] - INFO: 销售回访 第9页 - 重试第1次
+2025-12-26 23:07:31,568 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第3页 - 重试第1次
+2025-12-26 23:07:32,022 - cyy_to_mysql_all.py[line:834] - INFO: 任务 销售回访 完成, 获取26607条全量数据
+2025-12-26 23:07:34,108 - cyy_to_mysql_all.py[line:458] - INFO: 销售回访 - 表 car_sales_data 已清空所有数据
+2025-12-26 23:07:36,801 - cyy_to_mysql_all.py[line:468] - INFO: 销售回访 全量更新完成，插入 26607 行数据
+2025-12-26 23:07:36,826 - cyy_to_mysql_all.py[line:834] - INFO: 任务 库存车辆已售 完成, 获取25789条全量数据
+2025-12-26 23:07:39,734 - cyy_to_mysql_all.py[line:458] - INFO: 库存车辆已售 - 表 inventory_vehicle_sold 已清空所有数据
+2025-12-26 23:07:43,718 - cyy_to_mysql_all.py[line:468] - INFO: 库存车辆已售 全量更新完成，插入 25789 行数据
+2025-12-26 23:07:50,637 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第4页 - 重试第1次
+2025-12-26 23:08:10,249 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第5页 - 重试第1次
+2025-12-26 23:08:28,584 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第6页 - 重试第1次
+2025-12-26 23:08:43,431 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第7页 - 重试第1次
+2025-12-26 23:08:59,889 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第8页 - 重试第1次
+2025-12-26 23:09:14,412 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第9页 - 重试第1次
+2025-12-26 23:09:32,709 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第10页 - 重试第1次
+2025-12-26 23:09:49,551 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第11页 - 重试第1次
+2025-12-26 23:10:08,102 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第12页 - 重试第1次
+2025-12-26 23:10:27,135 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第13页 - 重试第1次
+2025-12-26 23:10:44,017 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第14页 - 重试第1次
+2025-12-26 23:10:59,496 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第15页 - 重试第1次
+2025-12-26 23:11:14,736 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第16页 - 重试第1次
+2025-12-26 23:11:30,397 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第17页 - 重试第1次
+2025-12-26 23:11:46,955 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第18页 - 重试第1次
+2025-12-26 23:12:06,305 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第19页 - 重试第1次
+2025-12-26 23:12:21,245 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第20页 - 重试第1次
+2025-12-26 23:12:37,124 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第21页 - 重试第1次
+2025-12-26 23:12:52,521 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第22页 - 重试第1次
+2025-12-26 23:13:09,993 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第23页 - 重试第1次
+2025-12-26 23:13:27,906 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第24页 - 重试第1次
+2025-12-26 23:13:46,987 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第25页 - 重试第1次
+2025-12-26 23:14:07,648 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第26页 - 重试第1次
+2025-12-26 23:14:27,008 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第27页 - 重试第1次
+2025-12-26 23:14:43,456 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第28页 - 重试第1次
+2025-12-26 23:15:02,200 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第29页 - 重试第1次
+2025-12-26 23:15:20,814 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第30页 - 重试第1次
+2025-12-26 23:15:37,650 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第31页 - 重试第1次
+2025-12-26 23:15:55,506 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第32页 - 重试第1次
+2025-12-26 23:16:14,848 - cyy_to_mysql_all.py[line:718] - INFO: 开票维护 第33页 - 重试第1次
+2025-12-26 23:16:25,283 - cyy_to_mysql_all.py[line:834] - INFO: 任务 开票维护 完成, 获取98785条全量数据
+2025-12-26 23:16:36,738 - cyy_to_mysql_all.py[line:639] - INFO: 开票维护保存完成，影响 193552 行数据
+2025-12-26 23:16:37,125 - cyy_to_mysql_all.py[line:247] - INFO: 数据库连接已关闭
