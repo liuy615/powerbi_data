@@ -25,7 +25,7 @@ class ScheduledTaskRunner:
         self.task_name = task_name
         self.running = False
         self.last_run_time = None
-        self.log_file = f"{task_name}_log.txt"
+        self.log_file = f"./data/自动执行任务/{task_name}_log.txt"
 
     def run_scripts(self, script_paths: List[str],
                    capture_output: bool = True) -> Dict:
