@@ -1,0 +1,84 @@
+[
+  {
+    "task_name": "私有云数据清洗",
+    "run_time": "2025-12-28 12:01:16",
+    "results": {
+      "total": 3,
+      "success": 2,
+      "failed": 1,
+      "details": [
+        {
+          "script": "down_syy_all.py",
+          "path": "E:\\powerbi_data\\代码执行\\syys_data_processor\\down_syy_all.py",
+          "success": false,
+          "returncode": 1,
+          "start_time": "12:00:17",
+          "end_time": "12:00:18",
+          "duration": "0:00:00.874753",
+          "error": "E:\\powerbi_data\\代码执行\\syys_data_processor\\down_syy_all.py:16: SyntaxWarning: invalid escape sequence '\\p'\n  def __init__(self, log_file: str = \"E:\\powerbi_data\\代码执行\\data\\syys_download.log\"):\nTraceback "
+        },
+        {
+          "script": "data_clean_syy.py",
+          "path": "E:\\powerbi_data\\代码执行\\syys_data_processor\\data_clean_syy.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "12:00:18",
+          "end_time": "12:01:04",
+          "duration": "0:00:45.719857",
+          "error": null
+        },
+        {
+          "script": "tmsj.py",
+          "path": "E:\\powerbi_data\\代码执行\\syys_data_processor\\tmsj.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "12:01:04",
+          "end_time": "12:01:16",
+          "duration": "0:00:11.754878",
+          "error": null
+        }
+      ]
+    }
+  },
+  {
+    "task_name": "私有云数据清洗",
+    "run_time": "2025-12-28 14:01:52",
+    "results": {
+      "total": 3,
+      "success": 2,
+      "failed": 1,
+      "details": [
+        {
+          "script": "down_syy_all.py",
+          "path": "E:\\powerbi_data\\代码执行\\syys_data_processor\\down_syy_all.py",
+          "success": false,
+          "returncode": 1,
+          "start_time": "14:00:28",
+          "end_time": "14:00:29",
+          "duration": "0:00:01.507093",
+          "error": "Traceback (most recent call last):\n  File \"E:\\powerbi_data\\代码执行\\syys_data_processor\\down_syy_all.py\", line 425, in test_connection\n    print(\"\\u2713 连接测试成功\")\n    ~~~~~^^^^^^^^^^^^^^^^^^\nUnicodeEncodeE"
+        },
+        {
+          "script": "data_clean_syy.py",
+          "path": "E:\\powerbi_data\\代码执行\\syys_data_processor\\data_clean_syy.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "14:00:29",
+          "end_time": "14:01:32",
+          "duration": "0:01:03.005578",
+          "error": null
+        },
+        {
+          "script": "tmsj.py",
+          "path": "E:\\powerbi_data\\代码执行\\syys_data_processor\\tmsj.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "14:01:32",
+          "end_time": "14:01:52",
+          "duration": "0:00:19.865774",
+          "error": null
+        }
+      ]
+    }
+  }
+]

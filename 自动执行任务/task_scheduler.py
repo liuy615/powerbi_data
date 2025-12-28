@@ -110,7 +110,7 @@ class ScheduledTaskRunner:
                     if capture_output and proc and proc.stdout:
                         output = proc.stdout.strip()
                         if output and len(output) > 50:
-                            print(f"  输出: {output[:50]}...")
+                            print(f"  输出: 成功")
                         elif output:
                             print(f"  输出: {output}")
                 else:
@@ -251,9 +251,6 @@ class ScheduledTaskRunner:
         monitor_thread = threading.Thread(target=self._monitor_schedule)
         monitor_thread.daemon = True
         monitor_thread.start()
-
-        print(f"\n定时任务已启动 [{self.task_name}]")
-        print("按 Ctrl+C 停止程序")
 
         try:
             while self.running:
@@ -397,7 +394,7 @@ class ScheduledTaskRunner:
     def _monitor_schedule(self):
         """监控任务状态"""
         while self.running:
-            time.sleep(60)  # 每分钟检查一次
+            time.sleep(3600)  # 每分钟检查一次
 
             now = datetime.now()
             if self.last_run_time:

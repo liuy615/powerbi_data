@@ -3517,5 +3517,311 @@
         }
       ]
     }
+  },
+  {
+    "task_name": "车易云数据清洗",
+    "run_time": "2025-12-28 11:54:36",
+    "results": {
+      "total": 4,
+      "success": 4,
+      "failed": 0,
+      "details": [
+        {
+          "script": "cyy_to_mysql_99.py",
+          "path": "E:\\powerbi_data\\代码执行\\车易云数据\\cyy_to_mysql_99.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "11:48:17",
+          "end_time": "11:49:32",
+          "duration": "0:01:14.276618",
+          "error": null
+        },
+        {
+          "script": "cyy_delete_data.py",
+          "path": "E:\\powerbi_data\\代码执行\\车易云数据\\cyy_delete_data.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "11:49:32",
+          "end_time": "11:51:02",
+          "duration": "0:01:30.874956",
+          "error": null
+        },
+        {
+          "script": "main.py",
+          "path": "E:\\powerbi_data\\代码执行\\cyys_data_processor\\main.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "11:51:02",
+          "end_time": "11:54:16",
+          "duration": "0:03:13.161423",
+          "error": null
+        },
+        {
+          "script": "concat_dashboad.py",
+          "path": "E:\\powerbi_data\\代码执行\\私有云数据\\concat_dashboad.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "11:54:16",
+          "end_time": "11:54:36",
+          "duration": "0:00:20.028284",
+          "error": null
+        }
+      ]
+    }
+  },
+  {
+    "task_name": "车易云数据清洗",
+    "run_time": "2025-12-28 12:27:56",
+    "results": {
+      "total": 4,
+      "success": 4,
+      "failed": 0,
+      "details": [
+        {
+          "script": "cyy_to_mysql_99.py",
+          "path": "E:\\powerbi_data\\代码执行\\车易云数据\\cyy_to_mysql_99.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "12:18:07",
+          "end_time": "12:19:16",
+          "duration": "0:01:09.196483",
+          "error": null
+        },
+        {
+          "script": "cyy_delete_data.py",
+          "path": "E:\\powerbi_data\\代码执行\\车易云数据\\cyy_delete_data.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "12:19:16",
+          "end_time": "12:20:41",
+          "duration": "0:01:24.853973",
+          "error": null
+        },
+        {
+          "script": "main.py",
+          "path": "E:\\powerbi_data\\代码执行\\cyys_data_processor\\main.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "12:20:41",
+          "end_time": "12:27:16",
+          "duration": "0:06:35.106986",
+          "error": null
+        },
+        {
+          "script": "concat_dashboad.py",
+          "path": "E:\\powerbi_data\\代码执行\\私有云数据\\concat_dashboad.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "12:27:16",
+          "end_time": "12:27:56",
+          "duration": "0:00:40.677420",
+          "error": null
+        }
+      ]
+    }
+  },
+  {
+    "task_name": "车易云数据清洗",
+    "run_time": "2025-12-28 12:58:25",
+    "results": {
+      "total": 4,
+      "success": 4,
+      "failed": 0,
+      "details": [
+        {
+          "script": "cyy_to_mysql_99.py",
+          "path": "E:\\powerbi_data\\代码执行\\车易云数据\\cyy_to_mysql_99.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "12:48:28",
+          "end_time": "12:49:41",
+          "duration": "0:01:13.219434",
+          "error": null
+        },
+        {
+          "script": "cyy_delete_data.py",
+          "path": "E:\\powerbi_data\\代码执行\\车易云数据\\cyy_delete_data.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "12:49:41",
+          "end_time": "12:51:13",
+          "duration": "0:01:32.102002",
+          "error": null
+        },
+        {
+          "script": "main.py",
+          "path": "E:\\powerbi_data\\代码执行\\cyys_data_processor\\main.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "12:51:13",
+          "end_time": "12:57:46",
+          "duration": "0:06:32.661652",
+          "error": null
+        },
+        {
+          "script": "concat_dashboad.py",
+          "path": "E:\\powerbi_data\\代码执行\\私有云数据\\concat_dashboad.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "12:57:46",
+          "end_time": "12:58:25",
+          "duration": "0:00:39.005028",
+          "error": null
+        }
+      ]
+    }
+  },
+  {
+    "task_name": "车易云数据清洗",
+    "run_time": "2025-12-28 13:28:24",
+    "results": {
+      "total": 4,
+      "success": 4,
+      "failed": 0,
+      "details": [
+        {
+          "script": "cyy_to_mysql_99.py",
+          "path": "E:\\powerbi_data\\代码执行\\车易云数据\\cyy_to_mysql_99.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "13:18:26",
+          "end_time": "13:19:40",
+          "duration": "0:01:14.330420",
+          "error": null
+        },
+        {
+          "script": "cyy_delete_data.py",
+          "path": "E:\\powerbi_data\\代码执行\\车易云数据\\cyy_delete_data.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "13:19:40",
+          "end_time": "13:21:11",
+          "duration": "0:01:31.055798",
+          "error": null
+        },
+        {
+          "script": "main.py",
+          "path": "E:\\powerbi_data\\代码执行\\cyys_data_processor\\main.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "13:21:11",
+          "end_time": "13:27:44",
+          "duration": "0:06:33.191724",
+          "error": null
+        },
+        {
+          "script": "concat_dashboad.py",
+          "path": "E:\\powerbi_data\\代码执行\\私有云数据\\concat_dashboad.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "13:27:44",
+          "end_time": "13:28:24",
+          "duration": "0:00:39.823801",
+          "error": null
+        }
+      ]
+    }
+  },
+  {
+    "task_name": "车易云数据清洗",
+    "run_time": "2025-12-28 13:55:07",
+    "results": {
+      "total": 4,
+      "success": 4,
+      "failed": 0,
+      "details": [
+        {
+          "script": "cyy_to_mysql_99.py",
+          "path": "E:\\powerbi_data\\代码执行\\车易云数据\\cyy_to_mysql_99.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "13:48:25",
+          "end_time": "13:49:54",
+          "duration": "0:01:29.187539",
+          "error": null
+        },
+        {
+          "script": "cyy_delete_data.py",
+          "path": "E:\\powerbi_data\\代码执行\\车易云数据\\cyy_delete_data.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "13:49:54",
+          "end_time": "13:51:08",
+          "duration": "0:01:13.354649",
+          "error": null
+        },
+        {
+          "script": "main.py",
+          "path": "E:\\powerbi_data\\代码执行\\cyys_data_processor\\main.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "13:51:08",
+          "end_time": "13:54:32",
+          "duration": "0:03:24.524419",
+          "error": null
+        },
+        {
+          "script": "concat_dashboad.py",
+          "path": "E:\\powerbi_data\\代码执行\\私有云数据\\concat_dashboad.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "13:54:32",
+          "end_time": "13:55:07",
+          "duration": "0:00:34.677600",
+          "error": null
+        }
+      ]
+    }
+  },
+  {
+    "task_name": "车易云数据清洗",
+    "run_time": "2025-12-28 14:27:23",
+    "results": {
+      "total": 4,
+      "success": 4,
+      "failed": 0,
+      "details": [
+        {
+          "script": "cyy_to_mysql_99.py",
+          "path": "E:\\powerbi_data\\代码执行\\车易云数据\\cyy_to_mysql_99.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "14:18:28",
+          "end_time": "14:19:48",
+          "duration": "0:01:20.323411",
+          "error": null
+        },
+        {
+          "script": "cyy_delete_data.py",
+          "path": "E:\\powerbi_data\\代码执行\\车易云数据\\cyy_delete_data.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "14:19:48",
+          "end_time": "14:21:15",
+          "duration": "0:01:27.299092",
+          "error": null
+        },
+        {
+          "script": "main.py",
+          "path": "E:\\powerbi_data\\代码执行\\cyys_data_processor\\main.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "14:21:15",
+          "end_time": "14:26:47",
+          "duration": "0:05:32.218256",
+          "error": null
+        },
+        {
+          "script": "concat_dashboad.py",
+          "path": "E:\\powerbi_data\\代码执行\\私有云数据\\concat_dashboad.py",
+          "success": true,
+          "returncode": 0,
+          "start_time": "14:26:47",
+          "end_time": "14:27:23",
+          "duration": "0:00:35.977472",
+          "error": null
+        }
+      ]
+    }
   }
 ]
