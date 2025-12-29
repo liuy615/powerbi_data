@@ -7,8 +7,7 @@ import logging
 import pandas as pd
 import numpy as np
 import re
-from datetime import datetime
-from config import COMPANIES, GUIZHOU_COMPANIES, EXCLUDED_STAFF, INTERNAL_COMPANIES, USED_CAR_REBATE_PATH
+from config.cyys_data_processor.config import COMPANIES, EXCLUDED_STAFF, INTERNAL_COMPANIES, USED_CAR_REBATE_PATH
 from utils import DataUtils
 
 

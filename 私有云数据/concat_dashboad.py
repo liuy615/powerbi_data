@@ -153,16 +153,16 @@ class update_dashboard:
 
     # -------------------------- 3. 修复所有文件路径：加r前缀 + 补充low_memory=False解决DtypeWarning --------------------------
     def Df_xcbx_cyy(self) -> pd.DataFrame:
-        return pd.read_csv(r'C:\Users\刘洋\Documents\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\新车保险台账-2025.csv',encoding='utf-8', low_memory=False)
+        return pd.read_csv(r'E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\新车保险台账-2025.csv',encoding='utf-8', low_memory=False)
 
     def Df_salary(self) -> pd.DataFrame:
-        return pd.read_excel(r"C:\Users\刘洋\Documents\WXWork\1688858189749305\WeDrive\成都永乐盛世\费效分析\销售\2025年人工效能分析表-销售.xlsx",sheet_name='看板用')
+        return pd.read_excel(r"E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\费效分析\销售\2025年人工效能分析表-销售.xlsx",sheet_name='看板用')
 
     def Car_belongs(self) -> pd.DataFrame:
-        return pd.read_excel(r'C:\Users\刘洋\Documents\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\看板部分数据源\各公司银行额度.xlsx',sheet_name='补充车系')
+        return pd.read_excel(r'E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\看板部分数据源\各公司银行额度.xlsx',sheet_name='补充车系')
 
     def Team_belongs(self) -> pd.DataFrame:
-        return pd.read_excel(r'C:\Users\刘洋\Documents\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\看板部分数据源\各公司银行额度.xlsx',sheet_name='补充团队')
+        return pd.read_excel(r'E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\看板部分数据源\各公司银行额度.xlsx',sheet_name='补充团队')
 
     def Df_xcbx_lock(self) -> pd.DataFrame:
         return pd.read_csv(r'E:\powerbi_data\看板数据\dashboard\新车保险台账.csv', low_memory=False)  # 加r + low_memory

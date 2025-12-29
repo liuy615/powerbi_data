@@ -5,8 +5,7 @@
 
 import logging
 import pandas as pd
-from config import MAPPING_EXCEL_PATH, SERVICE_NET_PATH, API_TABLE_MAPPING
-from database import DatabaseManager
+from config.cyys_data_processor.config import MAPPING_EXCEL_PATH, SERVICE_NET_PATH, API_TABLE_MAPPING
 
 
 class DataLoader:

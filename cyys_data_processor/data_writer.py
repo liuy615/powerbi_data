@@ -9,7 +9,7 @@ import numpy as np
 from datetime import datetime
 from pymongo import MongoClient
 import requests
-from config import MONGODB_URI, MONGODB_DB, NOTIFY_API_URL, COMPANIES
+from config.cyys_data_processor.config import MONGODB_URI, MONGODB_DB, NOTIFY_API_URL
 
 
 class DataWriter:

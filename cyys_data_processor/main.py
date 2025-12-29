@@ -2,18 +2,17 @@
 """
 主程序入口
 """
-
-import logging
-
+import os
+import sys
 import numpy as np
 import pandas as pd
 from datetime import datetime
 import warnings
-
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', 100)
-
-from config import LOG_DIR
+project_root = r"E:\powerbi_data"
+sys.path.insert(0, project_root)
+from config.cyys_data_processor.config import LOG_DIR
 from utils import DataUtils
 from database import DatabaseManager
 from data_loader import DataLoader

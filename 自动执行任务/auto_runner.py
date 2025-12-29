@@ -19,8 +19,8 @@ def syy_auto_runner():
 def cyy_auto_runner():
     """车易云任务执行器"""
     scripts = [
-        r"E:\powerbi_data\powerbi_data\车易云数据\cyy_to_mysql_99.py",
-        r"E:\powerbi_data\powerbi_data\车易云数据\cyy_delete_data.py",
+        r"E:\powerbi_data\powerbi_data\cyys_data_download\cyy_to_mysql_99.py",
+        r"E:\powerbi_data\powerbi_data\cyys_data_download\cyy_delete_data.py",
         r"E:\powerbi_data\powerbi_data\cyys_data_processor\main.py",
         r"E:\powerbi_data\powerbi_data\私有云数据\concat_dashboad.py",
     ]

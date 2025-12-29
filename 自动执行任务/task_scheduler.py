@@ -25,7 +25,7 @@ class ScheduledTaskRunner:
         self.task_name = task_name
         self.running = False
         self.last_run_time = None
-        self.log_file = f"E:/powerbi_data/powerbi_data/data/自动执行任务/{task_name}_log.txt"
+        self.log_file = f"E:/powerbi_data/data/自动执行任务/{task_name}_log.txt"
 
     def run_scripts(self, script_paths: List[str],
                    capture_output: bool = True) -> Dict:
@@ -109,7 +109,7 @@ class ScheduledTaskRunner:
                     # 显示部分输出
                     if capture_output and proc and proc.stdout:
                         output = proc.stdout.strip()
-                        if output and len(output) > 50:
+                        if output and len(output) > 10:
                             print(f"  输出: 成功")
                         elif output:
                             print(f"  输出: {output}")

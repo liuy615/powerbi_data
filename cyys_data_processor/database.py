@@ -6,10 +6,10 @@
 import logging
 import pandas as pd
 import pymysql
-from sqlalchemy import create_engine, inspect, text
+from sqlalchemy import create_engine
 from sqlalchemy.types import VARCHAR, DECIMAL, DATETIME, INTEGER
 from sqlalchemy.exc import SQLAlchemyError
-from config import SOURCE_MYSQL_CONFIG, OUTPUT_MYSQL_CONFIG
+from config.cyys_data_processor.config import SOURCE_MYSQL_CONFIG, OUTPUT_MYSQL_CONFIG
 
 
 class DatabaseManager:
