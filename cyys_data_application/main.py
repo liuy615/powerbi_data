@@ -2,7 +2,7 @@
 主程序 - 数据清洗流程（清洗后数据存入cyy_app_data数据库）
 """
 import pandas as pd
-from config import SOURCE_DB_URL, APP_DB_URL, SOURCE_TABLES, APP_TABLES
+from config.cyys_data_application.config import SOURCE_DB_URL, APP_DB_URL, SOURCE_TABLES, APP_TABLES
 from db_connector import DatabaseConnector
 from data_processor import DataProcessor
 from datetime import datetime

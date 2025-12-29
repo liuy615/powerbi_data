@@ -13,7 +13,7 @@ import shutil
 class Logger:
     """日志类，用于记录下载操作"""
 
-    def __init__(self, log_file: str = "download.log"):
+    def __init__(self, log_file: str = "download.download_log"):
         """初始化日志器"""
         self.log_file = log_file
         self.setup_logging()

@@ -21,7 +21,7 @@ logging.basicConfig(
     format='%(asctime)s [%(levelname)s] [%(message)s]',
     handlers=[
         logging.StreamHandler(),
-        logging.FileHandler(f"{log_dir}/log_api{datetime.now().strftime('%Y_%m_%d')}.log", encoding='utf-8')
+        logging.FileHandler(f"{log_dir}/log_api{datetime.now().strftime('%Y_%m_%d')}.download_log", encoding='utf-8')
     ]
 )
 

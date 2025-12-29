@@ -3,18 +3,22 @@ import datetime
 import logging
 import os
 import re
+import sys
 import numpy as np
 import pandas as pd
 from datetime import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.exc import SQLAlchemyError
 import warnings
+project_root = r"E:\powerbi_data"
+sys.path.insert(0, project_root)
+from config.cyys_data_processor.config import SOURCE_MYSQL_CONFIG, OUTPUT_MYSQL_CONFIG
 warnings.filterwarnings('ignore', category=FutureWarning, message='.*Downcasting object dtype arrays.*')
 # 全局显示配置：显示所有列
 pd.set_option('display.max_columns', 100)
 
 # -------------------------- 1. 修复路径转义：所有Windows路径加r前缀 --------------------------
-log_dir = r"/powerbi_data\私有云数据\data\log"  # 加r
+log_dir = r"E:\powerbi_data\data\cyy_log\concat_log"  # 加r
 os.makedirs(log_dir, exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,
@@ -45,25 +49,14 @@ def convert_date(date_str):
 class update_dashboard:
     def __init__(self):
         # 数据库配置（请确认已修改为实际环境信息）
-        self.db_config = {
-            'db_type': 'mysql',
-            'host': 'localhost',  # 例：192.168.1.100
-            'port': 3306,
-            'user': 'root',  # 实际用户名
-            'password': '513921',  # 实际密码
-            'db_name': 'cyy_stg_data'  # 实际数据库名
-        }
+        self.db_config = OUTPUT_MYSQL_CONFIG
 
         # 创建数据库引擎
         try:
-            if self.db_config['db_type'] == 'mysql':
-                # MySQL连接：加charset=utf8mb4，避免中文乱码
-                self.engine = create_engine(
-                    fr"mysql+pymysql://{self.db_config['user']}:{self.db_config['password']}@{self.db_config['host']}:{self.db_config['port']}/{self.db_config['db_name']}?charset=utf8mb4",
-                    echo=False
-                )
-            else:
-                raise ValueError(f"不支持的数据库类型: {self.db_config['db_type']}")
+            self.engine = create_engine(
+                fr"mysql+pymysql://{self.db_config['user']}:{self.db_config['password']}@{self.db_config['host']}:{self.db_config['port']}/{self.db_config['database']}?charset=utf8mb4",
+                echo=False
+            )
             logging.info("数据库引擎创建成功")
         except Exception as e:
             logging.error(f"数据库引擎创建失败: {str(e)}", exc_info=True)
@@ -165,45 +158,45 @@ class update_dashboard:
         return pd.read_excel(r'E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\看板部分数据源\各公司银行额度.xlsx',sheet_name='补充团队')
 
     def Df_xcbx_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:\powerbi_data\看板数据\dashboard\新车保险台账.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/新车保险台账.csv', low_memory=False)  # 加r + low_memory
 
     def Df_books_unsold(self) -> pd.DataFrame:
-        return pd.read_csv(fr'E:\powerbi_data\看板数据\cyy_old_data\未售订单.csv',low_memory=False)  # 加r + low_memory
+        return pd.read_csv(fr'E:/powerbi_data/看板数据/cyy_old_data/未售订单.csv', low_memory=False)  # 加r + low_memory
 
     def Df_yingxiao(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:\powerbi_data\看板数据\dashboard\投放费用.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/投放费用.csv', low_memory=False)  # 加r + low_memory
 
     def Df_Ers(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:\powerbi_data\看板数据\dashboard\二手车.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/二手车.csv', low_memory=False)  # 加r + low_memory
 
     def Df_Ers_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r"E:\powerbi_data\看板数据\cyy_old_data\二手车台账.csv", low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r"E:/powerbi_data/看板数据/cyy_old_data/二手车台账.csv", low_memory=False)  # 加r + low_memory
 
     def Df_books_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:\powerbi_data\看板数据\cyy_old_data\定车.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/定车.csv', low_memory=False)  # 加r + low_memory
 
     def Df_sales_lock(self) -> pd.DataFrame:
         # 修复DtypeWarning：补充low_memory=False
-        return pd.read_csv(r'E:\powerbi_data\看板数据\cyy_old_data\销售毛利.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/销售毛利.csv', low_memory=False)  # 加r + low_memory
 
     def Df_sales_lock1(self) -> pd.DataFrame:
         # 修复DtypeWarning：补充low_memory=False
-        return pd.read_csv(r'E:\powerbi_data\看板数据\cyy_old_data\销售.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/销售.csv', low_memory=False)  # 加r + low_memory
 
     def Df_jingpins_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:\powerbi_data\看板数据\cyy_old_data\精品销售.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/精品销售.csv', low_memory=False)  # 加r + low_memory
 
     def Df_tuis_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:\powerbi_data\看板数据\cyy_old_data\退定.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/退定.csv', low_memory=False)  # 加r + low_memory
 
     def Df_debits_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:\powerbi_data\看板数据\cyy_old_data\三方台账.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/三方台账.csv', low_memory=False)  # 加r + low_memory
 
     def Df_plan_date_get(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:\powerbi_data\看板数据\cyy_old_data\计划车辆汇总.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/计划车辆汇总.csv', low_memory=False)  # 加r + low_memory
 
     def Df_inventory_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:\powerbi_data\看板数据\dashboard\库存存档.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/库存存档.csv', low_memory=False)  # 加r + low_memory
 
 
     # -------------------------- 核心修复：切片后加.copy()解决SettingWithCopyWarning --------------------------

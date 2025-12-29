@@ -186,7 +186,7 @@ class CyysDataProcessor:
     """初始化日志系统：同时输出到控制台和按日期生成日志文件"""
     def _init_logger(self):
         os.makedirs(self.LOG_DIR, exist_ok=True)
-        log_file = f"{self.LOG_DIR}/log_api{datetime.now().strftime('%Y_%m_%d')}.log"
+        log_file = f"{self.LOG_DIR}/log_api{datetime.now().strftime('%Y_%m_%d')}.download_log"
         logging.basicConfig(
             level=logging.INFO,
             format='%(asctime)s [%(levelname)s] [%(message)s]',

@@ -13,7 +13,7 @@ import shutil
 class Logger:
     """日志类，用于记录下载操作"""
 
-    def __init__(self, log_file: str = "E:/powerbi_data/powerbi_data/data/syys_download.log"):
+    def __init__(self, log_file: str = "E:/powerbi_data/data/私有云日志/download_log/syys_download.log"):
         """初始化日志器"""
         self.log_file = log_file
         self.setup_logging()

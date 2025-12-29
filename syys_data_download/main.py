@@ -1,0 +1,34 @@
+import sys
+from file_processor import FileProcessor
+from logger import DataCheckerLogger
+
+
+def main():
+    """主程序入口"""
+    # 配置路径
+    directory_path = r"E:\powerbi_data\看板数据\私有云文件本地\贴膜升级"
+
+    # 初始化日志记录器
+    log_dir = r"E:\powerbi_data\data\私有云日志\check_logs"
+    logger = DataCheckerLogger(log_dir=log_dir)
+
+    try:
+        logger.logger.info(f"检核目录: {directory_path}")
+
+        # 初始化文件处理器
+        processor = FileProcessor(logger)
+
+        # 处理目录下所有文件
+        processor.process_directory(directory_path)
+
+        logger.logger.info("数据检核完成！")
+
+    except Exception as e:
+        logger.logger.error(f"程序执行失败: {str(e)}")
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

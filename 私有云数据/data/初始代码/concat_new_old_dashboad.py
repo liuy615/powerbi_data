@@ -10,14 +10,14 @@ import pandas as pd
 from datetime import datetime
 
 
-log_dir = "/powerbi_data/私有云数据/data/log"
+log_dir = "/powerbi_data/私有云数据/data/download_log"
 os.makedirs(log_dir, exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s [%(levelname)s] [%(message)s]',
     handlers=[
         logging.StreamHandler(),
-        logging.FileHandler(f"{log_dir}/log1_{datetime.now().strftime('%Y_%m_%d')}.log", encoding='utf-8')
+        logging.FileHandler(f"{log_dir}/log1_{datetime.now().strftime('%Y_%m_%d')}.download_log", encoding='utf-8')
     ]
 )
 def standardize_date(date_str):

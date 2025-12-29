@@ -188,7 +188,7 @@ class DataWriter:
         # 转换数值列
         for col in float_columns:
             if col in df_salesAgg.columns:
-                df_salesAgg[col] = pd.to_numeric(df_salesAgg[col], errors='coerce').fillna(0).astype('str')
+                df_salesAgg[col] = pd.to_numeric(df_salesAgg[col], errors='coerce').fillna(0).round(2).astype(float)
 
         # 设置过滤条件
         start_date = datetime(2025, 4, 1)

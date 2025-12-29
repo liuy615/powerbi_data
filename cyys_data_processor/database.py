@@ -4,11 +4,14 @@
 """
 
 import logging
+import sys
 import pandas as pd
 import pymysql
 from sqlalchemy import create_engine
 from sqlalchemy.types import VARCHAR, DECIMAL, DATETIME, INTEGER
 from sqlalchemy.exc import SQLAlchemyError
+project_root = r"E:\powerbi_data"
+sys.path.insert(0, project_root)
 from config.cyys_data_processor.config import SOURCE_MYSQL_CONFIG, OUTPUT_MYSQL_CONFIG
 
 

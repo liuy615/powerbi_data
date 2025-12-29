@@ -32,7 +32,7 @@ logging.basicConfig(
     format='%(asctime)s [%(levelname)s] [%(message)s]',
     handlers=[
         logging.StreamHandler(),
-        logging.FileHandler(f"{log_dir}/log_api{datetime.now().strftime('%Y_%m_%d')}.log", encoding='utf-8')
+        logging.FileHandler(f"{log_dir}/log_api{datetime.now().strftime('%Y_%m_%d')}.download_log", encoding='utf-8')
     ]
 )
 
@@ -169,7 +169,7 @@ class cyys:
                 print(f"⚠️ 通知发送失败，状态码: {res.status_code}, 响应: {res.text}")
         except Exception as e:
             print(f"⚠️ 发送通知异常: {e}")
-            with open("./logs/notify_fail.log", "a", encoding="utf-8") as f:
+            with open("./logs/notify_fail.download_log", "a", encoding="utf-8") as f:
                 f.write(f"{datetime.now()}: {msg}\n")
 
     def _to_numeric_safe(self, df, cols, fill_value=0):
