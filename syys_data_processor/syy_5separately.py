@@ -46,7 +46,7 @@ class FilmUpgradeAnalyzer:
 
         # 到店文件路径
         if visit_file_path is None:
-            self.visit_file_path = r"E:\powerbi_data\看板数据\私有云文件本地\贴膜升级\腾豹-双流、交大、羊犀、天府-贴膜升级登记表-最新年.xlsx"
+            self.visit_file_path = r"E:/powerbi_data/看板数据/私有云文件本地/贴膜升级/腾豹-双流、交大、羊犀、天府-贴膜升级登记表-最新年.xlsx"
         else:
             self.visit_file_path = visit_file_path
 
@@ -136,7 +136,6 @@ class FilmUpgradeAnalyzer:
 
         # 提取日期部分（去掉时间）
         combined_df['推送日期'] = combined_df['推送日期'].dt.date
-        print(combined_df)
 
         return combined_df
 
@@ -191,7 +190,7 @@ class FilmUpgradeAnalyzer:
         返回处理后的DataFrame
         """
         # 文件路径
-        file_path = r"E:\powerbi_data\看板数据\私有云文件本地\贴膜升级\腾豹-双流、交大、羊犀、天府-贴膜升级登记表-最新年.xlsx"
+        file_path = r"E:/powerbi_data/看板数据/私有云文件本地/贴膜升级/腾豹-双流、交大、羊犀、天府-贴膜升级登记表-最新年.xlsx"
 
         try:
             # 读取Excel文件中的汇总表
@@ -724,7 +723,6 @@ class DecorationOrdersExtractor:
         df_filtered = df_filtered.dropna(subset=['收款日期'])
         df_filtered_csv = df_filtered.copy()
 
-        df_filtered_csv.to_csv("装饰详情_csv.csv")
         # 2. 判断是否包含"膜"的关键字并计算新列
         df_filtered_csv['贴膜成本'] = df_filtered_csv.apply(
             lambda row: row['成本合计(含税)'] if '膜' in str(row['物资名称']) else 0, axis=1)
@@ -761,7 +759,7 @@ class DecorationOrdersExtractor:
         ]]
 
         # 显示结果
-        grouped_df.to_csv("装饰合并.csv")
+        # grouped_df.to_csv("装饰合并.csv")
 
         print(f"原始数据有 {len(df)} 行，合并后有 {len(grouped_df)} 行")
 
@@ -869,6 +867,7 @@ def merge_and_process_data(sales_df, push_df, visit_df, zhaungshi_df, chengben_d
     # 5. 左连接到店表
     # 确保连接键都是字符串类型
     merged_df['车架号后6位'] = merged_df['车架号后6位'].astype(str).str.strip()
+    print(visit_df)
     visit_df['车架号后6位'] = visit_df['车架号后6位'].astype(str).str.strip()
 
     merged_df = pd.merge(

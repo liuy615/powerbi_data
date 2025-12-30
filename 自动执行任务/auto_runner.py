@@ -1,4 +1,4 @@
-from task_scheduler import ScheduledTaskRunner, generate_time_range_schedule
+from task_scheduler import ScheduledTaskRunner, generate_time_range_schedule, generate_once_schedule
 import threading
 import time
 
@@ -8,10 +8,11 @@ def syy_auto_runner():
     scripts = [
         r"E:\powerbi_data\powerbi_data\syys_data_processor\down_syy_all.py",
         r"E:\powerbi_data\powerbi_data\syys_data_processor\data_clean_syy.py",
-        r"E:\powerbi_data\powerbi_data\syys_data_processor\tmsj.py"
+        r"E:\powerbi_data\powerbi_data\syys_data_processor\tmsj.py",
+        r"E:\powerbi_data\powerbi_data\syys_data_processor\syy_5separately.py",
     ]
 
-    config = generate_time_range_schedule("08:00", "22:00", 2, "hours")
+    config = generate_time_range_schedule("08:45", "22:45", 1, "hours")
     runner = ScheduledTaskRunner("私有云数据清洗")
     runner.start_schedule(scripts, config)
 
@@ -22,20 +23,38 @@ def cyy_auto_runner():
         r"E:\powerbi_data\powerbi_data\cyys_data_download\cyy_to_mysql_99.py",
         r"E:\powerbi_data\powerbi_data\cyys_data_download\cyy_delete_data.py",
         r"E:\powerbi_data\powerbi_data\cyys_data_processor\main.py",
-        r"E:\powerbi_data\powerbi_data\私有云数据\concat_dashboad.py",
+        r"E:\powerbi_data\powerbi_data\cyys_data_application\concat_dashboad.py",
+        r"E:\powerbi_data\看板更新\syy_files_upload.py",
+        r"E:\powerbi_data\看板更新\data_download.py",
     ]
 
-    config = generate_time_range_schedule("08:48", "22:48", 30, "minutes")
+    config = generate_time_range_schedule("08:52", "22:52", 30, "minutes")
     runner = ScheduledTaskRunner("车易云数据清洗")
     runner.start_schedule(scripts, config)
 
 
-# 创建并启动两个独立线程
+def daypaper_auto_runner():
+    """日报任务执行器"""
+    scripts = [
+        r"E:\pycharm_project\day_paper\daypaper_pbwy.py",
+    ]
+
+    config = generate_once_schedule("22:00")
+    runner = ScheduledTaskRunner("日报定时发送")
+    runner.start_schedule(scripts, config)
+
+
+# 创建并启动独立线程
 syy_thread = threading.Thread(target=syy_auto_runner, daemon=True, name="SYY_Task")
 cyy_thread = threading.Thread(target=cyy_auto_runner, daemon=True, name="CYY_Task")
+Daypaper = threading.Thread(target=daypaper_auto_runner, daemon=True, name="Daypaper")
+
+
 
 syy_thread.start()
 cyy_thread.start()
+Daypaper.start()
+
 
 # 主线程保持运行
 try:

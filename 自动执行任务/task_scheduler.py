@@ -213,10 +213,7 @@ class ScheduledTaskRunner:
                     "time": "23:00"      # 在指定时间执行一次
                 }
         """
-        print(f"\n启动定时任务调度 [{self.task_name}]")
-        print(f"调度配置: {json.dumps(schedule_config, ensure_ascii=False, indent=2)}")
-        print(f"脚本数量: {len(script_paths)}")
-        print("-" * 60)
+        print(f"启动定时任务调度 [{self.task_name}],脚本数量: {len(script_paths)}")
 
         # 验证脚本路径
         valid_scripts = []
@@ -296,9 +293,6 @@ class ScheduledTaskRunner:
         end_time = config.get("end", "22:00")
         interval = config.get("interval", 30)
         interval_unit = config.get("interval_unit", "minutes")
-
-        print(f"执行时间范围: {start_time} - {end_time}")
-        print(f"执行间隔: 每{interval}{interval_unit}")
 
         # 解析时间
         start_hour, start_minute = map(int, start_time.split(":"))
