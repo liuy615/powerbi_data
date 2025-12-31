@@ -247,8 +247,10 @@ class DataProcessor:
         # 划分金融类型
         if '金融性质' in df_loan.columns:
             df_loan['金融类型'] = np.where(
-                df_loan['金融性质'].str.contains('非贴息', na=False), '厂家非贴息贷',
-                np.where(df_loan['金融性质'].str.contains('贴息', na=False), '厂家贴息贷', '非贴息贷')
+                df_loan['金融性质'].str.contains('非贴息'), '厂家非贴息贷',
+                np.where(df_loan['金融性质'].str.contains('贴息'), '厂家贴息贷',
+                         np.where(df_loan['金融方案'].isin(['交行信用卡中心5免2-9%', '建行5免2', '5免2']), '无息贷',
+                                  '非贴息贷'))
             )
 
         # 数据类型转换
