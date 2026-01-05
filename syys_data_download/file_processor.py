@@ -26,31 +26,23 @@ class FileProcessor:
         self.logger.logger.info(f"在目录 {directory_path} 中找到 {len(excel_files)} 个Excel文件")
         return excel_files
 
-    def process_directory(self, directory_path: str):
+    def process_directory(self, directory_path: str, sheet_name: str = None):
         """处理指定目录下的所有Excel文件"""
         if not os.path.exists(directory_path):
             self.logger.logger.error(f"目录不存在: {directory_path}")
             return
 
         excel_files = self.find_excel_files(directory_path)
-        self.logger.summary["total_files"] = len(excel_files)
+        self.logger.summary["total_files"] += len(excel_files)
 
         for file_path in excel_files:
-            self.checker.process_excel_file(file_path)
+            self.checker.process_excel_file(file_path, sheet_name)
 
-        # 输出总结
-        self.logger.log_summary()
-
-        # 保存错误报告
-        self.logger.save_errors_to_excel()
-
-    def process_single_file(self, file_path: str):
+    def process_single_file(self, file_path: str, sheet_name: str = None):
         """处理单个文件"""
         if not os.path.exists(file_path):
             self.logger.logger.error(f"文件不存在: {file_path}")
             return
 
-        self.logger.summary["total_files"] = 1
-        self.checker.process_excel_file(file_path)
-        self.logger.log_summary()
-        self.logger.save_errors_to_excel()
+        self.logger.summary["total_files"] += 1
+        self.checker.process_excel_file(file_path, sheet_name)

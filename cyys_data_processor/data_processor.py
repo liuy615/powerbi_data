@@ -227,6 +227,8 @@ class DataProcessor:
         return df_carcost
 
     """清洗按揭业务数据"""
+    """清洗按揭业务数据"""
+
     def clean_loans(self, df_loan):
         if df_loan.empty:
             logging.warning("按揭业务数据为空，跳过清洗")
@@ -246,20 +248,38 @@ class DataProcessor:
 
         # 划分金融类型
         if '金融性质' in df_loan.columns:
-            df_loan['金融类型'] = np.where(
-                df_loan['金融性质'].str.contains('非贴息'), '厂家非贴息贷',
-                np.where(df_loan['金融性质'].str.contains('贴息'), '厂家贴息贷',
-                         np.where(df_loan['金融方案'].isin(['交行信用卡中心5免2-9%', '建行5免2', '5免2']), '无息贷',
-                                  '非贴息贷'))
-            )
+            df_loan['经销商贴息金额'] = pd.to_numeric(df_loan['经销商贴息金额'], errors='coerce')
+
+            def determine_financial_type(row):
+                # 修复：检查金融性质是否为None
+                financial_nature = row['金融性质']
+                if pd.isna(financial_nature) or financial_nature is None:
+                    financial_nature = ''
+
+                # 修复：检查金融方案是否为None
+                financial_plan = row['金融方案']
+                if pd.isna(financial_plan) or financial_plan is None:
+                    financial_plan = ''
+
+                if '非贴息' in str(financial_nature):
+                    return '厂家非贴息贷'
+                elif '贴息' in str(financial_nature):
+                    return '厂家贴息贷'
+                elif str(financial_plan) in ['交行信用卡中心5免2-9%', '建行5免2']:
+                    return '无息贷'
+                elif pd.notna(row['经销商贴息金额']) and row['经销商贴息金额'] > 0:
+                    return '厂家非贴息贷'
+                else:
+                    return '非贴息贷'
+
+            df_loan['金融类型'] = df_loan.apply(determine_financial_type, axis=1)
 
         # 数据类型转换
         if '返利系数' in df_loan.columns:
-            df_loan['返利系数'] = df_loan['返利系数'].astype(str).str.replace('%', '').astype(
-                float, errors='ignore') / 100
+            df_loan['返利系数'] = df_loan['返利系数'].astype(str).str.replace('%', '').astype(float,
+                                                                                              errors='ignore') / 100
 
-        float_cols = ['开票价', '贷款金额', '返利系数', '金融返利', '厂家贴息金额',
-                      '经销商贴息金额', '金融服务费']
+        float_cols = ['开票价', '贷款金额', '返利系数', '金融返利', '厂家贴息金额', '经销商贴息金额', '金融服务费']
         self.utils.convert_numeric_cols(df_loan, float_cols)
 
         # 计算衍生字段
@@ -268,7 +288,7 @@ class DataProcessor:
 
         if '贷款期限' in df_loan.columns:
             df_loan['贷款期限'] = df_loan['贷款期限'].astype(str).apply(
-                lambda x: re.sub(r'[\u4e00-\u9fa5]', '', x))  # 移除中文
+                lambda x: re.sub(r'[\u4e00-\u9fa5]', '', x) if pd.notna(x) else x)  # 移除中文
 
         if all(col in df_loan.columns for col in ['厂家贴息金额', '金融返利']):
             df_loan['金融税费'] = (df_loan['厂家贴息金额'] / 1.13 * 0.13 * 1.12) + (

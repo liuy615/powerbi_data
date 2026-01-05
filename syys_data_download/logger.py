@@ -39,9 +39,10 @@ class DataCheckerLogger:
         )
         self.logger = logging.getLogger(__name__)
 
-    def log_header_error(self, file_path: str, missing_headers: List[str], extra_headers: List[str]):
+    def log_header_error(self, file_path: str, missing_headers: List[str],
+                         extra_headers: List[str], template_name: str = "标准模板"):
         """记录表头错误"""
-        error_msg = f"文件 {file_path} 表头不匹配:\n"
+        error_msg = f"文件 {file_path} 表头不匹配{template_name}:\n"
         if missing_headers:
             error_msg += f"  缺少字段: {', '.join(missing_headers)}\n"
         if extra_headers:
@@ -52,6 +53,7 @@ class DataCheckerLogger:
             "type": "header_error",
             "file": file_path,
             "message": error_msg,
+            "template": template_name,
             "timestamp": datetime.now()
         })
         self.summary["header_errors"] += 1
@@ -95,6 +97,12 @@ class DataCheckerLogger:
         self.logger.info(f"数据错误数: {self.summary['data_errors']}")
         self.logger.info(f"总行数: {self.summary['total_rows']}")
         self.logger.info(f"错误行数: {self.summary['error_rows']}")
+
+        # 计算错误率
+        if self.summary['total_rows'] > 0:
+            error_rate = (self.summary['error_rows'] / self.summary['total_rows']) * 100
+            self.logger.info(f"错误率: {error_rate:.2f}%")
+
         self.logger.info("=" * 50)
 
     def save_errors_to_excel(self, output_file: str = None):
