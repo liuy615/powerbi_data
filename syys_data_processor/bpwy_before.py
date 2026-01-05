@@ -180,7 +180,7 @@ def process_qbwy():
     # 创建配置和客户端实例
     config = MongoDBConfig(database='xg_JiaTao')
     mongo_client = MongoDBClient(config)
-    collection_name_qbwy = '全保无忧销售数据'
+    collection_name_qbwy = 'YS_sales'
     collection_name_qbwy_info = '全保无忧费用明细'
     try:
         # 连接数据库
@@ -307,7 +307,7 @@ def process_dataframe(df):
 
 def bpwy_result():
     directories = [
-        r"E:\powerbi_data\看板数据\私有云文件本地\data\衍生产品"
+        r"E:\powerbi_data\看板数据\私有云文件本地\衍生产品"
     ]
 
     all_dfs = []
@@ -366,7 +366,7 @@ def process_dataframe_qbwy(df):
     """
     df['销售日期'] = pd.to_datetime(df['销售日期'], format='mixed',errors='coerce')
     df['销售日期'] = df['销售日期'].dt.date
-    df_Car = pd.read_excel(r'C:\Users\13111\Desktop\各公司银行额度.xlsx', sheet_name='补充车系')
+    df_Car = pd.read_excel(r'E:\powerbi_data\看板数据\私有云文件本地\data\售前看板数据源\各公司银行额度.xlsx', sheet_name='补充车系')
     df = pd.merge(df, df_Car[['车系', '服务网络']], how='left', on='车系')
     df['所属门店'] = np.where(df['所属门店'] == '直播基地', df['服务网络'] + '-' + df['所属门店'], df['所属门店'])
     return df[[ '客户姓名','手机号码','身份证号','车架号','发动机号','车牌号','车系','新车开票价格','车损险保额','车辆类型',
@@ -377,7 +377,7 @@ df_qbwy1, df_qbwy2 = process_qbwy()
 df4 = bpwy_result()
 df_wuyou = pd.concat([df_qbwy2, df4], axis=0,join='outer', ignore_index=True)
 
-df_Car = pd.read_excel(r'C:\Users\13111\Desktop\各公司银行额度.xlsx', sheet_name='补充车系')
+df_Car = pd.read_excel(r'E:\powerbi_data\看板数据\私有云文件本地\data\售前看板数据源\各公司银行额度.xlsx', sheet_name='补充车系')
 df_wuyou = pd.merge(df_wuyou, df_Car[['车系', '服务网络']], how='left', on='车系')
 df_wuyou['所属门店'] = np.where(df_wuyou['所属门店'] == '直播基地', df_wuyou['服务网络'] + '-' + df_wuyou['所属门店'], df_wuyou['所属门店'])
 
@@ -441,10 +441,10 @@ def process_xinchebaoxian(filedir, sheet_name):
 
 def xinchebaoxianTZ():
     all_dfs = pd.read_csv(r"E:\powerbi_data\看板数据\私有云文件本地\data\售前看板数据源\202401_202503新车保险台账.csv")
-    df_cyy = pd.read_csv(r"C:\Users\13111\Documents\WXWork\1688855282576011\WeDrive\成都永乐盛世\维护文件\新车保险台账-2025.csv")
+    df_cyy = pd.read_csv(r"E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\新车保险台账-2025.csv")
     df_cyy = df_cyy[['出单日期', '保险公司简称', '所属门店', '车系', '车架号', '交强险保费', '业务人员','保费总额','总费用_次数']]
     df_cyy.rename(columns={'出单日期': '签单日期', '保险公司简称': '保险公司', '车系': '车型', '所属门店': '归属公司', '业务人员': '销售顾问'}, inplace=True)
-    df_Car = pd.read_excel(r'C:\Users\13111\Desktop\各公司银行额度.xlsx', sheet_name='补充车系')
+    df_Car = pd.read_excel(r'E:\powerbi_data\看板数据\私有云文件本地\data\售前看板数据源\各公司银行额度.xlsx', sheet_name='补充车系')
     df_cyy = pd.merge(df_cyy, df_Car[['车系', '服务网络']], how='left', left_on='车型',right_on='车系')
     df_cyy['归属公司'] = np.where(df_cyy['归属公司'] == '直播基地', df_cyy['服务网络'] + '-' + df_cyy['归属公司'], df_cyy['归属公司'])
     all_dfs['总费用_次数'] = 1
@@ -478,6 +478,6 @@ df_excluded = df_excluded[df_excluded['是否保赔'] == '否']
 diff_df = df_xcbx[~df_xcbx['车架号'].isin(df_excluded['车架号'])]
 diff_df['城市'] = np.where(diff_df['归属公司'].str.contains('贵州'), '贵州', '成都')
 diff_df = diff_df.drop_duplicates()
-df_wuyou.to_csv(r'C:\Users\13111\code\dashboard\保赔无忧.csv', index=False)
-diff_df.to_csv(r'C:\Users\13111\code\dashboard\新车保险台账.csv', index=False)
-df_qbwy1.to_csv(r'C:\Users\13111\code\dashboard\全赔无忧.csv', index=False)
+df_wuyou.to_csv(r'E:\powerbi_data\看板数据\dashboard\保赔无忧.csv', index=False)
+diff_df.to_csv(r'E:\powerbi_data\看板数据\dashboard\新车保险台账.csv', index=False)
+df_qbwy1.to_csv(r'E:\powerbi_data\看板数据\dashboard\全赔无忧.csv', index=False)
