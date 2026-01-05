@@ -1496,7 +1496,7 @@ class MainDataProcessor:
         processor_classes = [
             ("营销投放费用处理器", YingxiaoMoneyProcessor),
             ("特殊事项收入处理器", SpecialIncomeProcessor),
-            ("全保无忧整合处理器", InsuranceWarrantyIntegrator),
+            # ("全保无忧整合处理器", InsuranceWarrantyIntegrator),
             ("三方延保处理器", SanfangYBProcessor),
             ("数据合并处理器", DataMerger),
             # ("贴膜升级处理器", TMSJProcessor)
