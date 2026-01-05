@@ -343,6 +343,7 @@ class ComprehensiveInsuranceProcessor(DataProcessor):
 
         # 计算利润
         valid_matches["利润"] = valid_matches["产品销售金额"] - valid_matches["成本"]
+        valid_matches = valid_matches.rename("产品销售金额", "全保无忧金额")
 
         # 处理日期
         valid_matches["产品销售日期"] = pd.to_datetime(valid_matches["产品销售日期"], format='mixed', errors='coerce').dt.date
