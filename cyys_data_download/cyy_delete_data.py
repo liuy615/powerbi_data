@@ -74,7 +74,7 @@ class Config:
     }
 
     # 日志配置
-    LOG_PATH = r"/powerbi_data\车易云数据\data\delete_log"
+    LOG_PATH = r"E:\powerbi_data\data\cyy_log\cyy_delete_log\cyy_delete_log"
     LOG_LEVEL = logging.INFO
 
 

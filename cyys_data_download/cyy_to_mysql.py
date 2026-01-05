@@ -656,6 +656,7 @@ if __name__ == "__main__":
     sync_manager = None
     try:
         # for i in [f"{month:02d}" for month in range(1, datetime.now().month+1)]:
+        # for i in [f"{month:02d}" for month in range(1, 13)]:
             sync_manager = DataSyncManager(time_option=2)  # 默认下载当月数据
             sync_manager.run_apis()
     except Exception as e:

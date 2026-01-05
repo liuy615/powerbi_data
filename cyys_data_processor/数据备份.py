@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-主程序入口
+主程序入口 - 数据备份版本（不写入数据库）
 """
 import os
 import sys
@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 from datetime import datetime
 import warnings
+
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', 100)
 project_root = r"E:\powerbi_data"
@@ -21,13 +22,13 @@ from data_writer import DataWriter
 
 
 class CyysDataProcessorApp:
-    """车易云商数据处理应用主类"""
+    """车易云商数据处理应用主类 - 数据备份版本"""
 
     def __init__(self):
         # 初始化日志
         self.logger = DataUtils.init_logger(LOG_DIR)
 
-        # 初始化数据库管理器
+        # 初始化数据库管理器（仅用于读取）
         self.db_manager = DatabaseManager()
 
         # 初始化数据加载器
@@ -38,9 +39,6 @@ class CyysDataProcessorApp:
 
         # 初始化数据处理器
         self.data_processor = DataProcessor(external_data['vat'])
-
-        # 初始化数据写入器
-        self.data_writer = DataWriter(self.db_manager)
 
         # 存储处理过程中的数据
         self.raw_data = {}
@@ -79,13 +77,14 @@ class CyysDataProcessorApp:
             return None
 
     def run(self):
-        """主流程：数据读取→清洗→计算→写入输出库→导出到MongoDB"""
+        """主流程：数据读取→清洗→计算→备份到文件（不写入数据库）"""
         self.logger.info("=" * 50)
         self.logger.info("车易云商数据处理流程启动（优化版）")
+        self.logger.info("说明: 此版本仅用于数据备份，不写入任何数据库")
         self.logger.info("=" * 50)
 
         try:
-            # 1. 连接数据库
+            # 1. 连接数据库（仅用于读取）
             self.db_manager.connect()
 
             # 2. 加载外部配置
@@ -124,7 +123,7 @@ class CyysDataProcessorApp:
             df_debit = self.data_processor.clean_debit_and_merge(raw_data["汇票管理"], df_carcost)
 
             # 库存和计划数据清洗
-            df_inventory_all, df_inventory, df_inventory1 = self.data_processor.clean_inventory_and_plan(raw_data["库存车辆查询"], raw_data["库存车辆已售"], raw_data["计划车辆"],df_debit, service_net, company_belongs)
+            df_inventory_all, df_inventory, df_inventory1 = self.data_processor.clean_inventory_and_plan(raw_data["库存车辆查询"], raw_data["库存车辆已售"], raw_data["计划车辆"], df_debit, service_net,company_belongs)
 
             # 订单数据清洗
             df_dings, df_zhubo = self.data_processor.clean_book_orders(raw_data["衍生订单"], raw_data["成交订单"], raw_data["未售订单"], service_net)
@@ -149,7 +148,7 @@ class CyysDataProcessorApp:
             df_Ers1, df_Ers2, df_Ers2_archive = self.data_processor.process_used_car_data(df_Ers, df_kaipiao)
 
             # 合并主销售表
-            df_salesAgg1 = self.data_processor.merge_main_sales_table(df_salesAgg, df_zhubo, df_service_aggregated, df_carcost, df_loan, df_decoration2, df_kaipiao, df_Ers2, df_Ers2_archive)
+            df_salesAgg1 = self.data_processor.merge_main_sales_table(df_salesAgg, df_zhubo, df_service_aggregated,df_carcost, df_loan, df_decoration2, df_kaipiao,df_Ers2, df_Ers2_archive)
 
             # 7. 应用促销逻辑
             df_salesAgg1 = self.data_processor.apply_promotion_logic(df_salesAgg1)
@@ -192,12 +191,12 @@ class CyysDataProcessorApp:
             df_inventory0_1 = pd.concat([df_inventory, df_inventory1], axis=0, ignore_index=True)
 
             # 最终整理和导出
-            (df_salesAgg_combined, df_dings, df_inventory_all, tui_dings_df, df_debit, df_salesAgg_, df_jingpin_result, df_inventory1) = self.data_processor.finalize_and_export(
-                df_salesAgg1, df_dings, df_inventory_all, tui_dings_df, df_debit,df_salesAgg_, df_jingpin_result, df_inventory1, df_Ers1, df_diao2, df_inventory0_1)
+            (df_salesAgg_combined, df_dings, df_inventory_all, tui_dings_df, df_debit, df_salesAgg_, df_jingpin_result,df_inventory1) = self.data_processor.finalize_and_export(
+                df_salesAgg1, df_dings, df_inventory_all, tui_dings_df, df_debit, df_salesAgg_, df_jingpin_result,df_inventory1, df_Ers1, df_diao2, df_inventory0_1)
 
             self.logger.info("数据处理完成")
 
-            # 10. 准备写入MySQL的数据
+            # 10. 准备写入MySQL的数据（仅用于备份）
             mysql_data = {
                 'sales_data': df_salesAgg_combined.drop_duplicates(),
                 'order_data': df_dings.drop_duplicates(),
@@ -221,24 +220,34 @@ class CyysDataProcessorApp:
                         mysql_data[table_name] = df
                         self.logger.info(f"表[{table_name}]重复列名清理完成")
 
-            # 11. 写入MySQL
-            self.data_writer.write_to_mysql(mysql_data)
-            # self.backup_to_excel_simple(mysql_data, r"E:/WXWork/1688858189749305/WeDrive/成都永乐盛世/维护文件/cyy.xlsx")
+            # 11. 仅备份数据，不写入数据库
+            # 备份到Excel（保持原有文件路径和名称）
+            self.backup_to_excel_simple(mysql_data,r"E:/WXWork/1688858189749305/WeDrive/成都永乐盛世/维护文件/cyy.xlsx")
 
-            # 12. 准备MongoDB数据并导出
-            self.logger.info("准备MongoDB数据...")
-            df_salesAgg_mongo, df_jingpin_result_mongo, df_diao_mongo = self.data_writer.prepare_mongodb_data(df_salesAgg_combined, df_jingpin_result)
+            # 12. 准备MongoDB数据并导出为CSV（仅备份，不写入MongoDB）
+            self.logger.info("准备数据导出为CSV...")
+
+            # 创建临时的DataWriter实例用于调用数据处理方法
+            temp_data_writer = DataWriter(self.db_manager)
+            df_salesAgg_mongo, df_jingpin_result_mongo, df_diao_mongo = temp_data_writer.prepare_mongodb_data(
+                df_salesAgg_combined, df_jingpin_result)
+
+            # 格式化日期字段（保持原有格式）
             df_salesAgg_mongo['订车日期'] = pd.to_datetime(df_salesAgg_mongo['订车日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_salesAgg_mongo['开票日期'] = pd.to_datetime(df_salesAgg_mongo['开票日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_salesAgg_mongo['收款日期'] = pd.to_datetime(df_salesAgg_mongo['收款日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_jingpin_result_mongo['开票日期'] = pd.to_datetime(df_jingpin_result_mongo['开票日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_jingpin_result_mongo['收款日期'] = pd.to_datetime(df_jingpin_result_mongo['收款日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
-            df_jingpin_result_mongo['最早收款日期'] = pd.to_datetime(df_jingpin_result_mongo['最早收款日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
+            df_jingpin_result_mongo['最早收款日期'] = pd.to_datetime(df_jingpin_result_mongo['最早收款日期'],errors='coerce', format='mixed').dt.strftime('%Y/%m/%d')
             df_diao_mongo['订车日期'] = pd.to_datetime(df_diao_mongo['订车日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_diao_mongo['开票日期'] = pd.to_datetime(df_diao_mongo['开票日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
+
+            # 清理空值
             df_salesAgg_mongo = df_salesAgg_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
             df_jingpin_result_mongo = df_jingpin_result_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
             df_diao_mongo = df_diao_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
+
+            # 处理二手车返利数据（保持原有逻辑）
             # 1. 提取不等于"二手车返利"的数据并进行去重
             df_not_rebate = df_salesAgg_mongo[df_salesAgg_mongo["车架号"] != "二手车返利"]
             df_not_rebate = df_not_rebate.drop_duplicates(subset=["车架号", "身份证号"], keep="last")
@@ -246,17 +255,16 @@ class CyysDataProcessorApp:
             df_rebate = df_salesAgg_mongo[df_salesAgg_mongo["车架号"] == "二手车返利"]
             # 3. 合并两部分数据
             df_salesAgg_mongo = pd.concat([df_not_rebate, df_rebate], ignore_index=True)
-            # df_salesAgg_mongo.to_csv(r"E:/WXWork/1688858189749305/WeDrive/成都永乐盛世/维护文件/车易云毛利润表.csv")
+
+            # 导出为CSV（保持原有文件路径和名称）
+            csv_path = r"E:/WXWork/1688858189749305/WeDrive/成都永乐盛世/维护文件/车易云毛利润表.csv"
+            df_salesAgg_mongo.to_csv(csv_path, index=False)
             print(f"车易云毛利润表备份完成！")
-            # 13. 导出到MongoDB
-            self.data_writer.export_to_mongodb(
-                df_salesAgg_mongo,
-                df_jingpin_result_mongo,
-                df_diao_mongo
-            )
+            self.logger.info(f"CSV文件已保存到: {csv_path}")
 
             self.logger.info("=" * 50)
-            self.logger.info("车易云商数据处理流程全部完成！")
+            self.logger.info("车易云商数据处理流程完成！")
+            self.logger.info("说明: 数据已备份到文件，未写入任何数据库")
             self.logger.info("=" * 50)
 
         except Exception as e:
@@ -265,7 +273,6 @@ class CyysDataProcessorApp:
         finally:
             # 关闭数据库连接
             self.db_manager.close()
-
 
 
 if __name__ == "__main__":

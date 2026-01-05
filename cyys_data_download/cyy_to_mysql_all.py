@@ -65,18 +65,19 @@ class DataCenter:
         """
         # API配置模板（移除所有时间相关参数）
         api_templates = {
+            # '装饰_订单管理_装饰订单': {'url': f'{Config.API_BASE_URL}/api/Summary/AccessoryOrder','method': 'GET','payload': {"LikeType": "1","TimeType": "2","PageSize":3000,"PageNumber": 1}},
+            # '销售_车辆销售_作废订单': {'url': f'{Config.API_BASE_URL}/api/Summary/AbnormalOrder','method': 'GET','payload': {"SalesContant": "1","state": "0,2","AuthDistrub": "0","TimeType": "2","yType": 2,"PageSize": 500,"PageNumber": 1}},
+            # '销售_衍生_订单查询': {'url': f'{Config.API_BASE_URL}/api/Summary/SalePreorder','method': 'GET','payload': {"TimeType": "1","LikeType": "3","PageSize": 3000,"PageNumber": 1}},
+
             '车辆销售明细表_开票日期': {'url': f'{Config.API_BASE_URL}/api/Summary/CarSalDetailSummary','method': 'GET','payload': {"TimeType": 3,"Type": "2","PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
             '车辆成本管理': {'url': f'{Config.API_BASE_URL}/api/Summary/CarCost','method': 'GET','payload': {"OrgType": "1","CostType": "1","TimeType": "3","check": "2","PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
-            '装饰_订单管理_装饰订单': {'url': f'{Config.API_BASE_URL}/api/Summary/AccessoryOrder','method': 'GET','payload': {"LikeType": "1","TimeType": "2","PageSize":3000,"PageNumber": 1}},
             '套餐销售列表': {'url': f'{Config.API_BASE_URL}/api/AfterSales/SaleServicePackagePage','method': 'GET','payload': {"TimeType": "2","isShowPhone": "1","PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
             '销售_车辆销售_成交订单': {'url': f'{Config.API_BASE_URL}/api/Summary/DealOrder','method': 'GET','payload': {"DateType": "4","SalesContant": "1","AuthDistrub": "0","LikeType": "3","PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
-            '销售_车辆销售_作废订单': {'url': f'{Config.API_BASE_URL}/api/Summary/AbnormalOrder','method': 'GET','payload': {"SalesContant": "1","state": "0,2","AuthDistrub": "0","TimeType": "2","yType": 2,"PageSize": 500,"PageNumber": 1}},
             '保险业务': {'url': f'{Config.API_BASE_URL}/api/Home/InternalExport','method': 'GET','payload': {"Salescontant": "1","TimeType": "1","LikeType": '3',"PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
             '按揭业务': {'url': f'{Config.API_BASE_URL}/api/Summary/MortgageData','method': 'GET','payload': {"Salescontant": "1","IsMortgage": "","IsPledge": "","state": "12","DateType": "1","LikeType": '',"PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
             '评估管理_成交': {'url': f'{Config.API_BASE_URL}/api/Summary/GetUsedCarList','method': 'GET','payload': {"BillState": "3","PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
             '评估管理_已入库': {'url': f'{Config.API_BASE_URL}/api/Summary/GetUsedCarList','method': 'GET','payload': {"BillState": "5","PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
             '调车结算查询': {'url': f'{Config.API_BASE_URL}/api/Summary/GetShuntSettlementList','method': 'GET','payload': {"OrgType": "-1","OrganizeId": "","PayState": 2,"BillingState": "","CarState": "","Title": "","TimeType": "","PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
-            '销售_衍生_订单查询': {'url': f'{Config.API_BASE_URL}/api/Summary/SalePreorder','method': 'GET','payload': {"TimeType": "1","LikeType": "3","PageSize": 3000,"PageNumber": 1}},
             '库存车辆已售': {'url': f'{Config.API_BASE_URL}/api/Summary/StoreCar','method': 'GET','payload': {"OrgType": "0","CarState": "2","TimeType": "3","ShowPriceFlag": "1","PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
             '汇票管理': {'url': f'{Config.API_BASE_URL}/api/Summary/CarTicket','method': 'GET','payload': {'sortName': 'PledgeDate','sortOrder': 'desc','DateType': '1',"PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
             '销售回访': {'url': f'{Config.API_BASE_URL}/api/Summary/GetFollowUpList','method': 'GET','payload': {'TimeType': '3','Unvisit': '',"PageSize": Config.PAGE_SIZE,"PageNumber": 1}},

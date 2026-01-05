@@ -1089,7 +1089,7 @@ class DataProcessor:
                 )
             )
         # 合并订车表中的身份证号
-        df_dings = df_dings.drop_duplicates("车架号", keep="last")
+        # df_dings = df_dings.drop_duplicates("车架号", keep="last")
         df_salesAgg1 = df_salesAgg1.merge(df_dings[["车架号", "身份证号"]], on='车架号', how="left")
 
         # 定义最终输出列
