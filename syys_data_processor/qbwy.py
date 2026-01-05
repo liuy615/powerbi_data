@@ -556,6 +556,7 @@ class InsuranceDataMerger:
 
         # 添加城市信息
         df_remaining['城市'] = np.where(df_remaining['归属公司'].str.contains('贵州', na=False), '贵州', '成都')
+        df_remaining["日期"] = df_remaining["签单日期"]
         df_remaining = df_remaining.drop_duplicates()
 
         return df_excluded, df_remaining
