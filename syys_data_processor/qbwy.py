@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import pandas as pd
 import numpy as np
 import os
@@ -227,14 +229,27 @@ class ComprehensiveInsuranceProcessor(DataProcessor):
 
             # 获取销售数据
             sales_data = cls._get_sales_data(mongo_client)
+            sales_data["利润"] = sales_data["产品销售金额"] - sales_data["成本金额"]
+            # 处理日期
+            sales_data["产品销售日期"] = pd.to_datetime(sales_data["产品销售日期"], format='mixed',errors='coerce').dt.date
+            sales_data["开票日期"] = pd.to_datetime(sales_data["开票日期"], format='mixed',errors='coerce').dt.date
+            sales_data["日期"] = np.where(
+                sales_data['开票日期'] > sales_data['产品销售日期'],
+                sales_data['开票日期'],
+                sales_data['产品销售日期']
+            )
 
             # 获取详细数据
-            detailed_data = cls._get_detailed_data(mongo_client)
+            # detailed_data = cls._get_detailed_data(mongo_client)
 
             # 合并成本数据
-            merged_data = cls._merge_cost_data(mongo_client, detailed_data)
 
-            return sales_data, merged_data
+            # merged_data = cls._merge_cost_data(mongo_client, detailed_data)
+
+            return sales_data[[
+                '业务部门', '产品状态', '客户姓名', '手机号码', '车架号', '车系', '产品销售日期','开票日期', '日期', '产品销售版本', '新车开票价格', '车辆阶段', '车辆类型',
+                '产品销售金额', '终身保养金额', '成本金额', '利润', '所属门店', '销售顾问', '车系网络','数据有效性', 'created_at'
+            ]].rename(columns={"产品销售日期":"销售日期", "产品销售版本":"全保无忧版本","产品销售金额":"全保无忧金额", "成本金额":"成本"})
 
         except Exception as e:
             print(f"处理全保无忧数据失败: {e}")
@@ -259,11 +274,6 @@ class ComprehensiveInsuranceProcessor(DataProcessor):
 
         for column, value in filters:
             df = df[df[column] == value]
-
-        # df.to_csv("qwby.csv")
-
-        # 版本标准化
-        df["全保无忧版本"] = df["产品销售版本"].str.replace(r"畅行.*", "畅行版", regex=True)
 
         return df
 
@@ -324,6 +334,8 @@ class ComprehensiveInsuranceProcessor(DataProcessor):
                                   detailed_data["全保无忧版本"] + "_" + detailed_data["车辆类型"]
 
         # 合并数据
+        detailed_data.to_csv("detailed_data.csv")
+        cost_data.to_csv("cost_data.csv")
         merged_df = pd.merge(
             detailed_data,
             cost_data[["关联键", "开始时间", "结束时间", "成本"]],
@@ -584,7 +596,7 @@ def main():
 
     # 1. 处理全保无忧数据
     print("正在处理全保无忧数据...")
-    comprehensive_sales, comprehensive_detailed = ComprehensiveInsuranceProcessor.process_qbwy()
+    comprehensive_sales = ComprehensiveInsuranceProcessor.process_qbwy()
 
     # 2. 处理衍生产品保险数据
     print("正在处理衍生产品保险数据...")
@@ -592,7 +604,7 @@ def main():
 
     # 3. 合并无忧数据
     print("正在合并无忧数据...")
-    merged_insurance_data = InsuranceDataMerger.merge_insurance_data(comprehensive_detailed,derivative_data)
+    merged_insurance_data = InsuranceDataMerger.merge_insurance_data(comprehensive_sales,derivative_data)
 
     # 4. 处理新车保险数据
     print("正在处理新车保险数据...")
