@@ -246,16 +246,6 @@ class CyysDataProcessorApp:
             df_salesAgg_mongo = df_salesAgg_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
             df_jingpin_result_mongo = df_jingpin_result_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
             df_diao_mongo = df_diao_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
-
-            # 处理二手车返利数据（保持原有逻辑）
-            # 1. 提取不等于"二手车返利"的数据并进行去重
-            df_not_rebate = df_salesAgg_mongo[df_salesAgg_mongo["车架号"] != "二手车返利"]
-            df_not_rebate = df_not_rebate.drop_duplicates(subset=["车架号", "身份证号"], keep="last")
-            # 2. 提取等于"二手车返利"的数据（不去重）
-            df_rebate = df_salesAgg_mongo[df_salesAgg_mongo["车架号"] == "二手车返利"]
-            # 3. 合并两部分数据
-            df_salesAgg_mongo = pd.concat([df_not_rebate, df_rebate], ignore_index=True)
-
             # 导出为CSV（保持原有文件路径和名称）
             csv_path = r"E:/WXWork/1688858189749305/WeDrive/成都永乐盛世/维护文件/车易云毛利润表.csv"
             df_salesAgg_mongo.to_csv(csv_path, index=False)

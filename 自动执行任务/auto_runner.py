@@ -30,19 +30,8 @@ def cyy_auto_runner():
         r"E:\powerbi_data\powerbi_data\cyys_data_processor\数据备份.py",  # 数据备份
     ]
 
-    config = generate_time_range_schedule("08:55", "22:55", 30, "minutes")
+    config = generate_time_range_schedule("08:52", "22:52", 30, "minutes")
     runner = ScheduledTaskRunner("车易云数据清洗")
-    runner.start_schedule(scripts, config)
-
-
-def daypaper_auto_runner():
-    """日报任务执行器"""
-    scripts = [
-        r"E:\pycharm_project\day_paper\daypaper_pbwy.py",
-    ]
-
-    config = generate_once_schedule("22:00")
-    runner = ScheduledTaskRunner("日报定时发送")
     runner.start_schedule(scripts, config)
 
 
