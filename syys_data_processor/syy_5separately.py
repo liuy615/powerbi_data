@@ -1,3 +1,4 @@
+import sys
 import pandas as pd
 from pathlib import Path
 import warnings
@@ -6,7 +7,9 @@ import pymysql
 from dns.dnssecalgs import PrivateDSA
 from pymysql import MySQLError
 from typing import List, Dict, Any, Optional
-
+project_root = r"E:\powerbi_data"
+sys.path.insert(0, project_root)
+from config.syy_5separately.config import SOURCE_MYSQL_CONFIG, OUTPUT_MYSQL_CONFIG
 # 忽略警告信息
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', 100)
@@ -212,11 +215,7 @@ class FilmUpgradeAnalyzer:
             df_filtered['月份'] = df_filtered['月份'].astype(int)
 
             # 合并年份和月份为日期列，日设置为1
-            df_filtered['销售日期'] = pd.to_datetime(
-                df_filtered['年份'].astype(str) + '-' +
-                df_filtered['月份'].astype(str) + '-01',
-                format='%Y-%m-%d'
-            )
+            df_filtered['销售日期'] = df_filtered['年份'].astype(str) + '-' + df_filtered['月份'].astype(str)
 
             # 计算总成本列（人员成本 + 场地租金水电 + 洗车费 + 耗材采购 + 维修费用）
             cost_columns = ['人员成本', '场地租金水电', '洗车费', '耗材采购', '维修费用']
@@ -244,7 +243,7 @@ class FilmUpgradeAnalyzer:
             final_columns = ['公司名称', '销售日期', '总成本']
 
             df_final = df_filtered[final_columns].copy()
-
+            print(df_final)
             return df_final
 
         except FileNotFoundError:
@@ -266,26 +265,10 @@ class DecorationOrdersExtractor:
         这里可以根据需要修改配置参数
         """
         # 主数据库连接配置
-        self.db_config = {
-            'host': 'localhost',  # 数据库主机地址
-            'port': 3306,  # 数据库端口，默认为3306
-            'user': 'root',  # 数据库用户名
-            'password': '513921',  # 数据库密码
-            'database': 'cyy_data',  # 数据库名称
-            'charset': 'utf8mb4',  # 字符集，支持中文
-            'cursorclass': pymysql.cursors.DictCursor  # 返回字典格式
-        }
+        self.db_config = SOURCE_MYSQL_CONFIG
 
         # 销售数据数据库配置（新增）
-        self.sales_db_config = {
-            'host': 'localhost',
-            'port': 3306,
-            'user': 'root',
-            'password': '513921',
-            'database': 'cyy_stg_data',  # 销售数据数据库
-            'charset': 'utf8mb4',
-            'cursorclass': pymysql.cursors.DictCursor
-        }
+        self.sales_db_config = OUTPUT_MYSQL_CONFIG
 
         # 装饰订单字段映射关系
         self.field_mapping = {
@@ -319,7 +302,6 @@ class DecorationOrdersExtractor:
         # 筛选条件
         self.target_sales_consultants = ['郑仁彬', '刘红梅', '郝小龙', '衡珊珊', '蒲松涛']
         self.target_organize_names = ['上元臻盛', '上元臻智', '上元星汉', '上元弘川', '上元坤灵']
-        self.target_company_names = ['上元臻盛', '上元臻智', '上元星汉', '上元弘川', '上元坤灵']  # 新增
 
         # 数据库连接对象
         self.connection = None
@@ -359,7 +341,7 @@ class DecorationOrdersExtractor:
         if organize_names:
             self.target_organize_names = organize_names
         if company_names:
-            self.target_company_names = company_names
+            self.target_organize_names = company_names
         print("筛选条件已更新")
 
     def connect(self, db_type: str = 'main') -> bool:
@@ -571,7 +553,7 @@ class DecorationOrdersExtractor:
         """
         # 使用传入的公司名称列表，如果没有传入则使用默认列表
         if company_names is None:
-            company_names = self.target_company_names
+            company_names = self.target_organize_names
 
         # 构建SELECT字段列表
         select_fields = ', '.join(self.sales_field_mapping.keys())
@@ -772,15 +754,6 @@ class DecorationOrdersExtractor:
         film_upgrade_dict = df_filtered.groupby('车架号').apply(check_film_upgrade).to_dict()
         df_filtered['是否为膜升级'] = df_filtered['车架号'].map(film_upgrade_dict)
 
-        # # 3. 新建[是否有龙膜赠送]列
-        # # 按车架号分组，判断物资名称中是否包含'龙膜'
-        # def check_dragon_film(group):
-        #     materials = ' '.join(group['赠送装饰项目'].astype(str).tolist())
-        #     return '是' if '龙膜' in materials else '否'
-        #
-        # dragon_film_dict = df_filtered.groupby('车架号').apply(check_dragon_film).to_dict()
-        # df_filtered['是否有龙膜赠送'] = df_filtered['车架号'].map(dragon_film_dict)
-
         # 4. 按开票日期和新车销售店名分组统计
         # 首先创建一个辅助DataFrame，每个车架号只保留一条记录用于计数
         unique_vin_df = df_filtered.drop_duplicates(subset=['车架号', '开票日期', '新车销售店名'])
@@ -808,8 +781,7 @@ class DecorationOrdersExtractor:
         # 按开票日期和新车销售店名分组并应用统计函数
         result = df_filtered.groupby(['开票日期', '新车销售店名']).apply(group_statistics)
         result = result.reset_index()
-        result = result.rename(columns={'成本合计(含税)_sum': '成本合计(含税)',
-                                        '合计收款金额_sum': '合计收款金额'})
+        result = result.rename(columns={'成本合计(含税)_sum': '成本合计(含税)', '合计收款金额_sum': '合计收款金额'})
 
         return result, grouped_df
 
@@ -1035,8 +1007,6 @@ if __name__ == "__main__":
     result_df, zhaungshi_df = extractor.process_sales_data()
     # 销售数据
     sales_df = extractor.execute_sales_data_pipeline()
-
-
 
     # syy数据
     analyzer = FilmUpgradeAnalyzer()

@@ -231,25 +231,23 @@ class ComprehensiveInsuranceProcessor(DataProcessor):
             sales_data = cls._get_sales_data(mongo_client)
             sales_data["利润"] = sales_data["产品销售金额"] - sales_data["成本金额"]
             # 处理日期
-            sales_data["产品销售日期"] = pd.to_datetime(sales_data["产品销售日期"], format='mixed',errors='coerce').dt.date
-            sales_data["开票日期"] = pd.to_datetime(sales_data["开票日期"], format='mixed',errors='coerce').dt.date
+            sales_data["产品销售日期"] = pd.to_datetime(sales_data["产品销售日期"], format='mixed',
+                                                        errors='coerce').dt.date
+            sales_data["开票日期"] = pd.to_datetime(sales_data["开票日期"], format='mixed', errors='coerce').dt.date
             sales_data["日期"] = np.where(
                 sales_data['开票日期'] > sales_data['产品销售日期'],
                 sales_data['开票日期'],
                 sales_data['产品销售日期']
             )
 
-            # 获取详细数据
-            # detailed_data = cls._get_detailed_data(mongo_client)
-
-            # 合并成本数据
-
-            # merged_data = cls._merge_cost_data(mongo_client, detailed_data)
-
             return sales_data[[
-                '业务部门', '产品状态', '客户姓名', '手机号码', '车架号', '车系', '产品销售日期','开票日期', '日期', '产品销售版本', '新车开票价格', '车辆阶段', '车辆类型',
-                '产品销售金额', '终身保养金额', '成本金额', '利润', '所属门店', '销售顾问', '车系网络','数据有效性', 'created_at'
-            ]].rename(columns={"产品销售日期":"销售日期", "产品销售版本":"全保无忧版本","产品销售金额":"全保无忧金额", "成本金额":"成本"})
+                '业务部门', '产品状态', '客户姓名', '手机号码', '车架号', '车系', '产品销售日期', '开票日期', '日期',
+                '产品销售版本', '新车开票价格', '车辆阶段', '车辆类型',
+                '产品销售金额', '终身保养金额', '成本金额', '利润', '所属门店', '销售顾问', '车系网络', '数据有效性',
+                'created_at'
+            ]].rename(
+                columns={"产品销售日期": "销售日期", "产品销售版本": "全保无忧版本", "产品销售金额": "全保无忧金额",
+                         "成本金额": "成本"})
 
         except Exception as e:
             print(f"处理全保无忧数据失败: {e}")
@@ -358,7 +356,8 @@ class ComprehensiveInsuranceProcessor(DataProcessor):
         valid_matches.rename(columns={'产品销售金额': '全保无忧金额'}, inplace=True)
 
         # 处理日期
-        valid_matches["产品销售日期"] = pd.to_datetime(valid_matches["产品销售日期"], format='mixed', errors='coerce').dt.date
+        valid_matches["产品销售日期"] = pd.to_datetime(valid_matches["产品销售日期"], format='mixed',
+                                                       errors='coerce').dt.date
         valid_matches["开票日期"] = pd.to_datetime(valid_matches["开票日期"], format='mixed', errors='coerce').dt.date
         valid_matches["日期"] = np.where(
             valid_matches['开票日期'] > valid_matches['产品销售日期'],
@@ -457,65 +456,61 @@ class NewCarInsuranceProcessor(DataProcessor):
     @classmethod
     def process_new_car_insurance(cls) -> pd.DataFrame:
         """处理新车保险数据"""
+        # 严格按照 bpwy_before.py 中的 xinchebaoxianTZ 函数逻辑
         # 读取数据
         all_dfs = pd.read_csv(Config.FILE_PATHS['new_insurance_csv'], low_memory=False)
-        df_yongle = pd.read_csv(Config.FILE_PATHS['yongle_csv'])
+        df_cyy = pd.read_csv(Config.FILE_PATHS['yongle_csv'])
 
-        # 处理保险数据
-        df_yongle = cls._process_yongle_data(df_yongle)
-
-        # 合并数据
-        all_dfs['总费用_次数'] = 1
-        df_combined = pd.concat([all_dfs, df_yongle], axis=0, join='outer', ignore_index=True)
-
-        # 数据清洗
-        df_combined['归属公司'] = df_combined['归属公司'].replace('文景初治', '上元盛世')
-        df_combined.dropna(subset=['保险公司'], inplace=True)
-
-        # 添加日期列
-        df_combined['日期'] = df_combined['签单日期']
-
-        return df_combined[[
-            '月份', '签单日期', '到期日期', '保险公司', '数据归属门店', '归属公司',
-            '车型', '车牌号', '车架号', '被保险人', '交强险保费', '销售顾问',
-            '是否为保赔无忧客户', '总费用_次数', '日期'
-        ]]
-
-    @classmethod
-    def _process_yongle_data(cls, df: pd.DataFrame) -> pd.DataFrame:
-        """处理新车保险数据"""
-        # 选择需要的列
-        df = df[[
-            '出单日期', '保险公司简称', '所属门店', '车系', '车架号',
-            '交强险保费', '业务人员', '保费总额', '总费用_次数'
-        ]].copy()
+        # 选择列
+        df_cyy = df_cyy[['出单日期', '保险公司简称', '所属门店', '车系', '车架号', '交强险保费', '业务人员', '保费总额',
+                         '总费用_次数']]
 
         # 重命名列
-        column_mapping = {
-            '出单日期': '签单日期',
-            '保险公司简称': '保险公司',
-            '车系': '车型',  # 注意：这里重命名为车型，但后面合并时需要车系列
-            '所属门店': '归属公司',
-            '业务人员': '销售顾问'
-        }
+        df_cyy.rename(
+            columns={'出单日期': '签单日期', '保险公司简称': '保险公司', '车系': '车型', '所属门店': '归属公司',
+                     '业务人员': '销售顾问'}, inplace=True)
 
-        # 使用 rename 方法的正确方式，避免 SettingWithCopyWarning
-        df = df.rename(columns=column_mapping)
+        # 加载车系数据
+        df_Car = cls.load_car_network_data()
+
+        # 合并车系网络数据
+        df_cyy = pd.merge(df_cyy, df_Car[['车系', '服务网络']], how='left', left_on='车型', right_on='车系')
 
         # 调整直播基地门店名称
-        # 因为重命名后车型列对应原车系列，所以使用 '车型' 作为合并列
-        df = cls.adjust_live_broadcast_store(df, '归属公司', '车型')
+        df_cyy['归属公司'] = np.where(df_cyy['归属公司'] == '直播基地', df_cyy['服务网络'] + '-' + df_cyy['归属公司'],
+                                      df_cyy['归属公司'])
 
-        return df
+        # 添加总费用_次数列
+        all_dfs['总费用_次数'] = 1
+
+        # 合并数据
+        df_combined = pd.concat([all_dfs, df_cyy], axis=0, join='outer', ignore_index=True)
+
+        # 替换门店名称
+        df_combined['归属公司'] = df_combined['归属公司'].replace('文景初治', '上元盛世')
+
+        # 删除保险公司为空的记录
+        df_combined.dropna(subset=['保险公司'], inplace=True)
+
+        # 选择需要的列
+        df_filtered = df_combined[
+            ['月份', '签单日期', '到期日期', '保险公司', '数据归属门店', '归属公司', '车型', '车牌号', '车架号',
+             '被保险人',
+             '交强险保费', '销售顾问', '是否为保赔无忧客户', '总费用_次数']]
+
+        # 添加日期列
+        df_filtered['日期'] = df_filtered['签单日期']
+
+        return df_filtered
 
 
 class InsuranceDataMerger:
     """保险数据合并类"""
 
     @staticmethod
-    def merge_insurance_data(comprehensive_data: pd.DataFrame,derivative_data: pd.DataFrame) -> pd.DataFrame:
+    def merge_insurance_data(comprehensive_data: pd.DataFrame, derivative_data: pd.DataFrame) -> pd.DataFrame:
         """合并保险数据"""
-        merged_data = pd.concat([comprehensive_data, derivative_data],axis=0, join='outer', ignore_index=True)
+        merged_data = pd.concat([comprehensive_data, derivative_data], axis=0, join='outer', ignore_index=True)
 
         # 数据增强
         merged_data = InsuranceDataMerger._enhance_data(merged_data)
@@ -540,17 +535,19 @@ class InsuranceDataMerger:
         return df
 
     @staticmethod
-    def mark_comprehensive_insurance(comprehensive_df: pd.DataFrame,insurance_df: pd.DataFrame) -> pd.DataFrame:
+    def mark_comprehensive_insurance(comprehensive_df: pd.DataFrame, insurance_df: pd.DataFrame) -> pd.DataFrame:
         """标记全保无忧保险数据"""
-        # 创建标记
-        comprehensive_flag = (comprehensive_df.assign(tmp=1)
-                              .groupby('车架号')
-                              .agg(是否保赔=('tmp', lambda x: '是' if len(x) > 0 else '否'))
-                              .reset_index())
+        # 创建标记 - 严格按照 bpwy_before.py 中的逻辑
+        wy_flag = (comprehensive_df.assign(tmp=1)
+                   .groupby('车架号')
+                   .agg(是否保赔=('tmp', lambda x: '是' if len(x) > 0 else '否'))
+                   .reset_index())
+
+        # 处理日期
+        insurance_df['日期'] = pd.to_datetime(insurance_df['日期'], errors='coerce').dt.date
 
         # 合并标记
-        insurance_df['日期'] = pd.to_datetime(insurance_df['日期'], errors='coerce').dt.date
-        insurance_df = insurance_df.merge(comprehensive_flag, on='车架号', how='left')
+        insurance_df = insurance_df.merge(wy_flag, on='车架号', how='left')
         insurance_df['是否保赔'] = insurance_df['是否保赔'].fillna('否')
 
         return insurance_df
@@ -558,21 +555,27 @@ class InsuranceDataMerger:
     @staticmethod
     def filter_excluded_vehicles(insurance_df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
         """筛选排除的车辆"""
-        # 筛选鼎和保险或特定交强险保费的车辆
-        exclude_condition1 = insurance_df['保险公司'].str.contains('鼎和', na=False)
-        exclude_condition2 = insurance_df['交强险保费'].astype(str).str.isnumeric() & insurance_df['交强险保费'].astype(float).isin(Config.EXCLUDE_INSURANCE_VALUES)
+        # 严格按照 bpwy_before.py 中的筛选逻辑
+        exclude_list = [1000, 1130, 1800]
 
-        df_excluded = insurance_df[(exclude_condition1 | exclude_condition2) & (insurance_df['是否保赔'] == '否')].drop_duplicates()
+        # 筛选鼎和保险
+        df_except = insurance_df[insurance_df['保险公司'].str.contains('鼎和')]
 
-        # 获取剩余车辆
-        df_remaining = insurance_df[~insurance_df['车架号'].isin(df_excluded['车架号'])].copy()
+        # 筛选特定交强险保费的记录
+        df_except1 = insurance_df[insurance_df['交强险保费'].isin(exclude_list)]
+
+        # 合并排除的记录
+        df_excluded = pd.concat([df_except, df_except1], axis=0).drop_duplicates()
+        df_excluded = df_excluded[df_excluded['是否保赔'] == '否']
+
+        # 筛选出不包含在 df_excluded 中的行
+        diff_df = insurance_df[~insurance_df['车架号'].isin(df_excluded['车架号'])]
 
         # 添加城市信息
-        df_remaining['城市'] = np.where(df_remaining['归属公司'].str.contains('贵州', na=False), '贵州', '成都')
-        df_remaining["日期"] = df_remaining["签单日期"]
-        df_remaining = df_remaining.drop_duplicates()
+        diff_df['城市'] = np.where(diff_df['归属公司'].str.contains('贵州'), '贵州', '成都')
+        diff_df = diff_df.drop_duplicates()
 
-        return df_excluded, df_remaining
+        return df_excluded, diff_df
 
 
 class DataExporter:
@@ -604,7 +607,7 @@ def main():
 
     # 3. 合并无忧数据
     print("正在合并无忧数据...")
-    merged_insurance_data = InsuranceDataMerger.merge_insurance_data(comprehensive_sales,derivative_data)
+    merged_insurance_data = InsuranceDataMerger.merge_insurance_data(comprehensive_sales, derivative_data)
 
     # 4. 处理新车保险数据
     print("正在处理新车保险数据...")
@@ -612,7 +615,7 @@ def main():
 
     # 5. 标记并筛选新车保险数据
     print("正在标记新车保险数据...")
-    marked_insurance = InsuranceDataMerger.mark_comprehensive_insurance(merged_insurance_data,new_car_insurance)
+    marked_insurance = InsuranceDataMerger.mark_comprehensive_insurance(merged_insurance_data, new_car_insurance)
 
     # 6. 筛选排除的车辆
     print("正在筛选排除的车辆...")
