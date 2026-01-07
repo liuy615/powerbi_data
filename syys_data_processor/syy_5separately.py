@@ -78,7 +78,6 @@ class FilmUpgradeAnalyzer:
             try:
                 # 读取Excel文件
                 df = pd.read_excel(file_path, sheet_name="膜升级登记表")
-                print(f"读取文件: {Path(file_path).name}, 行数: {len(df)}")
 
                 # 检查必需的列是否存在
                 if '车架号' in df.columns:
@@ -121,7 +120,7 @@ class FilmUpgradeAnalyzer:
 
                 # 添加到总数据中
                 all_data.append(df_subset)
-                print(f"文件 {Path(file_path).name} 处理完成，有效数据行数: {len(df_subset)}")
+                print(f"读取文件: {Path(file_path).name}, 行数: {len(df)},有效数据行数: {len(df_subset)}")
 
             except FileNotFoundError:
                 print(f"文件不存在: {file_path}")
@@ -139,52 +138,9 @@ class FilmUpgradeAnalyzer:
 
         # 提取日期部分（去掉时间）
         combined_df['推送日期'] = combined_df['推送日期'].dt.date
+        combined_df.to_csv("combined_df.csv")
 
         return combined_df
-
-    # 处理到店数据
-    def process_visit_data(self):
-        """
-        处理到店数据，统计每个店每日的到店量
-
-        Returns:
-        --------
-        pd.DataFrame
-            包含到店日期、新车销售店名、到店量的DataFrame
-        """
-        print("\n开始处理到店数据...")
-
-        try:
-            # 读取Excel文件
-            df = pd.read_excel(self.visit_file_path, sheet_name="膜升级登记表")
-            print(f"读取到店文件: {Path(self.visit_file_path).name}, 行数: {len(df)}")
-
-            # 检查必需的列是否存在
-            required_columns = ['新车销售店名', '到店日期', '是否算到店量', '膜升级金额', '其它项目金额']
-            missing_columns = [col for col in required_columns if col not in df.columns]
-
-            if missing_columns:
-                print(f"到店文件缺少列: {missing_columns}")
-                return pd.DataFrame(columns=['新车销售店名', '车架号（后6位）', '到店日期', '是否算到店量', '膜升级金额', '其它项目金额'])
-
-            # 确保日期列格式正确
-            df['到店日期'] = pd.to_datetime(df['到店日期'], errors='coerce')
-
-            # 筛选有效数据
-            valid_data = df[['新车销售店名', '车架号（后6位）', '到店日期', '是否算到店量', '膜升级金额', '其它项目金额']].rename(columns={'车架号（后6位）': '车架号'}).copy()
-            print(f"有效到店数据行数: {len(valid_data)}")
-
-            # 提取日期部分（去掉时间）
-            valid_data['到店日期'] = valid_data['到店日期'].dt.date
-
-            return valid_data
-
-        except FileNotFoundError:
-            print(f"到店文件不存在: {self.visit_file_path}")
-            return pd.DataFrame(columns=['日期', '新车销售店名', '到店量'])
-        except Exception as e:
-            print(f"处理到店文件时出错: {e}")
-            return pd.DataFrame(columns=['日期', '新车销售店名', '到店量'])
 
     # 处理成本数据
     def extract_store_cost_data(self):
@@ -210,12 +166,12 @@ class FilmUpgradeAnalyzer:
             # 删除空行（年份或月份为空的行）
             df_filtered = df_filtered.dropna(subset=['年份', '月份'])
 
-            # 将年份和月份转换为整数（如果它们是浮点数）
-            df_filtered['年份'] = df_filtered['年份'].astype(int)
-            df_filtered['月份'] = df_filtered['月份'].astype(int)
-
-            # 合并年份和月份为日期列，日设置为1
-            df_filtered['销售日期'] = df_filtered['年份'].astype(str) + '-' + df_filtered['月份'].astype(str)
+            # # 将年份和月份转换为整数（如果它们是浮点数）
+            # df_filtered['年份'] = df_filtered['年份'].astype(int)
+            # df_filtered['月份'] = df_filtered['月份'].astype(int)
+            #
+            # # 合并年份和月份为日期列，日设置为1
+            # df_filtered['销售日期'] = df_filtered['年份'].astype(str) + '-' + df_filtered['月份'].astype(str)
 
             # 计算总成本列（人员成本 + 场地租金水电 + 洗车费 + 耗材采购 + 维修费用）
             cost_columns = ['人员成本', '场地租金水电', '洗车费', '耗材采购', '维修费用']
@@ -240,7 +196,7 @@ class FilmUpgradeAnalyzer:
             df_filtered = df_filtered.rename(columns=column_mapping)
 
             # 重新排列列顺序
-            final_columns = ['公司名称', '销售日期', '总成本']
+            final_columns = ['公司名称', '年份', '月份', '总成本']
 
             df_final = df_filtered[final_columns].copy()
             print(df_final)
@@ -326,9 +282,7 @@ class DecorationOrdersExtractor:
         else:
             print(f"未知的配置类型: {config_type}")
 
-    def update_filter_conditions(self, sales_consultants: Optional[List[str]] = None,
-                                 organize_names: Optional[List[str]] = None,
-                                 company_names: Optional[List[str]] = None):
+    def update_filter_conditions(self, sales_consultants: Optional[List[str]] = None, organize_names: Optional[List[str]] = None,company_names: Optional[List[str]] = None):
         """
         更新筛选条件
         Args:
@@ -706,24 +660,18 @@ class DecorationOrdersExtractor:
         df_filtered_csv = df_filtered.copy()
 
         # 2. 判断是否包含"膜"的关键字并计算新列
-        df_filtered_csv['贴膜成本'] = df_filtered_csv.apply(
-            lambda row: row['成本合计(含税)'] if '膜' in str(row['物资名称']) else 0, axis=1)
-        df_filtered_csv['贴膜合计收款金额'] = df_filtered_csv.apply(
-            lambda row: row['合计收款金额'] if '膜' in str(row['物资名称']) else 0, axis=1)
-        df_filtered_csv['其他成本'] = df_filtered_csv.apply(
-            lambda row: row['成本合计(含税)'] if '膜' not in str(row['物资名称']) else 0, axis=1)
-        df_filtered_csv['其他合计收款金额'] = df_filtered_csv.apply(
-            lambda row: row['合计收款金额'] if '膜' not in str(row['物资名称']) else 0, axis=1)
-        df_filtered_csv['龙膜成本'] = df_filtered_csv.apply(
-            lambda row: row['成本合计(含税)'] if '龙膜' in str(row['物资名称']) else 0, axis=1)
-        df_filtered_csv['龙膜收款金额'] = df_filtered_csv.apply(
-            lambda row: row['合计收款金额'] if '龙膜' in str(row['物资名称']) else 0, axis=1)
+        df_filtered_csv['贴膜成本'] = df_filtered_csv.apply(lambda row: row['成本合计(含税)'] if '膜' in str(row['物资名称']) else 0, axis=1)
+        df_filtered_csv['贴膜合计收款金额'] = df_filtered_csv.apply(lambda row: row['合计收款金额'] if '膜' in str(row['物资名称']) else 0, axis=1)
+        df_filtered_csv['其他成本'] = df_filtered_csv.apply(lambda row: row['成本合计(含税)'] if '膜' not in str(row['物资名称']) else 0, axis=1)
+        df_filtered_csv['其他合计收款金额'] = df_filtered_csv.apply(lambda row: row['合计收款金额'] if '膜' not in str(row['物资名称']) else 0, axis=1)
+        df_filtered_csv['龙膜成本'] = df_filtered_csv.apply(lambda row: row['成本合计(含税)'] if '龙膜' in str(row['物资名称']) else 0, axis=1)
+        df_filtered_csv['龙膜收款金额'] = df_filtered_csv.apply(lambda row: row['合计收款金额'] if '龙膜' in str(row['物资名称']) else 0, axis=1)
 
         # 3. 按【车架号】分组并聚合数据
         grouped = df_filtered_csv.groupby('车架号').agg({
             '销售顾问': 'first',
             '新车销售店名': 'first',
-            '开票日期': 'first',
+            '收款日期': 'first',
             '物资名称': lambda x: '，'.join(x.dropna().astype(str)),
             '成本合计(含税)': 'sum',
             '合计收款金额': 'sum',
@@ -736,65 +684,24 @@ class DecorationOrdersExtractor:
         }).reset_index()
 
         # 4. 按指定顺序排列列
-        grouped_df = grouped[['车架号', '销售顾问', '新车销售店名', '物资名称','成本合计(含税)', '合计收款金额',
-            '贴膜成本', '贴膜合计收款金额','其他成本', '其他合计收款金额', '龙膜成本', '龙膜收款金额'
-        ]]
+        grouped_df = grouped[['车架号', '收款日期', '销售顾问', '新车销售店名', '物资名称','成本合计(含税)', '合计收款金额', '贴膜成本', '贴膜合计收款金额','其他成本', '其他合计收款金额', '龙膜成本', '龙膜收款金额']].rename(columns={'收款日期':'到店日期'})
 
         # 显示结果
-        # grouped_df.to_csv("装饰合并.csv")
+        grouped_df.to_csv("装饰合并.csv")
 
         print(f"原始数据有 {len(df)} 行，合并后有 {len(grouped_df)} 行")
 
-        # 2. 新建[是否为膜升级]列
-        # 按车架号分组，判断物资名称中是否包含'膜'字
-        def check_film_upgrade(group):
-            materials = ' '.join(group['物资名称'].astype(str).tolist())
-            return '是' if '膜' in materials else '否'
-
-        film_upgrade_dict = df_filtered.groupby('车架号').apply(check_film_upgrade).to_dict()
-        df_filtered['是否为膜升级'] = df_filtered['车架号'].map(film_upgrade_dict)
-
-        # 4. 按开票日期和新车销售店名分组统计
-        # 首先创建一个辅助DataFrame，每个车架号只保留一条记录用于计数
-        unique_vin_df = df_filtered.drop_duplicates(subset=['车架号', '开票日期', '新车销售店名'])
-
-        # 创建分组统计函数
-        def group_statistics(group):
-            # 获取当前分组的所有车架号
-            vin_in_group = group['车架号'].unique()
-
-            # 从unique_vin_df中获取当前分组的唯一车架号记录
-            unique_group = unique_vin_df[
-                (unique_vin_df['车架号'].isin(vin_in_group)) &
-                (unique_vin_df['开票日期'] == group.name[0]) &
-                (unique_vin_df['新车销售店名'] == group.name[1])
-                ]
-
-            return pd.Series({
-                '成本合计(含税)_sum': group['成本合计(含税)'].sum(),
-                '合计收款金额_sum': group['合计收款金额'].sum(),
-                '膜升级台数': unique_group[unique_group['是否为膜升级'] == '是']['车架号'].nunique(),
-                '其他升级台数': unique_group[unique_group['是否为膜升级'] == '否']['车架号'].nunique(),
-                '总台数': unique_group['车架号'].nunique()  # 添加总台数用于验证
-            })
-
-        # 按开票日期和新车销售店名分组并应用统计函数
-        result = df_filtered.groupby(['开票日期', '新车销售店名']).apply(group_statistics)
-        result = result.reset_index()
-        result = result.rename(columns={'成本合计(含税)_sum': '成本合计(含税)', '合计收款金额_sum': '合计收款金额'})
-
-        return result, grouped_df
+        return grouped_df
 
 
 # 处理销售表、推送表和到店表，装饰表,以及成本表生成符合要求的汇总表
-def merge_and_process_data(sales_df, push_df, visit_df, zhaungshi_df, chengben_df):
+def merge_and_process_data(sales_df, push_df, zhaungshi_df, chengben_df):
     """
     处理销售表、推送表和到店表，装饰表,以及成本表生成符合要求的汇总表
 
     参数:
     sales_df: 销售表DataFrame
     push_df: 推送表DataFrame
-    visit_df: 到店表DataFrame
 
     返回:
     处理后的DataFrame
@@ -810,19 +717,6 @@ def merge_and_process_data(sales_df, push_df, visit_df, zhaungshi_df, chengben_d
         # 如果没有推送日期，直接去重
         push_df = push_df.drop_duplicates(subset=['车架号'], keep='first')
 
-    # 2. 预处理到店表：去重，保留最新的一条
-    # 先重命名车架号列，方便处理
-    visit_df = visit_df.rename(columns={'车架号': '车架号后6位'})
-
-    if '到店日期' in visit_df.columns:
-        # 将到店日期转换为datetime格式
-        visit_df['到店日期'] = pd.to_datetime(visit_df['到店日期'], errors='coerce')
-        # 按车架号后6位分组，保留最新的一条（到店日期最大）
-        visit_df = visit_df.sort_values('到店日期', ascending=False).drop_duplicates(subset=['车架号后6位'], keep='first')
-    else:
-        # 如果没有到店日期，直接去重
-        visit_df = visit_df.drop_duplicates(subset=['车架号后6位'], keep='first')
-
     # 3. 为销售表添加车架号后6位列，用于匹配到店表
     sales_df = sales_df.copy()
     sales_df = sales_df[sales_df["车架号"]!="二手车返利"].drop_duplicates(subset=['车架号'], keep='first')
@@ -836,37 +730,33 @@ def merge_and_process_data(sales_df, push_df, visit_df, zhaungshi_df, chengben_d
         how='left'
     )
 
-    # 5. 左连接到店表
-    # 确保连接键都是字符串类型
-    merged_df['车架号后6位'] = merged_df['车架号后6位'].astype(str).str.strip()
-    print(visit_df)
-    visit_df['车架号后6位'] = visit_df['车架号后6位'].astype(str).str.strip()
 
-    merged_df = pd.merge(
-        merged_df,
-        visit_df[['车架号后6位', '到店日期']],  # 只保留需要的列
-        on='车架号后6位',
-        how='left',
-        suffixes=('', '_visit')
-    )
-
-    # 6. 以销售表为主表，左连接cyy装饰表
+    # 5. 以销售表为主表，左连接cyy装饰表
     merged_df = pd.merge(
         merged_df,
         zhaungshi_df,
         on='车架号',
         how='left'
     )
-    # 6.5. 以销售表为主表，左连接成本表
+    # 6. 以销售表为主表，左连接成本表
+    # 从merged_df的销售日期中提取年份和月份
+    merged_df['年份'] = merged_df['销售日期'].dt.year if hasattr(merged_df['销售日期'], 'dt') else pd.to_datetime(merged_df['销售日期']).dt.year
+    merged_df['月份'] = merged_df['销售日期'].dt.month if hasattr(merged_df['销售日期'], 'dt') else pd.to_datetime(merged_df['销售日期']).dt.month
+
+    # 使用提取的年份和月份进行合并
     merged_df = pd.merge(
         merged_df,
         chengben_df,
-        on=['公司名称', '销售日期'],
+        on=['公司名称', '年份', '月份'],
         how='left'
     )
-    merged_df['标记'] = merged_df.groupby(['销售日期', '公司名称']).cumcount()
-    # 将非第一行的成本设为0
-    merged_df['总成本'] = merged_df.apply(lambda row: row['总成本'] if row['标记'] == 0 else 0, axis=1)
+    # 创建一个标记，标记每个公司每个月的重复行
+    mask = merged_df.duplicated(subset=['公司名称', '年份', '月份'], keep='first')
+    # 将重复行的总成本设为0
+    merged_df.loc[mask, '总成本'] = 0
+    # 删除临时添加的年份和月份列
+    merged_df = merged_df.drop(['年份', '月份'], axis=1)
+
 
     # 7. 新建列【是否赠送膜】
     merged_df['是否赠送膜'] = merged_df['赠送装饰项目'].fillna('').apply(
@@ -1004,7 +894,7 @@ if __name__ == "__main__":
     # cyy数据
     extractor = DecorationOrdersExtractor()
     # 装饰订单数据
-    result_df, zhaungshi_df = extractor.process_sales_data()
+    zhaungshi_df = extractor.process_sales_data()
     # 销售数据
     sales_df = extractor.execute_sales_data_pipeline()
 
@@ -1014,9 +904,7 @@ if __name__ == "__main__":
     chengben = analyzer.extract_store_cost_data()
     # 推送数据
     df_subset = analyzer.process_push_data()
-    # 到店数据
-    valid_data= analyzer.process_visit_data()
 
 
     # 合并销售人员的数据
-    result_df_data = merge_and_process_data(sales_df, df_subset, valid_data, zhaungshi_df, chengben)
+    result_df_data = merge_and_process_data(sales_df, df_subset, zhaungshi_df, chengben)
