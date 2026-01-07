@@ -138,7 +138,7 @@ class FilmUpgradeAnalyzer:
 
         # 提取日期部分（去掉时间）
         combined_df['推送日期'] = combined_df['推送日期'].dt.date
-        combined_df.to_csv("combined_df.csv")
+        # combined_df.to_csv("combined_df.csv")
 
         return combined_df
 
@@ -165,13 +165,6 @@ class FilmUpgradeAnalyzer:
 
             # 删除空行（年份或月份为空的行）
             df_filtered = df_filtered.dropna(subset=['年份', '月份'])
-
-            # # 将年份和月份转换为整数（如果它们是浮点数）
-            # df_filtered['年份'] = df_filtered['年份'].astype(int)
-            # df_filtered['月份'] = df_filtered['月份'].astype(int)
-            #
-            # # 合并年份和月份为日期列，日设置为1
-            # df_filtered['销售日期'] = df_filtered['年份'].astype(str) + '-' + df_filtered['月份'].astype(str)
 
             # 计算总成本列（人员成本 + 场地租金水电 + 洗车费 + 耗材采购 + 维修费用）
             cost_columns = ['人员成本', '场地租金水电', '洗车费', '耗材采购', '维修费用']
@@ -687,7 +680,7 @@ class DecorationOrdersExtractor:
         grouped_df = grouped[['车架号', '收款日期', '销售顾问', '新车销售店名', '物资名称','成本合计(含税)', '合计收款金额', '贴膜成本', '贴膜合计收款金额','其他成本', '其他合计收款金额', '龙膜成本', '龙膜收款金额']].rename(columns={'收款日期':'到店日期'})
 
         # 显示结果
-        grouped_df.to_csv("装饰合并.csv")
+        # grouped_df.to_csv("装饰合并.csv")
 
         print(f"原始数据有 {len(df)} 行，合并后有 {len(grouped_df)} 行")
 
