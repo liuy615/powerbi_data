@@ -212,6 +212,12 @@ class ScheduledTaskRunner:
                     "type": "once",
                     "time": "23:00"      # 在指定时间执行一次
                 }
+
+                格式5: 每天一次 (新增)
+                {
+                    "type": "daily",
+                    "time": "08:00"      # 每天在指定时间执行一次
+                }
         """
         print(f"启动定时任务调度 [{self.task_name}],脚本数量: {len(script_paths)}")
 
@@ -240,6 +246,8 @@ class ScheduledTaskRunner:
             self._schedule_fixed_interval(valid_scripts, schedule_config)
         elif schedule_type == "once":
             self._schedule_once(valid_scripts, schedule_config)
+        elif schedule_type == "daily":
+            self._schedule_daily(valid_scripts, schedule_config)  # 新增
         else:
             print(f"错误: 不支持的调度类型 - {schedule_type}")
             return
@@ -385,6 +393,71 @@ class ScheduledTaskRunner:
 
         threading.Thread(target=scheduler, daemon=True).start()
 
+    def _schedule_daily(self, script_paths: List[str], config: Dict):
+        """
+        每天在指定时间执行一次 (新增方法)
+
+        Args:
+            script_paths: 脚本路径列表
+            config: 配置字典，包含time字段，格式为"HH:MM"
+        """
+        target_time = config.get("time", "08:00")
+        print(f"执行时间: 每天 {target_time}")
+
+        def scheduler():
+            while self.running:
+                now = datetime.now()
+                current_time_str = now.strftime("%H:%M")
+
+                # 如果当前时间等于目标时间，执行任务
+                if current_time_str == target_time:
+                    # 避免同一分钟内重复执行
+                    if (self.last_run_time is None or
+                        (now - self.last_run_time).total_seconds() > 60):
+                        print(f"\n[{current_time_str}] 到达每日执行时间: {target_time}")
+                        self.run_scripts(script_paths)
+                        self.last_run_time = now
+                        # 执行后等待61秒，避免重复
+                        time.sleep(61)
+
+                time.sleep(30)  # 每30秒检查一次
+
+        threading.Thread(target=scheduler, daemon=True).start()
+
+    def run_immediately(self, script_paths: List[str],
+                       capture_output: bool = True):
+        """
+        立即执行任务 (新增方法)
+
+        Args:
+            script_paths: 脚本路径列表
+            capture_output: 是否捕获输出
+        """
+        print(f"立即执行任务 [{self.task_name}]...")
+        results = self.run_scripts(script_paths, capture_output)
+
+        # 记录执行时间为当前时间
+        self.last_run_time = datetime.now()
+
+        return results
+
+    def start_schedule_with_immediate_run(self, script_paths: List[str], schedule_config: Dict, run_now: bool = True):
+        """
+        启动定时任务调度并立即执行一次 (新增方法)
+
+        Args:
+            script_paths: 脚本路径列表
+            schedule_config: 调度配置字典
+            run_now: 是否立即执行一次，默认为True
+        """
+        # 如果设置为立即执行，先执行一次
+        if run_now:
+            print("立即执行一次任务...")
+            self.run_immediately(script_paths)
+
+        # 启动定时调度
+        self.start_schedule(script_paths, schedule_config)
+
     def _monitor_schedule(self):
         """监控任务状态"""
         while self.running:
@@ -402,8 +475,7 @@ class ScheduledTaskRunner:
         print(f"\n任务 [{self.task_name}] 已停止")
 
 
-def generate_time_range_schedule(start_time: str, end_time: str,
-                                interval: int, interval_unit: str = "minutes") -> Dict:
+def generate_time_range_schedule(start_time: str, end_time: str, interval: int, interval_unit: str = "minutes") -> Dict:
     """
     生成时间范围调度配置
 
@@ -441,8 +513,7 @@ def generate_time_points_schedule(time_points: List[str]) -> Dict:
     }
 
 
-def generate_fixed_interval_schedule(interval: int,
-                                    interval_unit: str = "hours") -> Dict:
+def generate_fixed_interval_schedule(interval: int, interval_unit: str = "hours") -> Dict:
     """
     生成固定间隔调度配置
 
@@ -472,6 +543,22 @@ def generate_once_schedule(time: str) -> Dict:
     """
     return {
         "type": "once",
+        "time": time
+    }
+
+
+def generate_daily_schedule(time: str) -> Dict:
+    """
+    生成每天执行调度配置 (新增函数)
+
+    Args:
+        time: 每天执行时间，格式 "HH:MM"
+
+    Returns:
+        调度配置字典
+    """
+    return {
+        "type": "daily",
         "time": time
     }
 
@@ -531,14 +618,36 @@ if __name__ == "__main__":
     runner4 = ScheduledTaskRunner("夜间任务")
     # runner4.start_schedule(scripts, schedule_config4)
 
+    # 示例5: 每天一次，设置时间点 (新增)
+    print("\n\n示例5: 每天一次，设置时间点")
+    print("-" * 60)
+
+    schedule_config5 = generate_daily_schedule("09:00")
+
+    runner5 = ScheduledTaskRunner("每日任务")
+    # runner5.start_schedule(scripts, schedule_config5)
+
+    # 示例6: 运行后立马执行 (新增)
+    print("\n\n示例6: 运行后立马执行")
+    print("-" * 60)
+
+    runner6 = ScheduledTaskRunner("立即执行测试")
+    # 方法1: 直接调用立即执行方法
+    # runner6.run_immediately(scripts)
+
+    # 方法2: 启动调度并立即执行一次
+    # runner6.start_schedule_with_immediate_run(scripts, schedule_config5, run_now=True)
+
     # 交互式配置
     print("\n\n请选择调度模式:")
     print("1. 时间范围 + 间隔 (如8-22点，每30分钟)")
     print("2. 指定时间点 (如8点、12点、18点)")
     print("3. 固定间隔 (如每2小时)")
     print("4. 单次执行 (如每天23点)")
+    print("5. 每天一次 (新增)")
+    print("6. 立即执行一次 (新增)")
 
-    choice = input("\n请输入选择 (1-4): ").strip()
+    choice = input("\n请输入选择 (1-6): ").strip()
 
     # 默认使用原始需求的配置
     if choice == "1":
@@ -560,11 +669,69 @@ if __name__ == "__main__":
     elif choice == "4":
         time_point = input("执行时间 (HH:MM, 默认23:00): ").strip() or "23:00"
         schedule_config = generate_once_schedule(time_point)
+    elif choice == "5":
+        time_point = input("每天执行时间 (HH:MM, 默认09:00): ").strip() or "09:00"
+        schedule_config = generate_daily_schedule(time_point)
+    elif choice == "6":
+        # 立即执行一次，然后可以选择是否继续定时执行
+        task_name = input("任务名称 (默认: 立即执行任务): ").strip() or "立即执行任务"
+        runner = ScheduledTaskRunner(task_name)
+        runner.run_immediately(scripts)
+
+        # 询问是否继续定时执行
+        continue_schedule = input("\n是否继续定时执行? (y/n, 默认n): ").strip().lower()
+        if continue_schedule == 'y':
+            # 选择定时模式
+            print("\n请选择定时模式:")
+            print("1. 时间范围 + 间隔")
+            print("2. 指定时间点")
+            print("3. 固定间隔")
+            print("4. 每天一次")
+
+            schedule_choice = input("\n请输入选择 (1-4): ").strip()
+
+            if schedule_choice == "1":
+                start_time = input("开始时间 (HH:MM, 默认08:00): ").strip() or "08:00"
+                end_time = input("结束时间 (HH:MM, 默认22:00): ").strip() or "22:00"
+                interval = int(input("间隔分钟数 (默认30): ").strip() or "30")
+                schedule_config = generate_time_range_schedule(start_time, end_time, interval, "minutes")
+            elif schedule_choice == "2":
+                times_input = input("时间点列表 (用逗号分隔, 如08:00,12:00,18:00): ").strip()
+                if times_input:
+                    time_points = [t.strip() for t in times_input.split(",")]
+                else:
+                    time_points = ["08:00", "12:00", "18:00"]
+                schedule_config = generate_time_points_schedule(time_points)
+            elif schedule_choice == "3":
+                interval = int(input("间隔值 (默认2): ").strip() or "2")
+                unit = input("间隔单位 (hours/minutes/seconds, 默认hours): ").strip() or "hours"
+                schedule_config = generate_fixed_interval_schedule(interval, unit)
+            elif schedule_choice == "4":
+                time_point = input("每天执行时间 (HH:MM, 默认09:00): ").strip() or "09:00"
+                schedule_config = generate_daily_schedule(time_point)
+            else:
+                print("使用默认配置: 每天一次，09:00")
+                schedule_config = generate_daily_schedule("09:00")
+
+            # 启动定时调度（不立即执行，因为已经执行过了）
+            runner.start_schedule(scripts, schedule_config)
+        else:
+            print("程序退出")
+            sys.exit(0)
     else:
-        print("使用默认配置: 每天8-22点，每30分钟")
-        schedule_config = schedule_config1
+        print("使用默认配置: 每天一次，09:00")
+        schedule_config = generate_daily_schedule("09:00")
 
     task_name = input("任务名称 (默认: 定时任务): ").strip() or "定时任务"
 
+    # 询问是否立即执行一次
+    run_now = input("是否立即执行一次? (y/n, 默认n): ").strip().lower()
+
     runner = ScheduledTaskRunner(task_name)
-    runner.start_schedule(scripts, schedule_config)
+
+    if run_now == 'y':
+        # 使用新增的方法：启动调度并立即执行一次
+        runner.start_schedule_with_immediate_run(scripts, schedule_config, run_now=True)
+    else:
+        # 使用原来的方法：只启动定时调度
+        runner.start_schedule(scripts, schedule_config)

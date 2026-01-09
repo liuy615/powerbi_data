@@ -1,4 +1,4 @@
-from task_scheduler import ScheduledTaskRunner, generate_time_range_schedule, generate_once_schedule
+from task_scheduler import ScheduledTaskRunner, generate_time_range_schedule, generate_daily_schedule
 import threading
 import time
 
@@ -41,9 +41,10 @@ def daypaper_auto_runner():
         r"E:\pycharm_project\day_paper\daypaper_pbwy.py",
     ]
 
-    config = generate_once_schedule("22:00")
+    config = generate_daily_schedule("22:00")
     runner = ScheduledTaskRunner("日报定时发送")
     runner.start_schedule(scripts, config)
+
 
 # 创建并启动独立线程
 syy_thread = threading.Thread(target=syy_auto_runner, daemon=True, name="SYY_Task")
@@ -55,6 +56,21 @@ Daypaper = threading.Thread(target=daypaper_auto_runner, daemon=True, name="Dayp
 syy_thread.start()
 cyy_thread.start()
 Daypaper.start()
+
+
+
+
+# =======================================================================================================================
+def daypaper_runner():
+    """直接调用立即执行方法"""
+    scripts = [
+        r"E:\pycharm_project\day_paper\daypaper_pbwy.py",
+    ]
+    runner = ScheduledTaskRunner("立即执行测试")
+    runner.run_immediately(scripts)
+
+
+# daypaper_runner()
 
 
 # 主线程保持运行

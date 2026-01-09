@@ -249,7 +249,7 @@ class DecorationOrdersExtractor:
         }
 
         # 筛选条件
-        self.target_sales_consultants = ['郑仁彬', '刘红梅', '郝小龙', '衡珊珊', '蒲松涛']
+        self.target_sales_consultants = ['郑仁彬', '刘红梅', '郝小龙', '衡珊珊', '蒲松涛', '陈玲玲', '黄维']
         self.target_organize_names = ['上元臻盛', '上元臻智', '上元星汉', '上元弘川', '上元坤灵']
 
         # 数据库连接对象
