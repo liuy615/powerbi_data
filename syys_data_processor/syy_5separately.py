@@ -647,7 +647,7 @@ class DecorationOrdersExtractor:
         """
         df = self.execute_full_pipeline()
         # 1. 筛选物资状态不等于[全退货、全退款、待退货]的数据
-        exclude_status = ['全退货', '全退款']
+        exclude_status = ['已换货','已退货','已退款']
         df_filtered = df[~df['物资状态'].isin(exclude_status)].copy()
         df_filtered = df_filtered.dropna(subset=['收款日期'])
         df_filtered_csv = df_filtered.copy()
@@ -680,7 +680,7 @@ class DecorationOrdersExtractor:
         grouped_df = grouped[['车架号', '收款日期', '销售顾问', '新车销售店名', '物资名称','成本合计(含税)', '合计收款金额', '贴膜成本', '贴膜合计收款金额','其他成本', '其他合计收款金额', '龙膜成本', '龙膜收款金额']].rename(columns={'收款日期':'到店日期'})
 
         # 显示结果
-        # grouped_df.to_csv("装饰合并.csv")
+        grouped_df.to_csv("装饰合并.csv")
 
         print(f"原始数据有 {len(df)} 行，合并后有 {len(grouped_df)} 行")
 
@@ -733,8 +733,8 @@ def merge_and_process_data(sales_df, push_df, zhaungshi_df, chengben_df):
     )
     # 6. 以销售表为主表，左连接成本表
     # 从merged_df的销售日期中提取年份和月份
-    merged_df['年份'] = merged_df['销售日期'].dt.year if hasattr(merged_df['销售日期'], 'dt') else pd.to_datetime(merged_df['销售日期']).dt.year
-    merged_df['月份'] = merged_df['销售日期'].dt.month if hasattr(merged_df['销售日期'], 'dt') else pd.to_datetime(merged_df['销售日期']).dt.month
+    merged_df['年份'] = merged_df['到店日期'].dt.year if hasattr(merged_df['到店日期'], 'dt') else pd.to_datetime(merged_df['到店日期']).dt.year
+    merged_df['月份'] = merged_df['到店日期'].dt.month if hasattr(merged_df['到店日期'], 'dt') else pd.to_datetime(merged_df['到店日期']).dt.month
 
     # 使用提取的年份和月份进行合并
     merged_df = pd.merge(
