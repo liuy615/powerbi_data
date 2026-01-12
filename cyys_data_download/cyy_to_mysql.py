@@ -620,7 +620,7 @@ class DataSyncManager:
             1: "当日",
             2: "当月",
             3: "25年04月以后"
-        }.get(self.time_option, "未知")
+        }.get(self.time_option, f"{self.time_option}")
 
         notification_content = (
             f"数据同步任务已完成\n"
@@ -654,11 +654,14 @@ class DataSyncManager:
 if __name__ == "__main__":
     # 1: 当日数据, 2: 当月数据, 3: 输入'01'-'12',获取当月的数据
     sync_manager = None
+    current_year = datetime.now().year
+    current_month = datetime.now().month
     try:
-        # for i in [f"{month:02d}" for month in range(1, datetime.now().month+1)]:
-        # for i in [f"{month:02d}" for month in range(1, 13)]:
-            sync_manager = DataSyncManager(time_option=2)  # 默认下载当月数据
-            sync_manager.run_apis()
+        for year in range(2025, current_year + 1):
+            for month in range(1, 13 if year < current_year else current_month + 1):
+                time_option = f"{year}{month:02d}"
+                sync_manager = DataSyncManager(time_option=time_option)  # 默认下载当月数据
+                sync_manager.run_apis()
     except Exception as e:
         error_msg = f"数据同步主程序异常: {str(e)}"
         print(error_msg)

@@ -221,6 +221,8 @@ class DecorationOrdersExtractor:
 
         # 装饰订单字段映射关系
         self.field_mapping = {
+            'ID': 'ID',
+            'OutId': 'OutId',
             'ArticleRretCode': '订单编号',
             'FrameNumber': '车架号',
             'InvoiceDate': '开票日期',
@@ -475,6 +477,8 @@ class DecorationOrdersExtractor:
 
             # 重命名列名为中文
             df = df.rename(columns=self.field_mapping)
+            df = df.groupby('ID').apply(lambda x: x[x['OutId'] != 0] if (x['OutId'] != 0).any() else x).reset_index(drop=True)
+
 
             # 输出提取结果摘要
             print(f"成功提取 {len(df)} 条记录")
