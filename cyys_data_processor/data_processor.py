@@ -268,7 +268,7 @@ class DataProcessor:
                 elif str(financial_plan) in ['交行信用卡中心5免2-9%', '建行5免2']:
                     return '无息贷'
                 elif pd.notna(row['经销商贴息金额']) and row['经销商贴息金额'] > 0:
-                    return '厂家非贴息贷'
+                    return '厂家贴息贷'
                 else:
                     return '非贴息贷'
 
