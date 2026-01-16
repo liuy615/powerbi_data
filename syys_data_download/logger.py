@@ -39,19 +39,20 @@ class DataCheckerLogger:
         )
         self.logger = logging.getLogger(__name__)
 
-    def log_header_error(self, file_path: str, missing_headers: List[str],
-                         extra_headers: List[str], template_name: str = "标准模板"):
+    def log_header_error(self, file_path: str, missing_headers: List[str], extra_headers: List[str], template_name: str = "标准模板"):
         """记录表头错误"""
-        error_msg = f"文件 {file_path} 表头不匹配{template_name}:\n"
+        file_name = os.path.basename(file_path)  # 获取文件名
+        # error_msg = f"文件 {file_name} 表头不匹配{template_name}:\n"  # 只输出文件名
         if missing_headers:
-            error_msg += f"  缺少字段: {', '.join(missing_headers)}\n"
+            error_msg = f"  缺少字段: {', '.join(missing_headers)}\n"
         if extra_headers:
             error_msg += f"  多余字段: {', '.join(extra_headers)}"
 
         self.logger.error(error_msg)
         self.errors.append({
             "type": "header_error",
-            "file": file_path,
+            "file": file_path,  # 错误报告中仍然保存完整路径
+            "file_name": file_name,  # 新增文件名字段
             "message": error_msg,
             "template": template_name,
             "timestamp": datetime.now()
@@ -61,9 +62,11 @@ class DataCheckerLogger:
     def log_data_error(self, file_path: str, row_index: int, field: str,
                        value: Any, error_msg: str):
         """记录数据错误"""
+        file_name = os.path.basename(file_path)  # 获取文件名
         error_info = {
             "type": "data_error",
             "file": file_path,
+            "file_name": file_name,  # 新增文件名字段
             "row": row_index + 2,  # Excel行号从1开始，加上表头行
             "field": field,
             "value": str(value),
@@ -72,7 +75,7 @@ class DataCheckerLogger:
         }
 
         self.logger.error(
-            f"数据错误 - 文件: {file_path}, 行: {row_index + 2}, "
+            f"数据错误 - 文件: {file_name}, 行: {row_index + 2}, "  # 只输出文件名
             f"字段: {field}, 值: {value}, 错误: {error_msg}"
         )
 
@@ -81,8 +84,9 @@ class DataCheckerLogger:
 
     def log_file_processed(self, file_path: str, rows_processed: int, errors_found: int):
         """记录文件处理完成"""
+        file_name = os.path.basename(file_path)  # 获取文件名
         self.logger.info(
-            f"文件处理完成: {file_path}, "
+            f"文件处理完成: {file_name}, "  # 只输出文件名
             f"处理行数: {rows_processed}, 发现错误: {errors_found}"
         )
 

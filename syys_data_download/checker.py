@@ -137,7 +137,7 @@ class DataChecker:
         try:
             # 判断数据源类型
             data_source_type = self.get_data_source_type(file_path)
-            file_name = os.path.basename(file_path)
+            file_name = os.path.basename(file_path)  # 获取文件名
             template_name = self.get_template_name(data_source_type)
 
             self.logger.logger.info(f"处理文件: {file_name} (使用{template_name})")
@@ -151,7 +151,7 @@ class DataChecker:
                 else:
                     df = pd.read_excel(file_path, sheet_name=sheet_name, dtype=str)
             except Exception as e:
-                self.logger.logger.error(f"读取文件失败 {file_path}: {str(e)}")
+                self.logger.logger.error(f"读取文件失败 {file_name}: {str(e)}")  # 改为只输出文件名
                 return False
 
             # 检查表头
@@ -171,5 +171,5 @@ class DataChecker:
             return True
 
         except Exception as e:
-            self.logger.logger.error(f"处理文件 {file_path} 时发生错误: {str(e)}")
+            self.logger.logger.error(f"处理文件 {os.path.basename(file_path)} 时发生错误: {str(e)}")  # 改为只输出文件名
             return False

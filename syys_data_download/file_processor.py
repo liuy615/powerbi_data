@@ -23,13 +23,13 @@ class FileProcessor:
         # 去重并排序
         excel_files = sorted(list(set(excel_files)))
 
-        self.logger.logger.info(f"在目录 {directory_path} 中找到 {len(excel_files)} 个Excel文件")
+        self.logger.logger.info(f"在目录中找到 {len(excel_files)} 个Excel文件")  # 简化路径输出
         return excel_files
 
     def process_directory(self, directory_path: str, sheet_name: str = None):
         """处理指定目录下的所有Excel文件"""
         if not os.path.exists(directory_path):
-            self.logger.logger.error(f"目录不存在: {directory_path}")
+            self.logger.logger.error(f"目录不存在: {os.path.basename(directory_path)}")  # 只输出目录名
             return
 
         excel_files = self.find_excel_files(directory_path)
@@ -41,7 +41,7 @@ class FileProcessor:
     def process_single_file(self, file_path: str, sheet_name: str = None):
         """处理单个文件"""
         if not os.path.exists(file_path):
-            self.logger.logger.error(f"文件不存在: {file_path}")
+            self.logger.logger.error(f"文件不存在: {os.path.basename(file_path)}")  # 只输出文件名
             return
 
         self.logger.summary["total_files"] += 1
