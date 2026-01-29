@@ -249,6 +249,7 @@ class DataProcessor:
         # 划分金融类型
         if '金融性质' in df_loan.columns:
             df_loan['经销商贴息金额'] = pd.to_numeric(df_loan['经销商贴息金额'], errors='coerce')
+            print(df_loan.columns)
 
             def determine_financial_type(row):
                 # 修复：检查金融性质是否为None
@@ -260,19 +261,34 @@ class DataProcessor:
                 financial_plan = row['金融方案']
                 if pd.isna(financial_plan) or financial_plan is None:
                     financial_plan = ''
-
                 if '非贴息' in str(financial_nature):
                     return '厂家非贴息贷'
                 elif '贴息' in str(financial_nature):
                     return '厂家贴息贷'
                 elif str(financial_plan) in ['交行信用卡中心5免2-9%', '建行5免2']:
                     return '无息贷'
-                elif pd.notna(row['经销商贴息金额']) and row['经销商贴息金额'] > 0:
-                    return '厂家贴息贷'
+                # elif pd.notna(row['经销商贴息金额']) and row['经销商贴息金额'] > 0:
+                #     return '厂家贴息贷'
                 else:
                     return '非贴息贷'
 
             df_loan['金融类型'] = df_loan.apply(determine_financial_type, axis=1)
+            # def determine_financial_type(row):
+            #     financial_nature = row['金融性质']
+            #     if pd.isna(financial_nature) or financial_nature is None:
+            #         financial_nature = ''
+            #     if '非贴息' in financial_nature:
+            #         return '厂家非贴息贷'
+            #     elif '贴息' in financial_nature:
+            #         return '厂家贴息贷'
+            #     elif row['金融方案'] in ['交行信用卡中心5免2-9%', '建行5免2']:
+            #         return '无息贷'
+            #     elif pd.notna(row['经销商贴息金额']) and row['经销商贴息金额'] > 0:
+            #         return '厂家非贴息贷'
+            #     else:
+            #         return '非贴息贷'
+            #
+            # df_loan['金融类型'] = df_loan.apply(determine_financial_type, axis=1)
 
         # 数据类型转换
         if '返利系数' in df_loan.columns:

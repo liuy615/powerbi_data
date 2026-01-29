@@ -228,6 +228,9 @@ class ComprehensiveInsuranceProcessor(DataProcessor):
 
             # 获取销售数据
             sales_data = cls._get_sales_data(mongo_client)
+            sales_data.to_csv("E:/powerbi_data/看板数据/dashboard/全保无忧原始数据.csv")
+            sales_data["产品销售金额"] = pd.to_numeric(sales_data["产品销售金额"], errors='coerce')
+            sales_data["成本金额"] = pd.to_numeric(sales_data["成本金额"], errors='coerce')
             sales_data["利润"] = sales_data["产品销售金额"] - sales_data["成本金额"]
             # 处理日期
             sales_data["产品销售日期"] = pd.to_datetime(sales_data["产品销售日期"], format='mixed',
@@ -364,12 +367,12 @@ class NewCarInsuranceProcessor(DataProcessor):
         df_main = pd.read_csv(Config.FILE_PATHS['new_insurance_csv'])
         df_main['总费用_次数'] = 1
 
-        # 读取永乐盛世数据 - 使用xcbx.py中的列选择逻辑
+        # 读取永乐盛世数据
         df_cyy = pd.read_csv(Config.FILE_PATHS['yongle_csv'])
         df_cyy = df_cyy[
             ['出单日期', '保险公司简称', '所属门店', '车系', '车架号', '交强险保费', '业务人员', '保费总额', '业务来源', '总费用_次数']]
 
-        # 重命名列 - 与xcbx.py一致
+        # 重命名列
         df_cyy.rename(columns={
             '出单日期': '签单日期',
             '保险公司简称': '保险公司',
@@ -378,12 +381,17 @@ class NewCarInsuranceProcessor(DataProcessor):
             '业务人员': '销售顾问'
         }, inplace=True)
 
-        # 日期筛选 - xcbx.py中的逻辑
+        # 处理永乐盛世数据
         df_cyy['签单日期'] = pd.to_datetime(df_cyy['签单日期'], errors='coerce').dt.date
         start_date = pd.to_datetime('2025-04-01').date()
         df_cyy = df_cyy[df_cyy['签单日期'] >= start_date]
+        df_cyy['到期日期'] = pd.NaT
+        df_cyy['数据归属门店'] = df_cyy['归属公司']
+        df_cyy['车牌号'] = None
+        df_cyy['被保险人'] = None
+        df_cyy['是否为保赔无忧客户'] = '否'
 
-        # 加载车系网络数据并调整直播基地门店名称 - 与xcbx.py逻辑一致
+        # 加载车系网络数据并调整直播基地门店名称
         df_car = cls.load_car_network_data()
         df_cyy = df_cyy.merge(df_car[['车系', '服务网络']], left_on='车型', right_on='车系', how='left')
 
@@ -400,14 +408,14 @@ class NewCarInsuranceProcessor(DataProcessor):
         # 删除保险公司为空的记录
         df_combined.dropna(subset=['保险公司'], inplace=True)
 
-        # 选择需要的列 - 与xcbx.py中的列选择一致
-        cols = [
-            '月份', '签单日期', '到期日期', '保险公司', '数据归属门店', '归属公司', '车型', '车牌号',
+        # 选择需要的列
+        required_cols = [
+            '签单日期', '到期日期', '保险公司', '数据归属门店', '归属公司', '车型', '车牌号',
             '车架号', '被保险人', '交强险保费', '销售顾问', '是否为保赔无忧客户', '业务来源', '总费用_次数'
         ]
 
         # 只保留存在的列
-        available_cols = [col for col in cols if col in df_combined.columns]
+        available_cols = [col for col in required_cols if col in df_combined.columns]
         df_filtered = df_combined[available_cols]
 
         # 添加日期列
