@@ -229,8 +229,7 @@ class CyysDataProcessorApp:
 
             # 创建临时的DataWriter实例用于调用数据处理方法
             temp_data_writer = DataWriter(self.db_manager)
-            df_salesAgg_mongo, df_jingpin_result_mongo, df_diao_mongo = temp_data_writer.prepare_mongodb_data(
-                df_salesAgg_combined, df_jingpin_result)
+            df_salesAgg_mongo, df_jingpin_result_mongo, df_diao_mongo = temp_data_writer.prepare_mongodb_data(df_salesAgg_combined, df_jingpin_result)
 
             # 格式化日期字段（保持原有格式）
             df_salesAgg_mongo['订车日期'] = pd.to_datetime(df_salesAgg_mongo['订车日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
@@ -244,8 +243,9 @@ class CyysDataProcessorApp:
 
             # 清理空值
             df_salesAgg_mongo = df_salesAgg_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
-            df_jingpin_result_mongo = df_jingpin_result_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
-            df_diao_mongo = df_diao_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
+            df_salesAgg_mongo = df_salesAgg_mongo.drop_duplicates()
+            # df_jingpin_result_mongo = df_jingpin_result_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
+            # df_diao_mongo = df_diao_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
             # 导出为CSV（保持原有文件路径和名称）
             csv_path = r"E:/WXWork/1688858189749305/WeDrive/成都永乐盛世/维护文件/车易云毛利润表.csv"
             df_salesAgg_mongo.to_csv(csv_path, index=False)
