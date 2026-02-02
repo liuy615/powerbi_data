@@ -30,7 +30,7 @@ def cyy_auto_runner():
         r"E:\powerbi_data\powerbi_data\cyys_data_processor\数据备份.py",  # 数据备份
     ]
 
-    config = generate_time_range_schedule("08:52", "22:52", 30, "minutes")
+    config = generate_time_range_schedule("08:52", "21:52", 30, "minutes")
     runner = ScheduledTaskRunner("车易云数据清洗")
     runner.start_schedule(scripts, config)
 
