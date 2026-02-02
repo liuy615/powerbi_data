@@ -87,10 +87,10 @@ class update_dashboard:
         self.team_belongs = self.Team_belongs()
         self.df_plan_date_get = self.Df_plan_date_get()
         self.df_inventorys_lock = self.Df_inventory_lock()
-        self.list_companys = ['成都新港建元汽车销售服务有限公司', '成都永乐盛世汽车销售服务有限公司',
+        self.list_companys = ['成都新港建元汽车销售服务有限公司', '成都洪武盛世汽车销售服务有限公司',
                               '成都新港永初汽车服务有限公司', '成都新港海川汽车销售服务有限公司',
                               '成都新港先秦汽车服务有限公司', '成都新港治元汽车销售服务有限公司',
-                              '成都新港建隆汽车销售服务有限公司', '成都文景初治新能源汽车销售有限公司',
+                              '成都新港建隆汽车销售服务有限公司', '成都上元盛世新能源汽车销售有限公司',
                               '成都新港建武汽车销售服务有限公司', '成都新港文景海洋汽车销售服务有限公司',
                               '成都文景盛世汽车销售服务有限公司', '成都新港澜舰汽车销售服务有限公司',
                               '成都新港澜阔汽车销售服务有限公司', '成都鑫港鲲鹏汽车销售服务有限公司',
@@ -149,7 +149,7 @@ class update_dashboard:
         return pd.read_csv(r'E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\新车保险台账-2025.csv',encoding='utf-8', low_memory=False)
 
     def Df_salary(self) -> pd.DataFrame:
-        return pd.read_excel(r"E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\费效分析\销售\2025年人工效能分析表-销售.xlsx",sheet_name='看板用')
+        return pd.read_excel(r"E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\费效分析\销售\2025年人工效能分析表-销售.xlsx",sheet_name='看板用').replace("永乐盛世", "洪武盛世")
 
     def Car_belongs(self) -> pd.DataFrame:
         return pd.read_excel(r'E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\看板部分数据源\各公司银行额度.xlsx',sheet_name='补充车系')
@@ -158,45 +158,45 @@ class update_dashboard:
         return pd.read_excel(r'E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\看板部分数据源\各公司银行额度.xlsx',sheet_name='补充团队')
 
     def Df_xcbx_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/新车保险台账.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/新车保险台账.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_books_unsold(self) -> pd.DataFrame:
-        return pd.read_csv(fr'E:/powerbi_data/看板数据/cyy_old_data/未售订单.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(fr'E:/powerbi_data/看板数据/cyy_old_data/未售订单.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_yingxiao(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/投放费用.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/投放费用.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_Ers(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/二手车.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/二手车.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_Ers_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r"E:/powerbi_data/看板数据/cyy_old_data/二手车台账.csv", low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r"E:/powerbi_data/看板数据/cyy_old_data/二手车台账.csv", low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_books_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/定车.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/定车.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_sales_lock(self) -> pd.DataFrame:
         # 修复DtypeWarning：补充low_memory=False
-        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/销售毛利.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/销售毛利.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_sales_lock1(self) -> pd.DataFrame:
         # 修复DtypeWarning：补充low_memory=False
-        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/销售.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/销售.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_jingpins_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/精品销售.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/精品销售.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_tuis_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/退定.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/退定.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_debits_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/三方台账.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/三方台账.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_plan_date_get(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/计划车辆汇总.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/计划车辆汇总.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_inventory_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/库存存档.csv', low_memory=False)  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/库存存档.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
 
     # -------------------------- 核心修复：切片后加.copy()解决SettingWithCopyWarning --------------------------

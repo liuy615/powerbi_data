@@ -227,14 +227,13 @@ class ComprehensiveInsuranceProcessor(DataProcessor):
                 return pd.DataFrame(), pd.DataFrame()
 
             # 获取销售数据
-            sales_data = cls._get_sales_data(mongo_client)
+            sales_data = cls._get_sales_data(mongo_client).replace("永乐盛世", "洪武盛世")
             sales_data.to_csv("E:/powerbi_data/看板数据/dashboard/全保无忧原始数据.csv")
             sales_data["产品销售金额"] = pd.to_numeric(sales_data["产品销售金额"], errors='coerce')
             sales_data["成本金额"] = pd.to_numeric(sales_data["成本金额"], errors='coerce')
             sales_data["利润"] = sales_data["产品销售金额"] - sales_data["成本金额"]
             # 处理日期
-            sales_data["产品销售日期"] = pd.to_datetime(sales_data["产品销售日期"], format='mixed',
-                                                        errors='coerce').dt.date
+            sales_data["产品销售日期"] = pd.to_datetime(sales_data["产品销售日期"], format='mixed',errors='coerce').dt.date
             sales_data["开票日期"] = pd.to_datetime(sales_data["开票日期"], format='mixed', errors='coerce').dt.date
             sales_data["日期"] = np.where(
                 sales_data['开票日期'] > sales_data['产品销售日期'],
@@ -301,7 +300,7 @@ class DerivativeInsuranceProcessor(DataProcessor):
             for future in as_completed(futures):
                 dfs = future.result()
                 if dfs:
-                    df_combined = pd.concat(dfs, axis=0, join='outer', ignore_index=True)
+                    df_combined = pd.concat(dfs, axis=0, join='outer', ignore_index=True).replace("永乐盛世", "洪武盛世")
                     df_processed = cls._process_derivative_data(df_combined)
                     all_dfs.append(df_processed)
 
@@ -364,10 +363,10 @@ class NewCarInsuranceProcessor(DataProcessor):
     def process_new_car_insurance(cls) -> pd.DataFrame:
         """处理新车保险数据 - 更新为xcbx.py中的逻辑"""
         # 读取主数据
-        df_main = pd.read_csv(Config.FILE_PATHS['new_insurance_csv'])
+        df_main = pd.read_csv(Config.FILE_PATHS['new_insurance_csv']).replace("永乐盛世", "洪武盛世")
         df_main['总费用_次数'] = 1
 
-        # 读取永乐盛世数据
+        # 读取保险数据
         df_cyy = pd.read_csv(Config.FILE_PATHS['yongle_csv'])
         df_cyy = df_cyy[
             ['出单日期', '保险公司简称', '所属门店', '车系', '车架号', '交强险保费', '业务人员', '保费总额', '业务来源', '总费用_次数']]
