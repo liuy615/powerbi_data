@@ -39,6 +39,7 @@ def daypaper_auto_runner():
     """日报任务执行器"""
     scripts = [
         r"E:\pycharm_project\day_paper\daypaper_pbwy.py",
+        r"E:\powerbi_data\powerbi_data\cyys_data_download\cyy_to_mysql_month_all.py",
     ]
 
     config = generate_daily_schedule("22:00")
