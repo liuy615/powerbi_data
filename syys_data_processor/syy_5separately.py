@@ -723,6 +723,8 @@ def merge_and_process_data(sales_df, push_df, zhaungshi_df, chengben_df):
     else:
         # 如果没有推送日期，直接去重
         push_df = push_df.drop_duplicates(subset=['车架号'], keep='first')
+    push_df['车架号后6位'] = push_df['车架号'].astype(str).str[-6:]
+
 
     # 3. 为销售表添加车架号后6位列，用于匹配到店表
     sales_df = sales_df.copy()
@@ -732,8 +734,8 @@ def merge_and_process_data(sales_df, push_df, zhaungshi_df, chengben_df):
     # 4. 以销售表为主表，左连接推送表
     merged_df = pd.merge(
         sales_df,
-        push_df[['车架号', '推送日期', '返佣']],  # 只保留需要的列
-        on='车架号',
+        push_df[['车架号后6位', '推送日期', '返佣']],  # 只保留需要的列
+        on='车架号后6位',
         how='left'
     )
 
@@ -745,6 +747,8 @@ def merge_and_process_data(sales_df, push_df, zhaungshi_df, chengben_df):
         on='车架号',
         how='left'
     )
+
+
     # 6. 以销售表为主表，左连接成本表
     # 从merged_df的销售日期中提取年份和月份
     merged_df['年份'] = merged_df['到店日期'].dt.year if hasattr(merged_df['到店日期'], 'dt') else pd.to_datetime(merged_df['到店日期']).dt.year
