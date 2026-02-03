@@ -24,7 +24,7 @@ class FilmUpgradeAnalyzer:
     3. 合并推送和到店数据，按日期取并集
     """
 
-    def __init__(self, push_file_paths=None, visit_file_path=None):
+    def __init__(self, push_file_paths=None, visit_file_path=None, target_stores=None):
         """
         初始化分析器
 
@@ -42,14 +42,21 @@ class FilmUpgradeAnalyzer:
                 r"E:\powerbi_data\看板数据\私有云文件本地\贴膜升级\腾势-上元臻智-贴膜升级登记表-最新年.xlsx",
                 r"E:\powerbi_data\看板数据\私有云文件本地\贴膜升级\方程豹-上元弘川-贴膜升级登记表-最新年.xlsx",
                 r"E:\powerbi_data\看板数据\私有云文件本地\贴膜升级\腾势-上元臻盛-贴膜升级登记表-最新年.xlsx",
-                r"E:\powerbi_data\看板数据\私有云文件本地\贴膜升级\方程豹-上元星汉-贴膜升级登记表-最新年.xlsx"
+                r"E:\powerbi_data\看板数据\私有云文件本地\贴膜升级\方程豹-上元星汉-贴膜升级登记表-最新年.xlsx",
+                r"E:\powerbi_data\看板数据\私有云文件本地\贴膜升级\两网-西门-贴膜升级登记表-最新年.xlsx",
             ]
         else:
             self.push_file_paths = push_file_paths
 
-        # 到店文件路径
+        if target_stores is None:
+            self.target_stores = ['上元臻盛', '上元臻智', '上元星汉', '上元弘川', '上元坤灵', '文景盛世', '文景海洋']
+        else:
+            self.target_stores = target_stores
+
+        # 成本文件路径
         if visit_file_path is None:
-            self.visit_file_path = r"E:/powerbi_data/看板数据/私有云文件本地/贴膜升级/腾豹-双流、交大、羊犀、天府-贴膜升级登记表-最新年.xlsx"
+            self.visit_file_path = [r"E:/powerbi_data/看板数据/私有云文件本地/贴膜升级/腾豹-双流、交大、羊犀、天府-贴膜升级登记表-最新年.xlsx",
+                                    r"E:/powerbi_data/看板数据/私有云文件本地/贴膜升级/两网-西门自店-贴膜升级登记表-最新年.xlsx"]
         else:
             self.visit_file_path = visit_file_path
 
@@ -148,15 +155,18 @@ class FilmUpgradeAnalyzer:
         从Excel文件中提取指定门店的成本数据
         返回处理后的DataFrame
         """
-        # 文件路径
-        file_path = r"E:/powerbi_data/看板数据/私有云文件本地/贴膜升级/腾豹-双流、交大、羊犀、天府-贴膜升级登记表-最新年.xlsx"
 
         try:
-            # 读取Excel文件中的汇总表
-            df = pd.read_excel(file_path, sheet_name='汇总表')
+            df = pd.DataFrame()
+            # 遍历所有文件
+            for file_path in self.visit_file_path:
+                # 读取Excel文件
+                df_for = pd.read_excel(file_path, sheet_name="汇总表")
+                # 读取Excel文件中的汇总表
+                df = pd.concat([df, df_for], axis=0)
 
             # 筛选指定门店的数据
-            target_stores = ['上元臻盛', '上元臻智', '上元星汉', '上元弘川', '上元坤灵']
+            target_stores = self.target_stores
             df_filtered = df[df['新车销售店名'].isin(target_stores)].copy()
 
             # 只保留需要的列
@@ -252,7 +262,7 @@ class DecorationOrdersExtractor:
 
         # 筛选条件
         self.target_sales_consultants = ['郑仁彬', '刘红梅', '郝小龙', '衡珊珊', '蒲松涛', '陈玲玲', '黄维']
-        self.target_organize_names = ['上元臻盛', '上元臻智', '上元星汉', '上元弘川', '上元坤灵']
+        self.target_organize_names = ['上元臻盛', '上元臻智', '上元星汉', '上元弘川', '上元坤灵', '文景盛世', '文景海洋']
 
         # 数据库连接对象
         self.connection = None
@@ -740,7 +750,7 @@ def merge_and_process_data(sales_df, push_df, zhaungshi_df, chengben_df):
     merged_df['年份'] = merged_df['到店日期'].dt.year if hasattr(merged_df['到店日期'], 'dt') else pd.to_datetime(merged_df['到店日期']).dt.year
     merged_df['月份'] = merged_df['到店日期'].dt.month if hasattr(merged_df['到店日期'], 'dt') else pd.to_datetime(merged_df['到店日期']).dt.month
 
-    # 使用提取的年份和月份进行合并
+    # 使用提取的年份和月份进行合并成本
     merged_df = pd.merge(
         merged_df,
         chengben_df,

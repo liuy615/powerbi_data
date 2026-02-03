@@ -140,13 +140,8 @@ class DataProcessor:
             return pd.DataFrame()
 
         df_service = df_service[
-            (df_service['套餐名称'] != '保赔无忧') &
-            (df_service['审批状态'] != '审批驳回') &
-            (df_service['订单状态'] != '已退卡') &
-            (df_service['订单状态'] != '已登记') &
-            ~((df_service['套餐名称'].str.contains('终身保养', na=False)) & (df_service['实售金额'] > 0)) &
-            (df_service['实售金额'] <= 0)
-            ].copy()
+            (df_service['套餐名称'] != '保赔无忧') & (df_service['审批状态'] != '审批驳回') & (df_service['订单状态'] != '已退卡') & (df_service['订单状态'] != '已登记') &
+            ~((df_service['套餐名称'].str.contains('终身保养', na=False)) & (df_service['实售金额'] > 0)) & (df_service['实售金额'] <= 0)].copy()
 
         df_service['实售金额'] = pd.to_numeric(df_service['实售金额'], errors='coerce')
         df_service['车架号'] = df_service['车架号'].astype(str)
