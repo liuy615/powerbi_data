@@ -719,25 +719,30 @@ def merge_and_process_data(sales_df, push_df, zhaungshi_df, chengben_df):
         # 将推送日期转换为datetime格式，确保正确排序
         push_df['推送日期'] = pd.to_datetime(push_df['推送日期'], errors='coerce')
         # 按车架号分组，保留最新的一条（推送日期最大）
-        push_df = push_df.sort_values('推送日期', ascending=False).drop_duplicates(subset=['车架号'], keep='first')
+        push_df = push_df.drop_duplicates(subset=['车架号'], keep='first')
     else:
         # 如果没有推送日期，直接去重
         push_df = push_df.drop_duplicates(subset=['车架号'], keep='first')
     push_df['车架号后6位'] = push_df['车架号'].astype(str).str[-6:]
+    push_df = push_df.drop_duplicates(subset=['车架号后6位'], keep='first')
+
 
 
     # 3. 为销售表添加车架号后6位列，用于匹配到店表
     sales_df = sales_df.copy()
     sales_df = sales_df[sales_df["车架号"]!="二手车返利"].drop_duplicates(subset=['车架号'], keep='first')
-    sales_df['车架号后6位'] = sales_df['车架号'].str[-6:]
+    sales_df['车架号后6位'] = sales_df['车架号'].astype(str).str[-6:]
+    # sales_df.to_csv("销售数据表.csv")
 
     # 4. 以销售表为主表，左连接推送表
+    # push_df.to_csv("推送表.csv")
     merged_df = pd.merge(
         sales_df,
         push_df[['车架号后6位', '推送日期', '返佣']],  # 只保留需要的列
         on='车架号后6位',
         how='left'
     )
+    # merged_df.to_csv("推送合并表.csv")
 
 
     # 5. 以销售表为主表，左连接cyy装饰表
