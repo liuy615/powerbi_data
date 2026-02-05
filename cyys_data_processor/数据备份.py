@@ -243,7 +243,7 @@ class CyysDataProcessorApp:
 
             # 清理空值
             df_salesAgg_mongo = df_salesAgg_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
-            df_salesAgg_mongo = df_salesAgg_mongo.drop_duplicates()
+            df_salesAgg_mongo = df_salesAgg_mongo.drop_duplicates(["车架号", "车辆车系"], keep="last")
             # df_jingpin_result_mongo = df_jingpin_result_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
             # df_diao_mongo = df_diao_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
             # 导出为CSV（保持原有文件路径和名称）

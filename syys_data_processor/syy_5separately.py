@@ -694,7 +694,7 @@ class DecorationOrdersExtractor:
         grouped_df = grouped[['车架号', '收款日期', '销售顾问', '新车销售店名', '物资名称','成本合计(含税)', '合计收款金额', '贴膜成本', '贴膜合计收款金额','其他成本', '其他合计收款金额', '龙膜成本', '龙膜收款金额']].rename(columns={'收款日期':'到店日期'})
 
         # 显示结果
-        grouped_df.to_csv("装饰合并.csv")
+        # grouped_df.to_csv("装饰合并.csv")
 
         print(f"原始数据有 {len(df)} 行，合并后有 {len(grouped_df)} 行")
 

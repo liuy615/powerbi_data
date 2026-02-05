@@ -382,8 +382,7 @@ class update_dashboard:
         # 切片后加.copy()避免视图警告
         df_inventorys_cyy = self.df_inventorys_cyy[
             ['采购订单号', '归属系统', '车系', '车型', '颜色', '配置', '车架号', '指导价', '提货价', '生产日期',
-             '合格证状态', '发车日期', '到库日期', '库存天数', '车辆状态', '操作日期', '调入类型']
-        ].copy()  # 关键修复：加copy
+             '合格证状态', '发车日期', '到库日期', '库存天数', '车辆状态', '操作日期', '调入类型']].copy()  # 关键修复：加copy
 
         df_inventorys_cyy.rename(columns={'库存天数': '库存时间', '归属系统': '归属系统1', '颜色': '外饰颜色'},inplace=True)
         df_inventorys_cyy['库存时长分类'] = df_inventorys_cyy.apply(self.classify_inventory_duration, axis=1)
@@ -417,6 +416,7 @@ class update_dashboard:
         df_books_cyy = df_books_cyy[(df_books_cyy['审批状态'] == '审核通过')].copy()  # 切片后加copy
 
         df_books_lock['定单日期'] = pd.to_datetime(df_books_lock['定单日期'], errors='coerce')
+        df_books_cyy = df_books_cyy[df_books_cyy['定单日期'] > '2025-04-01'].copy()  # 切片后加copy
         df_books_lock = df_books_lock[df_books_lock['定单日期'] < '2025-04-01'].copy()  # 切片后加copy
 
         df_combined = pd.concat([df_books_cyy, df_books_lock], axis=0, join='outer', ignore_index=True)
