@@ -243,8 +243,7 @@ class update_dashboard:
              '终端返利', '提货价', '增值税利润差', '税费', '毛利', '金融性质', '返利系数', '贷款金额', '贷款期限',
              '经销商贴息金额', '厂家贴息金额', '金融税费', '金融返利', '金融服务费', '金融毛利', '上牌费', '上牌成本',
              '上牌毛利', '临牌费', '临牌成本', '临牌毛利', '促销费用', '装饰成本', '二手车成交价', '二手车返利金额',
-             '回扣款', '政府返回区补', '返客户区补', '开票价', '代开票支付费用', '单车毛利', '调出车', '金融类型',
-             '贷款期限1']
+             '回扣款', '政府返回区补', '返客户区补', '开票价', '代开票支付费用', '单车毛利', '调出车', '金融类型', '贷款期限1']
         ].copy()  # 关键：加 .copy() 生成副本
 
         # 2. 切片后加 .copy() 避免视图警告
@@ -423,32 +422,6 @@ class update_dashboard:
         df_combined = pd.concat([df_books_cyy, df_books_lock], axis=0, join='outer', ignore_index=True)
         df_combined['配置'] = df_combined['配置'].fillna(df_combined['车型'])
         return df_combined
-
-    # 合并精品表
-    # 输入：精品销售.csv 和 数据库的jingpin_data
-    # 输出：精品销售1.csv
-    # def concat_newold_jingpins_dashboad(self):
-    #     # 切片后加.copy()避免视图警告
-    #     df_jingpins_cyy = self.df_jingpins_cyy[['订单门店', '开票日期', '收款日期', '精品销售人员', '车架号', '车系', '客户名称', '联系电话', '物资明细', '销售总金额','总成本', '毛利润', '总次数']].copy()  # 关键修复：加copy
-    #     # 切片后加.copy()避免视图警告
-    #     df_jingpins_lock = self.df_jingpins_lock[['精品销售日期', '精品销售人员', '新车销售门店', '车型', '车架号', '客户姓名', '电话号码', '销售总金额','总成本', '毛利润', '总次数']].copy()  # 关键修复：加copy
-    #
-    #     team_sup = self.team_belongs[['公司名称', '板块']].copy()  # 切片后加copy
-    #     service_net = self.car_belongs[['车系', '服务网络']].copy()  # 切片后加copy
-    #
-    #     df_jingpins_cyy.rename(columns={'收款日期': '精品销售日期', '订单门店': '新车销售门店', '联系电话': '电话号码','客户名称': '客户姓名'},inplace=True)
-    #     df_jingpins_cyy['精品销售日期'] = pd.to_datetime(df_jingpins_cyy['精品销售日期'], errors='coerce')
-    #     df_jingpins_lock['精品销售日期'] = pd.to_datetime(df_jingpins_lock['精品销售日期'], errors='coerce')
-    #
-    #     df_jingpins_lock = pd.merge(df_jingpins_lock, team_sup, how='left', left_on='新车销售门店',right_on='公司名称').copy()  # merge后加copy
-    #     df_jingpins_cyy = df_jingpins_cyy[df_jingpins_cyy['精品销售日期'] >= '2025-04-01'].copy()  # 切片后加copy
-    #     df_jingpins_lock1 = df_jingpins_lock[df_jingpins_lock['精品销售日期'] < '2025-04-01'].copy()  # 切片后加copy
-    #     df_jingpins_lock2 = df_jingpins_lock[df_jingpins_lock['板块'] == '西河'].copy()  # 切片后加copy
-    #
-    #     df_combined = pd.concat([df_jingpins_cyy, df_jingpins_lock1, df_jingpins_lock2], axis=0, join='outer',ignore_index=True)
-    #     df_combined = pd.merge(df_combined, service_net, how='left', on='车系').copy()  # merge后加copy
-    #     df_combined['新车销售门店'] = np.where(df_combined['新车销售门店'] == '直播基地',df_combined['服务网络'] + '-' + df_combined['新车销售门店'],df_combined['新车销售门店'])
-    #     return df_combined
 
     def concat_newold_jingpins_dashboad(self):
         df_jingpins_cyy = self.df_jingpins_cyy[['单据类型', '订单门店', '开票日期', '收款日期', '最早收款日期', '精品销售人员', '车架号', '车系', '客户名称', '联系电话', '物资明细', '销售总金额', '总成本', '毛利润', '总次数']]
