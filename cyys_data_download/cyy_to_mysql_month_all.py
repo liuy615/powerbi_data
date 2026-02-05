@@ -660,7 +660,7 @@ class DataSyncManager:
     def run_apis(self) -> Dict[str, List[Dict]]:
         """使用线程池并发处理API请求"""
         results = {}
-        apis = DataCenter.get_apis(self.time_option)
+        apis = DataCenter.get_apis_99(self.time_option)
         total_affected = 0  # 统计总影响行数
         success_tasks = 0  # 统计成功的任务数
         failed_tasks = []  # 记录失败的任务及详细错误
