@@ -305,6 +305,7 @@ class update_dashboard:
             '线索提供人': '销售顾问',
             '录入日期': '收购时间'}, inplace=True)
         df_combined = pd.concat([df_Ers_lock, df_Ers], axis=0, join='outer', ignore_index=True)
+        # df_combined.to_csv("二手车.csv")
         return df_combined
 
     # 合并销售表
@@ -423,6 +424,10 @@ class update_dashboard:
         df_combined['配置'] = df_combined['配置'].fillna(df_combined['车型'])
         return df_combined
 
+
+    # 合并精品表
+    # 输入：数据库的order_data
+    # 输出：精品销售1.csv
     def concat_newold_jingpins_dashboad(self):
         df_jingpins_cyy = self.df_jingpins_cyy[['单据类型', '订单门店', '开票日期', '收款日期', '最早收款日期', '精品销售人员', '车架号', '车系', '客户名称', '联系电话', '物资明细', '销售总金额', '总成本', '毛利润', '总次数']]
         df_jingpins_lock = self.df_jingpins_lock[['精品销售日期', '精品销售人员', '新车销售门店', '车型', '车架号', '客户姓名', '电话号码', '销售总金额','总成本', '毛利润', '总次数']]
@@ -448,15 +453,9 @@ class update_dashboard:
     # 输出：三方台账1.csv
     def concat_newold_Debits_dashboad(self):
         # 切片后加.copy()避免视图警告
-        df_debits_cyy = self.df_debits_cyy[
-            ['合格证门店', '采购订单号', '车源门店', '开票日期', '保证金比例', '到期日期', '开票银行', '合格证号',
-             '车架号', '提货价', '赎证日期', '赎证款', '是否赎证']
-        ].copy()  # 关键修复：加copy
+        df_debits_cyy = self.df_debits_cyy[['合格证门店', '采购订单号', '车源门店', '开票日期', '保证金比例', '到期日期', '开票银行', '合格证号','车架号', '提货价', '赎证日期', '赎证款', '是否赎证']].copy()  # 关键修复：加copy
         # 切片后加.copy()避免视图警告
-        df_debits_lock = self.df_debits_lock[
-            ['订购日期', '采购订单号', '车架号', '赎证日期', '提货价', '赎证款', '保证金比例', '开票银行', '开票日期',
-             '到期日期', '是否赎证', '最新到期日期', '归属系统1']
-        ].copy()  # 关键修复：加copy
+        df_debits_lock = self.df_debits_lock[['订购日期', '采购订单号', '车架号', '赎证日期', '提货价', '赎证款', '保证金比例', '开票银行', '开票日期','到期日期', '是否赎证', '最新到期日期', '归属系统1']].copy()  # 关键修复：加copy
 
         df_debits_cyy.rename(columns={'合格证门店': '归属系统1'}, inplace=True)
         df_debits_cyy['最新到期日期'] = df_debits_cyy['到期日期']
@@ -580,6 +579,8 @@ class update_dashboard:
         df_salary1 = df_salary.groupby(['日期', '门店']).agg({'总薪酬': 'sum'}).reset_index()
         return df_salary1
 
+
+    #主程序
     def run(self):
         chexi = self.Car_belongs()
         df_yingxiao = self.clean_yingxiao()

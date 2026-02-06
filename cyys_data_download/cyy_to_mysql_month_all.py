@@ -252,15 +252,17 @@ class DataSaver:
         '按揭业务': 'mortgage_business',
         '保险业务': 'insurance_business',
         '车辆成本管理': 'car_cost_management',
-        '车辆销售明细表_订单日期': 'car_sales_order_date',
         '车辆销售明细表_开票日期': 'car_sales_invoice_date',
         '调车结算查询': 'vehicle_transfer_settlement',
         '汇票管理': 'bill_management',
+        '计划车辆': 'planned_vehicles',
         '开票维护': 'invoice_maintenance',
+        '库存车辆查询': 'inventory_vehicle_query',
         '库存车辆已售': 'inventory_vehicle_sold',
         '评估管理_成交': 'evaluation_deal',
         '评估管理_已入库': 'evaluation_stored',
         '套餐销售列表': 'package_sales',
+        '未售订单': 'unsold_orders',
         '销售_车辆销售_成交订单': 'sales_deal_orders',
         '销售_车辆销售_作废订单': 'sales_canceled_orders',
         '销售_衍生_订单查询': 'sales_derivative_orders',
@@ -660,7 +662,7 @@ class DataSyncManager:
     def run_apis(self) -> Dict[str, List[Dict]]:
         """使用线程池并发处理API请求"""
         results = {}
-        apis = DataCenter.get_apis_99(self.time_option)
+        apis = DataCenter.get_apis(self.time_option)
         total_affected = 0  # 统计总影响行数
         success_tasks = 0  # 统计成功的任务数
         failed_tasks = []  # 记录失败的任务及详细错误

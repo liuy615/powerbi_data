@@ -147,6 +147,9 @@ class CyysDataProcessorApp:
 
             # 处理二手车数据
             df_Ers1, df_Ers2, df_Ers2_archive = self.data_processor.process_used_car_data(df_Ers, df_kaipiao)
+            df_Ers1.to_csv("二手车测试1.csv")
+            df_Ers2.to_csv("二手车测试2.csv")
+            df_Ers2_archive.to_csv("二手车测试archive.csv")
 
             # 合并主销售表
             df_salesAgg1 = self.data_processor.merge_main_sales_table(df_salesAgg, df_zhubo, df_service_aggregated, df_carcost, df_loan, df_decoration2, df_kaipiao, df_Ers2, df_Ers2_archive)
