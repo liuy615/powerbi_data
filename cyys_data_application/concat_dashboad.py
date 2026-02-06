@@ -162,7 +162,7 @@ class update_dashboard:
         return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/新车保险台账.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_books_unsold(self) -> pd.DataFrame:
-        return pd.read_csv(fr'E:/powerbi_data/看板数据/cyy_old_data/未售订单.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
+        return pd.read_csv(fr'E:/powerbi_data/看板数据/dashboard/未售订单.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_yingxiao(self) -> pd.DataFrame:
         return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/投放费用.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
@@ -547,7 +547,7 @@ class update_dashboard:
         df_unsoldBook_cyy = df_unsoldBook_cyy.rename(columns=column_mapping)
         df_unsoldBook_cyy = df_unsoldBook_cyy[~df_unsoldBook_cyy['锁库日期'].isnull()].copy()  # 切片后加copy
         df_unsoldBook_cyy['车辆状态'] = df_unsoldBook_cyy['车辆状态'].apply(map_status)
-        df_unsoldBook_cyy = df_unsoldBook_cyy[['订单公司', '车系', '外饰颜色', '整车型号', '配置', '销售人员', '交付专员', '主播人员', '客户', '客户电话','客户电话2', '车架号', '计划单号', '锁库日期', '来源', '入库日期', '车辆状态']].copy()  # 切片后加copy
+        df_unsoldBook_cyy = df_unsoldBook_cyy[['订单公司', '车系', '外饰颜色', '整车型号', '配置', '销售人员', '交付专员', '主播人员', '客户姓名', '联系电话', '联系电话2', '车架号', '计划单号', '锁库日期', '来源', '入库日期', '车辆状态']].copy()  # 切片后加copy
         df_unsoldBook_cyy.columns = ['公司名称', '车系', '外饰颜色', '车型', '配置', '销售人员', '交付专员', '主播人员','客户姓名', '联系电话', '联系电话2', '车架号', '计划单号', '锁库日期', '所属团队','入库日期', '车辆状态']
         df_unsoldBook_cyy = df_unsoldBook_cyy[df_unsoldBook_cyy['车辆状态'].isin(['在库', '在途'])]
         return df_unsoldBook_cyy

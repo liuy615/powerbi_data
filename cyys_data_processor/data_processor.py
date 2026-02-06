@@ -34,6 +34,7 @@ class DataProcessor:
     """清洗二手车数据"""
     def clean_used_cars(self, df_ershou):
         df_Ers = df_ershou[df_ershou['收款状态'] == '已收款'].copy()
+        df_Ers.to_csv(r'E:\powerbi_data\看板数据\dashboard\二手车.csv', index=False)
         return df_Ers
 
     """清洗精品数据"""

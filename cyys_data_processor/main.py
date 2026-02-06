@@ -128,7 +128,7 @@ class CyysDataProcessorApp:
 
             # 订单数据清洗
             df_dings, df_zhubo = self.data_processor.clean_book_orders(raw_data["衍生订单"], raw_data["成交订单"], raw_data["未售订单"], service_net)
-
+            raw_data["未售订单"].to_csv("E:/powerbi_data/看板数据/dashboard/未售订单.csv")
             # 作废订单数据清洗
             tui_dings_df = self.data_processor.clean_void_orders(raw_data["作废订单"], service_net)
 
@@ -147,9 +147,6 @@ class CyysDataProcessorApp:
 
             # 处理二手车数据
             df_Ers1, df_Ers2, df_Ers2_archive = self.data_processor.process_used_car_data(df_Ers, df_kaipiao)
-            df_Ers1.to_csv("二手车测试1.csv")
-            df_Ers2.to_csv("二手车测试2.csv")
-            df_Ers2_archive.to_csv("二手车测试archive.csv")
 
             # 合并主销售表
             df_salesAgg1 = self.data_processor.merge_main_sales_table(df_salesAgg, df_zhubo, df_service_aggregated, df_carcost, df_loan, df_decoration2, df_kaipiao, df_Ers2, df_Ers2_archive)
