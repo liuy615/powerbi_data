@@ -223,7 +223,6 @@ class DataProcessor:
         return df_carcost
 
     """清洗按揭业务数据"""
-
     def clean_loans(self, df_loan):
         if df_loan.empty:
             logging.warning("按揭业务数据为空，跳过清洗")

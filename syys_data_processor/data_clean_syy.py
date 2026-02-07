@@ -428,6 +428,7 @@ class SpecialIncomeProcessor(DataProcessorBase):
         if '归属门店' in self.df_result.columns:
             self.df_result['归属门店'] = self.df_result['归属门店'].replace('文景初治', '上元盛世')
             self.df_result['归属门店'] = self.df_result['归属门店'].replace("王朝网-直播基地", "直播基地")
+            self.df_result['归属门店'] = self.df_result['归属门店'].replace("永乐盛世", "洪武盛世")
 
         self.logger.info(f"数据质量处理完成 - 保留{len(existing_columns)}列")
 
@@ -542,7 +543,7 @@ class InsuranceWarrantyIntegrator(DataProcessorBase):
         ]
 
         self.business_rules = {
-            "company_mapping": {"文景初治": "上元盛世", "王朝网-直播基地":"直播基地"},
+            "company_mapping": {"文景初治": "上元盛世", "王朝网-直播基地":"直播基地", "永乐盛世":"洪武盛世"},
             "exclude_operating_fee": [1000, 1130, 1800],
             "exclude_operating_company": "鼎和",
             "max_workers": 5
@@ -929,7 +930,7 @@ class SanfangYBProcessor(DataProcessorBase):
             '是否录入厂家系统', '录入厂家系统日期', '比亚迪系统录入金额',
             '超期录入比亚迪系统违约金', '备注', 'From'
         ]
-        self.store_name_mapping = {'文景初治': '上元盛世', "王朝网-直播基地":"直播基地"}
+        self.store_name_mapping = {'文景初治': '上元盛世', "王朝网-直播基地":"直播基地", "永乐盛世":"洪武盛世"}
 
         self._init_check()
 
@@ -1189,6 +1190,7 @@ class DataMerger(DataProcessorBase):
         if col_name in df.columns:
             df[col_name] = df[col_name].replace('文景初治', '上元盛世')
             df[col_name] = df[col_name].replace("王朝网-直播基地", "直播基地")
+            df[col_name] = df[col_name].replace("永乐盛世", "洪武盛世")
             self.logger.info("公司名称替换完成")
         else:
             self.logger.warning(f"替换列 '{col_name}' 在数据中不存在")
@@ -1376,6 +1378,7 @@ class TMSJProcessor(DataProcessorBase):
             df_final['成都腾豹贴膜返利'] = df_final.apply(self._calculate_rebate, axis=1)
             df_final['新车销售店名'] = df_final['新车销售店名'].replace('文景初治', '上元盛世')
             df_final['新车销售店名'] = df_final['新车销售店名'].replace("王朝网-直播基地", "直播基地")
+            df_final['新车销售店名'] = df_final['新车销售店名'].replace("永乐盛世", "洪武盛世")
 
         return df_final
 
@@ -1394,6 +1397,7 @@ class TMSJProcessor(DataProcessorBase):
             df_final = df_final.dropna(subset=['新车销售店名'], how='all')
             df_final['新车销售店名'] = df_final['新车销售店名'].replace('文景初治', '上元盛世')
             df_final['新车销售店名'] = df_final['新车销售店名'].replace("王朝网-直播基地", "直播基地")
+            df_final['新车销售店名'] = df_final['新车销售店名'].replace("永乐盛世", "洪武盛世")
             self.logger.info(f"汇总表数据处理完成 - {len(df_final)}行")
         else:
             df_final = pd.DataFrame()

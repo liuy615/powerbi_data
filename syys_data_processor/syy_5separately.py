@@ -49,14 +49,16 @@ class FilmUpgradeAnalyzer:
             self.push_file_paths = push_file_paths
 
         if target_stores is None:
-            self.target_stores = ['上元臻盛', '上元臻智', '上元星汉', '上元弘川', '上元坤灵', '文景盛世', '文景海洋']
+            self.target_stores = ['上元臻盛', '上元臻智', '上元星汉', '上元弘川', '上元坤灵', '文景盛世', '文景海洋', '上元盛世', '洪武盛世', '新港海川', '新港永初', '永乐盛世', '文景初治']
         else:
             self.target_stores = target_stores
 
         # 成本文件路径
         if visit_file_path is None:
             self.visit_file_path = [r"E:/powerbi_data/看板数据/私有云文件本地/贴膜升级/腾豹-双流、交大、羊犀、天府-贴膜升级登记表-最新年.xlsx",
-                                    r"E:/powerbi_data/看板数据/私有云文件本地/贴膜升级/两网-西门自店-贴膜升级登记表-最新年.xlsx"]
+                                    r"E:/powerbi_data/看板数据/私有云文件本地/贴膜升级/两网-西门自店-贴膜升级登记表-最新年.xlsx",
+                                    r"E:/powerbi_data/看板数据/私有云文件本地/贴膜升级/两网-总部-贴膜升级登记表-最新年.xlsx",
+                                    ]
         else:
             self.visit_file_path = visit_file_path
 
@@ -262,7 +264,7 @@ class DecorationOrdersExtractor:
 
         # 筛选条件
         self.target_sales_consultants = ['郑仁彬', '刘红梅', '郝小龙', '衡珊珊', '蒲松涛', '陈玲玲', '黄维']
-        self.target_organize_names = ['上元臻盛', '上元臻智', '上元星汉', '上元弘川', '上元坤灵', '文景盛世', '文景海洋']
+        self.target_organize_names = ['上元臻盛', '上元臻智', '上元星汉', '上元弘川', '上元坤灵', '文景盛世', '文景海洋', '上元盛世', '洪武盛世', '新港海川', '新港永初']
 
         # 数据库连接对象
         self.connection = None
@@ -732,17 +734,17 @@ def merge_and_process_data(sales_df, push_df, zhaungshi_df, chengben_df):
     sales_df = sales_df.copy()
     sales_df = sales_df[sales_df["车架号"]!="二手车返利"].drop_duplicates(subset=['车架号'], keep='first')
     sales_df['车架号后6位'] = sales_df['车架号'].astype(str).str[-6:]
-    # sales_df.to_csv("销售数据表.csv")
+    sales_df.to_csv("销售数据表.csv")
 
     # 4. 以销售表为主表，左连接推送表
-    # push_df.to_csv("推送表.csv")
+    push_df.to_csv("推送表.csv")
     merged_df = pd.merge(
         sales_df,
         push_df[['车架号后6位', '推送日期', '返佣']],  # 只保留需要的列
         on='车架号后6位',
         how='left'
     )
-    # merged_df.to_csv("推送合并表.csv")
+    merged_df.to_csv("推送合并表.csv")
 
 
     # 5. 以销售表为主表，左连接cyy装饰表
@@ -920,7 +922,6 @@ if __name__ == "__main__":
     chengben = analyzer.extract_store_cost_data()
     # 推送数据
     df_subset = analyzer.process_push_data()
-
 
     # 合并销售人员的数据
     result_df_data = merge_and_process_data(sales_df, df_subset, zhaungshi_df, chengben)

@@ -10,9 +10,12 @@ from datetime import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.exc import SQLAlchemyError
 import warnings
+
 project_root = r"E:\powerbi_data"
 sys.path.insert(0, project_root)
 from config.cyys_data_processor.config import SOURCE_MYSQL_CONFIG, OUTPUT_MYSQL_CONFIG
+from config.cyys_data_application.config import APP_DB_CONFIG
+
 warnings.filterwarnings('ignore', category=FutureWarning, message='.*Downcasting object dtype arrays.*')
 # 全局显示配置：显示所有列
 pd.set_option('display.max_columns', 100)
@@ -51,15 +54,24 @@ class update_dashboard:
         # 数据库配置（请确认已修改为实际环境信息）
         self.db_config = OUTPUT_MYSQL_CONFIG
 
-        # 创建数据库引擎
+        # 创建读取数据库引擎
         try:
             self.engine = create_engine(
-                fr"mysql+pymysql://{self.db_config['user']}:{self.db_config['password']}@{self.db_config['host']}:{self.db_config['port']}/{self.db_config['database']}?charset=utf8mb4",
-                echo=False
+                fr"mysql+pymysql://{self.db_config['user']}:{self.db_config['password']}@{self.db_config['host']}:{self.db_config['port']}/{self.db_config['database']}?charset=utf8mb4",echo=False
             )
-            logging.info("数据库引擎创建成功")
+            logging.info("读取数据库引擎创建成功")
         except Exception as e:
-            logging.error(f"数据库引擎创建失败: {str(e)}", exc_info=True)
+            logging.error(f"读取数据库引擎创建失败: {str(e)}", exc_info=True)
+            raise
+        
+        # 创建写入数据库引擎
+        try:
+            self.output_engine = create_engine(
+                f"mysql+pymysql://{APP_DB_CONFIG['user']}:{APP_DB_CONFIG['password']}@{APP_DB_CONFIG['host']}:{APP_DB_CONFIG['port']}/{APP_DB_CONFIG['database']}?charset=utf8mb4",echo=False
+            )
+            logging.info("输出数据库引擎创建成功")
+        except Exception as e:
+            logging.error(f"输出数据库引擎创建失败: {str(e)}", exc_info=True)
             raise
 
         # 数据初始化（所有文件路径均加r前缀，且read_csv添加low_memory=False）
@@ -122,6 +134,25 @@ class update_dashboard:
             logging.error(f"数据处理失败（表：{table_name}）：{str(e)}", exc_info=True)
             raise
 
+    # 新增方法：将DataFrame写入数据库
+    def _write_df_to_db(self, df: pd.DataFrame, table_name: str) -> bool:
+        """将DataFrame写入数据库"""
+        try:
+            logging.info(f"开始写入数据库表：{table_name}")
+            # 写入数据库，如果表存在则替换
+            df.to_sql(
+                name=table_name,
+                con=self.output_engine,
+                if_exists='replace',
+                index=False,
+                chunksize=1000
+            )
+            logging.info(f"成功写入表 {table_name}，数据行数：{len(df)}")
+            return True
+        except Exception as e:
+            logging.error(f"数据写入失败（表：{table_name}）：{str(e)}", exc_info=True)
+            return False
+
     # 数据库读取方法
     def Df_books_cyy(self) -> pd.DataFrame:
         return self._read_from_db('order_data')
@@ -177,11 +208,9 @@ class update_dashboard:
         return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/定车.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_sales_lock(self) -> pd.DataFrame:
-        # 修复DtypeWarning：补充low_memory=False
         return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/销售毛利.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_sales_lock1(self) -> pd.DataFrame:
-        # 修复DtypeWarning：补充low_memory=False
         return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/销售.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
 
     def Df_jingpins_lock(self) -> pd.DataFrame:
@@ -305,7 +334,6 @@ class update_dashboard:
             '线索提供人': '销售顾问',
             '录入日期': '收购时间'}, inplace=True)
         df_combined = pd.concat([df_Ers_lock, df_Ers], axis=0, join='outer', ignore_index=True)
-        # df_combined.to_csv("二手车.csv")
         return df_combined
 
     # 合并销售表
@@ -346,8 +374,7 @@ class update_dashboard:
         df_combined = df_combined[
             ['服务网络', '车架号', '车系', '车型', '车辆配置', '外饰颜色', '定金金额', '指导价', '提货价',
              '匹配定单归属门店', '到库日期', '定单日期', '销售日期', '所属团队', '销售顾问', '客户姓名', '当月定卖',
-             '城市']
-        ].copy()  # 切片后加copy
+             '城市']].copy()  # 切片后加copy
 
         df_combined['车辆配置'] = df_combined['车辆配置'].fillna(df_combined['车型'])
         return df_combined
@@ -482,58 +509,6 @@ class update_dashboard:
     # 输出：未售锁车.csv
     def concat_unsoldBook_dashboad(self):
         df_unsoldBook_cyy = self.df_books_unsold.copy()  # 读取后加copy
-        column_mapping = {
-            "BillStateName": "订单状态",
-            "OrganizeName": "订单公司",
-            "CarBrandName": "品牌",
-            "CarSeriesName": "车系",
-            "CarModelsName": "整车型号",
-            "CarStyleName": "款式",
-            "CarDisposeName": "配置",
-            "BodyColorName": "外饰颜色",
-            "ColloCation": "录入日期",
-            "RegistrationTime": "录入日期",
-            "EstimatedDeliveryDate": "预交日期",
-            "BillCode": "合同单号",
-            "DepartName": "部门",
-            "SalesConsultantName": "销售人员",
-            "DeliveryPersonName": "交付专员",
-            "TVanchorName": "主播人员",
-            "CusName": "客户",
-            "CusPhone": "客户电话",
-            "CusPhone2": "客户电话2",
-            "LYOrganizeName": "来源公司",
-            "FrameNumber": "车架号",
-            "EngineNumber": "发动机",
-            "OrderCode": "计划单号",
-            "LockStartTime": "锁库日期",
-            "LockEndTime": "到期日期",
-            "ReportingTime": "汇报日期",
-            "InvoiceDate": "开票日期",
-            "DeliveryTime": "销售日期",
-            "DRemarks": "订单备注",
-            "CRemarks": "车辆备注",
-            "LogisticsRemarks": "物流备注",
-            "DistributionChannelName": "来源",
-            "CusDistribuName": "客户来源",
-            "InStoreDate": "入库日期",
-            "RegisterDate": "生产日期",
-            "Weekandweek": "车辆状态",
-            "ApprovalTypeName": "ApprovalTypeName",
-            "CertOrganizeName": "合格证门店",
-            "OrgDeposit": "门店收取",
-            "IsOrgDeposit": "门店收取状态",
-            "FacDeposit": "厂家代收",
-            "IsFacDeposit": "厂家代收状态",
-            "MortgageState": "按揭状态",
-            "OperaStatusName": "状态",
-            "PublicCode": "公共单号",
-            "Islogistics": "物流创建",
-            "PaymentWay": "购车方式",
-            "IsCoupon": "发券状态",
-            "DepositType": "订金状态"
-        }
-
         def map_status(x):
             if x == '计划':
                 return '未发'
@@ -544,7 +519,6 @@ class update_dashboard:
             else:
                 return None
 
-        df_unsoldBook_cyy = df_unsoldBook_cyy.rename(columns=column_mapping)
         df_unsoldBook_cyy = df_unsoldBook_cyy[~df_unsoldBook_cyy['锁库日期'].isnull()].copy()  # 切片后加copy
         df_unsoldBook_cyy['车辆状态'] = df_unsoldBook_cyy['车辆状态'].apply(map_status)
         df_unsoldBook_cyy = df_unsoldBook_cyy[['订单公司', '车系', '外饰颜色', '整车型号', '配置', '销售人员', '交付专员', '主播人员', '客户姓名', '联系电话', '联系电话2', '车架号', '计划单号', '锁库日期', '来源', '入库日期', '车辆状态']].copy()  # 切片后加copy
@@ -706,20 +680,82 @@ class update_dashboard:
         df_carseris = df_carseris[~df_carseris['车系'].isin(['二手车返利', '调拨'])].copy()  # 切片后加copy
 
         # 所有输出路径加r
+        # df_sales.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售毛利1.csv', index=False)
+        # df_books.to_csv(r'E:\powerbi_data\看板数据\dashboard\定车1.csv', index=False)
+        # df_inventorys.to_csv(r'E:\powerbi_data\看板数据\dashboard\库存1.csv', index=False)
+        # df_jingpins.to_csv(r'E:\powerbi_data\看板数据\dashboard\精品销售1.csv', index=False)
+        # df_tuis.to_csv(r'E:\powerbi_data\看板数据\dashboard\退订1.csv', index=False)
+        # df_dings_all.to_csv(r'E:\powerbi_data\看板数据\dashboard\所有定单1.csv', index=False)
+        # df_debits.to_csv(r'E:\powerbi_data\看板数据\dashboard\三方台账1.csv', index=False)
+        # df_sales1.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售1.csv', index=False)
+        # df_Ers.to_csv(r'E:\powerbi_data\看板数据\dashboard\二手车1.csv', index=False)
+        # df_unsoldBook.to_csv(r'E:\powerbi_data\看板数据\dashboard\未售锁车.csv', index=False)
+        # df_salary.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售薪资.csv', index=False)
+        # df_yingxiao.to_csv(r'E:\powerbi_data\看板数据\dashboard\市场费用.csv', index=False)
+        # df_carseris.to_csv(r'E:\powerbi_data\看板数据\dashboard\所有车系.csv', index=False)
+        # latest_stores.to_csv(r'E:\powerbi_data\看板数据\dashboard\辅助_销售顾问.csv', index=False)
+        
+        # 定义表名映射（CSV文件名 -> 数据库表名） - 新增
+        table_mapping = {
+            '销售毛利1.csv': 'sales_profit',
+            '定车1.csv': 'orders',
+            '库存1.csv': 'inventory',
+            '精品销售1.csv': 'premium_sales',
+            '退订1.csv': 'refunds',
+            '所有定单1.csv': 'all_orders',
+            '三方台账1.csv': 'third_party_ledger',
+            '销售1.csv': 'sales',
+            '二手车1.csv': 'used_cars',
+            '未售锁车.csv': 'unsold_locked',
+            '销售薪资.csv': 'sales_salary',
+            '市场费用.csv': 'marketing_expenses',
+            '所有车系.csv': 'all_car_series',
+            '辅助_销售顾问.csv': 'assistant_sales_consultant'
+        }
+        
+        # 保存CSV文件并写入数据库 - 修改原有代码
+        # 所有输出路径加r，并同时写入数据库
         df_sales.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售毛利1.csv', index=False)
+        self._write_df_to_db(df_sales, table_mapping['销售毛利1.csv'])
+        
         df_books.to_csv(r'E:\powerbi_data\看板数据\dashboard\定车1.csv', index=False)
+        self._write_df_to_db(df_books, table_mapping['定车1.csv'])
+        
         df_inventorys.to_csv(r'E:\powerbi_data\看板数据\dashboard\库存1.csv', index=False)
+        self._write_df_to_db(df_inventorys, table_mapping['库存1.csv'])
+        
         df_jingpins.to_csv(r'E:\powerbi_data\看板数据\dashboard\精品销售1.csv', index=False)
+        self._write_df_to_db(df_jingpins, table_mapping['精品销售1.csv'])
+        
         df_tuis.to_csv(r'E:\powerbi_data\看板数据\dashboard\退订1.csv', index=False)
+        self._write_df_to_db(df_tuis, table_mapping['退订1.csv'])
+        
         df_dings_all.to_csv(r'E:\powerbi_data\看板数据\dashboard\所有定单1.csv', index=False)
+        self._write_df_to_db(df_dings_all, table_mapping['所有定单1.csv'])
+        
         df_debits.to_csv(r'E:\powerbi_data\看板数据\dashboard\三方台账1.csv', index=False)
+        self._write_df_to_db(df_debits, table_mapping['三方台账1.csv'])
+        
         df_sales1.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售1.csv', index=False)
+        self._write_df_to_db(df_sales1, table_mapping['销售1.csv'])
+        
         df_Ers.to_csv(r'E:\powerbi_data\看板数据\dashboard\二手车1.csv', index=False)
+        self._write_df_to_db(df_Ers, table_mapping['二手车1.csv'])
+        
         df_unsoldBook.to_csv(r'E:\powerbi_data\看板数据\dashboard\未售锁车.csv', index=False)
+        self._write_df_to_db(df_unsoldBook, table_mapping['未售锁车.csv'])
+        
         df_salary.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售薪资.csv', index=False)
+        self._write_df_to_db(df_salary, table_mapping['销售薪资.csv'])
+        
         df_yingxiao.to_csv(r'E:\powerbi_data\看板数据\dashboard\市场费用.csv', index=False)
+        self._write_df_to_db(df_yingxiao, table_mapping['市场费用.csv'])
+        
         df_carseris.to_csv(r'E:\powerbi_data\看板数据\dashboard\所有车系.csv', index=False)
+        self._write_df_to_db(df_carseris, table_mapping['所有车系.csv'])
+        
         latest_stores.to_csv(r'E:\powerbi_data\看板数据\dashboard\辅助_销售顾问.csv', index=False)
+        self._write_df_to_db(latest_stores, table_mapping['辅助_销售顾问.csv'])
 
 
 if __name__ == "__main__":
