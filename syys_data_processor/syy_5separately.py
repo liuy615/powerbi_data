@@ -204,7 +204,7 @@ class FilmUpgradeAnalyzer:
             final_columns = ['公司名称', '年份', '月份', '总成本']
 
             df_final = df_filtered[final_columns].copy()
-            print(df_final)
+            # print(df_final)
             return df_final
 
         except FileNotFoundError:
@@ -734,17 +734,17 @@ def merge_and_process_data(sales_df, push_df, zhaungshi_df, chengben_df):
     sales_df = sales_df.copy()
     sales_df = sales_df[sales_df["车架号"]!="二手车返利"].drop_duplicates(subset=['车架号'], keep='first')
     sales_df['车架号后6位'] = sales_df['车架号'].astype(str).str[-6:]
-    sales_df.to_csv("销售数据表.csv")
+    # sales_df.to_csv("销售数据表.csv")
 
     # 4. 以销售表为主表，左连接推送表
-    push_df.to_csv("推送表.csv")
+    # push_df.to_csv("推送表.csv")
     merged_df = pd.merge(
         sales_df,
         push_df[['车架号后6位', '推送日期', '返佣']],  # 只保留需要的列
         on='车架号后6位',
         how='left'
     )
-    merged_df.to_csv("推送合并表.csv")
+    # merged_df.to_csv("推送合并表.csv")
 
 
     # 5. 以销售表为主表，左连接cyy装饰表
