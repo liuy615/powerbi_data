@@ -13,7 +13,7 @@ import warnings
 
 project_root = r"E:\powerbi_data"
 sys.path.insert(0, project_root)
-from config.cyys_data_processor.config import SOURCE_MYSQL_CONFIG, OUTPUT_MYSQL_CONFIG
+from config.cyys_data_processor.config import OUTPUT_MYSQL_CONFIG
 from config.cyys_data_application.config import APP_DB_CONFIG
 
 warnings.filterwarnings('ignore', category=FutureWarning, message='.*Downcasting object dtype arrays.*')
@@ -99,23 +99,6 @@ class update_dashboard:
         self.team_belongs = self.Team_belongs()
         self.df_plan_date_get = self.Df_plan_date_get()
         self.df_inventorys_lock = self.Df_inventory_lock()
-        self.list_companys = ['成都新港建元汽车销售服务有限公司', '成都洪武盛世汽车销售服务有限公司',
-                              '成都新港永初汽车服务有限公司', '成都新港海川汽车销售服务有限公司',
-                              '成都新港先秦汽车服务有限公司', '成都新港治元汽车销售服务有限公司',
-                              '成都新港建隆汽车销售服务有限公司', '成都上元盛世新能源汽车销售有限公司',
-                              '成都新港建武汽车销售服务有限公司', '成都新港文景海洋汽车销售服务有限公司',
-                              '成都文景盛世汽车销售服务有限公司', '成都新港澜舰汽车销售服务有限公司',
-                              '成都新港澜阔汽车销售服务有限公司', '成都鑫港鲲鹏汽车销售服务有限公司',
-                              '成都新茂元大汽车销售服务有限公司', '成都新港澜轩汽车销售服务有限公司',
-                              '成都新港浩蓝汽车销售服务有限公司', '贵州新港蔚蓝汽车销售服务有限责任公司',
-                              '贵州新港浩蓝汽车销售服务有限责任公司', '贵州新港澜源汽车服务有限责任公司',
-                              '贵州新港海之辇汽车销售服务有限责任公司', '成都新港上元坤灵汽车销售服务有限公司',
-                              '乐山新港上元曦和汽车销售服务有限公司', '宜宾新港上元曦和汽车销售服务有限公司',
-                              '泸州新港上元坤灵汽车销售服务有限公司', '贵州新港上元臻智汽车贸易有限公司',
-                              '成都新港上元臻智汽车销售服务有限公司', '乐山新港上元臻智汽车销售服务有限公司',
-                              '宜宾新港上元臻智汽车销售服务有限公司', '成都新港上元臻享汽车销售服务有限公司',
-                              '成都新港上元曦和汽车销售服务有限公司', '贵州新港澜轩汽车销售有限责任公司',
-                              '贵州新港上元曦和汽车销售服务有限公司', '直播基地']
 
     # -------------------------- 2. 修复数据库读取：显式构造SQL语句，反引号包裹表名 --------------------------
     def _read_from_db(self, table_name: str) -> pd.DataFrame:
@@ -188,45 +171,44 @@ class update_dashboard:
     def Team_belongs(self) -> pd.DataFrame:
         return pd.read_excel(r'E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\看板部分数据源\各公司银行额度.xlsx',sheet_name='补充团队')
 
-    # 新车保险未合并
     def Df_xcbx_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/新车保险台账.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/新车保险台账.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  
 
     def Df_books_unsold(self) -> pd.DataFrame:
-        return pd.read_csv(fr'E:/powerbi_data/看板数据/dashboard/未售订单.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
+        return pd.read_csv(fr'E:/powerbi_data/看板数据/dashboard/未售订单.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  
 
     def Df_yingxiao(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/投放费用.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/投放费用.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  
 
     def Df_Ers(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/二手车.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/二手车.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  
 
     def Df_Ers_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r"E:/powerbi_data/看板数据/cyy_old_data/二手车台账.csv", low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
+        return pd.read_csv(r"E:/powerbi_data/看板数据/cyy_old_data/二手车台账.csv", low_memory=False).replace("永乐盛世", "洪武盛世")  
 
     def Df_books_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/定车.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/定车.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  
 
     def Df_sales_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/销售毛利.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/销售毛利.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  
 
     def Df_sales_lock1(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/销售.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/销售.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  
 
     def Df_jingpins_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/精品销售.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/精品销售.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  
 
     def Df_tuis_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/退定.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/退定.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  
 
     def Df_debits_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/三方台账.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/三方台账.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  
 
     def Df_plan_date_get(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/计划车辆汇总.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/计划车辆汇总.csv', low_memory=False).replace("永乐盛世", "洪武盛世")
 
     def Df_inventory_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/库存存档.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  # 加r + low_memory
+        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/库存存档.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  
 
 
     # -------------------------- 核心修复：切片后加.copy()解决SettingWithCopyWarning --------------------------
@@ -680,20 +662,20 @@ class update_dashboard:
         df_carseris = df_carseris[~df_carseris['车系'].isin(['二手车返利', '调拨'])].copy()  # 切片后加copy
 
         # 所有输出路径加r
-        # df_sales.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售毛利1.csv', index=False)
-        # df_books.to_csv(r'E:\powerbi_data\看板数据\dashboard\定车1.csv', index=False)
-        # df_inventorys.to_csv(r'E:\powerbi_data\看板数据\dashboard\库存1.csv', index=False)
-        # df_jingpins.to_csv(r'E:\powerbi_data\看板数据\dashboard\精品销售1.csv', index=False)
-        # df_tuis.to_csv(r'E:\powerbi_data\看板数据\dashboard\退订1.csv', index=False)
-        # df_dings_all.to_csv(r'E:\powerbi_data\看板数据\dashboard\所有定单1.csv', index=False)
-        # df_debits.to_csv(r'E:\powerbi_data\看板数据\dashboard\三方台账1.csv', index=False)
-        # df_sales1.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售1.csv', index=False)
-        # df_Ers.to_csv(r'E:\powerbi_data\看板数据\dashboard\二手车1.csv', index=False)
-        # df_unsoldBook.to_csv(r'E:\powerbi_data\看板数据\dashboard\未售锁车.csv', index=False)
-        # df_salary.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售薪资.csv', index=False)
-        # df_yingxiao.to_csv(r'E:\powerbi_data\看板数据\dashboard\市场费用.csv', index=False)
-        # df_carseris.to_csv(r'E:\powerbi_data\看板数据\dashboard\所有车系.csv', index=False)
-        # latest_stores.to_csv(r'E:\powerbi_data\看板数据\dashboard\辅助_销售顾问.csv', index=False)
+        df_sales.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售毛利1.csv', index=False)
+        df_books.to_csv(r'E:\powerbi_data\看板数据\dashboard\定车1.csv', index=False)
+        df_inventorys.to_csv(r'E:\powerbi_data\看板数据\dashboard\库存1.csv', index=False)
+        df_jingpins.to_csv(r'E:\powerbi_data\看板数据\dashboard\精品销售1.csv', index=False)
+        df_tuis.to_csv(r'E:\powerbi_data\看板数据\dashboard\退订1.csv', index=False)
+        df_dings_all.to_csv(r'E:\powerbi_data\看板数据\dashboard\所有定单1.csv', index=False)
+        df_debits.to_csv(r'E:\powerbi_data\看板数据\dashboard\三方台账1.csv', index=False)
+        df_sales1.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售1.csv', index=False)
+        df_Ers.to_csv(r'E:\powerbi_data\看板数据\dashboard\二手车1.csv', index=False)
+        df_unsoldBook.to_csv(r'E:\powerbi_data\看板数据\dashboard\未售锁车.csv', index=False)
+        df_salary.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售薪资.csv', index=False)
+        df_yingxiao.to_csv(r'E:\powerbi_data\看板数据\dashboard\市场费用.csv', index=False)
+        df_carseris.to_csv(r'E:\powerbi_data\看板数据\dashboard\所有车系.csv', index=False)
+        latest_stores.to_csv(r'E:\powerbi_data\看板数据\dashboard\辅助_销售顾问.csv', index=False)
         
         # 定义表名映射（CSV文件名 -> 数据库表名） - 新增
         table_mapping = {
@@ -713,49 +695,25 @@ class update_dashboard:
             '辅助_销售顾问.csv': 'assistant_sales_consultant'
         }
         
-        # 保存CSV文件并写入数据库 - 修改原有代码
-        # 所有输出路径加r，并同时写入数据库
-        df_sales.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售毛利1.csv', index=False)
-        self._write_df_to_db(df_sales, table_mapping['销售毛利1.csv'])
-        
-        df_books.to_csv(r'E:\powerbi_data\看板数据\dashboard\定车1.csv', index=False)
-        self._write_df_to_db(df_books, table_mapping['定车1.csv'])
-        
-        df_inventorys.to_csv(r'E:\powerbi_data\看板数据\dashboard\库存1.csv', index=False)
-        self._write_df_to_db(df_inventorys, table_mapping['库存1.csv'])
-        
-        df_jingpins.to_csv(r'E:\powerbi_data\看板数据\dashboard\精品销售1.csv', index=False)
-        self._write_df_to_db(df_jingpins, table_mapping['精品销售1.csv'])
-        
-        df_tuis.to_csv(r'E:\powerbi_data\看板数据\dashboard\退订1.csv', index=False)
-        self._write_df_to_db(df_tuis, table_mapping['退订1.csv'])
-        
-        df_dings_all.to_csv(r'E:\powerbi_data\看板数据\dashboard\所有定单1.csv', index=False)
-        self._write_df_to_db(df_dings_all, table_mapping['所有定单1.csv'])
-        
-        df_debits.to_csv(r'E:\powerbi_data\看板数据\dashboard\三方台账1.csv', index=False)
-        self._write_df_to_db(df_debits, table_mapping['三方台账1.csv'])
-        
-        df_sales1.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售1.csv', index=False)
-        self._write_df_to_db(df_sales1, table_mapping['销售1.csv'])
-        
-        df_Ers.to_csv(r'E:\powerbi_data\看板数据\dashboard\二手车1.csv', index=False)
-        self._write_df_to_db(df_Ers, table_mapping['二手车1.csv'])
-        
-        df_unsoldBook.to_csv(r'E:\powerbi_data\看板数据\dashboard\未售锁车.csv', index=False)
-        self._write_df_to_db(df_unsoldBook, table_mapping['未售锁车.csv'])
-        
-        df_salary.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售薪资.csv', index=False)
-        self._write_df_to_db(df_salary, table_mapping['销售薪资.csv'])
-        
-        df_yingxiao.to_csv(r'E:\powerbi_data\看板数据\dashboard\市场费用.csv', index=False)
-        self._write_df_to_db(df_yingxiao, table_mapping['市场费用.csv'])
-        
-        df_carseris.to_csv(r'E:\powerbi_data\看板数据\dashboard\所有车系.csv', index=False)
-        self._write_df_to_db(df_carseris, table_mapping['所有车系.csv'])
-        
-        latest_stores.to_csv(r'E:\powerbi_data\看板数据\dashboard\辅助_销售顾问.csv', index=False)
-        self._write_df_to_db(latest_stores, table_mapping['辅助_销售顾问.csv'])
+        # 筛选需要的列并写入数据库
+        df_sales_mysql = df_sales[["公司名称", "销售日期", "车架号", "车系", "所属团队", "销售人员", "主播人员", "车主姓名", "联系电话", "提货价", "返利合计", "购买方式", "金融类型", "金融性质", "金融毛利", "上牌毛利", "二手车返利金额", "置换服务费", "单车毛利", "类型"]]
+        self._write_df_to_db(df_sales_mysql, table_mapping['销售毛利1.csv'])
+        df_inventorys_mysql = df_sales_mysql[["车架号", "归属系统1", "车系", "提货价", "合格证状态", "到库日期", "库存时间", "车辆状态", "库存时长分类", "类型"]].rename(columns={'归属系统1':'公司名称'}, inplace=True)
+        self._write_df_to_db(df_inventorys_mysql, table_mapping['库存1.csv'])
+        df_dings_all_mysql = df_dings_all[["车架号", "定单归属门店", "定单状态", "销售顾问", "定金金额", "审批状态", "所属团队", "车系", "主播人员", "联系电话", "非退定核算", "退订原因"]].rename(columns={'定单状态': '定单时间', '定单归属门店':'公司名称'}, inplace=True)
+        self._write_df_to_db(df_dings_all_mysql, table_mapping['所有定单1.csv'])
+
+        # self._write_df_to_db(df_Ers, table_mapping['二手车1.csv'])
+        # self._write_df_to_db(df_jingpins, table_mapping['精品销售1.csv'])
+        # self._write_df_to_db(df_tuis, table_mapping['退订1.csv'])
+        # self._write_df_to_db(df_books, table_mapping['定车1.csv'])
+        # self._write_df_to_db(df_debits, table_mapping['三方台账1.csv'])
+        # self._write_df_to_db(df_sales1, table_mapping['销售1.csv'])
+        # self._write_df_to_db(df_unsoldBook, table_mapping['未售锁车.csv'])
+        # self._write_df_to_db(df_salary, table_mapping['销售薪资.csv'])
+        # self._write_df_to_db(df_yingxiao, table_mapping['市场费用.csv'])
+        # self._write_df_to_db(df_carseris, table_mapping['所有车系.csv'])
+        # self._write_df_to_db(latest_stores, table_mapping['辅助_销售顾问.csv'])
 
 
 if __name__ == "__main__":
