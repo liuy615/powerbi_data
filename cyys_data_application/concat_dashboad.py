@@ -696,11 +696,13 @@ class update_dashboard:
         }
         
         # 筛选需要的列并写入数据库
-        df_sales_mysql = df_sales[["公司名称", "销售日期", "车架号", "车系", "所属团队", "销售人员", "主播人员", "车主姓名", "联系电话", "提货价", "返利合计", "购买方式", "金融类型", "金融性质", "金融毛利", "上牌毛利", "二手车返利金额", "置换服务费", "单车毛利", "类型"]]
+        df_sales_mysql = df_sales[["公司名称", "销售日期", "车架号", "车系", "所属团队", "销售人员", "主播人员", "车主姓名", "联系电话", "提货价", "返利合计", "购买方式", "金融类型", "金融性质", "金融毛利", "上牌毛利", "二手车返利金额", "置换服务费", "单车毛利", "类型"]].copy()
         self._write_df_to_db(df_sales_mysql, table_mapping['销售毛利1.csv'])
-        df_inventorys_mysql = df_sales_mysql[["车架号", "归属系统1", "车系", "提货价", "合格证状态", "到库日期", "库存时间", "车辆状态", "库存时长分类", "类型"]].rename(columns={'归属系统1':'公司名称'}, inplace=True)
+        df_inventorys_mysql = df_inventorys[["车架号", "归属系统1", "车系", "提货价", "合格证状态", "到库日期", "库存时间", "车辆状态", "库存时长分类", "类型"]].copy()
+        df_inventorys_mysql.rename(columns={'归属系统1': '公司名称'}, inplace=True)
         self._write_df_to_db(df_inventorys_mysql, table_mapping['库存1.csv'])
-        df_dings_all_mysql = df_dings_all[["车架号", "定单归属门店", "定单状态", "销售顾问", "定金金额", "审批状态", "所属团队", "车系", "主播人员", "联系电话", "非退定核算", "退订原因"]].rename(columns={'定单状态': '定单时间', '定单归属门店':'公司名称'}, inplace=True)
+        df_dings_all_mysql = df_dings_all[["车架号", "定单归属门店", "定单状态", "销售顾问", "定金金额", "审批状态", "所属团队", "车系", "主播人员", "联系电话", "非退定核算", "退订原因"]].copy()
+        df_dings_all_mysql.rename(columns={'定单状态': '定单时间', '定单归属门店': '公司名称'}, inplace=True)
         self._write_df_to_db(df_dings_all_mysql, table_mapping['所有定单1.csv'])
 
         # self._write_df_to_db(df_Ers, table_mapping['二手车1.csv'])
