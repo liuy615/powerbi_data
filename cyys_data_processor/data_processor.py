@@ -67,7 +67,7 @@ class DataProcessor:
 
         # === 精品逻辑（按新规则聚合）===
         df_jingpin = df_decoration[~gift_mask].copy()
-        df_jingpin = df_jingpin[~df_jingpin['销售顾问'].isin(['郑仁彬','刘红梅','衡珊珊','郝小龙'])].copy()
+        df_jingpin = df_jingpin[~df_jingpin['销售顾问'].isin(['郑仁彬','刘红梅','衡珊珊','郝小龙','蒲松涛','陈玲玲'])].copy()
         df_jingpin['装饰赠送成本'] = df_jingpin[['成本合计(含税)','工时费']].sum(axis=1)
 
         # 构造物资明细（按订单编号）
