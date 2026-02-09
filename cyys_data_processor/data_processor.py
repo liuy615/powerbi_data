@@ -37,6 +37,11 @@ class DataProcessor:
         df_Ers.to_csv(r'E:\powerbi_data\看板数据\dashboard\二手车.csv', index=False)
         return df_Ers
 
+    def clean_teshuzhengquan(self):
+        data = pd.read_excel("E:\powerbi_data\看板数据\私有云文件本地\特殊赠券登记台账\售前特殊赠券数据汇总表.xlsx", sheet_name="Sheet1")
+        data = data[["赠送成本", "车架号"]].copy()
+        return data.rename(columns={'赠送成本': '特殊赠券成本'})
+
     """清洗精品数据"""
     def clean_decoration_orders(self, df_decoration):
         df_decoration = df_decoration[
@@ -243,7 +248,6 @@ class DataProcessor:
         # 划分金融类型
         if '金融性质' in df_loan.columns:
             df_loan['经销商贴息金额'] = pd.to_numeric(df_loan['经销商贴息金额'], errors='coerce')
-            print(df_loan.columns)
 
             def determine_financial_type(row):
                 # 修复：检查金融性质是否为None
@@ -688,13 +692,13 @@ class DataProcessor:
                 df_salesAgg_clean, service_net[['车系', '服务网络']],
                 how='left', on='车系'
             )
+        if all(col in df_salesAgg_clean.columns for col in ['公司名称', '服务网络']):
+            df_salesAgg_clean['公司名称'] = np.where(
+                df_salesAgg_clean['公司名称'] == '直播基地',
+                df_salesAgg_clean['服务网络'] + '-' + df_salesAgg_clean['公司名称'],
+                df_salesAgg_clean['公司名称']
+            )
 
-            if all(col in df_salesAgg_clean.columns for col in ['公司名称', '服务网络']):
-                df_salesAgg_clean['公司名称'] = np.where(
-                    df_salesAgg_clean['公司名称'] == '直播基地',
-                    df_salesAgg_clean['服务网络'] + '-' + df_salesAgg_clean['公司名称'],
-                    df_salesAgg_clean['公司名称']
-                )
 
         # 转换销售日期
         if '销售日期' in df_salesAgg_clean.columns:
@@ -1071,6 +1075,10 @@ class DataProcessor:
             df_salesAgg1['毛利'] = df_salesAgg1[['销售车价', '返利合计']].sum(axis=1) - df_salesAgg1[['税费', '提货价']].sum(axis=1)
         else:
             df_salesAgg1['毛利'] = 0
+
+        # 处理特殊赠券
+        teshuzengquan = self.clean_teshuzhengquan()
+        df_salesAgg1 = pd.merge(df_salesAgg1, teshuzengquan, on="车架号", how='left')
         return df_salesAgg1
 
     """最终整理和导出"""
@@ -1078,10 +1086,10 @@ class DataProcessor:
         profit_cols_positive = [
             '毛利', '金融毛利', '上牌毛利', '二手车返利金额', '代开票支付费用',
             '置换服务费', '回扣款', '票据事务费-公司', '返介绍费', '质损赔付金额',
-            '其他成本', '政府返回区补', '装饰收入', '调整项', '其它费用', '特殊事项', '拖车费用'
+            '其他成本', '政府返回区补', '装饰收入', '调整项', '其它费用', '特殊事项', '拖车费用',
         ]
 
-        profit_cols_negative = ['促销费用', '装饰赠送合计']
+        profit_cols_negative = ['促销费用', '装饰赠送合计', '特殊赠券成本']
 
         # 转换数值类型
         for col in profit_cols_positive + profit_cols_negative:
@@ -1101,6 +1109,7 @@ class DataProcessor:
         if '调拨费' in df_salesAgg1.columns:
             df_salesAgg1['调拨费'] = pd.to_numeric(df_salesAgg1['调拨费'], errors='coerce').fillna(0)
             df_salesAgg1['单车毛利'] = df_salesAgg1['单车毛利'] - df_salesAgg1['调拨费']
+
 
         # 标记调出类型
         if '车主姓名' in df_salesAgg1.columns and '所属团队' in df_salesAgg1.columns:
@@ -1133,7 +1142,7 @@ class DataProcessor:
             '促销费用', '赠送装饰项目', '装饰收入', '装饰成本', '套餐明细', '保养升级成本', '装饰赠送合计',
             '其他成本', '返介绍费', '回扣款', '代开票支付费用', '调拨费', '票据事务费', '票据事务费-公司',
             '其它费用', '特殊事项', '政府返回区补', '质损赔付金额', '调整项', '单车毛利', '开票门店',
-            '退代金券', '退成交车辆定金（未抵扣）', '退按揭押金', '退置换补贴保证金', '拖车费用'
+            '退代金券', '退成交车辆定金（未抵扣）', '退按揭押金', '退置换补贴保证金', '拖车费用', '特殊赠券成本'
         ]
 
         # 筛选存在的列
@@ -1193,8 +1202,9 @@ class DataProcessor:
                     df_salesAgg_combined['收款日期'].fillna(df_salesAgg_combined['销售日期']),
                     df_salesAgg_combined['收款日期']
                 )
-
                 df_salesAgg_combined['销售日期'] = df_salesAgg_combined['销售日期'].fillna(df_salesAgg_combined['收款日期'])
+
+
 
         # 合并精品结果和车系信息
         if not df_jingpin_result.empty and '车架号' in df_jingpin_result.columns:
@@ -1204,7 +1214,6 @@ class DataProcessor:
                     df_salesAgg2[['车架号', '车系']],
                     on='车架号', how='left'
                 )
-
         return df_salesAgg_combined, df_dings, df_inventory_all, tui_dings_df, df_debit, df_salesAgg_, df_jingpin_result, df_inventory1
 
     """处理二手车数据"""

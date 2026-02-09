@@ -530,8 +530,14 @@ def main():
         },
         {
             'target_url': f"{base_url}/信息部/信息部内部文件/车易云-新车保险台账/",
-            'local_dir': "E:/powerbi_data/看板数据/私有云文件本地/新车保险台账",  # 修改为独立子目录
+            'local_dir': "E:/powerbi_data/看板数据/私有云文件本地/新车保险台账",
             'search_pattern': "明细",
+            'file_extensions': [".xlsx", ".csv"]
+        },
+        {
+            'target_url': f"{base_url}/信息部/售前数据/特殊赠券登记台账/汇总",
+            'local_dir': "E:/powerbi_data/看板数据/私有云文件本地/特殊赠券登记台账",
+            'search_pattern': "汇总表",
             'file_extensions': [".xlsx", ".csv"]
         },
     ]

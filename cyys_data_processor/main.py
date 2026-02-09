@@ -231,8 +231,8 @@ class CyysDataProcessorApp:
             df_salesAgg_mongo['订车日期'] = pd.to_datetime(df_salesAgg_mongo['订车日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_salesAgg_mongo['开票日期'] = pd.to_datetime(df_salesAgg_mongo['开票日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_salesAgg_mongo['收款日期'] = pd.to_datetime(df_salesAgg_mongo['收款日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
-            df_jingpin_result_mongo['开票日期'] = pd.to_datetime(df_jingpin_result_mongo['开票日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
-            df_jingpin_result_mongo['收款日期'] = pd.to_datetime(df_jingpin_result_mongo['收款日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
+            # df_jingpin_result_mongo['开票日期'] = pd.to_datetime(df_jingpin_result_mongo['开票日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
+            # df_jingpin_result_mongo['收款日期'] = pd.to_datetime(df_jingpin_result_mongo['收款日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_jingpin_result_mongo['最早收款日期'] = pd.to_datetime(df_jingpin_result_mongo['最早收款日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_diao_mongo['订车日期'] = pd.to_datetime(df_diao_mongo['订车日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_diao_mongo['开票日期'] = pd.to_datetime(df_diao_mongo['开票日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
@@ -241,7 +241,6 @@ class CyysDataProcessorApp:
             df_jingpin_result_mongo = df_jingpin_result_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
             df_diao_mongo = df_diao_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
             # df_salesAgg_mongo.to_csv(r"E:/WXWork/1688858189749305/WeDrive/成都永乐盛世/维护文件/车易云毛利润表.csv")
-            print(f"车易云毛利润表备份完成！")
             # 13. 导出到MongoDB
             self.data_writer.export_to_mongodb(
                 df_salesAgg_mongo,

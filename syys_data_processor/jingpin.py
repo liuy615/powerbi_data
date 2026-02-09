@@ -11,7 +11,7 @@ class JingpinProcessor:
     # 配置常量
     DIRECTORIES = [r"E:\powerbi_data\看板数据\私有云文件本地\精品销售"]
     SHEET_NAME = '精品销售台账'
-    OUTPUT_PATH = r"E:\powerbi_data\看板数据\cyy_old_data\精品销售.csv"
+    OUTPUT_PATH = r"/看板数据/cyy_old_data/精品销售.csv"
 
     # 需要处理的列配置
     COLUMNS_TO_KEEP = [

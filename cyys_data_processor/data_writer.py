@@ -195,7 +195,6 @@ class DataWriter:
         # 过滤精品数据
         df_jingpin_result['最早收款日期'] = pd.to_datetime(df_jingpin_result['最早收款日期'], errors='coerce',format='mixed')
         filtered_df_jingpin_result = df_jingpin_result[df_jingpin_result['最早收款日期'] >= start_date].copy()
-        filtered_df_jingpin_result['收款日期'] = pd.to_datetime(filtered_df_jingpin_result['收款日期'], format='mixed',errors='coerce').dt.strftime('%Y/%m/%d')
         filtered_df_jingpin_result['订单门店'] = np.where(filtered_df_jingpin_result['订单门店'].str.contains('直播基地'), '直播基地',filtered_df_jingpin_result['订单门店'])
 
         # 准备调拨数据

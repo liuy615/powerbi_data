@@ -230,13 +230,10 @@ class CyysDataProcessorApp:
             # 创建临时的DataWriter实例用于调用数据处理方法
             temp_data_writer = DataWriter(self.db_manager)
             df_salesAgg_mongo, df_jingpin_result_mongo, df_diao_mongo = temp_data_writer.prepare_mongodb_data(df_salesAgg_combined, df_jingpin_result)
-
             # 格式化日期字段（保持原有格式）
             df_salesAgg_mongo['订车日期'] = pd.to_datetime(df_salesAgg_mongo['订车日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_salesAgg_mongo['开票日期'] = pd.to_datetime(df_salesAgg_mongo['开票日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_salesAgg_mongo['收款日期'] = pd.to_datetime(df_salesAgg_mongo['收款日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
-            df_jingpin_result_mongo['开票日期'] = pd.to_datetime(df_jingpin_result_mongo['开票日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
-            df_jingpin_result_mongo['收款日期'] = pd.to_datetime(df_jingpin_result_mongo['收款日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_jingpin_result_mongo['最早收款日期'] = pd.to_datetime(df_jingpin_result_mongo['最早收款日期'],errors='coerce', format='mixed').dt.strftime('%Y/%m/%d')
             df_diao_mongo['订车日期'] = pd.to_datetime(df_diao_mongo['订车日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_diao_mongo['开票日期'] = pd.to_datetime(df_diao_mongo['开票日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
