@@ -145,6 +145,7 @@ def TMSJ1():
         df_final = pd.concat(all_dfs, axis=0,join='outer')
         df_final = df_final.dropna(subset=['新车销售店名'], how='all')
         df_final['新车销售店名'] = df_final['新车销售店名'].replace('文景初治', '上元盛世')
+        df_final['新车销售店名'] = df_final['新车销售店名'].replace('永乐盛世', '洪武盛世')
     else:
         df_final = pd.DataFrame()
     return df_final
@@ -184,5 +185,6 @@ if not df_TMSJ.empty:
     # 应用函数到每一行并创建新列
     df_TMSJ['成都腾豹贴膜返利'] = df_TMSJ.apply(calculate_rebate, axis=1)
     df_TMSJ['新车销售店名'] = df_TMSJ['新车销售店名'].replace('文景初治', '上元盛世')
+    df_TMSJ['新车销售店名'] = df_TMSJ['新车销售店名'].replace('永乐盛世', '洪武盛世')
     df_TMSJ.to_csv(r'E:\powerbi_data\看板数据\dashboard\贴膜升级.csv', index=False)
 df_TMSJ1.to_csv(r'E:\powerbi_data\看板数据\dashboard\贴膜升级1.csv', index=False)
