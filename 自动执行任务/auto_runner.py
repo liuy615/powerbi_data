@@ -32,7 +32,7 @@ def cyy_auto_runner():
         r"E:\powerbi_data\powerbi_data\cyys_data_processor\数据备份.py",  # 数据备份
     ]
 
-    config = generate_time_range_schedule("08:52", "21:52", 30, "minutes")
+    config = generate_time_range_schedule("08:52", "22:52", 30, "minutes")
     runner = ScheduledTaskRunner("车易云数据清洗")
     runner.start_schedule(scripts, config)
 
@@ -49,16 +49,27 @@ def daypaper_auto_runner():
     runner.start_schedule(scripts, config)
 
 
+def cyy_all_auto_runner():
+    """日报任务执行器"""
+    scripts = [
+        r"E:\powerbi_data\powerbi_data\cyys_data_download\cyy_to_mysql_month_all.py",
+    ]
+
+    config = generate_daily_schedule("01:00")
+    runner = ScheduledTaskRunner("日报定时发送")
+    runner.start_schedule(scripts, config)
+
 # 创建并启动独立线程
 syy_thread = threading.Thread(target=syy_auto_runner, daemon=True, name="SYY_Task")
 cyy_thread = threading.Thread(target=cyy_auto_runner, daemon=True, name="CYY_Task")
 Daypaper = threading.Thread(target=daypaper_auto_runner, daemon=True, name="Daypaper")
-
+cyy_all_clean = threading.Thread(target=cyy_all_auto_runner, daemon=True, name="Cyy_All")
 
 
 syy_thread.start()
 cyy_thread.start()
 Daypaper.start()
+cyy_all_clean.start()
 
 
 
