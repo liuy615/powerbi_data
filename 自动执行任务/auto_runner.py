@@ -11,6 +11,7 @@ def syy_auto_runner():
         r"E:\powerbi_data\powerbi_data\syys_data_processor\tmsj.py",
         r"E:\powerbi_data\powerbi_data\syys_data_processor\jingpin.py",
         r"E:\powerbi_data\powerbi_data\syys_data_processor\qbwy.py",
+        r"E:\powerbi_data\powerbi_data\syys_data_processor\sanfang.py",
         r"E:\powerbi_data\powerbi_data\syys_data_processor\syy_5separately.py",
     ]
 

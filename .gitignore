@@ -1,0 +1,8 @@
+# 忽略 Python 编译文件
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.venv/
+env/
