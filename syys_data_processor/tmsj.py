@@ -3,6 +3,10 @@ import os
 import re
 import numpy as np
 import pandas as pd
+from sqlalchemy import create_engine
+from config.cyys_data_application.config import APP_DB_CONFIG
+
+
 
 def read_excel_files(directory, sheet_name):
     """
@@ -109,7 +113,6 @@ def TMSJ():
         else:
             df_final['到店日期'] = df_final['推送日期']        
         df_final = df_final[df_final['到店日期'].notna()]
-        print(df_final.head())
     else:
         df_final = pd.DataFrame()
     return df_final
@@ -139,7 +142,6 @@ def TMSJ1():
         df_combined = process_single_file(directory, sheet_name)  # 调用新函数
         if df_combined is not None:
             all_dfs.append(df_combined)
-            print(all_dfs)
 
     if all_dfs:
         df_final = pd.concat(all_dfs, axis=0,join='outer')
@@ -150,8 +152,42 @@ def TMSJ1():
         df_final = pd.DataFrame()
     return df_final
 
+# 新增方法：将DataFrame写入数据库
+def write_df_to_db(df: pd.DataFrame, table_name: str) -> bool:
+    # 创建写入数据库引擎
+    try:
+        output_engine = create_engine(
+            f"mysql+pymysql://{APP_DB_CONFIG['user']}:{APP_DB_CONFIG['password']}@{APP_DB_CONFIG['host']}:{APP_DB_CONFIG['port']}/{APP_DB_CONFIG['database']}?charset=utf8mb4",echo=False
+        )
+        print("输出数据库引擎创建成功")
+    except Exception as e:
+        print(f"输出数据库引擎创建失败: {str(e)}", exc_info=True)
+        raise
+
+    """将DataFrame写入数据库"""
+    try:
+        print(f"开始写入数据库表：{table_name}")
+        # 写入数据库，如果表存在则替换
+        df.to_sql(
+            name=table_name,
+            con=output_engine,
+            if_exists='replace',
+            index=False,
+            chunksize=1000
+        )
+        print(f"成功写入表 {table_name}，数据行数：{len(df)}")
+        return True
+    except Exception as e:
+        print(f"数据写入失败（表：{table_name}）：{str(e)}", exc_info=True)
+        return False
+
+
+
 # 执行代码
 df_TMSJ1 = TMSJ1()
+df_TMSJ1.to_csv(r'E:\powerbi_data\看板数据\dashboard\贴膜升级1.csv', index=False)
+
+
 df_TMSJ = TMSJ()
 if not df_TMSJ.empty:
     df_TMSJ = df_TMSJ[['月份', '推送日期','到店日期','到店日期_辅助', '新车销售店名', '新车销售店名_腾豹自店','车型', '车架号', '客户姓名', '是否送龙膜/高等级膜',
@@ -187,4 +223,9 @@ if not df_TMSJ.empty:
     df_TMSJ['新车销售店名'] = df_TMSJ['新车销售店名'].replace('文景初治', '上元盛世')
     df_TMSJ['新车销售店名'] = df_TMSJ['新车销售店名'].replace('永乐盛世', '洪武盛世')
     df_TMSJ.to_csv(r'E:\powerbi_data\看板数据\dashboard\贴膜升级.csv', index=False)
-df_TMSJ1.to_csv(r'E:\powerbi_data\看板数据\dashboard\贴膜升级1.csv', index=False)
+    df_tmsj = df_TMSJ[["新车销售店名", "推送日期", "到店日期", "车型", "车架号（后6位）", "客户姓名", "膜升级毛利润", "其他项升级毛利润", "合计升级毛利润", "三方返还佣金"]].rename(columns={"新车销售店名": "公司名称", "车型":"车系"}).copy()
+    write_df_to_db(df_tmsj, 'tmsj_sales')
+
+
+
+

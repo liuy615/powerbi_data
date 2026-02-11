@@ -682,7 +682,7 @@ class update_dashboard:
             '销售毛利1.csv': 'sales_profit',
             '定车1.csv': 'orders',
             '库存1.csv': 'inventory',
-            '精品销售1.csv': 'premium_sales',
+            '精品销售1.csv': 'jingpin_sales',
             '退订1.csv': 'refunds',
             '所有定单1.csv': 'all_orders',
             '三方台账1.csv': 'third_party_ledger',
@@ -704,9 +704,11 @@ class update_dashboard:
         df_dings_all_mysql = df_dings_all[["车架号", "定单归属门店", "定单状态", "销售顾问", "定金金额", "审批状态", "所属团队", "车系", "主播人员", "联系电话", "非退定核算", "退订原因"]].copy()
         df_dings_all_mysql.rename(columns={'定单状态': '定单时间', '定单归属门店': '公司名称'}, inplace=True)
         self._write_df_to_db(df_dings_all_mysql, table_mapping['所有定单1.csv'])
+        df_jingpins_mysql = df_jingpins[["新车销售门店", "收款日期", "精品销售日期", "精品销售人员", "车架号", "车系", "客户姓名", "电话号码", "物资明细", "毛利润", "服务网络"]].rename(columns={"新车销售门店": "公司名称"}).copy()
+        self._write_df_to_db(df_jingpins_mysql, table_mapping['精品销售1.csv'])
+
 
         # self._write_df_to_db(df_Ers, table_mapping['二手车1.csv'])
-        # self._write_df_to_db(df_jingpins, table_mapping['精品销售1.csv'])
         # self._write_df_to_db(df_tuis, table_mapping['退订1.csv'])
         # self._write_df_to_db(df_books, table_mapping['定车1.csv'])
         # self._write_df_to_db(df_debits, table_mapping['三方台账1.csv'])

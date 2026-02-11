@@ -1,7 +1,8 @@
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
 import pandas as pd
-
+from sqlalchemy import create_engine
+from config.cyys_data_application.config import APP_DB_CONFIG
 
 class JingpinProcessor:
     """
@@ -80,6 +81,7 @@ class JingpinProcessor:
 
         # 重命名门店
         self.df_jingpin['新车销售门店'] = self.df_jingpin['新车销售门店'].replace('文景初治', '上元盛世')
+        self.df_jingpin['新车销售门店'] = self.df_jingpin['新车销售门店'].replace('永乐盛世', '洪武盛世')
 
     def load_data(self):
         """

@@ -2,6 +2,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
 import pandas as pd
 from typing import List, Optional, Tuple
+from sqlalchemy import create_engine
+from config.cyys_data_application.config import APP_DB_CONFIG
 
 
 class SanfangYBProcessor:
@@ -187,7 +189,7 @@ class SanfangYBProcessor:
 
         # 原逻辑：替换店名
         df['新车销售店名'] = df['新车销售店名'].replace(self.store_name_mapping)
-        print("已完成店名替换：'文景初治' -> '上元盛世'")
+        print("已完成店名替换")
         return df
 
     def save_result(self, df: pd.DataFrame) -> None:
@@ -206,6 +208,36 @@ class SanfangYBProcessor:
         except Exception as e:
             raise RuntimeError(f"保存文件失败：{str(e)}") from e
 
+    # 新增方法：将DataFrame写入数据库
+    def write_df_to_db(self, df: pd.DataFrame, table_name: str) -> bool:
+        # 创建写入数据库引擎
+        try:
+            output_engine = create_engine(
+                f"mysql+pymysql://{APP_DB_CONFIG['user']}:{APP_DB_CONFIG['password']}@{APP_DB_CONFIG['host']}:{APP_DB_CONFIG['port']}/{APP_DB_CONFIG['database']}?charset=utf8mb4",echo=False
+            )
+            print("输出数据库引擎创建成功")
+        except Exception as e:
+            print(f"输出数据库引擎创建失败: {str(e)}", exc_info=True)
+            raise
+
+        """将DataFrame写入数据库"""
+        try:
+            print(f"开始写入数据库表：{table_name}")
+            # 写入数据库，如果表存在则替换
+            df = df[["新车销售店名", "延保销售日期", "车系", "车架号", "客户姓名", "电话号码1", "延保销售人员", "金额"]].rename(columns={"新车销售店名": "公司名称"}).copy()
+            df.to_sql(
+                name=table_name,
+                con=output_engine,
+                if_exists='replace',
+                index=False,
+                chunksize=1000
+            )
+            print(f"成功写入表 {table_name}，数据行数：{len(df)}")
+            return True
+        except Exception as e:
+            print(f"数据写入失败（表：{table_name}）：{str(e)}", exc_info=True)
+            return False
+
     def run(self, directories: Optional[List[str]] = None) -> pd.DataFrame:
         """
         核心执行方法：串联整个数据处理流程（外部调用入口）
@@ -222,6 +254,7 @@ class SanfangYBProcessor:
         df_filtered = self._filter_and_select_columns(df_merged)
         df_final = self._replace_store_name(df_filtered)
         self.save_result(df_final)
+        self.write_df_to_db(df_final, 'sanfang_sales')
 
         return df_final
 

@@ -6,7 +6,9 @@ import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pymongo import MongoClient
 from typing import List, Tuple, Optional, Dict, Any
-
+from sqlalchemy import create_engine
+from config.cyys_data_application.config import APP_DB_CONFIG
+pd.set_option('future.no_silent_downcasting', True)
 
 class Config:
     """配置管理类"""
@@ -363,7 +365,7 @@ class NewCarInsuranceProcessor(DataProcessor):
     def process_new_car_insurance(cls) -> pd.DataFrame:
         """处理新车保险数据 - 更新为xcbx.py中的逻辑"""
         # 读取主数据
-        df_main = pd.read_csv(Config.FILE_PATHS['new_insurance_csv']).replace("永乐盛世", "洪武盛世")
+        df_main = pd.read_csv(Config.FILE_PATHS['new_insurance_csv'], low_memory=False).replace("永乐盛世", "洪武盛世")
         df_main['总费用_次数'] = 1
 
         # 读取保险数据
@@ -415,10 +417,10 @@ class NewCarInsuranceProcessor(DataProcessor):
 
         # 只保留存在的列
         available_cols = [col for col in required_cols if col in df_combined.columns]
-        df_filtered = df_combined[available_cols]
+        df_filtered = df_combined[available_cols].copy()
 
         # 添加日期列
-        df_filtered['日期'] = df_filtered['签单日期']
+        df_filtered.loc[:, '日期'] = df_filtered['签单日期']
 
         return df_filtered
 
@@ -508,6 +510,36 @@ class DataExporter:
                 df.to_csv(file_path, index=False)
                 print(f"已导出 {name} 数据到: {file_path}")
 
+    @staticmethod
+    # 新增方法：将DataFrame写入数据库
+    def write_df_to_db(df: pd.DataFrame, table_name: str) -> bool:
+        # 创建写入数据库引擎
+        try:
+            output_engine = create_engine(
+                f"mysql+pymysql://{APP_DB_CONFIG['user']}:{APP_DB_CONFIG['password']}@{APP_DB_CONFIG['host']}:{APP_DB_CONFIG['port']}/{APP_DB_CONFIG['database']}?charset=utf8mb4",echo=False
+            )
+            print("输出数据库引擎创建成功")
+        except Exception as e:
+            print(f"输出数据库引擎创建失败: {str(e)}", exc_info=True)
+            raise
+
+        """将DataFrame写入数据库"""
+        try:
+            print(f"开始写入数据库表：{table_name}")
+            # 写入数据库，如果表存在则替换
+            df.to_sql(
+                name=table_name,
+                con=output_engine,
+                if_exists='replace',
+                index=False,
+                chunksize=1000
+            )
+            print(f"成功写入表 {table_name}，数据行数：{len(df)}")
+            return True
+        except Exception as e:
+            print(f"数据写入失败（表：{table_name}）：{str(e)}", exc_info=True)
+            return False
+
 
 def main():
     """主函数"""
@@ -544,6 +576,13 @@ def main():
         '新车保险台账': remaining_vehicles,
         '全赔无忧': comprehensive_sales
     })
+
+    # 8. 保存到数据库
+    merged_insurance_mysql = merged_insurance_data[["所属门店", "服务网络", "日期", "车系", "车架号", "客户姓名", "手机号码", "全保无忧版本", "全保无忧金额", "利润", "保赔无忧金额", "双保无忧金额"]].rename(columns={"所属门店": "公司名称"}).copy()
+    DataExporter.write_df_to_db(merged_insurance_mysql, 'qbwy_sales')
+    remaining_vehicles_mysql = remaining_vehicles[["数据归属门店", "车架号", "日期", "是否保赔"]].rename(columns={"数据归属门店": "公司名称"}).copy()
+    DataExporter.write_df_to_db(remaining_vehicles_mysql, 'insurance_sales')
+
 
     print("数据处理完成！")
 
