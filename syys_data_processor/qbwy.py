@@ -1,3 +1,4 @@
+import sys
 from datetime import datetime
 import pandas as pd
 import numpy as np
@@ -6,6 +7,8 @@ import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pymongo import MongoClient
 from typing import List, Tuple, Optional, Dict, Any
+project_root = r"E:\powerbi_data"
+sys.path.insert(0, project_root)
 from sqlalchemy import create_engine
 from config.cyys_data_application.config import APP_DB_CONFIG
 pd.set_option('future.no_silent_downcasting', True)

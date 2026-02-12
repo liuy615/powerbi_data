@@ -1,8 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
 import pandas as pd
-from sqlalchemy import create_engine
-from config.cyys_data_application.config import APP_DB_CONFIG
 
 class JingpinProcessor:
     """

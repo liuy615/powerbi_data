@@ -1,7 +1,10 @@
+import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
 import pandas as pd
 from typing import List, Optional, Tuple
+project_root = r"E:\powerbi_data"
+sys.path.insert(0, project_root)
 from sqlalchemy import create_engine
 from config.cyys_data_application.config import APP_DB_CONFIG
 
