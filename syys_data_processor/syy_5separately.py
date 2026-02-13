@@ -147,6 +147,7 @@ class FilmUpgradeAnalyzer:
 
         # 提取日期部分（去掉时间）
         combined_df['推送日期'] = combined_df['推送日期'].dt.date
+        combined_df.replace("永乐盛世", "洪武盛世")
         # combined_df.to_csv("combined_df.csv")
 
         return combined_df
@@ -204,7 +205,8 @@ class FilmUpgradeAnalyzer:
             final_columns = ['公司名称', '年份', '月份', '总成本']
 
             df_final = df_filtered[final_columns].copy()
-            # print(df_final)
+            df_final.replace("永乐盛世", "洪武盛世")
+            df_final.replace("文景初治", "上元盛世")
             return df_final
 
         except FileNotFoundError:
@@ -263,7 +265,7 @@ class DecorationOrdersExtractor:
         }
 
         # 筛选条件
-        self.target_sales_consultants = ['郑仁彬', '刘红梅', '郝小龙', '衡珊珊', '蒲松涛', '陈玲玲', '黄维']
+        self.target_sales_consultants = ['郑仁彬', '刘红梅', '郝小龙', '衡珊珊', '蒲松涛', '陈玲玲', '黄维', '侯容灯', '徐潘潘']
         self.target_organize_names = ['上元臻盛', '上元臻智', '上元星汉', '上元弘川', '上元坤灵', '文景盛世', '文景海洋', '上元盛世', '洪武盛世', '新港海川', '新港永初']
 
         # 数据库连接对象
