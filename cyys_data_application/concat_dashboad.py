@@ -99,6 +99,7 @@ class update_dashboard:
         self.team_belongs = self.Team_belongs()
         self.df_plan_date_get = self.Df_plan_date_get()
         self.df_inventorys_lock = self.Df_inventory_lock()
+        self.df_dkh = self.Df_dkh()
 
     # -------------------------- 2. 修复数据库读取：显式构造SQL语句，反引号包裹表名 --------------------------
     def _read_from_db(self, table_name: str) -> pd.DataFrame:
@@ -208,9 +209,10 @@ class update_dashboard:
         return pd.read_csv(r'E:/powerbi_data/看板数据/cyy_old_data/计划车辆汇总.csv', low_memory=False).replace("永乐盛世", "洪武盛世")
 
     def Df_inventory_lock(self) -> pd.DataFrame:
-        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/库存存档.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  
+        return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/库存存档.csv', low_memory=False).replace("永乐盛世", "洪武盛世")
 
-
+    def Df_dkh(self):
+        return pd.read_csv(r'E:\powerbi_data\看板数据\私有云文件本地\data\售前看板数据源\大客户备案.csv', low_memory=False).replace("永乐盛世","洪武盛世")
     # -------------------------- 核心修复：切片后加.copy()解决SettingWithCopyWarning --------------------------
     def classify_inventory_duration(self, row):
         inventory_time = row['库存时间']
@@ -596,6 +598,8 @@ class update_dashboard:
 
         df_inventorys['提货价'] = df_inventorys['提货价'].astype('float')
         df_inventorys['车系'] = np.where((df_inventorys['车系'] == "2025款海鸥") & (df_inventorys['提货价'] == 65800),'2025款 海鸥', df_inventorys['车系'])
+        # 库存匹配大客户
+        df_inventorys['大客户'] = np.where(df_inventorys['采购订单号'].isin(self.df_dkh['采购订单编号']), '大客户','非大客户')
 
         # 切片后加copy
         df_carseris = pd.concat(
