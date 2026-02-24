@@ -712,6 +712,7 @@ class update_dashboard:
         self._write_df_to_db(df_jingpins_mysql, table_mapping['精品销售1.csv'])
 
 
+
         # self._write_df_to_db(df_Ers, table_mapping['二手车1.csv'])
         # self._write_df_to_db(df_tuis, table_mapping['退订1.csv'])
         # self._write_df_to_db(df_books, table_mapping['定车1.csv'])
