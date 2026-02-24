@@ -231,8 +231,6 @@ class CyysDataProcessorApp:
             df_salesAgg_mongo['订车日期'] = pd.to_datetime(df_salesAgg_mongo['订车日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_salesAgg_mongo['开票日期'] = pd.to_datetime(df_salesAgg_mongo['开票日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_salesAgg_mongo['收款日期'] = pd.to_datetime(df_salesAgg_mongo['收款日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
-            # df_jingpin_result_mongo['开票日期'] = pd.to_datetime(df_jingpin_result_mongo['开票日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
-            # df_jingpin_result_mongo['收款日期'] = pd.to_datetime(df_jingpin_result_mongo['收款日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_jingpin_result_mongo['最早收款日期'] = pd.to_datetime(df_jingpin_result_mongo['最早收款日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_diao_mongo['订车日期'] = pd.to_datetime(df_diao_mongo['订车日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
             df_diao_mongo['开票日期'] = pd.to_datetime(df_diao_mongo['开票日期'], errors='coerce',format='mixed').dt.strftime('%Y/%m/%d')
