@@ -17,7 +17,6 @@ pd.set_option('display.max_columns', 100)
 """数据处理基类，提供统一的日志和异常处理"""
 class DataProcessorBase:
 
-
     def __init__(self, processor_name: str, base_data_dir: str = r"E:\powerbi_data\看板数据"):
         self.processor_name = processor_name
         self.base_data_dir = base_data_dir
@@ -75,174 +74,9 @@ class DataProcessorBase:
             self.logger.error(f"执行失败 {func.__name__}: {str(e)}", exc_info=True)
             return None
 
-"""MongoDB连接配置类"""
-class MongoDBConfig:
-    def __init__(self, host='192.168.1.7', port=27017,username='xg_wd', password='H91NgHzkvRiKygTe4X4ASw',auth_source='xg', database='xg_JiaTao'):
-        self.host = host
-        self.port = port
-        self.username = username
-        self.password = password
-        self.auth_source = auth_source
-        self.database_name = database
-
-    def get_connection_string(self):
-        """构建连接字符串"""
-        return f'mongodb://{self.username}:{self.password}@{self.host}:{self.port}/{self.database_name}?authSource={self.auth_source}&authMechanism=SCRAM-SHA-256'
-
-    def get_database_name(self):
-        return self.database_name
-
-"""MongoDB客户端操作类"""
-class MongoDBClient:
-    def __init__(self, config):
-        self.config = config
-        self.client = None
-        self.db = None
-        self.connected = False
-
-    def connect(self):
-        """建立数据库连接"""
-        try:
-            self.client = MongoClient(self.config.get_connection_string())
-            self.db = self.client[self.config.get_database_name()]
-
-            # 测试连接
-            self.client.admin.command('ping')
-            self.connected = True
-            print("成功连接到MongoDB!")
-            return True
-
-        except Exception as e:
-            print(f"连接失败: {e}")
-            self.connected = False
-            return False
-
-    def disconnect(self):
-        """关闭数据库连接"""
-        if self.client:
-            self.client.close()
-            self.connected = False
-            print("数据库连接已关闭")
-
-    def get_collection_count(self, collection_name):
-        """获取指定集合的文档数量"""
-        if not self.connected:
-            print("未建立数据库连接")
-            return 0
-
-        try:
-            collection = self.db[collection_name]
-            return collection.count_documents({})
-        except Exception as e:
-            print(f"获取文档数量失败: {e}")
-            return 0
-
-    def query_data_with_projection(self, collection_name, desired_fields, limit=None, query_filter=None):
-        """查询指定集合中指定字段的数据"""
-        if not self.connected:
-            print("未建立数据库连接")
-            return None
-
-        try:
-            # 获取指定集合
-            collection = self.db[collection_name]
-
-            # 动态构建投影
-            projection = {field: 1 for field in desired_fields}
-            projection["_id"] = 0  # 不返回_id
-
-            # 设置查询过滤器，默认为空
-            if query_filter is None:
-                query_filter = {}
-
-            # 查询数据
-            query = collection.find(query_filter, projection)
-            if limit:
-                query = query.limit(limit)
-
-            # 转换为列表和DataFrame
-            data_list = list(query)
-            df = pd.DataFrame(data_list)
-
-            return df
-
-        except Exception as e:
-            print(f"查询失败: {e}")
-            return None
-
-    def query_all_data(self, collection_name, limit=None, query_filter=None, exclude_id=True):
-        """查询指定集合中的所有数据"""
-        if not self.connected:
-            print("未建立数据库连接")
-            return None
-
-        try:
-            # 获取指定集合
-            collection = self.db[collection_name]
-
-            # 设置投影，默认不返回_id字段
-            projection = {"_id": 0} if exclude_id else {}
-
-            # 设置查询过滤器，默认为空
-            if query_filter is None:
-                query_filter = {}
-
-            # 查询数据
-            query = collection.find(query_filter, projection)
-            if limit:
-                query = query.limit(limit)
-
-            # 转换为列表和DataFrame
-            data_list = list(query)
-            df = pd.DataFrame(data_list)
-
-            return df
-
-        except Exception as e:
-            print(f"查询失败: {e}")
-            return None
-
-    def list_collections(self):
-        """列出数据库中的所有集合"""
-        if not self.connected:
-            print("未建立数据库连接")
-            return []
-
-        try:
-            collections = self.db.list_collection_names()
-            print("数据库中的集合列表:")
-            for i, collection in enumerate(collections, 1):
-                print(f"{i}. {collection}")
-            return collections
-        except Exception as e:
-            print(f"获取集合列表失败: {e}")
-            return []
-
-    def get_collection_fields(self, collection_name, sample_size=5):
-        """获取指定集合的字段信息"""
-        if not self.connected:
-            print("未建立数据库连接")
-            return []
-
-        try:
-            collection = self.db[collection_name]
-            sample_doc = collection.find_one()
-            if sample_doc:
-                fields = list(sample_doc.keys())
-                print(f"集合 '{collection_name}' 的字段:")
-                for field in fields:
-                    print(f"- {field}")
-                return fields
-            else:
-                print(f"集合 '{collection_name}' 为空或不存在")
-                return []
-        except Exception as e:
-            print(f"获取字段信息失败: {e}")
-            return []
 
 """营销投放费用数据处理器"""
 class YingxiaoMoneyProcessor(DataProcessorBase):
-
 
     def __init__(self, base_data_dir: str = r"E:\powerbi_data\看板数据"):
         super().__init__("营销投放费用处理器", base_data_dir)
@@ -373,7 +207,6 @@ class YingxiaoMoneyProcessor(DataProcessorBase):
 """特殊事项收入数据处理器"""
 class SpecialIncomeProcessor(DataProcessorBase):
 
-
     def __init__(self, base_data_dir: str = r"E:\powerbi_data\看板数据"):
         super().__init__("特殊事项收入处理器", base_data_dir)
 
@@ -495,7 +328,6 @@ class SpecialIncomeProcessor(DataProcessorBase):
 """数据合并处理器"""
 class DataMerger(DataProcessorBase):
 
-
     def __init__(self, base_data_dir: str = r"E:\powerbi_data\看板数据"):
         super().__init__("数据合并处理器", base_data_dir)
 
@@ -550,14 +382,16 @@ class DataMerger(DataProcessorBase):
             ],
             "quality_files": [
                 r'E:\powerbi_data\看板数据\私有云文件本地\收集文件\2025年数据汇总表.xlsx',
-                r'E:\powerbi_data\看板数据\私有云文件本地\收集文件\2024年数据汇总表.xlsx'
+                r'E:\powerbi_data\看板数据\私有云文件本地\收集文件\2024年数据汇总表.xlsx',
+                r'E:\powerbi_data\看板数据\私有云文件本地\收集文件\2026年数据汇总表.xlsx',
             ],
             "quality_files1": [
                 r'E:\powerbi_data\看板数据\私有云文件本地\收集文件\2025年数据汇总表.xlsx',
-                r'E:\powerbi_data\看板数据\私有云文件本地\收集文件\2024年数据汇总表.xlsx'
+                r'E:\powerbi_data\看板数据\私有云文件本地\收集文件\2024年数据汇总表.xlsx',
+                r'E:\powerbi_data\看板数据\私有云文件本地\收集文件\2026年数据汇总表.xlsx',
             ],
             "wes_files": [
-                r"E:\powerbi_data\看板数据\私有云文件本地\收集文件\2025年WES返利汇总表.xlsx"
+                r"E:\powerbi_data\看板数据\私有云文件本地\收集文件\2026年WES返利汇总表.xlsx",
             ]
         }
 
@@ -663,7 +497,6 @@ class DataMerger(DataProcessorBase):
 
 """主数据处理器 - 统一调度所有数据处理任务"""
 class MainDataProcessor:
-
 
     def __init__(self, base_data_dir: str = r"E:\powerbi_data\看板数据"):
         self.base_data_dir = base_data_dir
