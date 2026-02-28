@@ -277,8 +277,7 @@ class ComprehensiveInsuranceProcessor(DataProcessor):
 class DerivativeInsuranceProcessor(DataProcessor):
     REQUIRED_COLUMNS = {
         'derivative': [
-            '车架号', '车系', '销售日期', '开票日期', '客户姓名', '手机号码',
-            '保赔无忧金额', '双保无忧金额', '终身保养金额','销售顾问', '所属门店', '备注', '日期'
+            '车架号', '车系', '销售日期', '开票日期', '客户姓名', '手机号码', '保赔无忧金额', '双保无忧金额', '终身保养金额','销售顾问', '所属门店', '备注', '日期'
         ]
     }
 
@@ -357,7 +356,7 @@ class DerivativeInsuranceProcessor(DataProcessor):
 class NewCarInsuranceProcessor(DataProcessor):
     @classmethod
     def process_new_car_insurance(cls) -> pd.DataFrame:
-        """处理新车保险数据 - 更新为xcbx.py中的逻辑"""
+        """处理新车保险数据"""
         # 读取主数据
         df_main = pd.read_csv(Config.FILE_PATHS['new_insurance_csv'], low_memory=False).replace("永乐盛世", "洪武盛世")
         df_main['总费用_次数'] = 1
@@ -376,7 +375,7 @@ class NewCarInsuranceProcessor(DataProcessor):
             '业务人员': '销售顾问'
         }, inplace=True)
 
-        # 处理永乐盛世数据
+        # 处理总数据
         df_cyy['签单日期'] = pd.to_datetime(df_cyy['签单日期'], errors='coerce').dt.date
         start_date = pd.to_datetime('2025-04-01').date()
         df_cyy = df_cyy[df_cyy['签单日期'] >= start_date]
@@ -434,7 +433,7 @@ class InsuranceDataMerger:
             merged_data["销售日期"].isna(),  # 条件1：日期为空
             "日期为空",  # 条件1满足时的赋值
             np.where(  # 条件1不满足时，进入第二层判断
-                merged_data["销售日期"] > pd.to_datetime("2026/02/01"),  # 条件2：日期在3月1日之后
+                merged_data["销售日期"] > pd.to_datetime("2026/03/01"),  # 条件2：日期在3月1日之后
                 "是",  # 条件2满足时的赋值
                 "否"  # 条件2不满足时的赋值
             )
@@ -468,7 +467,7 @@ class InsuranceDataMerger:
 
     @staticmethod
     def mark_comprehensive_insurance(comprehensive_df: pd.DataFrame, insurance_df: pd.DataFrame) -> pd.DataFrame:
-        """标记全保无忧保险数据 - 更新为xcbx.py中的逻辑"""
+        """标记全保无忧保险数据"""
         # 创建标记
         wy_flag = (comprehensive_df.groupby('车架号')
                    .size()
@@ -487,7 +486,7 @@ class InsuranceDataMerger:
 
     @staticmethod
     def filter_excluded_vehicles(insurance_df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
-        """筛选排除的车辆 - 更新为xcbx.py中的逻辑"""
+        """筛选排除的车辆"""
         # 排除运营车的逻辑
         exclude_mask = (
             insurance_df['保险公司'].str.contains('鼎和', na=False) | insurance_df['交强险保费'].isin(Config.EXCLUDE_INSURANCE_VALUES) |
@@ -496,9 +495,27 @@ class InsuranceDataMerger:
         # 获取被排除的车架号
         excluded_vins = insurance_df[exclude_mask]['车架号'].unique()
 
+        # 获取审批流中的数据
+        config = MongoDBConfig(database='xg_JiaTao')
+        mongo_client = MongoDBClient(config)
+        COLLECTION_NAMES = {
+            'sales_data': 'YS_sales',
+            'cost_details': '全保无忧费用明细'
+        }
+
+        try:
+            if not mongo_client.connect():
+                return pd.DataFrame(), pd.DataFrame()
+
+            # 获取销售数据
+            sales_data = mongo_client.query_all_data(COLLECTION_NAMES['sales_data'])
+            sales_data_number = sales_data["车架号"].to_list()
+        except:
+            print("数据库连接失败")
+
+
         # 处理日期
         insurance_df["日期"] = pd.to_datetime(insurance_df["日期"], errors='coerce')
-        
         # 新增列【是否符合3月1日之前规则】
         # 先判断日期是否在3月1日之前，如果不是则为空值
         # 如果是，再判断车架号是否在excluded_vins中：在则标记为"不符合"，不在则标记为"符合"
@@ -509,7 +526,11 @@ class InsuranceDataMerger:
                 '不符合',
                 '符合'
             ),
-            None
+            np.where(
+                insurance_df['车架号'].isin(sales_data_number),
+                '不符合',
+                '符合'
+            )
         )
 
         # 添加城市信息
