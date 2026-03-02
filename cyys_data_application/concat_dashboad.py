@@ -164,7 +164,10 @@ class update_dashboard:
         return pd.read_csv(r'E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\新车保险台账-2025.csv',encoding='utf-8', low_memory=False)
 
     def Df_salary(self) -> pd.DataFrame:
-        return pd.read_excel(r"E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\费效分析\销售\2025年人工效能分析表-销售.xlsx",sheet_name='看板用').replace("永乐盛世", "洪武盛世")
+        data_2025 = pd.read_excel(r"E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\费效分析\销售\2025年人工效能分析表-销售.xlsx",sheet_name='看板用').replace("永乐盛世", "洪武盛世")
+        data_2026 = pd.read_excel(r"E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\费效分析\销售\2026年人工效能分析表-销售.xlsx",sheet_name='看板用').replace("永乐盛世", "洪武盛世")
+        data = pd.concat([data_2025, data_2026])
+        return data
 
     def Car_belongs(self) -> pd.DataFrame:
         return pd.read_excel(r'E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\看板部分数据源\各公司银行额度.xlsx',sheet_name='补充车系')
@@ -680,6 +683,9 @@ class update_dashboard:
         df_yingxiao.to_csv(r'E:\powerbi_data\看板数据\dashboard\市场费用.csv', index=False)
         df_carseris.to_csv(r'E:\powerbi_data\看板数据\dashboard\所有车系.csv', index=False)
         latest_stores.to_csv(r'E:\powerbi_data\看板数据\dashboard\辅助_销售顾问.csv', index=False)
+        self.df_salary.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售薪资_看板合并.csv', index=False)
+
+
         
         # 定义表名映射（CSV文件名 -> 数据库表名） - 新增
         table_mapping = {
