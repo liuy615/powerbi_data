@@ -496,11 +496,10 @@ class InsuranceDataMerger:
         excluded_vins = insurance_df[exclude_mask]['车架号'].unique()
 
         # 获取审批流中的数据
-        config = MongoDBConfig(database='xg_JiaTao')
+        config = MongoDBConfig(database='xg')
         mongo_client = MongoDBClient(config)
         COLLECTION_NAMES = {
-            'sales_data': 'YS_sales',
-            'cost_details': '全保无忧费用明细'
+            'sales_data': '新保全保剔除申请',
         }
 
         try:
@@ -510,6 +509,7 @@ class InsuranceDataMerger:
             # 获取销售数据
             sales_data = mongo_client.query_all_data(COLLECTION_NAMES['sales_data'])
             sales_data_number = sales_data["车架号"].to_list()
+            print(sales_data_number)
         except:
             print("数据库连接失败")
 
