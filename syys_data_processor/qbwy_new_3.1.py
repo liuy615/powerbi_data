@@ -508,8 +508,10 @@ class InsuranceDataMerger:
 
             # 获取销售数据
             sales_data = mongo_client.query_all_data(COLLECTION_NAMES['sales_data'])
-            # sales_data.to_csv("sales_data.csv")
-            sales_data = sales_data[sales_data["审批状态"] == "已同意"]
+            sales_data.to_csv("sales_data.csv")
+            sales_data = sales_data[(sales_data["审批状态"] == "已同意") &
+                                    (sales_data["扣除项目"].isin(["全保扣除", "新保全保均扣除"])) &
+                                    (sales_data["类型"].isin(["营运车（网约车）、出租车、教练车、租赁车", "外地车"]))]
             sales_data_number = sales_data["车架号"].to_list()
             print(sales_data_number)
         except:
