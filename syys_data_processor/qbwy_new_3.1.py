@@ -20,7 +20,8 @@ class Config:
     FILE_PATHS = {
         'car_network_excel': r'E:\powerbi_data\看板数据\私有云文件本地\data\售前看板数据源\各公司银行额度.xlsx',
         'new_insurance_csv': r"E:\powerbi_data\看板数据\私有云文件本地\data\售前看板数据源\202401_202503新车保险台账.csv",
-        'yongle_csv': r"E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\新车保险台账-2025.csv",
+        'cyy_insurance_csv': r"E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\新车保险台账-2025.csv",
+        'cyy_zhongduan_csv': r"E:\powerbi_data\看板数据\私有云文件本地\data\售前看板数据源\销售毛利1.csv",
         'output_dir': r'E:\powerbi_data\看板数据\dashboard',
         'derivative_products_dir': r"E:\powerbi_data\看板数据\私有云文件本地\衍生产品"
     }
@@ -178,6 +179,46 @@ class DataProcessor:
             Config.FILE_PATHS['car_network_excel'],
             sheet_name=Config.EXCEL_SHEET_NAMES['car_network']
         )
+
+    @staticmethod
+    def cyy_zhongduan_data() -> pd.DataFrame:
+        """加载终端数据"""
+        data = pd.read_csv(Config.FILE_PATHS['cyy_zhongduan_csv'])
+        return data[data["所属团队"].isin(["展厅组", "DCC组", "抖音组", "转介绍组", "新媒体组"])]["车架号"].to_list()
+
+    @staticmethod
+    def excluded_vins_data(insurance_df) -> pd.DataFrame:
+        """筛选排除的数据"""
+        exclude_mask = (insurance_df['保险公司'].str.contains('鼎和', na=False) | insurance_df['交强险保费'].isin(Config.EXCLUDE_INSURANCE_VALUES) |
+                               insurance_df['业务来源'].isin(Config.EXCLUDE_BUSINESS_SOURCE)) & (insurance_df['是否保赔'] == '否')
+
+        # 获取被排除的车架号
+        excluded_vins = insurance_df[exclude_mask]['车架号'].unique()
+        return excluded_vins
+
+    @staticmethod
+    def sales_vins_data() -> pd.DataFrame:
+        """加载审批提出的数据"""
+        config = MongoDBConfig(database='xg')
+        mongo_client = MongoDBClient(config)
+        COLLECTION_NAMES = {'sales_data': '新保全保剔除申请',}
+
+        try:
+            if not mongo_client.connect():
+                return pd.DataFrame(), pd.DataFrame()
+
+            # 获取销售数据
+            sales_data = mongo_client.query_all_data(COLLECTION_NAMES['sales_data'])
+            sales_data.to_csv("sales_data.csv")
+            sales_data = sales_data[(sales_data["审批状态"] == "已同意") &
+                                    (sales_data["扣除项目"].isin(["全保扣除", "新保全保均扣除"])) &
+                                    (sales_data["类型"].isin(["营运车（网约车）、出租车、教练车、租赁车", "外地车"]))]
+            sales_data_number = sales_data["车架号"].to_list()
+            print(sales_data_number)
+        except:
+            print("数据库连接失败")
+
+        return sales_data_number
 
     @staticmethod
     def adjust_live_broadcast_store(df: pd.DataFrame, store_column: str = '所属门店', merge_column: str = '车系') -> pd.DataFrame:
@@ -362,9 +403,8 @@ class NewCarInsuranceProcessor(DataProcessor):
         df_main['总费用_次数'] = 1
 
         # 读取保险数据
-        df_cyy = pd.read_csv(Config.FILE_PATHS['yongle_csv'])
-        df_cyy = df_cyy[
-            ['出单日期', '保险公司简称', '所属门店', '车系', '车架号', '交强险保费', '业务人员', '保费总额', '业务来源', '总费用_次数']]
+        df_cyy = pd.read_csv(Config.FILE_PATHS['cyy_insurance_csv'])
+        df_cyy = df_cyy[['出单日期', '保险公司简称', '所属门店', '车系', '车架号', '交强险保费', '业务人员', '保费总额', '业务来源', '总费用_次数']]
 
         # 重命名列
         df_cyy.rename(columns={
@@ -487,35 +527,15 @@ class InsuranceDataMerger:
     @staticmethod
     def filter_excluded_vehicles(insurance_df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
         """筛选排除的车辆"""
-        # 排除运营车的逻辑
-        exclude_mask = (
-            insurance_df['保险公司'].str.contains('鼎和', na=False) | insurance_df['交强险保费'].isin(Config.EXCLUDE_INSURANCE_VALUES) |
-                               insurance_df['业务来源'].isin(Config.EXCLUDE_BUSINESS_SOURCE)) & (insurance_df['是否保赔'] == '否')
+        # 获取终端数据
+        cyy_zhongduan = DataProcessor.cyy_zhongduan_data()
+        print(cyy_zhongduan)
 
-        # 获取被排除的车架号
-        excluded_vins = insurance_df[exclude_mask]['车架号'].unique()
+        # 排除运营车的逻辑
+        excluded_vins = DataProcessor.excluded_vins_data(insurance_df)
 
         # 获取审批流中的数据
-        config = MongoDBConfig(database='xg')
-        mongo_client = MongoDBClient(config)
-        COLLECTION_NAMES = {
-            'sales_data': '新保全保剔除申请',
-        }
-
-        try:
-            if not mongo_client.connect():
-                return pd.DataFrame(), pd.DataFrame()
-
-            # 获取销售数据
-            sales_data = mongo_client.query_all_data(COLLECTION_NAMES['sales_data'])
-            sales_data.to_csv("sales_data.csv")
-            sales_data = sales_data[(sales_data["审批状态"] == "已同意") &
-                                    (sales_data["扣除项目"].isin(["全保扣除", "新保全保均扣除"])) &
-                                    (sales_data["类型"].isin(["营运车（网约车）、出租车、教练车、租赁车", "外地车"]))]
-            sales_data_number = sales_data["车架号"].to_list()
-            print(sales_data_number)
-        except:
-            print("数据库连接失败")
+        sales_data_number = DataProcessor.sales_vins_data()
 
 
         # 处理日期
@@ -531,7 +551,7 @@ class InsuranceDataMerger:
                 '符合'
             ),
             np.where(
-                insurance_df['车架号'].isin(sales_data_number),
+                (insurance_df['车架号'].isin(sales_data_number)) & (~insurance_df['车架号'].isin(cyy_zhongduan)),
                 '不符合',
                 '符合'
             )
