@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 from datetime import datetime
 from sqlalchemy import create_engine
+from sqlalchemy.dialects.mssql.information_schema import columns
 from sqlalchemy.exc import SQLAlchemyError
 import warnings
 
@@ -166,6 +167,7 @@ class update_dashboard:
     def Df_salary(self) -> pd.DataFrame:
         data_2025 = pd.read_excel(r"E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\费效分析\销售\2025年人工效能分析表-销售.xlsx",sheet_name='看板用').replace("永乐盛世", "洪武盛世")
         data_2026 = pd.read_excel(r"E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\费效分析\销售\2026年人工效能分析表-销售.xlsx",sheet_name='看板用').replace("永乐盛世", "洪武盛世")
+        data_2026.rename(columns = {"月社保公积金": "月社保"}, inplace=True)
         data = pd.concat([data_2025, data_2026])
         return data
 
