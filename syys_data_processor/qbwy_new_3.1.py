@@ -283,6 +283,10 @@ class ComprehensiveInsuranceProcessor(DataProcessor):
                 sales_data['产品销售日期']
             )
 
+            # 获取终端数据
+            cyy_zhongduan = DataProcessor.cyy_zhongduan_data()
+            sales_data = sales_data[sales_data["车架号"].isin(cyy_zhongduan)]
+
             return sales_data[[
                 '业务部门', '产品状态', '客户姓名', '手机号码', '车架号', '车系', '产品销售日期', '开票日期', '日期',
                 '产品销售版本', '新车开票价格', '车辆阶段', '车辆类型','产品销售金额', '终身保养金额', '成本金额', '利润', '所属门店', '销售顾问', '车系网络', '数据有效性',
@@ -529,7 +533,6 @@ class InsuranceDataMerger:
         """筛选排除的车辆"""
         # 获取终端数据
         cyy_zhongduan = DataProcessor.cyy_zhongduan_data()
-        print(cyy_zhongduan)
 
         # 排除运营车的逻辑
         excluded_vins = DataProcessor.excluded_vins_data(insurance_df)
