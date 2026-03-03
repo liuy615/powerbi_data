@@ -532,20 +532,21 @@ class update_dashboard:
         excel_start_date = pd.Timestamp('1899-12-30')
         df_salary['年月'] = df_salary['年月'].apply(lambda x: excel_start_date + pd.Timedelta(days=x))
         df_salary['年月'] = pd.to_datetime(df_salary['年月'])
+        df_salary_bi = df_salary.copy()
         df_salary['日期'] = df_salary['年月'] + pd.offsets.MonthEnd(0)
         cols_to_convert = ['月薪酬', '月社保']
         df_salary[cols_to_convert] = df_salary[cols_to_convert].apply(lambda x: pd.to_numeric(x, errors='coerce').fillna(0))
         df_salary['总薪酬'] = df_salary['月薪酬'] + df_salary['月社保']
         df_salary['总薪酬'] = pd.to_numeric(df_salary['总薪酬'], errors='coerce').fillna(0).astype(float)
         df_salary1 = df_salary.groupby(['日期', '门店']).agg({'总薪酬': 'sum'}).reset_index()
-        return df_salary1
+        return df_salary_bi, df_salary1
 
 
     #主程序
     def run(self):
         chexi = self.Car_belongs()
         df_yingxiao = self.clean_yingxiao()
-        df_salary = self.clean_salary()
+        df_salary_bi, df_salary = self.clean_salary()
         df_sales = self.concat_newold_Sales_dashboad()
         df_sales1 = self.concat_newold_Sales_dashboad1()
         df_books = self.concat_newold_Books_dashboad()
@@ -683,7 +684,8 @@ class update_dashboard:
         df_yingxiao.to_csv(r'E:\powerbi_data\看板数据\dashboard\市场费用.csv', index=False)
         df_carseris.to_csv(r'E:\powerbi_data\看板数据\dashboard\所有车系.csv', index=False)
         latest_stores.to_csv(r'E:\powerbi_data\看板数据\dashboard\辅助_销售顾问.csv', index=False)
-        self.df_salary.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售薪资_看板合并.csv', index=False)
+
+        df_salary_bi.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售薪资_看板合并.csv', index=False)
 
 
         
