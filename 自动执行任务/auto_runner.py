@@ -42,6 +42,7 @@ def daypaper_auto_runner():
     """日报任务执行器"""
     scripts = [
         r"E:\pycharm_project\day_paper\daypaper_pbwy.py",
+        r"E:\pycharm_project\day_paper\daypaper_order.py",
     ]
 
     config = generate_daily_schedule("22:00")
