@@ -337,7 +337,7 @@ class update_dashboard:
         # 切片后加.copy()避免视图警告
         df_sales_cyy1 = self.df_sales_cyy1[
             ['服务网络', '车架号', '车系', '车型', '车辆配置', '外饰颜色', '定金金额', '指导价', '提货价',
-             '匹配定单归属门店', '到库日期', '定单日期', '销售日期', '所属团队', '销售顾问', '客户姓名']
+             '匹配定单归属门店', '到库日期', '定单日期', '销售日期', '所属团队', '销售顾问', '客户姓名', '身份证号']
         ].copy()  # 关键修复：加copy
 
         df_sales_cyy1 = df_sales_cyy1[~((df_sales_cyy1['所属团队'].isin(list(['调拨', '其他', '二手车返利']))))].copy()  # 切片后加copy
@@ -362,7 +362,7 @@ class update_dashboard:
         df_combined['到库日期'] = df_combined['到库日期'].fillna(df_combined['到库日期1'])
         df_combined = df_combined[
             ['服务网络', '车架号', '车系', '车型', '车辆配置', '外饰颜色', '定金金额', '指导价', '提货价',
-             '匹配定单归属门店', '到库日期', '定单日期', '销售日期', '所属团队', '销售顾问', '客户姓名', '当月定卖',
+             '匹配定单归属门店', '到库日期', '定单日期', '销售日期', '所属团队', '销售顾问', '客户姓名', '身份证号', '当月定卖',
              '城市']].copy()  # 切片后加copy
 
         df_combined['车辆配置'] = df_combined['车辆配置'].fillna(df_combined['车型'])
@@ -720,7 +720,6 @@ class update_dashboard:
         self._write_df_to_db(df_dings_all_mysql, table_mapping['所有定单1.csv'])
         df_jingpins_mysql = df_jingpins[["新车销售门店", "收款日期", "精品销售日期", "精品销售人员", "车架号", "车系", "客户姓名", "电话号码", "物资明细", "毛利润", "服务网络"]].rename(columns={"新车销售门店": "公司名称"}).copy()
         self._write_df_to_db(df_jingpins_mysql, table_mapping['精品销售1.csv'])
-
 
 
         # self._write_df_to_db(df_Ers, table_mapping['二手车1.csv'])

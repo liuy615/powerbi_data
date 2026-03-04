@@ -129,11 +129,13 @@ class CyysDataProcessorApp:
             # 订单数据清洗
             df_dings, df_zhubo = self.data_processor.clean_book_orders(raw_data["衍生订单"], raw_data["成交订单"], raw_data["未售订单"], service_net)
             raw_data["未售订单"].to_csv("E:/powerbi_data/看板数据/dashboard/未售订单.csv")
+
             # 作废订单数据清洗
             tui_dings_df = self.data_processor.clean_void_orders(raw_data["作废订单"], service_net)
 
             # 销售明细数据清洗
             df_salesAgg = self.data_processor.clean_sales_detail(raw_data["车辆销售明细_开票日期"], service_net)
+
 
             self.logger.info("数据清洗完成")
 
@@ -198,6 +200,7 @@ class CyysDataProcessorApp:
             self.logger.info("数据处理完成")
 
             # 10. 准备写入MySQL的数据
+            df_salesAgg_ = df_salesAgg_.merge(df_dings[["车架号", "身份证号"]], on='车架号', how="left")
             mysql_data = {
                 'sales_data': df_salesAgg_combined.drop_duplicates(),
                 'order_data': df_dings.drop_duplicates(),

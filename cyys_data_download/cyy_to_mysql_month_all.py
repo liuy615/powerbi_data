@@ -622,16 +622,72 @@ class DataSyncManager:
 
                 payload['Token'] = self.token
 
-                response = self.requester.request(
-                    url=url,
-                    method=method,
-                    **kwargs
-                )
+                # 添加重试机制
+                max_retries = 3
+                retry_delay = 5  # 秒
+                response = None
+                last_exception = None
 
-                if not response or not isinstance(response, dict):
-                    raise Exception(f"{task_name} 第{page_number}页请求返回无效数据")
+                for attempt in range(max_retries):
+                    self.logger.log_info(f"{task_name} 第{page_number}页 - 重试第{attempt + 1}次")
+                    try:
+                        response = self.requester.request(
+                            url=url,
+                            method=method,
+                            **kwargs
+                        )
 
-                # 提取数据
+                        # 检查响应结构
+                        if not response or not isinstance(response, dict):
+                            raise KeyError(f"响应不是字典类型: {type(response)}")
+
+                        if 'data' not in response:
+                            raise KeyError("响应中缺少 'data' 字段")
+
+                        # 进一步检查 data 结构
+                        page_data = response['data']
+                        if not page_data:
+                            raise KeyError("data 字段为空")
+
+                        # 检查嵌套的数据结构
+                        if 'Msg' in page_data:
+                            if 'Model' not in page_data['Msg']:
+                                raise KeyError("data.Msg 中缺少 'Model' 字段")
+                        else:
+                            if 'Data' not in page_data:
+                                raise KeyError("data 中缺少 'Data' 字段")
+
+                        # 如果所有检查都通过，跳出重试循环
+                        break
+
+                    except KeyError as e:
+                        # 专门处理数据结构错误
+                        last_exception = e
+                        if attempt < max_retries - 1:
+                            self.logger.log_warning(
+                                f"{task_name} 第{page_number}页第{attempt + 1}次请求数据结构错误: {str(e)}，{retry_delay}秒后重试")
+                            sleep(retry_delay)
+                        else:
+                            raise Exception(
+                                f"{task_name} 第{page_number}页请求数据结构错误，已重试{max_retries}次: {str(e)}")
+
+                    except Exception as e:
+                        last_exception = e
+                        if attempt < max_retries - 1:
+                            self.logger.log_warning(
+                                f"{task_name} 第{page_number}页第{attempt + 1}次请求失败: {str(e)}，{retry_delay}秒后重试")
+                            sleep(retry_delay)
+                        else:
+                            raise Exception(f"{task_name} 第{page_number}页请求失败，已重试{max_retries}次: {str(e)}")
+
+                # 如果经过重试后仍然没有有效响应，抛出异常
+                if not response or not isinstance(response, dict) or 'data' not in response:
+                    error_msg = f"{task_name} 第{page_number}页请求返回无效数据"
+                    if last_exception:
+                        error_msg += f"，最后一次错误: {str(last_exception)}"
+                    raise Exception(error_msg)
+
+                # 提取数据（这里应该不会再有KeyError，因为上面已经验证过数据结构）
                 page_data = response['data']
                 if 'Msg' in page_data:
                     page_data = page_data['Msg']['Model']
@@ -643,7 +699,8 @@ class DataSyncManager:
                     page_data = page_data.get('list', page_data.get('items', []))
 
                 if not isinstance(page_data, list):
-                    raise Exception(f"{task_name} 第{page_number}页返回数据格式不正确，预期列表类型")
+                    raise Exception(
+                        f"{task_name} 第{page_number}页返回数据格式不正确，预期列表类型，实际得到: {type(page_data)}")
 
                 all_data.extend(page_data)
 
