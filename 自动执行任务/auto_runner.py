@@ -50,6 +50,17 @@ def daypaper_auto_runner():
     runner.start_schedule(scripts, config)
 
 
+def daypaper_auto_runner_20():
+    """日报任务执行器"""
+    scripts = [
+        r"E:\pycharm_project\day_paper\daypaper_order.py",
+    ]
+
+    config = generate_daily_schedule("20:00")
+    runner = ScheduledTaskRunner("日报定时发送")
+    runner.start_schedule(scripts, config)
+
+
 def cyy_all_auto_runner():
     """日报任务执行器"""
     scripts = [
@@ -64,12 +75,14 @@ def cyy_all_auto_runner():
 syy_thread = threading.Thread(target=syy_auto_runner, daemon=True, name="SYY_Task")
 cyy_thread = threading.Thread(target=cyy_auto_runner, daemon=True, name="CYY_Task")
 Daypaper = threading.Thread(target=daypaper_auto_runner, daemon=True, name="Daypaper")
+Daypaper_20 = threading.Thread(target=daypaper_auto_runner_20, daemon=True, name="Daypaper_20")
 cyy_all_clean = threading.Thread(target=cyy_all_auto_runner, daemon=True, name="Cyy_All")
 
 
 syy_thread.start()
 cyy_thread.start()
 Daypaper.start()
+Daypaper_20.start()
 cyy_all_clean.start()
 
 
