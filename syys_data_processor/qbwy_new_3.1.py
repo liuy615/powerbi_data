@@ -255,7 +255,6 @@ class DataProcessor:
 class ComprehensiveInsuranceProcessor(DataProcessor):
     COLLECTION_NAMES = {
         'sales_data': 'YS_sales',
-        'cost_details': '全保无忧费用明细'
     }
 
     @classmethod
