@@ -710,7 +710,7 @@ class DataProcessor:
         # 筛选最终字段
         final_cols = [
             '服务网络', '公司名称', '订车日期', '入库日期', '销售日期', '车架号', '车系', '车型',
-            '车辆配置', '外饰颜色', '所属团队', '销售人员', '邀约人员', '交付专员', '车主姓名',
+            '车辆配置', '外饰颜色', '所属团队', '客户来源', '主播人员', '销售人员', '邀约人员', '交付专员', '车主姓名',
             '联系电话', '联系电话2', '身份证号', '定金金额', '指导价', '裸车成交价', '车款（发票价）',
             '提货价', '调拨费', '置换款', '精品款', '上牌费', '购买方式', '置换服务费',
             '金融服务费_顾问', '票据事务金额', '票据事务费', '代金券', '金融押金', '保险押金',
@@ -726,12 +726,12 @@ class DataProcessor:
     """合并主销售表"""
     def merge_main_sales_table(self, df_salesAgg, df_books2, df_service_aggregated, df_carcost, df_loan, df_decoration2, df_kaipiao, df_Ers2, df_Ers2_archive):
         df_salesAgg1 = df_salesAgg.copy()
-        # 合并主播信息
-        if not df_books2.empty and '车架号' in df_books2.columns and '主播人员' in df_books2.columns:
-            df_salesAgg1 = df_salesAgg1.merge(
-                df_books2[['车架号', '主播人员']],
-                on='车架号', how='left'
-            )
+        # # 合并主播信息
+        # if not df_books2.empty and '车架号' in df_books2.columns and '主播人员' in df_books2.columns:
+        #     df_salesAgg1 = df_salesAgg1.merge(
+        #         df_books2[['车架号', '主播人员']],
+        #         on='车架号', how='left'
+        #     )
 
         # 合并套餐数据
         if not df_service_aggregated.empty and '车架号' in df_service_aggregated.columns:
@@ -1133,7 +1133,7 @@ class DataProcessor:
         # 定义最终输出列
         final_columns = [
             '服务网络', '公司名称', '订车日期', '入库日期', '收款日期', '销售日期', '车架号', '车系', '车辆配置',
-            '车型', '外饰颜色', '所属团队', '调出类型', '销售人员', '邀约人员', '交付专员', '主播人员',
+            '车型', '外饰颜色', '所属团队', '客户来源', '调出类型', '销售人员', '邀约人员', '交付专员', '主播人员',
             '车主姓名', '身份证号', '联系电话', '联系电话2', '定金金额', '指导价', '裸车成交价', '销售车价',
             '车款（发票价）', '提货价', '置换款', '精品款', '后返客户款项', '保险返利', '终端返利', '返利合计',
             '增值税利润差', '税费', '毛利', '购买方式', '金融类型', '金融性质', '金融方案', '首付金额',
