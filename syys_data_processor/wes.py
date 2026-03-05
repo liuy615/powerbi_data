@@ -84,7 +84,7 @@ def data_change(df, year):
         sub = sub.rename(columns={f'{q}分数': '分数', f'{q}激励': '激励'})
 
         # 添加年季列（固定为2026年）
-        sub['年季'] = f'{year}年{q}'
+        sub['年季'] = f'{year}{q}'
 
         # 调整列顺序
         sub = sub[['公司名称', '年季', '分数', '成绩', '激励']]
