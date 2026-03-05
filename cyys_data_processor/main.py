@@ -180,6 +180,8 @@ class CyysDataProcessorApp:
 
             df_salesAgg_ = df_salesAgg_[(df_salesAgg_['所属团队'] != "调拨") & (df_salesAgg_['所属团队'].notna() & df_salesAgg_['所属团队'] != "")]
             df_salesAgg_ = df_salesAgg_.drop_duplicates()
+            df_salesAgg_ = df_salesAgg_.merge(df_dings[["车架号", "身份证号"]], on='车架号', how="left")
+            print(df_salesAgg_.columns)
 
             # 合并库存数据
             # 检查并删除重复列名
@@ -201,6 +203,7 @@ class CyysDataProcessorApp:
 
             # 10. 准备写入MySQL的数据
             df_salesAgg_ = df_salesAgg_.merge(df_dings[["车架号", "身份证号"]], on='车架号', how="left")
+            print(df_salesAgg_combined.columns)
             mysql_data = {
                 'sales_data': df_salesAgg_combined.drop_duplicates(),
                 'order_data': df_dings.drop_duplicates(),
