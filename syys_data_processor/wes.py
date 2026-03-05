@@ -64,15 +64,6 @@ def wes_run():
     df_wes.to_csv(r'E:\powerbi_data\看板数据\dashboard\data_wes.csv', index=False)
 
 
-
-def fuwupinzhi_2026():
-    pass
-
-
-
-
-
-
 def fuwupinzhi_2025():
     data = pd.read_excel(r"E:\powerbi_data\看板数据\私有云文件本地\收集文件\2025年数据汇总表.xlsx", sheet_name="服务品质", skiprows=[0, 1]).rename(columns={"1-2月激励":"2月激励"})
     
@@ -110,18 +101,72 @@ def fuwupinzhi_2025():
             data_quart[col] = data_quart[col].round(2)
     
     print("月度数据：")
-    data_month.to_csv(r'E:\powerbi_data\看板数据\dashboard\data_fwpz.csv', index=False)
+    # data_month.to_csv(r'E:\powerbi_data\看板数据\dashboard\data_fwpz.csv', index=False)
     print("\n季度数据：")
     print(data_quart)
+    return data_month
+
+
+def month_to_quarters(df):
+    # 假设 df 是您的原始数据 DataFrame
+    # 请确保列名准确，例如 '公司名称', '1月分数', '2月分数', '2月激励', ...
+
+    # 定义季度对应的列名
+    quarters = {
+        'Q1': {
+            '分数': ['1月分数', '2月分数', '3月分数'],
+            '激励': ['2月激励', '3月激励']
+        },
+        'Q2': {
+            '分数': ['4月分数', '5月分数', '6月分数'],
+            '激励': ['4月激励', '5月激励', '6月激励']
+        },
+        # 注意：数据中缺少7-9月，Q3不处理
+        'Q4': {
+            '分数': ['10月分数', '11月分数', '12月分数'],
+            '激励': ['10月激励', '11月激励', '12月激励']
+        }
+    }
+
+    # 创建结果DataFrame，保留公司名称
+    result = df[['公司名称']].copy()
+
+    # 遍历每个季度
+    for q, cols in quarters.items():
+        # 处理分数：将对应列转为数值，无法转换的变为NaN，然后求每行的平均值（忽略NaN），全NaN则填充0
+        score_cols = cols['分数']
+        score_df = df[score_cols].apply(pd.to_numeric, errors='coerce')
+        result[f'{q}分数'] = score_df.mean(axis=1, skipna=True).fillna(0).round(2)
+
+        # 处理激励：将对应列转为数值，求和（忽略NaN），全NaN则填充0
+        incentive_cols = cols['激励']
+        incentive_df = df[incentive_cols].apply(pd.to_numeric, errors='coerce')
+        result[f'{q}激励'] = incentive_df.sum(axis=1, skipna=True).fillna(0)
+
+    # 查看结果
+    result.to_csv("月数据转为季度数据.csv")
+    print(result)
+
+
+
+
+
+def fuwupinzhi_2026():
+    pass
 
 
 
 
 
 
+def run():
+    # wes_run()
+    # 获取2025年服务品质的数据
+    data_month = fuwupinzhi_2025()
+    month_to_quarters(data_month)
 
-wes_run()
-# fuwupinzhi_2025()
+    # 获取2026年服务品质的数据
+
 
 
 
