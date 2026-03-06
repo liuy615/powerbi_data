@@ -22,10 +22,6 @@ class SalesDataProcessor:
         self.tiche_history_path = os.path.join(base_dir, "merged_tiche_data.xlsx")  # 历史提车数据
         self.output_tiche_concat = os.path.join(base_dir, "tiche_concat.xlsx")  # 合并结果
         self.output_detail = os.path.join(base_dir, "提车明细.xlsx")  # 提车明细
-        # self.output_annual = os.path.join(
-        #     r"C:\Users\13111\Documents\WXWork\1688855282576011\WeDrive\成都永乐盛世\维护文件",
-        #     "年度提车.xlsx"
-        # )  # 年度提车数据
 
         # 2. 核心配置参数
         self.company_mapping: Dict[str, str] = {
@@ -82,9 +78,13 @@ class SalesDataProcessor:
             ("2025-07-26", "2025-08-25"),
             ("2025-08-26", "2025-09-25"),
             ("2025-09-26", "2025-10-25"),
+            ("2025-10-26", "2025-11-25"),
+            ("2025-11-26", "2025-12-25"),
+            ("2025-12-26", "2026-01-25"),
+            ("2026-01-26", "2026-02-25"),
         ]  # 日期范围配置
         self.exclude_attributes: List[str] = [
-            '2025年8月', '2025年9月', '2025年10月', '2025年11月', '2025年12月'
+            '2025年8月', '2025年9月', '2025年10月', '2025年11月', '2025年12月', '2026年1月', '2026年2月'
         ]  # 需排除的历史提车属性
         self.exclude_companies: List[str] = [
             '方程豹', '海洋网', '王朝网', '腾势', '方程豹总计', '海洋网总计',

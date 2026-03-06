@@ -517,7 +517,7 @@ def main():
             'file_extensions': [".xlsx", ".csv"]
         },
         {
-            'target_url': fr"{base_url}/信息部/厂家系统_车易云/厂家系统数据/【原始数据】采购总量/2025",
+            'target_url': fr"{base_url}/信息部/厂家系统_车易云/厂家系统数据/【原始数据】采购总量/2026",
             'local_dir': "E:/powerbi_data/看板数据/私有云文件本地/厂家采购",
             'search_pattern': "明细",
             'file_extensions': [".xlsx", ".csv"]
