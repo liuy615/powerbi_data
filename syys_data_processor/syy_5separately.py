@@ -44,6 +44,7 @@ class FilmUpgradeAnalyzer:
                 r"E:\powerbi_data\看板数据\私有云文件本地\贴膜升级\腾势-上元臻盛-贴膜升级登记表-最新年.xlsx",
                 r"E:\powerbi_data\看板数据\私有云文件本地\贴膜升级\方程豹-上元星汉-贴膜升级登记表-最新年.xlsx",
                 r"E:\powerbi_data\看板数据\私有云文件本地\贴膜升级\两网-西门-贴膜升级登记表-最新年.xlsx",
+                r"E:\powerbi_data\看板数据\私有云文件本地\贴膜升级\两网-总部-贴膜升级登记表-最新年.xlsx",
             ]
         else:
             self.push_file_paths = push_file_paths

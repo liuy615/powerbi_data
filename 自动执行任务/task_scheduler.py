@@ -117,8 +117,8 @@ class ScheduledTaskRunner:
                     print(f"  ✗ 失败 (返回码: {result_info['returncode']})")
                     if capture_output and proc and proc.stderr:
                         error_msg = proc.stderr.strip()
-                        result_info["error"] = error_msg[:200] if len(error_msg) > 200 else error_msg
-                        print(f"  错误: {result_info['error']}")
+                        # result_info["error"] = error_msg[:200] if len(error_msg) > 200 else error_msg
+                        print(f"  错误: {error_msg}")
                     results["failed"] += 1
 
             except subprocess.TimeoutExpired:
