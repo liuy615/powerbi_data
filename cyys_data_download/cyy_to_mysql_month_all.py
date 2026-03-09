@@ -268,6 +268,7 @@ class DataSaver:
         '销售_衍生_订单查询': 'sales_derivative_orders',
         '装饰_订单管理_装饰订单': 'decoration_orders',
         '销售回访': 'car_sales_data',
+        '二手车服务_线索管理': 'used_car_services'
     }
 
     # 各表的主键或唯一键字段
@@ -292,6 +293,7 @@ class DataSaver:
         'sales_derivative_orders': 'ID',
         'decoration_orders': 'ID',
         'car_sales_data': 'ID',
+        'used_car_services': 'BillCode'
     }
 
     def __init__(self, db_operator: DBOperator):

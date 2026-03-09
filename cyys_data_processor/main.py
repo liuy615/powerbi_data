@@ -104,6 +104,9 @@ class CyysDataProcessorApp:
             # 保险数据清洗
             df_insurance = self.data_processor.clean_insurance(raw_data["保险业务"])
 
+            # 二手车线索数据清洗
+            df_used_car_services = self.data_processor.clean_used_car_services(raw_data["二手车服务_线索管理"])
+
             # 二手车数据清洗
             df_Ers = self.data_processor.clean_used_cars(pd.concat([raw_data["二手车成交"], raw_data["二手车入库"]], ignore_index=True))
 

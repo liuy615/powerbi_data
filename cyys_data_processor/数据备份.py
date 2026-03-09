@@ -102,9 +102,15 @@ class CyysDataProcessorApp:
 
             # 保险数据清洗
             df_insurance = self.data_processor.clean_insurance(raw_data["保险业务"])
+            df_insurance.to_csv(fr"E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\新车保险台账-2025.csv", index=False)
+
+            # 二手车线索数据清洗
+            df_used_car_services = self.data_processor.clean_used_car_services(raw_data["二手车服务_线索管理"])
+            df_used_car_services.to_csv(fr"E:\powerbi_data\看板数据\dashboard\事实表_二手车线索管理.csv", index=False)
 
             # 二手车数据清洗
             df_Ers = self.data_processor.clean_used_cars(pd.concat([raw_data["二手车成交"], raw_data["二手车入库"]], ignore_index=True))
+            df_Ers.to_csv(r'E:\powerbi_data\看板数据\dashboard\二手车.csv', index=False)
 
             # 装饰订单数据清洗
             raw_data["装饰订单"] = raw_data["装饰订单"].groupby('ID').apply(lambda x: x[x['OutId'] != 0] if (x['OutId'] != 0).any() else x).reset_index(drop=True)

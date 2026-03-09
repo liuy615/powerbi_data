@@ -225,7 +225,6 @@ class DataSaver:
         '按揭业务': 'mortgage_business',
         '保险业务': 'insurance_business',
         '车辆成本管理': 'car_cost_management',
-        '车辆销售明细表_订单日期': 'car_sales_order_date',
         '车辆销售明细表_开票日期': 'car_sales_invoice_date',
         '调车结算查询': 'vehicle_transfer_settlement',
         '汇票管理': 'bill_management',
@@ -239,6 +238,7 @@ class DataSaver:
         '销售_衍生_订单查询': 'sales_derivative_orders',
         '装饰_订单管理_装饰订单': 'decoration_orders',
         '销售回访': 'car_sales_data',
+        '二手车服务_线索管理': 'used_car_services'
     }
 
     # 各表的主键或唯一键字段
@@ -246,7 +246,6 @@ class DataSaver:
         'mortgage_business': 'ID',
         'insurance_business': 'ID',
         'car_cost_management': 'OrderCode',
-        'car_sales_order_date': 'ID',
         'car_sales_invoice_date': 'ID',
         'vehicle_transfer_settlement': 'FrameNumber',
         'bill_management': 'ID',
@@ -263,6 +262,7 @@ class DataSaver:
         'sales_derivative_orders': 'ID',
         'decoration_orders': 'ID',
         'car_sales_data': 'ID',
+        'used_car_services': 'BillCode'
     }
 
     def __init__(self, db_operator: DBOperator):

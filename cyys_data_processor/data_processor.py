@@ -24,17 +24,22 @@ class DataProcessor:
                 df[col] = pd.to_numeric(df[col], errors='coerce').fillna(fill_value)
         return df
 
+    """清洗二手车线索数据"""
+    def clean_used_car_services(self, df_used_car_services):
+        df_used_car_services = df_used_car_services[df_used_car_services["线索来源"] == '售前'].copy()
+        df_used_car_services["线索日期"] = pd.to_datetime(df_used_car_services['线索日期'], format='mixed')
+        df_used_car_services["操作时间"] = pd.to_datetime(df_used_car_services['操作时间'], format='mixed')
+        return df_used_car_services
+
     """清洗保险数据"""
     def clean_insurance(self, df_insurance):
         df_insurance['保费总额'] = pd.to_numeric(df_insurance['保费总额'], errors='coerce').fillna(0)
         df_insurance['总费用_次数'] = df_insurance['保费总额'].apply(lambda x: 1 if x > 0 else (-1 if x < 0 else 0))
-        df_insurance.to_csv(fr"E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\新车保险台账-2025.csv")
         return df_insurance
 
     """清洗二手车数据"""
     def clean_used_cars(self, df_ershou):
         df_Ers = df_ershou[df_ershou['收款状态'] == '已收款'].copy()
-        df_Ers.to_csv(r'E:\powerbi_data\看板数据\dashboard\二手车.csv', index=False)
         return df_Ers
 
     def clean_teshuzhengquan(self):
@@ -386,17 +391,6 @@ class DataProcessor:
             df_plan['开票银行'] = df_plan['开票银行'].fillna('公司')
 
         df_plan.rename(columns={'开票银行': '合格证状态', '门店': '归属系统'}, inplace=True)
-
-        # 检查列名重复问题
-        # 打印列名以便调试
-        logging.info(f"df_inventory 列名: {list(df_inventory.columns)}")
-        logging.info(f"df_plan 列名: {list(df_plan.columns)}")
-
-        # 找出重复列名
-        inventory_cols = set(df_inventory.columns)
-        plan_cols = set(df_plan.columns)
-        common_cols = inventory_cols.intersection(plan_cols)
-        logging.info(f"共同列名: {common_cols}")
 
         # 检查是否有重复列名
         if len(df_inventory.columns) != len(set(df_inventory.columns)):
@@ -1163,7 +1157,6 @@ class DataProcessor:
         df_salesAgg2_ = df_salesAgg2.copy().drop_duplicates()
         df_salesAgg2_.rename(columns={'公司名称': '匹配定单归属门店'}, inplace=True)
         df_salesAgg2_.to_csv(r'E:/WXWork/1688858189749305/WeDrive/成都永乐盛世/维护文件/车易云新车销售台账.csv',index=False)
-        print(f"车易云新车销售台账备份完成！")
 
         # 处理调拨数据
         if not df_diao2.empty:

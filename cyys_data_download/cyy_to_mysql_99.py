@@ -244,6 +244,7 @@ class DataSaver:
         '装饰_订单管理_装饰订单': 'decoration_orders',
         '销售回访': 'car_sales_data',
         '删除日志': 'delete_log',
+        '二手车服务_线索管理': 'used_car_services'
     }
 
     # 各表的主键或唯一键字段
@@ -268,6 +269,7 @@ class DataSaver:
         'sales_derivative_orders': 'ID',
         'decoration_orders': 'ID',
         'car_sales_data': 'ID',
+        'used_car_services': 'BillCode'
     }
     # 需要全量更新的表列表（先删除后插入）
     FULL_UPDATE_TABLES = ['planned_vehicles', 'unsold_orders', 'inventory_vehicle_query', 'delete_log']
