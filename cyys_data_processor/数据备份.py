@@ -246,9 +246,13 @@ class CyysDataProcessorApp:
 
             # 清理空值
             df_salesAgg_mongo = df_salesAgg_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
-            df_salesAgg_mongo = df_salesAgg_mongo.drop_duplicates(["车架号", "车辆车系"], keep="last")
-            # df_jingpin_result_mongo = df_jingpin_result_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
-            # df_diao_mongo = df_diao_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
+            # 将数据拆分为“二手车返利”和其他部分
+            df_secondhand = df_salesAgg_mongo[df_salesAgg_mongo["车架号"] == "二手车返利"]
+            df_other = df_salesAgg_mongo[df_salesAgg_mongo["车架号"] != "二手车返利"]
+            # 对非“二手车返利”的部分按指定列去重（保留最后出现的一条）
+            df_other = df_other.drop_duplicates(["车架号", "车辆车系"], keep="last")
+            # 合并两部分，重新生成连续索引
+            df_salesAgg_mongo = pd.concat([df_secondhand, df_other], ignore_index=True)
             # 导出为CSV（保持原有文件路径和名称）
             csv_path = r"E:/WXWork/1688858189749305/WeDrive/成都永乐盛世/维护文件/车易云毛利润表.csv"
             df_salesAgg_mongo.to_csv(csv_path, index=False)
