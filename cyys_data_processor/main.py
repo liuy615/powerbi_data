@@ -244,7 +244,9 @@ class CyysDataProcessorApp:
             df_salesAgg_mongo = df_salesAgg_mongo.drop_duplicates()
             df_jingpin_result_mongo = df_jingpin_result_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
             df_diao_mongo = df_diao_mongo.replace({'nan': None, np.nan: None, 'NaN': None, 'NAN': None})
-            # df_salesAgg_mongo.to_csv(r"E:/WXWork/1688858189749305/WeDrive/成都永乐盛世/维护文件/车易云毛利润表.csv")
+            df_secondhand = df_salesAgg_mongo[df_salesAgg_mongo["车架号"] == "二手车返利"]
+            df_other = df_salesAgg_mongo[df_salesAgg_mongo["车架号"] != "二手车返利"].drop_duplicates(["车架号", "车辆车系"], keep="last")
+            df_salesAgg_mongo = pd.concat([df_other, df_secondhand], ignore_index=True)
             # 13. 导出到MongoDB
             self.data_writer.export_to_mongodb(
                 df_salesAgg_mongo,

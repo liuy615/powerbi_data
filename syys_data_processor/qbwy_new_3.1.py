@@ -209,7 +209,7 @@ class DataProcessor:
 
             # 获取销售数据
             sales_data = mongo_client.query_all_data(COLLECTION_NAMES['sales_data'])
-            sales_data.to_csv("sales_data.csv")
+            sales_data.to_csv(r"E:/powerbi_data/看板数据/dashboard/新保全保审批数据.csv")
             sales_data = sales_data[(sales_data["审批状态"] == "已同意") &
                                     (sales_data["扣除项目"].isin(["全保扣除", "新保全保均扣除"])) &
                                     (sales_data["类型"].isin(["营运车（网约车）、出租车、教练车、租赁车", "外地车"]))]
@@ -284,7 +284,11 @@ class ComprehensiveInsuranceProcessor(DataProcessor):
 
             # 获取终端数据
             cyy_zhongduan = DataProcessor.cyy_zhongduan_data()
-            sales_data = sales_data[sales_data["车架号"].isin(cyy_zhongduan)]
+            cutoff_date = datetime.strptime("2026/03/01", "%Y/%m/%d").date()
+            sales_data = sales_data[
+                (sales_data['产品销售日期'] < cutoff_date) |
+                ((sales_data['产品销售日期'] >= cutoff_date) & (sales_data["车架号"].isin(cyy_zhongduan)))
+                ]
 
             return sales_data[[
                 '业务部门', '产品状态', '客户姓名', '手机号码', '车架号', '车系', '产品销售日期', '开票日期', '日期',
