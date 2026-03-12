@@ -87,8 +87,8 @@ class YingxiaoMoneyProcessor(DataProcessorBase):
         self.output_file = os.path.join(self.output_dir, "投放费用.csv")
 
         # 业务配置
-        self.target_sheets = ["2024年", "2025年", "2026年"]
-        self.required_columns = ["年份", "月份", "归属门店", "项目大类", "项目分类", "具体项目","费用金额", "核销发票金额", "核销发票税金", "费用合计", "备注", "From"]
+        self.target_sheets = ["2024年", "2025年", "登记表"]
+        self.required_columns = ["年月", "归属门店", "项目大类", "项目分类", "具体项目","费用金额", "核销发票金额", "核销发票税金", "费用合计", "备注", "From"]
         self.store_map = {"文景初治": "上元盛世", "王朝网-直播基地":"直播基地", "永乐盛世":"洪武盛世"}
 
         self._init_check()
@@ -160,6 +160,7 @@ class YingxiaoMoneyProcessor(DataProcessorBase):
         if "费用合计" in df_clean.columns and "费用金额" in df_clean.columns:
             df_clean["费用合计"] = df_clean["费用合计"].fillna(df_clean["费用金额"])
             df_clean["费用合计"] = pd.to_numeric(df_clean["费用合计"], errors="coerce").fillna(0)
+            df_clean["年月"] = pd.to_datetime(df_clean["年月"], errors="coerce")
 
         self.logger.info(f"数据清洗完成 - {len(df_clean)}行, {len(exist_cols)}列")
         return df_clean
