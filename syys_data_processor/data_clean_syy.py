@@ -1,5 +1,6 @@
 import pandas as pd
-import numpy as np
+import re
+from dateutil import parser
 import os
 import logging
 import warnings
@@ -154,13 +155,56 @@ class YingxiaoMoneyProcessor(DataProcessorBase):
 
     def _clean_data(self, df: pd.DataFrame) -> pd.DataFrame:
         """数据清洗"""
+        # 日期格式转换
+        def to_month_start(value, debug=False):
+            if pd.isna(value):
+                return pd.NaT
+
+            # 统一转为字符串并去除首尾空白
+            s = str(value).strip()
+            # 1. 尝试匹配中文年月格式（允许空格、全角字符）
+            #   使用 [\u4e00-\u9fff] 匹配中文字符更准确，但直接用“年”“月”也可以
+            #   此处使用更宽松的正则：\s* 匹配任意空白，年、月可能全角或半角
+            match = re.search(r'(\d{4})\s*年\s*(\d{1,2})\s*月', s)
+            if match:
+                year = int(match.group(1))
+                month = int(match.group(2))
+                # 确保月份在1-12之间（可选）
+                if 1 <= month <= 12:
+                    return pd.Timestamp(year=year, month=month, day=1)
+                else:
+                    if debug:
+                        print(f"月份超出范围: {month}")
+
+            # 2. 尝试匹配 "yyyy-mm" 或 "yyyy/mm" 等格式
+            #   使用 pd.to_datetime 自动推断（包含时间戳格式）
+            try:
+                dt = pd.to_datetime(s, infer_datetime_format=True)
+                # 成功解析后，返回月份第一天
+                return dt.normalize().replace(day=1)
+            except:
+                pass
+
+            # 3. 尝试匹配纯数字格式如 "202501"（六位数字）
+            match = re.fullmatch(r'(\d{4})(\d{2})', s)
+            if match:
+                year = int(match.group(1))
+                month = int(match.group(2))
+                if 1 <= month <= 12:
+                    return pd.Timestamp(year=year, month=month, day=1)
+
+            # 4. 如果都不行，返回 NaT
+            if debug:
+                print(f"无法解析的值: {repr(s)}")
+            return pd.NaT
         exist_cols = [c for c in self.required_columns if c in df.columns]
         df_clean = df[exist_cols].copy()
 
         if "费用合计" in df_clean.columns and "费用金额" in df_clean.columns:
             df_clean["费用合计"] = df_clean["费用合计"].fillna(df_clean["费用金额"])
             df_clean["费用合计"] = pd.to_numeric(df_clean["费用合计"], errors="coerce").fillna(0)
-            df_clean["年月"] = pd.to_datetime(df_clean["年月"], errors="coerce")
+            # 应用到列，打开 debug 查看哪些值有问题
+            df_clean["年月"] = df_clean["年月"].apply(lambda x: to_month_start(x, debug=True))
 
         self.logger.info(f"数据清洗完成 - {len(df_clean)}行, {len(exist_cols)}列")
         return df_clean

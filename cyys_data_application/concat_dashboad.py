@@ -520,10 +520,10 @@ class update_dashboard:
     # 输出：市场费用.csv
     def clean_yingxiao(self):
         df_yingxiao = self.df_yingxiao.copy()  # 读取后加copy
-        df_yingxiao = self.add_month_end_date(df_yingxiao)
+        # df_yingxiao = self.add_month_end_date(df_yingxiao)
         df_yingxiao = df_yingxiao[df_yingxiao['项目分类'] != '随车'].copy()  # 切片后加copy
         df_yingxiao['费用合计'] = pd.to_numeric(df_yingxiao['费用合计'], errors='coerce').fillna(0)
-        df_yingxiao1 = df_yingxiao.groupby(['日期', '归属门店']).agg({'费用合计': 'sum'}).reset_index()
+        df_yingxiao1 = df_yingxiao.groupby(['年月', '归属门店']).agg({'费用合计': 'sum'}).reset_index()
         return df_yingxiao1
 
     # 合并人工效能表
