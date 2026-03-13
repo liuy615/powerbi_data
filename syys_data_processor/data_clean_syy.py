@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import re
 from dateutil import parser
@@ -205,6 +206,8 @@ class YingxiaoMoneyProcessor(DataProcessorBase):
             df_clean["费用合计"] = pd.to_numeric(df_clean["费用合计"], errors="coerce").fillna(0)
             # 应用到列，打开 debug 查看哪些值有问题
             df_clean["年月"] = df_clean["年月"].apply(lambda x: to_month_start(x, debug=True))
+            threshold = pd.Timestamp('2026-01-01')
+            df_clean['项目'] = np.where(df_clean['年月'] < threshold, df_clean['项目大类'], df_clean['项目分类'])
 
         self.logger.info(f"数据清洗完成 - {len(df_clean)}行, {len(exist_cols)}列")
         return df_clean
