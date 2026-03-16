@@ -1,5 +1,7 @@
 import logging
 import os
+import requests
+import json
 from datetime import datetime
 from typing import Dict, List, Any
 import pandas as pd
@@ -8,9 +10,17 @@ import pandas as pd
 class DataCheckerLogger:
     """数据检核日志记录器"""
 
-    def __init__(self, log_dir: str = r"E:\powerbi_data\data\私有云日志\check_logs"):
-        """初始化日志记录器"""
+    def __init__(self, log_dir: str = r"E:\powerbi_data\data\私有云日志\check_logs",
+                 wecom_webhook: str = None):
+        """
+        初始化日志记录器
+        
+        参数:
+            log_dir: 日志目录
+            wecom_webhook: 企业微信机器人webhook地址
+        """
         self.log_dir = log_dir
+        self.wecom_webhook = wecom_webhook
         self.errors = []
         self.summary = {
             "total_files": 0,
@@ -39,20 +49,22 @@ class DataCheckerLogger:
         )
         self.logger = logging.getLogger(__name__)
 
-    def log_header_error(self, file_path: str, missing_headers: List[str], extra_headers: List[str], template_name: str = "标准模板"):
+    def log_header_error(self, file_path: str, missing_headers: List[str], 
+                        extra_headers: List[str], template_name: str = "标准模板"):
         """记录表头错误"""
-        file_name = os.path.basename(file_path)  # 获取文件名
-        # error_msg = f"文件 {file_name} 表头不匹配{template_name}:\n"  # 只输出文件名
+        file_name = os.path.basename(file_path)
+        error_msg = ""
         if missing_headers:
-            error_msg = f"  缺少字段: {', '.join(missing_headers)}\n"
+            error_msg = f"缺少字段: {', '.join(missing_headers)}"
         if extra_headers:
-            error_msg += f"  多余字段: {', '.join(extra_headers)}"
+            if error_msg:
+                error_msg += "\n"
+            error_msg += f"多余字段: {', '.join(extra_headers)}"
 
-        self.logger.error(error_msg)
+        self.logger.error(f"文件 {file_name} 表头不匹配 - {error_msg}")
         self.errors.append({
             "type": "header_error",
-            "file": file_path,  # 错误报告中仍然保存完整路径
-            "file_name": file_name,  # 新增文件名字段
+            "file_name": file_name,
             "message": error_msg,
             "template": template_name,
             "timestamp": datetime.now()
@@ -62,11 +74,10 @@ class DataCheckerLogger:
     def log_data_error(self, file_path: str, row_index: int, field: str,
                        value: Any, error_msg: str):
         """记录数据错误"""
-        file_name = os.path.basename(file_path)  # 获取文件名
+        file_name = os.path.basename(file_path)
         error_info = {
             "type": "data_error",
-            "file": file_path,
-            "file_name": file_name,  # 新增文件名字段
+            "file_name": file_name,
             "row": row_index + 2,  # Excel行号从1开始，加上表头行
             "field": field,
             "value": str(value),
@@ -75,7 +86,7 @@ class DataCheckerLogger:
         }
 
         self.logger.error(
-            f"数据错误 - 文件: {file_name}, 行: {row_index + 2}, "  # 只输出文件名
+            f"数据错误 - 文件: {file_name}, 行: {row_index + 2}, "
             f"字段: {field}, 值: {value}, 错误: {error_msg}"
         )
 
@@ -84,9 +95,9 @@ class DataCheckerLogger:
 
     def log_file_processed(self, file_path: str, rows_processed: int, errors_found: int):
         """记录文件处理完成"""
-        file_name = os.path.basename(file_path)  # 获取文件名
+        file_name = os.path.basename(file_path)
         self.logger.info(
-            f"文件处理完成: {file_name}, "  # 只输出文件名
+            f"文件处理完成: {file_name}, "
             f"处理行数: {rows_processed}, 发现错误: {errors_found}"
         )
 
@@ -134,6 +145,67 @@ class DataCheckerLogger:
 
         except Exception as e:
             self.logger.error(f"保存错误报告失败: {str(e)}")
+
+    def send_wecom_notification(self, webhook_url: str = None):
+        """
+        发送企业微信通知
+        
+        参数:
+            webhook_url: 企业微信机器人webhook地址（如果不提供则使用初始化时的地址）
+        """
+        webhook = webhook_url or self.wecom_webhook
+        
+        if not webhook:
+            self.logger.warning("未配置企业微信webhook地址，跳过通知发送")
+            return
+
+        try:
+            # 构建通知内容
+            error_rate = 0
+            if self.summary['total_rows'] > 0:
+                error_rate = (self.summary['error_rows'] / self.summary['total_rows']) * 100
+
+            content = f"""数据检核完成通知
+            
+检核时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+检核结果:
+- 总文件数: {self.summary['total_files']}
+- 检核文件数: {self.summary['checked_files']}
+- 表头错误数: {self.summary['header_errors']}
+- 数据错误数: {self.summary['data_errors']}
+- 总行数: {self.summary['total_rows']}
+- 错误行数: {self.summary['error_rows']}
+- 错误率: {error_rate:.2f}%
+
+详细日志: {self.log_file}
+"""
+
+            # 发送请求
+            data = {
+                "msgtype": "text",
+                "text": {
+                    "content": content
+                }
+            }
+
+            response = requests.post(
+                webhook,
+                headers={"Content-Type": "application/json"},
+                data=json.dumps(data)
+            )
+
+            if response.status_code == 200:
+                result = response.json()
+                if result.get("errcode") == 0:
+                    self.logger.info("企业微信通知发送成功")
+                else:
+                    self.logger.error(f"企业微信通知发送失败: {result.get('errmsg')}")
+            else:
+                self.logger.error(f"企业微信通知发送失败，状态码: {response.status_code}")
+
+        except Exception as e:
+            self.logger.error(f"发送企业微信通知时发生错误: {str(e)}")
 
     def increment_counter(self, counter_name: str, value: int = 1):
         """增加计数器"""
