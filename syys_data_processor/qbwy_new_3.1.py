@@ -212,7 +212,7 @@ class DataProcessor:
             sales_data.to_csv(r"E:/powerbi_data/看板数据/dashboard/新保全保审批数据.csv")
             sales_data = sales_data[(sales_data["审批状态"] == "已同意") &
                                     (sales_data["扣除项目"].isin(["全保扣除", "新保全保均扣除"])) &
-                                    (sales_data["类型"].isin(["营运车（网约车）、出租车、教练车、租赁车", "外地车"]))]
+                                    (sales_data["类型"].isin(["营运车（网约车）、出租车、教练车、租赁车", "外地用车", "大客户、政府采购、企事业、机关单位采购", "试乘试驾车/集团旗下子公司"]))]
             sales_data_number = sales_data["车架号"].to_list()
             print(sales_data_number)
         except:
@@ -546,20 +546,27 @@ class InsuranceDataMerger:
 
         # 处理日期
         insurance_df["日期"] = pd.to_datetime(insurance_df["日期"], errors='coerce')
-        # 新增列【是否符合3月1日之前规则】
-        # 先判断日期是否在3月1日之前，如果不是则为空值
-        # 如果是，再判断车架号是否在excluded_vins中：在则标记为"不符合"，不在则标记为"符合"
+        # 核心逻辑：先判断日期，再按规则筛选
         insurance_df['是否符合3月1日之前删除规则'] = np.where(
+            # 条件1：日期 < 2026-03-01
             insurance_df["日期"] < pd.to_datetime('2026/03/01'),
+            # 分支1：3月1日之前 → 原逻辑（在排除清单=不符合）
             np.where(
                 insurance_df['车架号'].isin(excluded_vins),
                 '不符合',
                 '符合'
             ),
+            # 分支2：3月1日及之后 → 新增你的判断逻辑
             np.where(
-                (insurance_df['车架号'].isin(sales_data_number)) & (~insurance_df['车架号'].isin(cyy_zhongduan)),
+                # 第一步：车架号 不在 cyy_zhongduan → 直接不符合
+                ~insurance_df['车架号'].isin(cyy_zhongduan),
                 '不符合',
-                '符合'
+                # 第二步：在 cyy_zhongduan 里，再判断是否同时在 sales_data_number
+                np.where(
+                    insurance_df['车架号'].isin(sales_data_number),
+                    '不符合',
+                    '符合'
+                )
             )
         )
 
