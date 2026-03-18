@@ -132,8 +132,9 @@ class CyysDataProcessorApp:
             df_inventory_all, df_inventory, df_inventory1 = self.data_processor.clean_inventory_and_plan(raw_data["库存车辆查询"], raw_data["库存车辆已售"], raw_data["计划车辆"], df_debit, service_net,company_belongs)
 
             # 订单数据清洗
-            df_dings, df_zhubo = self.data_processor.clean_book_orders(raw_data["衍生订单"], raw_data["成交订单"], raw_data["未售订单"], service_net)
-
+            df_dings = self.data_processor.clean_book_orders(raw_data["衍生订单"], service_net)
+            # 开票数据筛选
+            df_kaipiao = self.data_processor.clean_kaipiao_orders(raw_data["开票维护"])
             # 作废订单数据清洗
             tui_dings_df = self.data_processor.clean_void_orders(raw_data["作废订单"], service_net)
 
@@ -144,61 +145,23 @@ class CyysDataProcessorApp:
 
             # 6. 主表合并
             self.logger.info("开始主表合并...")
-            # 开票数据筛选
-            df_kaipiao = raw_data["开票维护"][raw_data["开票维护"]['单据类别'] == "车辆销售单"]
-            df_kaipiao['下载时间'] = pd.to_datetime(df_kaipiao['下载时间'], format='mixed')
-            df_kaipiao = df_kaipiao.sort_values(by=['车架号', '下载时间'], ascending=[True, False])
-            df_kaipiao = df_kaipiao.drop_duplicates(subset=['车架号'], keep='first')
-
             # 处理二手车数据
             df_Ers1, df_Ers2, df_Ers2_archive = self.data_processor.process_used_car_data(df_Ers, df_kaipiao)
 
             # 合并主销售表
-            df_salesAgg1 = self.data_processor.merge_main_sales_table(df_salesAgg, df_zhubo, df_service_aggregated,df_carcost, df_loan, df_decoration2, df_kaipiao,df_Ers2, df_Ers2_archive)
+            df_salesAgg1 = self.data_processor.merge_main_sales_table(df_salesAgg, df_service_aggregated,df_carcost, df_loan, df_decoration2, df_kaipiao,df_Ers2, df_Ers2_archive)
 
             # 7. 应用促销逻辑
             df_salesAgg1 = self.data_processor.apply_promotion_logic(df_salesAgg1)
 
             # 8. 处理调拨数据
             df_diao2 = self.data_processor.handle_diaobo_merge(raw_data["调车结算"], df_salesAgg1)
- 
+
             # 9. 最终整理
             self.logger.info("最终数据整理...")
-            # 创建销售明细副本
-            df_salesAgg_ = df_salesAgg1.copy()
-            df_salesAgg_.rename(columns={
-                '入库日期': '到库日期',
-                '公司名称': '匹配定单归属门店',
-                '订车日期': '定单日期',
-                '销售人员': '销售顾问',
-                '车主姓名': '客户姓名'
-            }, inplace=True)
-
-            df_salesAgg_ = df_salesAgg_[(df_salesAgg_['车架号'] != "") & (df_salesAgg_['销售日期'] != "")]
-            df_salesAgg_ = df_salesAgg_[[
-                '服务网络', '车架号', '车系', '车型', '车辆配置', '外饰颜色', '定金金额', '指导价',
-                '提货价', '销售车价', '匹配定单归属门店', '到库日期', '定单日期', '销售日期',
-                '所属团队', '销售顾问', '客户姓名', '联系电话', '联系电话2'
-            ]]
-
-            df_salesAgg_ = df_salesAgg_[(df_salesAgg_['所属团队'] != "调拨") & (df_salesAgg_['所属团队'].notna() & df_salesAgg_['所属团队'] != "")]
-            df_salesAgg_ = df_salesAgg_.drop_duplicates()
-
-            # 合并库存数据
-            # 检查并删除重复列名
-            if len(df_inventory.columns) != len(set(df_inventory.columns)):
-                # 删除重复列
-                df_inventory = df_inventory.loc[:, ~df_inventory.columns.duplicated()]
-
-            if len(df_inventory1.columns) != len(set(df_inventory1.columns)):
-                # 删除重复列
-                df_inventory1 = df_inventory1.loc[:, ~df_inventory1.columns.duplicated()]
-
-            df_inventory0_1 = pd.concat([df_inventory, df_inventory1], axis=0, ignore_index=True)
-
             # 最终整理和导出
-            (df_salesAgg_combined, df_dings, df_inventory_all, tui_dings_df, df_debit, df_salesAgg_, df_jingpin_result,df_inventory1) = self.data_processor.finalize_and_export(
-                df_salesAgg1, df_dings, df_inventory_all, tui_dings_df, df_debit, df_salesAgg_, df_jingpin_result,df_inventory1, df_Ers1, df_diao2, df_inventory0_1)
+            (df_salesAgg_combined, df_salesAgg_, df_jingpin_result) = self.data_processor.finalize_and_export(
+                df_salesAgg1, df_dings, df_jingpin_result, df_Ers1, df_diao2, df_inventory, df_inventory1)
 
             self.logger.info("数据处理完成")
 
