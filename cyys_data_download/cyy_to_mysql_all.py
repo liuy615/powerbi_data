@@ -67,7 +67,7 @@ class DataCenter:
         api_templates = {
             # '装饰_订单管理_装饰订单': {'url': f'{Config.API_BASE_URL}/api/Summary/AccessoryOrder','method': 'GET','payload': {"LikeType": "1","TimeType": "2","PageSize":3000,"PageNumber": 1}},
             # '销售_车辆销售_作废订单': {'url': f'{Config.API_BASE_URL}/api/Summary/AbnormalOrder','method': 'GET','payload': {"SalesContant": "1","state": "0,2","AuthDistrub": "0","TimeType": "2","yType": 2,"PageSize": 500,"PageNumber": 1}},
-            # '销售_衍生_订单查询': {'url': f'{Config.API_BASE_URL}/api/Summary/SalePreorder','method': 'GET','payload': {"TimeType": "1","LikeType": "3","PageSize": 3000,"PageNumber": 1}},
+            '销售_衍生_订单查询': {'url': f'{Config.API_BASE_URL}/api/Summary/SalePreorder','method': 'GET','payload': {"TimeType": "1","LikeType": "3","PageSize": 3000,"PageNumber": 1}},
 
             # '车辆销售明细表_开票日期': {'url': f'{Config.API_BASE_URL}/api/Summary/CarSalDetailSummary','method': 'GET','payload': {"TimeType": 3,"Type": "2","PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
             # '车辆成本管理': {'url': f'{Config.API_BASE_URL}/api/Summary/CarCost','method': 'GET','payload': {"OrgType": "1","CostType": "1","TimeType": "3","check": "2","PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
@@ -82,7 +82,7 @@ class DataCenter:
             # '汇票管理': {'url': f'{Config.API_BASE_URL}/api/Summary/CarTicket','method': 'GET','payload': {'sortName': 'PledgeDate','sortOrder': 'desc','DateType': '1',"PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
             # '销售回访': {'url': f'{Config.API_BASE_URL}/api/Summary/GetFollowUpList','method': 'GET','payload': {'TimeType': '3','Unvisit': '',"PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
             # '开票维护': {'url': f'{Config.API_BASE_URL}/api/Summary/GetInvoicesList','method': 'GET','payload': {"QueryType": "2","TimeType": "2","PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
-            '二手车服务_线索管理': {'url': f'{Config.API_BASE_URL}/api/Summary/GetUsedClueList', 'method': 'GET','payload': {"BillState": "0", "TimeType": "0", "PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
+            # '二手车服务_线索管理': {'url': f'{Config.API_BASE_URL}/api/Summary/GetUsedClueList', 'method': 'GET','payload': {"BillState": "0", "TimeType": "0", "PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
 
         }
 

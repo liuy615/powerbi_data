@@ -437,7 +437,7 @@ class DataProcessor:
         return df_inventory_all, df_inventory, df_inventory1
 
     """清洗订单数据"""
-    def clean_book_orders(self, df_books, df_books2, df_unsold, service_net):
+    def clean_book_orders(self, df_books, service_net):
         if df_books.empty:
             logging.warning("衍生订单数据为空，跳过清洗")
             return pd.DataFrame(), pd.DataFrame()
@@ -467,59 +467,11 @@ class DataProcessor:
         if '作废状态' in df_books.columns:
             df_books = df_books[df_books['作废状态'] == False]
 
-        # 处理成交订单
-        if not df_books2.empty:
-            df_books2.rename(columns={'联系方式': '联系电话', '联系方式2': '联系电话2'}, inplace=True)
-
-            # 获取主播人员信息
-            if all(col in df_books2.columns for col in['ID', '联系电话', '联系电话2', '主播人员', '车系', '客户姓名', '订单公司']):
-                df_sold = df_books2[['ID', '联系电话', '联系电话2', '主播人员', '车系', '客户姓名', '订单公司']].drop_duplicates()
-            else:
-                df_sold = pd.DataFrame()
-        else:
-            df_sold = pd.DataFrame()
-
-        # 处理未售订单
-        if not df_unsold.empty:
-            df_unsold.rename(columns={'客户电话': '联系电话', '客户电话2': '联系电话2', '客户': '客户姓名'},inplace=True)
-            if all(col in df_unsold.columns for col in['ID', '联系电话', '联系电话2', '主播人员', '车系', '客户姓名', '订单公司']):
-                df_unsold1 = df_unsold[['ID', '联系电话', '联系电话2', '主播人员', '车系', '客户姓名', '订单公司']]
-            else:
-                df_unsold1 = pd.DataFrame()
-        else:
-            df_unsold1 = pd.DataFrame()
-
-        # 合并主播列表
-        if not df_sold.empty or not df_unsold1.empty:
-            df_zhubolist = pd.concat([df_sold, df_unsold1], ignore_index=True).drop_duplicates()
-
-            # 处理联系电话
-            cols = ['联系电话', '联系电话2']
-            if all(col in df_zhubolist.columns for col in cols):
-                df_zhubolist[cols] = (df_zhubolist[cols].replace('', pd.NA).fillna(0).astype('int64').astype('str').replace('0', ''))
-
-            # 创建辅助列
-            df_zhubolist['辅助列'] = ''
-            if '联系电话' in df_zhubolist.columns:
-                df_zhubolist['辅助列'] += df_zhubolist['联系电话'].fillna('')
-            if '联系电话2' in df_zhubolist.columns:
-                df_zhubolist['辅助列'] += df_zhubolist['联系电话2'].fillna('')
-            if '客户姓名' in df_zhubolist.columns:
-                df_zhubolist['辅助列'] += df_zhubolist['客户姓名'].fillna('')
-            if '车系' in df_zhubolist.columns:
-                df_zhubolist['辅助列'] += df_zhubolist['车系'].fillna('')
-            if '订单公司' in df_zhubolist.columns:
-                df_zhubolist['辅助列'] += df_zhubolist['订单公司'].fillna('')
-
-            df_zhubolist = df_zhubolist.drop_duplicates(subset=['辅助列'], keep='first')
-        else:
-            df_zhubolist = pd.DataFrame()
-
         # 筛选订单必要字段
         order_cols = [
             '车架号', '订单日期', '定单日期', '订金状态', '审批状态', '销售人员',
             '销售日期', '定金金额', '定单归属门店', '所属团队', '车系', '外饰颜色',
-            '车型', '配置', '客户姓名', '身份证号', '联系电话', '联系电话2'
+            '车型', '配置', '客户姓名', '身份证号', '联系电话', '联系电话2', '客户来源', '指导价', '主播人员'
         ]
 
         valid_order_cols = self.utils.get_valid_columns(df_books, order_cols)
@@ -539,26 +491,6 @@ class DataProcessor:
                     df_dings['定单归属门店']
                 )
 
-        # 匹配主播人员
-        if not df_zhubolist.empty and '辅助列' in df_zhubolist.columns:
-            # 创建df_dings的辅助列
-            df_dings['辅助列'] = ''
-            if '联系电话' in df_dings.columns:
-                df_dings['辅助列'] += df_dings['联系电话'].fillna('')
-            if '联系电话2' in df_dings.columns:
-                df_dings['辅助列'] += df_dings['联系电话2'].fillna('')
-            if '客户姓名' in df_dings.columns:
-                df_dings['辅助列'] += df_dings['客户姓名'].fillna('')
-            if '车系' in df_dings.columns:
-                df_dings['辅助列'] += df_dings['车系'].fillna('')
-            if '定单归属门店' in df_dings.columns:
-                df_dings['辅助列'] += df_dings['定单归属门店'].fillna('')
-
-            df_dings = pd.merge(df_dings, df_zhubolist[['辅助列', '主播人员']], how='left', on='辅助列')
-
-            # 删除辅助列
-            # df_dings = df_dings.drop(columns=['辅助列'], errors='ignore')
-
         # 处理现定现交
         df_dings['现定现交'] = np.where(
             (df_dings['定单日期'].isna()) & (df_dings['销售日期'].notna()),
@@ -567,10 +499,19 @@ class DataProcessor:
         df_dings['定单状态'] = pd.to_datetime(np.where((df_dings['销售日期'].notna()), df_dings['销售日期'], None))
         df_dings['定金金额'] = np.where(df_dings['现定现交'] == '现定现交', 3000, df_dings['定金金额'])
         df_dings = df_dings.drop_duplicates()
-        df_zhubo = df_dings[['车架号', '主播人员']]
         df_dings["身份证号"] = df_dings["身份证号"].astype("str")
         logging.info(f"订单数据清洗完成：{len(df_dings)}条记录")
-        return df_dings, df_zhubo
+        return df_dings
+
+    """开票数据筛选：车辆销售单"""
+    def clean_kaipiao_orders(self, df_kaipiao):
+        df_kaipiao = df_kaipiao[df_kaipiao['单据类别'] == "车辆销售单"]
+        df_kaipiao['下载时间'] = pd.to_datetime(df_kaipiao['下载时间'], format='mixed')
+        df_kaipiao = df_kaipiao.sort_values(by=['车架号', '下载时间'], ascending=[True, False])
+        df_kaipiao = df_kaipiao.drop_duplicates(subset=['车架号'], keep='first')
+
+        return df_kaipiao
+
 
     """清洗作废订单数据"""
     def clean_void_orders(self, tui_dings_df, service_net):
@@ -718,14 +659,8 @@ class DataProcessor:
         return df_salesAgg_clean
 
     """合并主销售表"""
-    def merge_main_sales_table(self, df_salesAgg, df_books2, df_service_aggregated, df_carcost, df_loan, df_decoration2, df_kaipiao, df_Ers2, df_Ers2_archive):
+    def merge_main_sales_table(self, df_salesAgg, df_service_aggregated, df_carcost, df_loan, df_decoration2, df_kaipiao, df_Ers2, df_Ers2_archive):
         df_salesAgg1 = df_salesAgg.copy()
-        # # 合并主播信息
-        # if not df_books2.empty and '车架号' in df_books2.columns and '主播人员' in df_books2.columns:
-        #     df_salesAgg1 = df_salesAgg1.merge(
-        #         df_books2[['车架号', '主播人员']],
-        #         on='车架号', how='left'
-        #     )
 
         # 合并套餐数据
         if not df_service_aggregated.empty and '车架号' in df_service_aggregated.columns:
@@ -1076,7 +1011,29 @@ class DataProcessor:
         return df_salesAgg1
 
     """最终整理和导出"""
-    def finalize_and_export(self, df_salesAgg1, df_dings, df_inventory_all, tui_dings_df, df_debit, df_salesAgg_, df_jingpin_result, df_inventory1, df_Ers1, df_diao2, df_inventory0_1):
+    def finalize_and_export(self, df_salesAgg1, df_dings, df_jingpin_result, df_Ers1, df_diao2, df_inventory, df_inventory1):
+
+        # 创建销售明细副本
+        df_salesAgg_ = df_salesAgg1.copy()
+        df_salesAgg_.rename(columns={
+            '入库日期': '到库日期',
+            '公司名称': '匹配定单归属门店',
+            '订车日期': '定单日期',
+            '销售人员': '销售顾问',
+            '车主姓名': '客户姓名'
+        }, inplace=True)
+
+        df_salesAgg_ = df_salesAgg_[(df_salesAgg_['车架号'] != "") & (df_salesAgg_['销售日期'] != "")]
+        df_salesAgg_ = df_salesAgg_[[
+            '服务网络', '车架号', '车系', '车型', '车辆配置', '外饰颜色', '定金金额', '指导价',
+            '提货价', '销售车价', '匹配定单归属门店', '到库日期', '定单日期', '销售日期',
+            '所属团队', '销售顾问', '客户姓名', '联系电话', '联系电话2'
+        ]]
+
+        df_salesAgg_ = df_salesAgg_[
+            (df_salesAgg_['所属团队'] != "调拨") & (df_salesAgg_['所属团队'].notna() & df_salesAgg_['所属团队'] != "")]
+        df_salesAgg_ = df_salesAgg_.drop_duplicates()
+
         profit_cols_positive = [
             '毛利', '金融毛利', '上牌毛利', '二手车返利金额', '代开票支付费用',
             '置换服务费', '回扣款', '票据事务费-公司', '返介绍费', '质损赔付金额',
@@ -1121,7 +1078,6 @@ class DataProcessor:
                 )
             )
         # 合并订车表中的身份证号
-        # df_dings = df_dings.drop_duplicates(["车架号", "身份证号"], keep="last")
         df_salesAgg1 = df_salesAgg1.merge(df_dings[["车架号", "身份证号"]], on='车架号', how="left")
 
         # 定义最终输出列
@@ -1142,6 +1098,18 @@ class DataProcessor:
         # 筛选存在的列
         existing_columns = [col for col in final_columns if col in df_salesAgg1.columns]
         df_salesAgg2 = df_salesAgg1[existing_columns].copy()
+
+        # 合并库存数据
+        # 检查并删除重复列名
+        if len(df_inventory.columns) != len(set(df_inventory.columns)):
+            # 删除重复列
+            df_inventory = df_inventory.loc[:, ~df_inventory.columns.duplicated()]
+
+        if len(df_inventory1.columns) != len(set(df_inventory1.columns)):
+            # 删除重复列
+            df_inventory1 = df_inventory1.loc[:, ~df_inventory1.columns.duplicated()]
+
+        df_inventory0_1 = pd.concat([df_inventory, df_inventory1], axis=0, ignore_index=True)
 
         # 合并库存信息
         if not df_inventory0_1.empty and '车架号' in df_inventory0_1.columns:
@@ -1207,7 +1175,7 @@ class DataProcessor:
                     df_salesAgg2[['车架号', '车系']],
                     on='车架号', how='left'
                 )
-        return df_salesAgg_combined, df_dings, df_inventory_all, tui_dings_df, df_debit, df_salesAgg_, df_jingpin_result, df_inventory1
+        return df_salesAgg_combined, df_salesAgg_, df_jingpin_result
 
     """处理二手车数据"""
     def process_used_car_data(self, df_Ers, df_kaipiao):
