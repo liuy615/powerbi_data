@@ -366,6 +366,7 @@ class update_dashboard:
              '城市']].copy()  # 切片后加copy
 
         df_combined['车辆配置'] = df_combined['车辆配置'].fillna(df_combined['车型'])
+        df_combined = df_combined.drop_duplicates(subset=['车架号'],keep='last')
         return df_combined
 
     # 合并退订表
