@@ -555,7 +555,7 @@ class DataProcessor:
 
         # 筛选必要字段
         cancel_cols = ['订单门店', '业务渠道', '销售人员', '订单日期', '车系', '外饰颜色',
-                       '车型', '配置', '主播人员', '客户名称', '客户电话', '作废类型',
+                       '车型', '配置', '主播人员', '客户来源', '客户名称', '客户电话', '作废类型',
                        '退订原因', '退定日期', '非退定核算']
 
         valid_cancel_cols = self.utils.get_valid_columns(tui_dings_df, cancel_cols)

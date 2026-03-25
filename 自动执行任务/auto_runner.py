@@ -92,7 +92,10 @@ cyy_all_clean.start()
 def daypaper_runner():
     """直接调用立即执行方法"""
     scripts = [
-        r"E:\pycharm_project\day_paper\daypaper_pbwy.py",
+        r"E:\pycharm_project\day_paper\daypaper_order_宋Ultra EV.py",
+        r"E:\pycharm_project\day_paper\daypaper_order_2026款海狮06EV.py",
+        r"E:\pycharm_project\day_paper\daypaper_order_全新腾势Z9.py",
+        r"E:\pycharm_project\day_paper\daypaper_order_钛3+钛7.py",
     ]
     runner = ScheduledTaskRunner("立即执行测试")
     runner.run_immediately(scripts)
