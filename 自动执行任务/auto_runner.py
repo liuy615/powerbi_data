@@ -43,6 +43,10 @@ def daypaper_auto_runner():
     scripts = [
         r"E:\pycharm_project\day_paper\daypaper_pbwy.py",
         r"E:\pycharm_project\day_paper\daypaper_order.py",
+        r"E:\pycharm_project\day_paper\daypaper_order_宋Ultra EV.py",
+        r"E:\pycharm_project\day_paper\daypaper_order_2026款海狮06EV.py",
+        r"E:\pycharm_project\day_paper\daypaper_order_全新腾势Z9.py",
+        r"E:\pycharm_project\day_paper\daypaper_order_钛3+钛7.py",
     ]
 
     config = generate_daily_schedule("22:00")
@@ -54,6 +58,10 @@ def daypaper_auto_runner_20():
     """日报任务执行器"""
     scripts = [
         r"E:\pycharm_project\day_paper\daypaper_order.py",
+        r"E:\pycharm_project\day_paper\daypaper_order_宋Ultra EV.py",
+        r"E:\pycharm_project\day_paper\daypaper_order_2026款海狮06EV.py",
+        r"E:\pycharm_project\day_paper\daypaper_order_全新腾势Z9.py",
+        r"E:\pycharm_project\day_paper\daypaper_order_钛3+钛7.py",
     ]
 
     config = generate_daily_schedule("20:00")
