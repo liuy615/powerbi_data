@@ -14,9 +14,10 @@ def syy_auto_runner():
         r"E:\powerbi_data\powerbi_data\syys_data_processor\sanfang.py",
         r"E:\powerbi_data\powerbi_data\syys_data_processor\syy_5separately.py",
         r"E:\powerbi_data\powerbi_data\syys_data_processor\wes.py",
+        r"E:\pycharm_project\powerbi_warnings\powerbi_monitor.py"
     ]
 
-    config = generate_time_range_schedule("08:45", "22:45", 1, "hours")
+    config = generate_time_range_schedule("08:20", "21:20", 1, "hours")
     runner = ScheduledTaskRunner("私有云数据清洗")
     runner.start_schedule(scripts, config)
 
@@ -33,7 +34,7 @@ def cyy_auto_runner():
         r"E:\powerbi_data\powerbi_data\cyys_data_processor\数据备份.py",  # 数据备份
     ]
 
-    config = generate_time_range_schedule("08:40", "22:10", 30, "minutes")
+    config = generate_time_range_schedule("08:40", "21:40", 30, "minutes")
     runner = ScheduledTaskRunner("车易云数据清洗")
     runner.start_schedule(scripts, config)
 
@@ -46,6 +47,7 @@ def daypaper_auto_runner():
         r"E:\pycharm_project\day_paper\daypaper_order_宋Ultra EV.py",
         r"E:\pycharm_project\day_paper\daypaper_order_2026款海狮06EV.py",
         r"E:\pycharm_project\day_paper\daypaper_order_全新腾势Z9.py",
+        r"E:\pycharm_project\day_paper\daypaper_order_全新腾势D9.py",
         r"E:\pycharm_project\day_paper\daypaper_order_钛3+钛7.py",
     ]
 
@@ -61,6 +63,7 @@ def daypaper_auto_runner_20():
         r"E:\pycharm_project\day_paper\daypaper_order_宋Ultra EV.py",
         r"E:\pycharm_project\day_paper\daypaper_order_2026款海狮06EV.py",
         r"E:\pycharm_project\day_paper\daypaper_order_全新腾势Z9.py",
+        r"E:\pycharm_project\day_paper\daypaper_order_全新腾势D9.py",
         r"E:\pycharm_project\day_paper\daypaper_order_钛3+钛7.py",
     ]
 
@@ -69,29 +72,46 @@ def daypaper_auto_runner_20():
     runner.start_schedule(scripts, config)
 
 
+def daypaper_test_auto_runner():
+    """全保测试数据"""
+    scripts = [
+        r"E:\pycharm_project\day_paper\daypaper_pbwy_9_30_test.py",
+    ]
+
+    config = generate_daily_schedule("21:30")
+    runner = ScheduledTaskRunner("全保测试数据")
+    runner.start_schedule(scripts, config)
+
 def cyy_all_auto_runner():
-    """日报任务执行器"""
+    """车易云数据全量更新"""
     scripts = [
         r"E:\powerbi_data\powerbi_data\cyys_data_download\cyy_to_mysql_month_all.py",
     ]
 
     config = generate_daily_schedule("01:00")
-    runner = ScheduledTaskRunner("日报定时发送")
+    runner = ScheduledTaskRunner("车易云数据全量更新")
     runner.start_schedule(scripts, config)
 
 # 创建并启动独立线程
 syy_thread = threading.Thread(target=syy_auto_runner, daemon=True, name="SYY_Task")
 cyy_thread = threading.Thread(target=cyy_auto_runner, daemon=True, name="CYY_Task")
+cyy_all_clean = threading.Thread(target=cyy_all_auto_runner, daemon=True, name="Cyy_All")
+
 Daypaper = threading.Thread(target=daypaper_auto_runner, daemon=True, name="Daypaper")
 Daypaper_20 = threading.Thread(target=daypaper_auto_runner_20, daemon=True, name="Daypaper_20")
-cyy_all_clean = threading.Thread(target=cyy_all_auto_runner, daemon=True, name="Cyy_All")
+Daypaper_test = threading.Thread(target=daypaper_test_auto_runner, daemon=True, name="Daypaper_test")
+
+
 
 
 syy_thread.start()
 cyy_thread.start()
+cyy_all_clean.start()
+
 Daypaper.start()
 Daypaper_20.start()
-cyy_all_clean.start()
+Daypaper_test.start()
+
 
 
 
@@ -103,6 +123,7 @@ def daypaper_runner():
         r"E:\pycharm_project\day_paper\daypaper_order_宋Ultra EV.py",
         r"E:\pycharm_project\day_paper\daypaper_order_2026款海狮06EV.py",
         r"E:\pycharm_project\day_paper\daypaper_order_全新腾势Z9.py",
+        r"E:\pycharm_project\day_paper\daypaper_order_全新腾势D9.py",
         r"E:\pycharm_project\day_paper\daypaper_order_钛3+钛7.py",
     ]
     runner = ScheduledTaskRunner("立即执行测试")

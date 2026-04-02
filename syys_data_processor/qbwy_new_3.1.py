@@ -485,7 +485,7 @@ class InsuranceDataMerger:
                 "否"  # 条件2不满足时的赋值
             )
         )
-
+        merged_data.to_csv("merged_data.csv")
         return merged_data
 
     @staticmethod
@@ -574,7 +574,6 @@ class InsuranceDataMerger:
         insurance_df['城市'] = np.where(insurance_df['归属公司'].str.contains('贵州'), '贵州', '成都')
         df_result = insurance_df.drop_duplicates()
         df_result.loc[df_result['车架号'] == 'LC0FD4C41S7204374', '是否符合3月1日之前删除规则'] = '不符合'
-
         return df_result
 
 
