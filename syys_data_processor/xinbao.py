@@ -21,6 +21,7 @@ def generate_2026_summary(source_path: str) -> pd.DataFrame:
     df_src_2026['新保保费'] = df_src_2026['新保商业险保费'] + df_src_2026['新保交强险保费']
     df_src_2026['新车驾意险保费'] = df_src_2026['新保驾乘险保费']
     df_src_2026['新车驾意险产值'] = df_src_2026['新保非车险收入']
+    df_src_2026['新保投保台次'] = df_src_2026['新保投保台次']
 
     # 按日期、门店、保险公司汇总
     group_cols = ['出单日期', '所属门店', '保险公司']
@@ -28,7 +29,8 @@ def generate_2026_summary(source_path: str) -> pd.DataFrame:
         '新保保费': 'sum',
         '新保产值': 'sum',
         '新车驾意险保费': 'sum',
-        '新车驾意险产值': 'sum'
+        '新车驾意险产值': 'sum',
+        '新保投保台次': 'sum',
     }
     df_2026 = df_src_2026.groupby(group_cols, as_index=False).agg(agg_dict)
 
@@ -36,7 +38,8 @@ def generate_2026_summary(source_path: str) -> pd.DataFrame:
     df_2026.rename(columns={
         '出单日期': '签单日期',
         '所属门店': '归属公司',
-        '保险公司': '保险公司'
+        '保险公司': '保险公司',
+        '新保投保台次':'新保单量'
     }, inplace=True)
 
     return df_2026
@@ -63,7 +66,7 @@ def merge_with_history(history_path: str, source_path: str, output_path: str = N
     # 4. 保存
     if output_path is None:
         output_path = "新保数量产值成本表_合并.xlsx"
-    df_merged.to_excel(output_path, index=False)
+    df_merged.to_excel(output_path, index=False, sheet_name='新保数量产值成本表')
     print(f"合并完成，历史记录数：{len(df_history_before_2026)}，新数据记录数：{len(df_2026)}，合计：{len(df_merged)}")
     print(f"结果保存至：{output_path}")
 
