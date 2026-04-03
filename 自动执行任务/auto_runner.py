@@ -14,7 +14,7 @@ def syy_auto_runner():
         r"E:\powerbi_data\powerbi_data\syys_data_processor\sanfang.py",
         r"E:\powerbi_data\powerbi_data\syys_data_processor\syy_5separately.py",
         r"E:\powerbi_data\powerbi_data\syys_data_processor\wes.py",
-        r"E:\pycharm_project\powerbi_warnings\powerbi_monitor.py"
+        r"E:\powerbi_data\powerbi_data\syys_data_processor\xinbao.py"
     ]
 
     config = generate_time_range_schedule("08:20", "21:20", 1, "hours")
