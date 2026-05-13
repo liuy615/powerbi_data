@@ -44,11 +44,8 @@ def daypaper_auto_runner():
     scripts = [
         r"E:\pycharm_project\day_paper\daypaper_pbwy.py",
         r"E:\pycharm_project\day_paper\daypaper_order.py",
-        r"E:\pycharm_project\day_paper\daypaper_order_宋Ultra EV.py",
-        r"E:\pycharm_project\day_paper\daypaper_order_2026款海狮06EV.py",
-        r"E:\pycharm_project\day_paper\daypaper_order_全新腾势Z9.py",
-        r"E:\pycharm_project\day_paper\daypaper_order_全新腾势D9.py",
-        r"E:\pycharm_project\day_paper\daypaper_order_钛3+钛7.py",
+        r"E:\pycharm_project\新车日报\new_car_report_builder.py",
+        r"E:\pycharm_project\新车日报\send_new_car_reports_to_qiwei.py",
     ]
 
     config = generate_daily_schedule("22:00")
@@ -60,11 +57,8 @@ def daypaper_auto_runner_20():
     """日报任务执行器"""
     scripts = [
         r"E:\pycharm_project\day_paper\daypaper_order.py",
-        r"E:\pycharm_project\day_paper\daypaper_order_宋Ultra EV.py",
-        r"E:\pycharm_project\day_paper\daypaper_order_2026款海狮06EV.py",
-        r"E:\pycharm_project\day_paper\daypaper_order_全新腾势Z9.py",
-        r"E:\pycharm_project\day_paper\daypaper_order_全新腾势D9.py",
-        r"E:\pycharm_project\day_paper\daypaper_order_钛3+钛7.py",
+        r"E:\pycharm_project\新车日报\new_car_report_builder.py",
+        r"E:\pycharm_project\新车日报\send_new_car_reports_to_qiwei.py",
     ]
 
     config = generate_daily_schedule("20:00")
@@ -120,17 +114,13 @@ Daypaper_test.start()
 def daypaper_runner():
     """直接调用立即执行方法"""
     scripts = [
-        r"E:\pycharm_project\day_paper\daypaper_order_宋Ultra EV.py",
-        r"E:\pycharm_project\day_paper\daypaper_order_2026款海狮06EV.py",
-        r"E:\pycharm_project\day_paper\daypaper_order_全新腾势Z9.py",
-        r"E:\pycharm_project\day_paper\daypaper_order_全新腾势D9.py",
-        r"E:\pycharm_project\day_paper\daypaper_order_钛3+钛7.py",
+        r"E:\pycharm_project\新车日报\new_car_report_builder.py",
+        r"E:\pycharm_project\新车日报\send_new_car_reports_to_qiwei.py",
     ]
+
     runner = ScheduledTaskRunner("立即执行测试")
     runner.run_immediately(scripts)
 
-
-# daypaper_runner()
 
 
 # 主线程保持运行

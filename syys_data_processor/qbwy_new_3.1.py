@@ -33,7 +33,8 @@ class Config:
         'username': 'xg_wd',
         'password': 'H91NgHzkvRiKygTe4X4ASw',
         'auth_source': 'xg',
-        'database': 'xg_JiaTao'
+        'database': 'xg_JiaTao',
+        'datetime_conversion' : 'DATETIME_AUTO'
     }
 
     # 其他配置
@@ -55,6 +56,7 @@ class MongoDBConfig:
         self.password = config['password']
         self.auth_source = config['auth_source']
         self.database_name = config['database']
+        self.datetime_conversion = config.get('datetime_conversion', 'DATETIME_AUTO')
 
     def get_connection_string(self):
         """构建连接字符串"""
@@ -72,11 +74,12 @@ class MongoDBClient:
         self.client = None
         self.db = None
         self.connected = False
+        self.datetime_conversion = getattr(config, 'datetime_conversion', 'DATETIME_AUTO')
 
     def connect(self):
         """建立数据库连接"""
         try:
-            self.client = MongoClient(self.config.get_connection_string())
+            self.client = MongoClient(self.config.get_connection_string(),datetime_conversion=self.datetime_conversion)
             self.db = self.client[self.config.get_database_name()]
             self.client.admin.command('ping')
             self.connected = True
@@ -125,7 +128,7 @@ class MongoDBClient:
 
             return pd.DataFrame(list(query))
         except Exception as e:
-            print(f"查询失败: {e}")
+            print(f"查询失败1: {e}")
             return None
 
     def query_all_data(self, collection_name, limit=None, query_filter=None, exclude_id=True):
@@ -136,15 +139,17 @@ class MongoDBClient:
 
         try:
             collection = self.db[collection_name]
+            print(collection)
             projection = {"_id": 0} if exclude_id else {}
             query_filter = query_filter or {}
+            print(query_filter)
             query = collection.find(query_filter, projection)
             if limit:
                 query = query.limit(limit)
 
             return pd.DataFrame(list(query))
         except Exception as e:
-            print(f"查询失败: {e}")
+            print(f"查询失败2: {e}")
             return None
 
     def list_collections(self):

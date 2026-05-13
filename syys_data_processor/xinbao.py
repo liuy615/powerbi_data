@@ -76,5 +76,5 @@ if __name__ == "__main__":
     merge_with_history(
         history_path=r"E:\powerbi_data\看板数据\私有云文件本地\data\售前看板数据源\新保数量产值成本表.xlsx",
         source_path=r"E:\powerbi_data\看板数据\私有云文件本地\data\售前看板数据源\保险事业部新保收入相关数据.xlsx",
-        output_path=r"E:\powerbi_data\看板数据\私有云文件本地\data\售前看板数据源\新保数量产值成本表.xlsx"
+        output_path=r"E:\powerbi_data\看板数据\dashboard\新保数量产值成本表.xlsx"
     )

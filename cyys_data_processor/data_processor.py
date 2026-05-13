@@ -712,10 +712,10 @@ class DataProcessor:
         # 合并二手车返利数据
         if not df_Ers2.empty and '车架号' in df_Ers2.columns:
             df_salesAgg1 = df_salesAgg1.merge(
-                df_Ers2[['车架号', '二手车成交价', '二手车返利金额1', '收款日期']],
+                df_Ers2[['车架号', '二手车成交价', '二手车返利金额1', '成交日期']],
                 on='车架号', how='left'
             )
-
+            df_salesAgg1.rename(columns={'成交日期': '收款日期'}, inplace=True)
         # 合并二手车返利存档
         if not df_Ers2_archive.empty and '车架号' in df_Ers2_archive.columns:
             df_salesAgg1 = df_salesAgg1.merge(
@@ -1007,7 +1007,7 @@ class DataProcessor:
 
         # 处理特殊赠券
         teshuzengquan = self.clean_teshuzhengquan()
-        df_salesAgg1 = pd.merge(df_salesAgg1, teshuzengquan, on="车架号", how='left')
+        #df_salesAgg1 = pd.merge(df_salesAgg1, teshuzengquan, on="车架号", how='left')
         return df_salesAgg1
 
     """最终整理和导出"""
@@ -1078,7 +1078,14 @@ class DataProcessor:
                 )
             )
         # 合并订车表中的身份证号
-        df_salesAgg1 = df_salesAgg1.merge(df_dings[["车架号", "身份证号"]], on='车架号', how="left")
+        if "身份证号" in df_dings.columns:
+            df_dings_sub = df_dings[["车架号", "身份证号"]].drop_duplicates(subset=["车架号"])
+            # 可选：将两个DataFrame的车架号转为category
+            df_salesAgg1["车架号"] = df_salesAgg1["车架号"].astype("category")
+            df_dings_sub["车架号"] = df_dings_sub["车架号"].astype("category")
+            df_salesAgg1 = df_salesAgg1.merge(df_dings_sub, on="车架号", how="left")
+        else:
+            print("警告：df_dings 中缺少身份证号列，跳过 identity 信息合并")
 
         # 定义最终输出列
         final_columns = [
@@ -1207,9 +1214,10 @@ class DataProcessor:
                 ].copy()
 
             # 选择需要的列
-            ers_cols = ['评估门店', '成交金额', '其他费用', '线索提供人', '客户', '车型', '收款日期']
+            ers_cols = ['评估门店', '成交金额', '其他费用', '线索提供人', '客户', '车型', '成交日期']
             valid_ers_cols = self.utils.get_valid_columns(df_Ers1, ers_cols)
             df_Ers1 = df_Ers1[valid_ers_cols]
+            df_Ers1.rename(columns={'成交日期': '收款日期'}, inplace=True)
         else:
             df_Ers1 = pd.DataFrame()
 

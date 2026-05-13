@@ -67,9 +67,9 @@ class DataCenter:
         api_templates = {
             # '装饰_订单管理_装饰订单': {'url': f'{Config.API_BASE_URL}/api/Summary/AccessoryOrder','method': 'GET','payload': {"LikeType": "1","TimeType": "2","PageSize":3000,"PageNumber": 1}},
             # '销售_车辆销售_作废订单': {'url': f'{Config.API_BASE_URL}/api/Summary/AbnormalOrder','method': 'GET','payload': {"SalesContant": "1","state": "0,2","AuthDistrub": "0","TimeType": "2","yType": 2,"PageSize": 500,"PageNumber": 1}},
-            '销售_衍生_订单查询': {'url': f'{Config.API_BASE_URL}/api/Summary/SalePreorder','method': 'GET','payload': {"TimeType": "1","LikeType": "3","PageSize": 3000,"PageNumber": 1}},
+            # '销售_衍生_订单查询': {'url': f'{Config.API_BASE_URL}/api/Summary/SalePreorder','method': 'GET','payload': {"TimeType": "1","LikeType": "3","PageSize": 3000,"PageNumber": 1}},
 
-            # '车辆销售明细表_开票日期': {'url': f'{Config.API_BASE_URL}/api/Summary/CarSalDetailSummary','method': 'GET','payload': {"TimeType": 3,"Type": "2","PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
+            '车辆销售明细表_开票日期': {'url': f'{Config.API_BASE_URL}/api/Summary/CarSalDetailSummary','method': 'GET','payload': {"TimeType": 3,"Type": "2","PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
             # '车辆成本管理': {'url': f'{Config.API_BASE_URL}/api/Summary/CarCost','method': 'GET','payload': {"OrgType": "1","CostType": "1","TimeType": "3","check": "2","PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
             # '套餐销售列表': {'url': f'{Config.API_BASE_URL}/api/AfterSales/SaleServicePackagePage','method': 'GET','payload': {"TimeType": "2","isShowPhone": "1","PageSize": Config.PAGE_SIZE,"PageNumber": 1}},
             # '销售_车辆销售_成交订单': {'url': f'{Config.API_BASE_URL}/api/Summary/DealOrder','method': 'GET','payload': {"DateType": "4","SalesContant": "1","AuthDistrub": "0","LikeType": "3","PageSize": Config.PAGE_SIZE,"PageNumber": 1}},

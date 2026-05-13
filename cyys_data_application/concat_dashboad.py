@@ -172,10 +172,10 @@ class update_dashboard:
         return data
 
     def Car_belongs(self) -> pd.DataFrame:
-        return pd.read_excel(r'E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\看板部分数据源\各公司银行额度.xlsx',sheet_name='补充车系')
+        return pd.read_excel(r'E:\powerbi_data\看板数据\私有云文件本地\data\售前看板数据源\各公司银行额度.xlsx',sheet_name='补充车系')
 
     def Team_belongs(self) -> pd.DataFrame:
-        return pd.read_excel(r'E:\WXWork\1688858189749305\WeDrive\成都永乐盛世\维护文件\看板部分数据源\各公司银行额度.xlsx',sheet_name='补充团队')
+        return pd.read_excel(r'E:\powerbi_data\看板数据\私有云文件本地\data\售前看板数据源\各公司银行额度.xlsx',sheet_name='补充团队')
 
     def Df_xcbx_lock(self) -> pd.DataFrame:
         return pd.read_csv(r'E:/powerbi_data/看板数据/dashboard/新车保险台账.csv', low_memory=False).replace("永乐盛世", "洪武盛世")  
@@ -266,7 +266,7 @@ class update_dashboard:
 
         # 2. 切片后加 .copy() 避免视图警告
         df_sales_cyy = self.df_sales_cyy[
-            ['公司名称', '销售日期', '订车日期', '收款日期', '车架号', '车系', '车系1', '车辆信息', '外饰颜色',
+            ['公司名称', '销售日期', '订车日期', '入库日期', '收款日期', '车架号', '车系', '车系1', '车辆信息', '外饰颜色',
              '车辆配置', '车型', '所属团队', '客户来源', '调出类型', '销售人员', '主播人员', '车主姓名', '联系电话', '指导价',
              '销售车价', '车款（发票价）', '提货价', '置换款', '精品款', '后返客户款项', '保险返利', '终端返利',
              '返利合计', '增值税利润差', '税费', '毛利', '购买方式', '金融类型', '金融性质', '返利系数', '贷款金额',
@@ -310,7 +310,6 @@ class update_dashboard:
         df_Ers_lock = self.df_Ers_lock[['收购时间', '新车客户姓名', '联系电话', '旧车客户姓名', '旧车品牌', '收购价格', '二手车返利','二手车返利到账时间', '销售顾问', '归属团队']].copy()  # 关键修复：加copy
         # 切片后加.copy()避免视图警告
         df_Ers = self.df_Ers[['评估门店', '客户', '手机', '置换客户名称', '车型', '成交日期', '成交金额', '其他费用', '线索提供人','录入日期']].copy()  # 关键修复：加copy
-
         df_Ers.rename(columns={
             '评估门店': '归属团队',
             '客户': '旧车客户姓名',

@@ -625,8 +625,8 @@ class DataSyncManager:
                 payload['Token'] = self.token
 
                 # 添加重试机制
-                max_retries = 3
-                retry_delay = 5  # 秒
+                max_retries = 5
+                retry_delay = 15  # 秒
                 response = None
                 last_exception = None
 
