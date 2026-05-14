@@ -490,7 +490,6 @@ class InsuranceDataMerger:
                 "否"  # 条件2不满足时的赋值
             )
         )
-        merged_data.to_csv("merged_data.csv")
         return merged_data
 
     @staticmethod

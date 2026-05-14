@@ -90,7 +90,7 @@ class YingxiaoMoneyProcessor(DataProcessorBase):
 
         # 业务配置
         self.target_sheets = ["2024年", "2025年", "登记表"]
-        self.required_columns = ["年月", "归属门店", "项目大类", "项目分类", "具体项目","费用金额", "核销发票金额", "核销发票税金", "费用合计", "备注", "From"]
+        self.required_columns = ["年月", "归属门店", "项目大类", "项目分类", "项目明细", "具体项目","费用金额", "核销发票金额", "核销发票税金", "费用合计", "备注", "From"]
         self.store_map = {"文景初治": "上元盛世", "王朝网-直播基地":"直播基地", "永乐盛世":"洪武盛世"}
 
         self._init_check()
