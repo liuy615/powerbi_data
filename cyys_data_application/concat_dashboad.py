@@ -550,6 +550,14 @@ class update_dashboard:
         df_yingxiao = self.clean_yingxiao()
         df_salary_bi, df_salary = self.clean_salary()
         df_sales = self.concat_newold_Sales_dashboad()
+        # 这里改为拓展收益价格随车
+        # 1. 贴膜升级.csv中筛选有推送日期的，然后通过车架号匹配推送日期，三方返还佣金
+        # 2. 新车三方延保台账.csv中匹配延保销售日期、车架号、金额
+        # 3. 精品销售1.csv中匹配精品销售日期、车架号、毛利润
+        # 4. 保赔无忧.csv中匹配日期、车架号、利润
+        # 5. 新保驾乘险费率匹配.csv中匹配出单日期、车架号、新保驾乘险理论费率收入
+        # 6. 新保商业险和交强险费率匹配.csv匹配出单日期、车架号、新保交强险理论费率收入、新保商业险理论费率收入
+
         df_sales1 = self.concat_newold_Sales_dashboad1()
         df_books = self.concat_newold_Books_dashboad()
         df_inventorys = self.concat_newold_Inventorys_dashboad()
@@ -672,7 +680,7 @@ class update_dashboard:
         df_carseris = df_carseris[~df_carseris['车系'].isin(['二手车返利', '调拨'])].copy()  # 切片后加copy
 
         # 所有输出路径加r
-        df_sales.to_csv(r'E:\powerbi_data\看板数据\dashboard\销售毛利1.csv', index=False)
+        df_sales.to_csv(r'E:\powerbi_data\看板数据\cyy_old_data\销售毛利1.csv', index=False)
         df_books.to_csv(r'E:\powerbi_data\看板数据\dashboard\定车1.csv', index=False)
         df_inventorys.to_csv(r'E:\powerbi_data\看板数据\dashboard\库存1.csv', index=False)
         df_jingpins.to_csv(r'E:\powerbi_data\看板数据\dashboard\精品销售1.csv', index=False)

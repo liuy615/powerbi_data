@@ -377,8 +377,7 @@ class DataProcessor:
 
         # 合并汇票数据
         if not df_debit.empty and '采购订单号' in df_debit.columns:
-            merge_cols = ['采购订单号', '提货价', '开票银行', '合格证门店', '赎证日期', '到期日期',
-                          '保证金比例', '赎证款']
+            merge_cols = ['采购订单号', '提货价', '开票银行', '合格证门店', '赎证日期', '到期日期', '保证金比例', '赎证款']
             valid_merge_cols = self.utils.get_valid_columns(df_debit, merge_cols)
             df_plan = pd.merge(
                 df_plan, df_debit[valid_merge_cols],
@@ -404,6 +403,10 @@ class DataProcessor:
             logging.warning(f"df_plan 有重复列名: {duplicates}")
             # 删除重复列
             df_plan = df_plan.loc[:, ~df_plan.columns.duplicated()]
+        # 做一个特殊处理：在车系为：“汉EV智驾版”的车辆配置中，如果有闪充两个字，那么把“汉EV智驾版”改为汉EV智驾版 闪充
+        if '车系' in df_plan.columns and '车型' in df_plan.columns:
+            mask = (df_plan['车系'] == '汉EV智驾版') & (df_plan['车型'].str.contains('闪充', na=False))
+            df_plan.loc[mask, '车系'] = '汉EV智驾版 闪充'
 
         df_inventory_all = pd.concat([df_inventory, df_plan], axis=0, ignore_index=True)
 
@@ -501,6 +504,10 @@ class DataProcessor:
         df_dings = df_dings.drop_duplicates()
         df_dings["身份证号"] = df_dings["身份证号"].astype("str")
         logging.info(f"订单数据清洗完成：{len(df_dings)}条记录")
+        # 做一个特殊处理：在车系为：“汉EV智驾版”的车辆配置中，如果有闪充两个字，那么把“汉EV智驾版”改为汉EV智驾版 闪充
+        if '车系' in df_dings.columns and '车型' in df_dings.columns:
+            mask = (df_dings['车系'] == '汉EV智驾版') & (df_dings['车型'].str.contains('闪充', na=False))
+            df_dings.loc[mask, '车系'] = '汉EV智驾版 闪充'
         return df_dings
 
     """开票数据筛选：车辆销售单"""
@@ -560,7 +567,10 @@ class DataProcessor:
 
         valid_cancel_cols = self.utils.get_valid_columns(tui_dings_df, cancel_cols)
         tui_dings_df = tui_dings_df[valid_cancel_cols]
-
+        # 做一个特殊处理：在车系为：“汉EV智驾版”的车辆配置中，如果有闪充两个字，那么把“汉EV智驾版”改为汉EV智驾版 闪充
+        if '车系' in tui_dings_df.columns and '车型' in tui_dings_df.columns:
+            mask = (tui_dings_df['车系'] == '汉EV智驾版') & (tui_dings_df['车型'].str.contains('闪充', na=False))
+            tui_dings_df.loc[mask, '车系'] = '汉EV智驾版 闪充'
         logging.info(f"作废订单数据清洗完成：{len(tui_dings_df)}条记录")
         return tui_dings_df
 
@@ -656,6 +666,11 @@ class DataProcessor:
         df_salesAgg_clean = df_salesAgg_clean[valid_final_cols]
 
         logging.info(f"销售明细数据清洗完成：{len(df_salesAgg_clean)}条记录")
+        # 做一个特殊处理：在车系为：“汉EV智驾版”的车辆配置中，如果有闪充两个字，那么把“汉EV智驾版”改为汉EV智驾版 闪充
+        if '车系' in df_salesAgg_clean.columns and '车辆配置' in df_salesAgg_clean.columns:
+            mask = (df_salesAgg_clean['车系'] == '汉EV智驾版') & (
+                df_salesAgg_clean['车辆配置'].str.contains('闪充', na=False))
+            df_salesAgg_clean.loc[mask, '车系'] = '汉EV智驾版 闪充'
         return df_salesAgg_clean
 
     """合并主销售表"""
