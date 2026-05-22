@@ -29,6 +29,7 @@ def cyy_auto_runner():
         r"E:\powerbi_data\powerbi_data\cyys_data_download\cyy_delete_data.py",
         r"E:\powerbi_data\powerbi_data\cyys_data_processor\main.py",
         r"E:\powerbi_data\powerbi_data\cyys_data_application\concat_dashboad.py",
+        r"E:\powerbi_data\powerbi_data\cyys_data_application\sales_to_car.py",
         r"E:\powerbi_data\看板更新\syy_files_upload.py",
         r"E:\powerbi_data\看板更新\data_download.py",
         r"E:\powerbi_data\powerbi_data\cyys_data_processor\数据备份.py",  # 数据备份
